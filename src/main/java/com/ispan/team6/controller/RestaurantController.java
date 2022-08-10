@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,7 +29,7 @@ public class RestaurantController {
 	@PostMapping("/uploadRestaurant")
 	public String uploadRestaurant(@RequestParam("restaurantName") String name,
 			@RequestParam("restaurantPhone") String phone, @RequestParam("restaurantAddress") String address,
-			@RequestParam("type") String type, @RequestParam("startTime") String starttime,
+			@RequestParam("fk_type_id") String type, @RequestParam("startTime") String starttime,
 			@RequestParam("endTime") String endtime, @RequestParam("startDate") String startdate,
 			@RequestParam("endDate") String enddate, @RequestParam("remark") String remark) {
 
@@ -72,8 +73,9 @@ public class RestaurantController {
 	}
 	
 	@PostMapping("/restaurant/editRestaurant")
-	public String editRestaurant() {
-		rService.insertRestaurant()
+	public String editRestaurant(@ModelAttribute Restaurant restaurant) {
+		rService.insertRestaurant(restaurant);
 		
+		return "redirect:/restaurant/viewRestaurants";
 	}
 }

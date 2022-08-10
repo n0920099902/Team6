@@ -1,10 +1,13 @@
 package com.ispan.team6.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -27,9 +30,6 @@ public class Restaurant {
 	@Column(name = "address")
 	private String address;
 
-	@Column(name = "type")
-	private String type;
-
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
 	@Column(name = "starttime")
 	private String starttime;
@@ -47,17 +47,20 @@ public class Restaurant {
 	@Column(name = "remark")
 	private String remark;
 
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="fk_type_id")
+	private RestaurantType RestaurantType;
+	
 	public Restaurant() {
 	}
 
-	public Restaurant(Integer id, String name, String phone, String address, String type, String starttime, String endtime,
-			String startDate, String endDate, String remark) {
+	public Restaurant(Integer id, String name, String phone, String address, String type, String starttime,
+			String endtime, String startDate, String endDate, String remark) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
-		this.type = type;
 		this.starttime = starttime;
 		this.endtime = endtime;
 		this.startDate = startDate;
@@ -95,14 +98,6 @@ public class Restaurant {
 
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getStarttime() {

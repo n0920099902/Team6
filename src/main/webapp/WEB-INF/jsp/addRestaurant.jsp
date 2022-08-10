@@ -29,15 +29,8 @@
 				餐廳地址： <input type="text" name="restaurantAddress" required />
 			</div>
 			<div>
-				餐廳類別： <select name="type">
-					<option value="">請選擇餐廳類別</option>
-					<option value="tw">台式</option>
-					<option value="jp">日式</option>
-					<option value="america">美式</option>
-					<option value="italy">義式</option>
-					<option value="vietnam">越式</option>
-					<option value="tailand">泰式</option>
-				</select>
+				餐廳類別： 
+				<checkbox ></checkbox>
 			</div>
 			<div>
 				營業時間： <select name="startDate">
