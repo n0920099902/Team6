@@ -48,9 +48,9 @@ public class Restaurant {
 	private String remark;
 
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="fk_type_id")
+	@JoinColumn(name = "fk_type_id")
 	private RestaurantType RestaurantType;
-	
+
 	public Restaurant() {
 	}
 

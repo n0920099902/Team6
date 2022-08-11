@@ -29,8 +29,12 @@
 				餐廳地址： <input type="text" name="restaurantAddress" required />
 			</div>
 			<div>
-				餐廳類別： 
-				<checkbox ></checkbox>
+				餐廳類別：
+					<select name="restaurantType">
+						<c:forEach items="${allRestaurantType}" var="rt">
+							<option value="${rt.rest_type_id}">${rt.rest_type}</option>
+						</c:forEach>
+					</select>
 			</div>
 			<div>
 				營業時間： <select name="startDate">
@@ -52,8 +56,9 @@
 				</select> <input type="time" name="startTime" required>～ <input
 					type="time" name="endTime" required>
 			</div>
-			<div>備註:<br />
-			<textarea id="remark" name="remark" rows="5" cols="33"></textarea>
+			<div>
+				備註:<br />
+				<textarea id="remark" name="remark" rows="5" cols="33"></textarea>
 			</div>
 			<button type="submit">新增</button>
 		</form>

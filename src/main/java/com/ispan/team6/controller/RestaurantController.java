@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ispan.team6.model.Restaurant;
+import com.ispan.team6.model.RestaurantType;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
@@ -21,7 +22,9 @@ public class RestaurantController {
 	private RestaurantService rService;
 
 	@GetMapping("/restaurant/add")
-	public String addRestaurantPage() {
+	public String addRestaurantPage(Model m) {
+		List<RestaurantType> list = rService.findAllRestuarantType();
+		m.addAttribute("allRestaurantType", list);
 
 		return "addRestaurant";
 	}
@@ -29,15 +32,16 @@ public class RestaurantController {
 	@PostMapping("/uploadRestaurant")
 	public String uploadRestaurant(@RequestParam("restaurantName") String name,
 			@RequestParam("restaurantPhone") String phone, @RequestParam("restaurantAddress") String address,
-			@RequestParam("fk_type_id") String type, @RequestParam("startTime") String starttime,
-			@RequestParam("endTime") String endtime, @RequestParam("startDate") String startdate,
-			@RequestParam("endDate") String enddate, @RequestParam("remark") String remark) {
+			@RequestParam("startTime") String starttime, @RequestParam("endTime") String endtime,
+			@RequestParam("startDate") String startdate, @RequestParam("endDate") String enddate,
+			@RequestParam("remark") String remark, @RequestParam("restaurantType") Integer rest_type_id, Model m) {
 
 		Restaurant newRest = new Restaurant();
+		RestaurantType newRestType = new RestaurantType();
 		newRest.setName(name);
 		newRest.setPhone(phone);
 		newRest.setAddress(address);
-		newRest.setType(type);
+		newRestType.setRest_type_id(rest_type_id);
 		newRest.setStarttime(starttime);
 		newRest.setEndtime(endtime);
 		newRest.setStartDate(startdate);
@@ -49,33 +53,44 @@ public class RestaurantController {
 		return "addRestaurant";
 	}
 
+	@GetMapping("/restaurantType/viewType")
+	public void findAllRestaurantType(Model m) {
+		List<RestaurantType> list = rService.findAllRestuarantType();
+		m.addAttribute("allRestaurantType", list);
+	}
+
+	public void uploadType() {
+
+	}
+
 	@GetMapping("/restaurant/viewRestaurants")
-	public String findMessages(Model m) {
+	public String findAllRestaurant(Model m) {
 		List<Restaurant> list = rService.findAllRestuarant();
 		m.addAttribute("allRestaurant", list);
-		
+
 		return "viewRestaurants";
 	}
 
 	@GetMapping("/restaurant/deleteRestaurant/{id}")
 	public String deleteRestaurantById(@PathVariable Integer id) {
 		rService.deleteRestaurant(id);
-		
+
 		return "redirect:/restaurant/viewRestaurants ";
 	}
-	
+
 	@GetMapping("/restaurant/editRestaurant/{id}")
-	public String editRestaurantPage(@PathVariable Integer id,Model m) {
+	public String editRestaurantPage(@PathVariable Integer id, Model m) {
 		Restaurant res = rService.findById(id);
 		m.addAttribute("restaurant", res);
-		
+
 		return "editRestaurant";
 	}
-	
+
 	@PostMapping("/restaurant/editRestaurant")
 	public String editRestaurant(@ModelAttribute Restaurant restaurant) {
 		rService.insertRestaurant(restaurant);
-		
+
 		return "redirect:/restaurant/viewRestaurants";
 	}
+
 }
