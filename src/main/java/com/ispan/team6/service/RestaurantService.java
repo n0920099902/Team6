@@ -7,11 +7,11 @@ import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.ispan.team6.model.Restaurant;
 import com.ispan.team6.model.RestaurantDao;
+import com.ispan.team6.model.RestaurantType;
+import com.ispan.team6.model.RestaurantTypeDao;
 
 @Service
 @Transactional
@@ -19,13 +19,19 @@ public class RestaurantService {
 
 	@Autowired
 	private RestaurantDao rDao;
+	@Autowired
+	private RestaurantTypeDao rtDao;
 
 	public List<Restaurant> findAllRestuarant() {
 		return rDao.findAll();
 	}
 
-	public void insertRestaurant(Restaurant rest) {
-		rDao.save(rest);
+	public List<RestaurantType> findAllRestuarantType() {
+		return rtDao.findAll();
+	}
+
+	public void insertRestaurant(Restaurant r) {
+		rDao.save(r);
 	}
 
 	public Restaurant findById(Integer Id) {
@@ -41,4 +47,5 @@ public class RestaurantService {
 	public void deleteRestaurant(Integer id) {
 		rDao.deleteById(id);
 	}
+
 }
