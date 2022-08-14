@@ -16,7 +16,7 @@
 <body>
 	<h1>餐廳修改頁面測試</h1>
 	<form:form class="form" method="post" modelAttribute="restaurant"
-		action="${contextRoot}/message/editMessage">
+		action="${contextRoot}/restaurant/editRestaurant">
 
 		<form:input type="hidden" path="id" />
 		<div>
@@ -32,15 +32,37 @@
 			<form:input type="text" path="address" value="${restaurant.address }" />
 		</div>
 		<div>
-			餐廳類別:
-			<form:select path="type" value="${restaurant.type }">
-				<form:options itemValue="${restaurant.type }"></form:options>
-			</form:select>
+			餐廳類別: <select name="restaurantType">
+				<c:forEach items="${allRestaurantType}" var="rt">
+					<option value="${rt.rest_type_id}">${rt.rest_type}</option>
+				</c:forEach>
+			</select>
 		</div>
-		營業時間:<form:select type="date" path="startDate" value="${startDate }" />
-		<form:select type="date" path="endDate" value="${endDate }" />
-		<%-- 		<form:select type="time" path="startTime" value="${startTime }" /> --%>
-		<%-- 		<form:input type="time" path="endTime" value="${endTime }" /> --%>
+		營業時間:
+		<form:select type="date" path="startDate" value="${startDate }">
+			<form:option value="Sun">星期日</form:option>
+			<form:option value="Mon">星期一</form:option>
+			<form:option value="Tue">星期二</form:option>
+			<form:option value="Wed">星期三</form:option>
+			<form:option value="Thu">星期四</form:option>
+			<form:option value="Fri">星期五</form:option>
+			<form:option value="Sat">星期六</form:option>
+		</form:select>
+		<form:select type="date" path="endDate" value="${endDate }">
+			<form:option value="Sun">星期日</form:option>
+			<form:option value="Mon">星期一</form:option>
+			<form:option value="Tue">星期二</form:option>
+			<form:option value="Wed">星期三</form:option>
+			<form:option value="Thu">星期四</form:option>
+			<form:option value="Fri">星期五</form:option>
+			<form:option value="Sat">星期六</form:option>
+		</form:select>
+		<form:input type="time" path="starttime" />
+		<form:input type="time" path="endtime" />
+		<div>
+			圖
+			<form:input type="file" path="photo" />
+		</div>
 		<div>
 			備註:<br />
 			<form:textarea path="remark" value="${restaurant.remark }" />

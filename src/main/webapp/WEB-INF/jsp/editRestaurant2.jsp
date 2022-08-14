@@ -11,26 +11,30 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>餐廳新增頁面</title>
+<title>餐廳修改頁面</title>
 </head>
 <body>
-	<h1>新增頁面測試</h1>
+	<h1>修改頁面測試</h1>
 
 	<div class="m-5">
-		<form action="${contextRoot}/uploadRestaurant" method="post"
+		<form action="${contextRoot}/restaurant/editRestaurant2" name="restaurant" method="post"
 			enctype="multipart/form-data">
+			<input type="hidden" name="id" value="${restaurant.id}" />
+
 			<div>
-				餐廳名稱： <input type="text" name="restaurantName" required />
+				餐廳名稱：<input type="text" name="restaurantName" value="${restaurant.name }"
+					required />
 			</div>
 			<div>
-				餐廳電話： <input type="text" name="restaurantPhone" required />
+				餐廳電話： <input type="text" name="restaurantPhone" value="${restaurant.phone }"
+					required />
 			</div>
 			<div>
-				餐廳地址： <input type="text" name="restaurantAddress" required />
+				餐廳地址： <input type="text" name="restaurantAddress"
+					value="${restaurant.address }" required />
 			</div>
 			<div>
-				餐廳類別： 
-				<select name="restaurantType">
+				餐廳類別： <select name="restaurantType">
 					<c:forEach items="${allRestaurantType}" var="rt">
 						<option value="${rt.rest_type_id}">${rt.rest_type}</option>
 					</c:forEach>
@@ -45,7 +49,7 @@
 					<option value="Thu">星期四</option>
 					<option value="Fri">星期五</option>
 					<option value="Sat">星期六</option>
-				</select>～ <select name="endDate">
+				</select> ～ <select name="endDate">
 					<option value="Sun">星期日</option>
 					<option value="Mon">星期一</option>
 					<option value="Tue">星期二</option>
@@ -53,8 +57,8 @@
 					<option value="Thu">星期四</option>
 					<option value="Fri">星期五</option>
 					<option value="Sat">星期六</option>
-				</select> <input type="time" name="startTime" required>～ <input
-					type="time" name="endTime" required>
+				</select> <input type="time" name="starttime" value="${starttime }" required>～
+				<input type="time" name="endtime" value="${endtime }" required>
 			</div>
 			<div>
 				餐廳圖片: <input type="file" name="restaurantImg"
@@ -65,7 +69,7 @@
 				備註:<br />
 				<textarea id="remark" name="remark" rows="5" cols="33"></textarea>
 			</div>
-			<button type="submit">新增</button>
+			<button type="submit">修改</button>
 		</form>
 	</div>
 </body>

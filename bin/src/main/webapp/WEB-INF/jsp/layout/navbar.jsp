@@ -30,9 +30,6 @@
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/restaurant/viewRestaurants">查看餐廳</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/restaurant/Test">測試頁面</a>
-      </li>
      
     </ul>
   </div>
