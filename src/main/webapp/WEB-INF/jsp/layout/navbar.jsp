@@ -36,7 +36,12 @@
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/restaurant/Test">測試頁面</a>
       </li>
-     
+        <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/Users/register">後台會員新增</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/Users/select">後台會員管理</a>
+      </li>
     </ul>
   </div>
 </nav>

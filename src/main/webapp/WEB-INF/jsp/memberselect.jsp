@@ -39,13 +39,12 @@
 
 						<table>
 							<tr>
-								<td>account</td>
-								<td>password</td>
-								<td>email</td>
-								<td>phone</td>
-								<td>birthday</td>
-								<td>access</td>
-								<td>remark</td>
+								<td>帳號</td>
+								<td>密碼</td>
+								<td>信箱</td>
+								<td>電話</td>
+								<td>生日</td>
+								<td>圖片</td>
 							</tr>
 						</table>
 						<c:forEach items="${allmember}" var="m">
@@ -58,13 +57,12 @@
 									<td>${m.email }</td>
 									<td>${m.phone }</td>
 									<td>${m.birthday }</td>
-									<td>${m.access }</td>
 									<td>${m.remark }</td>
 								</tr>
 							</table>
 							<div class="edit-link">
-								<a href="${contextRoot}/member/update/${m.id}">編輯</a> <a
-									href="${contextRoot}/member/delete/${m.id}"
+								<a href="${contextRoot}/Users/update/${m.id}">編輯</a> <a
+									href="${contextRoot}/Users/delete/${m.id}"
 									onclick="return confirm('確認刪除?')">刪除</a>
 							</div>
 
