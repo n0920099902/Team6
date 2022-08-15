@@ -20,6 +20,7 @@
 		搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
 		<button>GO</button>
 	</form>
+
 	<c:forEach var="restaurant" items="${allRestaurant}">
 		<div class="row justify-content-center">
 			<div class="col-8">

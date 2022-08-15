@@ -7,6 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface RestaurantTypeDao extends JpaRepository<RestaurantType, Integer> {
 
-	@Query(value = "select * from Restaurant_type where rest_type like % :name %", nativeQuery = true)
-	public List<RestaurantType> findByType(String name);
+	@Query(value = "select * from Restaurant_type where rest_type like %:keyword%", nativeQuery = true)
+	public List<RestaurantType> findByType(String keyword);
 }

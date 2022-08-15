@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.team6.model.Restaurant;
@@ -22,6 +25,19 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantService rService;
+
+	@GetMapping("/restaurant/downloadImage/{id}")
+	public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id){
+		Restaurant photo1 = rService.findById(id);
+		
+		byte[] photoFile = photo1.getPhoto();
+		
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.IMAGE_JPEG);
+		
+		                          // 要回傳的物件本體, header, HttpStatus 回應
+		return new ResponseEntity<byte[]>(photoFile,header,HttpStatus.OK);
+	}
 
 	@GetMapping("/restaurant/add")
 	public String addRestaurantPage(Model m) {
@@ -88,10 +104,10 @@ public class RestaurantController {
 		List<RestaurantType> list = rService.findAllRestuarantType();
 		m.addAttribute("allRestaurantType", list);
 
-		return "editRestaurant2";
+		return "editRestaurant";
 	}
 
-	@PostMapping("/restaurant/editRestaurant2")
+	@PostMapping("/restaurant/editRestaurant")
 	public String editRestaurant(@RequestParam("id") Integer id, @RequestParam("restaurantName") String name,
 			@RequestParam("restaurantPhone") String phone, @RequestParam("restaurantAddress") String address,
 			@RequestParam("starttime") String starttime, @RequestParam("endtime") String endtime,
@@ -120,12 +136,20 @@ public class RestaurantController {
 		return "redirect:/restaurant/viewRestaurants";
 	}
 
-	@GetMapping(value = "/restaurant/search", produces = "text/pain;charset=UTF-8")
+	@GetMapping(value = "/restaurant/search1", produces = "text/pain;charset=UTF-8")
 	public String findByNameLike(@RequestParam String keyword, Model m) {
-		List<Restaurant> list = rService.findByNameLike("%" + keyword + "%");
-//		rService.findByType(name);
+		List<Restaurant> list1 = rService.findByNameLike("%" + keyword + "%");
 
-		m.addAttribute("allRestaurant", list);
+		m.addAttribute("allRestaurant", list1);
+		return "viewRestaurants";
+	}
+
+	@GetMapping(value = "/restaurant/search2", produces = "text/pain;charset=UTF-8")
+	public String findByTypeLike(@RequestParam String keyword, Model m) {
+		List<RestaurantType> list2 = rService.findByTypeLike(keyword);
+
+		m.addAttribute("allRestaurant", list2);
+
 		return "viewRestaurants";
 	}
 

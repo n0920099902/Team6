@@ -1,13 +1,41 @@
 package com.ispan.team6.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import com.ispan.team6.model.Restaurant;
+import com.ispan.team6.service.RestaurantService;
 
 @Controller
 public class PageControiller {
+
+	@Autowired
+	private RestaurantService rService;
+
+	@GetMapping("/")
+	public String processMainAction() {
+		return "index";
+	}
 	
 	@GetMapping("/restaurant")
-	public String processMainAction() {
+	public String processRestaurantMainAction(Model m) {
+		List<Restaurant> list = rService.findAllRestuarant();
+		m.addAttribute("allRestaurant", list);
 		return "restaurant";
+	}
+	
+	@GetMapping("/restaurant/intro/{id}")
+	public String processAction(@PathVariable Integer id) {
+		return "restaurantIntro";
+	}
+	
+	@GetMapping("restaurant/Test")
+	public String testAction() {
+		return "Test";
 	}
 }

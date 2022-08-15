@@ -6,7 +6,6 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import com.ispan.team6.model.Restaurant;
@@ -44,6 +43,7 @@ public class RestaurantService {
 
 		return null;
 	}
+	
 
 	public void deleteRestaurant(Integer id) {
 		rDao.deleteById(id);
@@ -53,7 +53,7 @@ public class RestaurantService {
 		return rDao.findByNameLike(name);
 	}
 	
-	public List<RestaurantType> findByType(String name) {
+	public List<RestaurantType> findByTypeLike(String name) {
 		return rtDao.findByType(name);
 	}
 	
