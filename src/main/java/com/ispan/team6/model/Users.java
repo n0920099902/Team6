@@ -20,118 +20,119 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table(name = "Users")
 public class Users {
 
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- @Column(name = "ID")
- private int id;
- 
- @Column(name = "ACCOUNT")
- private String account;
- 
- @Column(name = "PASSWORD")
- private String password;
- 
- @Column(name = "EMAIL")
- private String email; 
- 
- @Column(name = "PHONE")
- private int phone;
- 
- @JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")//json
- @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")//springmvc
- @Temporal(TemporalType.TIMESTAMP)
- @Column(name = "BIRTHDAY")
- private Date birthday;
- 
- @Column(name = "ACCESS")
- private String access;
- 
- @Column(name = "PHOTO")
- private byte[] photo;
- 
- @Column(name = "REMARK")
- private String remark;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "ID")
+	private int id;
 
- public Users() {
- }
+	@Column(name = "ACCOUNT")
+	private String account;
 
- public int getId() {
-  return id;
- }
+	@Column(name = "PASSWORD")
+	private String password;
 
- public void setId(int id) {
-  this.id = id;
- }
+	@Column(name = "EMAIL")
+	private String email;
 
- public String getAccount() {
-  return account;
- }
+	@Column(name = "PHONE")
+	private int phone;
 
- public void setAccount(String account) {
-  this.account = account;
- }
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss") // json
+	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // springmvc
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "BIRTHDAY")
+	private Date birthday;
 
- public String getPassword() {
-  return password;
- }
+	@Column(name = "ACCESS")
+	private String access;
 
- public void setPassword(String password) {
-  this.password = password;
- }
+	@Column(name = "PHOTO")
+	private byte[] photo;
 
- public String getEmail() {
-  return email;
- }
+	@Column(name = "REMARK")
+	private String remark;
 
- public void setEmail(String email) {
-  this.email = email;
- }
+	public Users() {
+	}
 
- public int getPhone() {
-  return phone;
- }
+	public int getId() {
+		return id;
+	}
 
- public void setPhone(int phone) {
-  this.phone = phone;
- }
+	public void setId(int id) {
+		this.id = id;
+	}
 
- public Date getBirthday() {
-  return birthday;
- }
+	public String getAccount() {
+		return account;
+	}
 
- public void setBirthday(Date birthday) {
-  this.birthday = birthday;
- }
+	public void setAccount(String account) {
+		this.account = account;
+	}
 
- public String getAccess() {
-  return access;
- }
+	public String getPassword() {
+		return password;
+	}
 
- public void setAccess(String access) {
-  this.access = access;
- }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
- public byte[] getPhoto() {
-  return photo;
- }
+	public String getEmail() {
+		return email;
+	}
 
- public void setPhoto(byte[] photo) {
-  this.photo = photo;
- }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
- public String getRemark() {
-  return remark;
- }
+	public int getPhone() {
+		return phone;
+	}
 
- public void setRemark(String remark) {
-  this.remark = remark;
- }
- @PrePersist //物件轉換成 persistant狀態以前執行的方法
- public void onCreate() {
-  if(birthday ==null) {
-   birthday=new Date();
-  }
-  
- }
- 
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public Date getBirthday() {
+		return birthday;
+	}
+
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+
+	public String getAccess() {
+		return access;
+	}
+
+	public void setAccess(String access) {
+		this.access = access;
+	}
+
+	public byte[] getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(byte[] photo) {
+		this.photo = photo;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	@PrePersist // 物件轉換成 persistant狀態以前執行的方法
+	public void onCreate() {
+		if (birthday == null) {
+			birthday = new Date();
+		}
+
+	}
+
 }

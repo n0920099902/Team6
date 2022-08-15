@@ -17,7 +17,6 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.Transient;
-import javax.persistence.criteria.Order;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -68,7 +67,8 @@ public class Comment {
 	public Comment() {
 	}
 
-	public Comment(Integer id, OrdersBean order, Users users, String comment, Integer score, String remark, Date time) {
+	public Comment(Integer id, OrdersBean order, Users users, String comment, Integer score, String remark,
+			Date time) {
 		super();
 		this.id = id;
 		this.order = order;
@@ -87,21 +87,6 @@ public class Comment {
 		this.id = id;
 	}
 
-	public OrdersBean getOrder() {
-		return order;
-	}
-
-	public void setOrder(OrdersBean order) {
-		this.order = order;
-	}
-
-	public Users getUsers() {
-		return users;
-	}
-
-	public void setUsers(Users users) {
-		this.users = users;
-	}
 
 	public String getComment() {
 		return comment;
