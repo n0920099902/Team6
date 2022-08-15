@@ -43,9 +43,18 @@ public class RestaurantService {
 
 		return null;
 	}
+	
 
 	public void deleteRestaurant(Integer id) {
 		rDao.deleteById(id);
 	}
 
+	public List<Restaurant> findByNameLike(String name) {
+		return rDao.findByNameLike(name);
+	}
+	
+	public List<RestaurantType> findByTypeLike(String name) {
+		return rtDao.findByType(name);
+	}
+	
 }

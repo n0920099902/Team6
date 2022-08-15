@@ -22,19 +22,13 @@
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav">
       <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/">主頁<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="${contextRoot}/restaurant">餐廳主頁 <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${contextRoot}/restaurant">Home <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/restaurant/add">新增餐廳</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/restaurant/Test">測試頁面</a>
+        <a class="nav-link" href="${contextRoot}/restaurant/viewRestaurants">查看餐廳</a>
       </li>
      
     </ul>

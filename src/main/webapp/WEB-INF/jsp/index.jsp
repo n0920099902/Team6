@@ -14,9 +14,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="${contextRoot}/restaurant/search" method="get">
-		搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
-		<button>GO</button>
-	</form>
+<h1>首頁測試</h1>
 </body>
 </html>

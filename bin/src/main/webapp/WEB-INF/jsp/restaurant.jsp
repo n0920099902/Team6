@@ -11,12 +11,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Restuarant</title>
 </head>
 <body>
-	<form action="${contextRoot}/restaurant/search" method="get">
-		搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
-		<button>GO</button>
-	</form>
+	<h1>店家頁面測試</h1>
+
 </body>
 </html>

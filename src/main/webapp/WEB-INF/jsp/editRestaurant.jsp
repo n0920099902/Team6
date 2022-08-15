@@ -14,41 +14,76 @@
 <title>餐廳修改頁面</title>
 </head>
 <body>
-	<h1>餐廳修改頁面測試</h1>
-	<form:form class="form" method="post" modelAttribute="restaurant"
-		action="${contextRoot}/message/editMessage">
+	<h1>修改頁面測試</h1>
 
-		<form:input type="hidden" path="id" />
-		<div>
-			餐廳名稱:
-			<form:input type="text" path="name" value="${restaurant.name }" />
-		</div>
-		<div>
-			餐廳電話:
-			<form:input type="text" path="phone" value="${restaurant.phone }" />
-		</div>
-		<div>
-			餐廳地址:
-			<form:input type="text" path="address" value="${restaurant.address }" />
-		</div>
-		<div>
-			餐廳類別:
-			<form:select path="type" value="${restaurant.type }">
-				<form:options itemValue="${restaurant.type }"></form:options>
-			</form:select>
-		</div>
-		營業時間:<form:select type="date" path="startDate" value="${startDate }" />
-		<form:select type="date" path="endDate" value="${endDate }" />
-		<%-- 		<form:select type="time" path="startTime" value="${startTime }" /> --%>
-		<%-- 		<form:input type="time" path="endTime" value="${endTime }" /> --%>
-		<div>
-			備註:<br />
-			<form:textarea path="remark" value="${restaurant.remark }" />
-		</div>
-		<button type="submit">修改</button>
-	</form:form>
+	<div class="m-5">
+		<form action="${contextRoot}/restaurant/editRestaurant" name="restaurant" method="post"
+			enctype="multipart/form-data">
+			<input type="hidden" name="id" value="${restaurant.id}" />
+
+			<div>
+				餐廳名稱：<input type="text" name="restaurantName" value="${restaurant.name }"
+					required />
+			</div>
+			<div>
+				餐廳電話： <input type="text" name="restaurantPhone" value="${restaurant.phone }"
+					required />
+			</div>
+			<div>
+				餐廳地址： <input type="text" name="restaurantAddress"
+					value="${restaurant.address }" required />
+			</div>
+			<div>
+				餐廳類別： <select name="restaurantType">
+					<c:forEach items="${allRestaurantType}" var="rt">
+						<option value="${rt.rest_type_id}">${rt.rest_type}</option>
+					</c:forEach>
+				</select>
+			</div>
+			<div>
+				營業時間： <select name="startDate">
+					<option value="Sun">星期日</option>
+					<option value="Mon">星期一</option>
+					<option value="Tue">星期二</option>
+					<option value="Wed">星期三</option>
+					<option value="Thu">星期四</option>
+					<option value="Fri">星期五</option>
+					<option value="Sat">星期六</option>
+				</select> ～ <select name="endDate">
+					<option value="Sun">星期日</option>
+					<option value="Mon">星期一</option>
+					<option value="Tue">星期二</option>
+					<option value="Wed">星期三</option>
+					<option value="Thu">星期四</option>
+					<option value="Fri">星期五</option>
+					<option value="Sat">星期六</option>
+				</select> <input type="time" name="starttime" value="${starttime }" required>～
+				<input type="time" name="endtime" value="${endtime }" required>
+			</div>
+			<div>
+				餐廳圖片: <input type="file" name="restaurantImg"
+					onchange="openFile(event)">
+			</div>
+			<img id="output" height="200" style="display: none">
+			<div>
+				備註:<br />
+				<textarea id="remark" name="remark" rows="5" cols="33"></textarea>
+			</div>
+			<button type="submit">修改</button>
+		</form>
+	</div>
 </body>
-<script>
-	
+<script type="text/javascript">
+	function openFile(event) {
+		var input = event.target; //取得上傳檔案
+		var reader = new FileReader(); //建立FileReader物件
+
+		reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+		reader.onload = function() { //FileReader取得上傳檔案後執行以下內容
+			var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+			$('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+		};
+	}
 </script>
 </html>
