@@ -17,6 +17,6 @@
 <body>
 <h1>註冊成功</h1>
 
-<a href="${contextRoot}/member/view">回前頁</a>
+<a href="${contextRoot}/">回主頁</a>
 </body>
 </html>

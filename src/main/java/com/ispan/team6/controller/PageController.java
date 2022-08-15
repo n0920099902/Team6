@@ -32,9 +32,9 @@ public class PageController {
 		return "memberadd";
 	}
 
-	@GetMapping("/Users/navbar")
-	public String memberaddPage2(Model m) {
-		return "ADD";
+	@GetMapping("/Users/register")
+	public String memberaddPage2() {
+		return "RegisterUsers";
 	}
 
 //	@GetMapping("/search")
