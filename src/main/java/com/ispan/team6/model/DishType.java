@@ -17,7 +17,7 @@ public class DishType {
 	private int id;
 
 	@Column(name = "category")
-	private String dishType;
+	private String category;
 	
 	public DishType() {
 	}
@@ -30,12 +30,12 @@ public class DishType {
 		this.id = id;
 	}
 
-	public String getDishType() {
-		return dishType;
+	public String getCategory() {
+		return category;
 	}
 
-	public void setDishType(String dishType) {
-		this.dishType = dishType;
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 }
