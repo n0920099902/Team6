@@ -51,7 +51,7 @@ public class Comment {
 	@Column(name = "remark")
 	private String remark;
 	
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss")  // restful JSON
+	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss",timezone = "Asia/Taipei")  // restful JSON
 	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss")   //SpringMVC
 	@Temporal(TemporalType.TIMESTAMP) 
 	@Column(name = "time")
