@@ -63,7 +63,7 @@ public class RestaurantController {
 			newRest.setName(name);
 			newRest.setPhone(phone);
 			newRest.setAddress(address);
-			newRest.setfk_type_id(rest_type_id);
+//			newRest.setfk_type_id(rest_type_id);
 			newRest.setStarttime(starttime);
 			newRest.setEndtime(endtime);
 			newRest.setStartDate(startdate);
@@ -123,7 +123,7 @@ public class RestaurantController {
 		editRest.setName(name);
 		editRest.setPhone(phone);
 		editRest.setAddress(address);
-		editRest.setfk_type_id(rest_type_id);
+//		editRest.setfk_type_id(rest_type_id);
 		editRest.setStarttime(starttime);
 		editRest.setEndtime(endtime);
 		editRest.setStartDate(startDate);
