@@ -15,5 +15,7 @@ public interface  MemberDao extends JpaRepository <Users, Integer> {
 	@Query(value = "select * from Users where account like (%:search%)", nativeQuery = true)
 	List<Users> queryLikeByName(String search);
 
+	public void save(Integer id);
+
 	
 }

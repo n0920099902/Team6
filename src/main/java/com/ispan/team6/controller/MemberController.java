@@ -55,7 +55,7 @@ public class MemberController {
 		System.out.println("birthday:"+birthday);
 //		System.out.println(remark);
 		System.out.println(bytes);
-
+		
 		return "memberin";
 //		
 	}
@@ -91,7 +91,7 @@ public class MemberController {
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
-
+		model.addAttribute("id", update.getId());
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
@@ -101,8 +101,20 @@ public class MemberController {
 		return "updatePage";
 	}
 
+	
+//	@PostMapping("/Users/update2/{id}")
+//	public String UpdateMember2(@PathVariable Integer id, Model model) {
+//		
+//		Users update = service.UpdateById(id);
+//		
+//		model.addAttribute("getAll", update);
+//		
+//		return "redirect:/Users/select";
+//	}
+//	
+	
 	@PostMapping("/Users/update")
-	public String editMessagePost(@RequestParam("account") String account, @RequestParam("password") String password,
+	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
 			@RequestParam("email") String email, @RequestParam("phone") int phone,
 			@RequestParam("access") String access,
@@ -110,6 +122,7 @@ public class MemberController {
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
 		
 		Users u = new Users();
+		u.setId(id);
 		byte[] bytes = file.getBytes();
 		u.setAccount(account);
 		u.setAccess(access);

@@ -58,6 +58,8 @@
 									<td>${m.phone }</td>
 									<td>${m.birthday }</td>
 									<td>${m.remark }</td>
+									<td><img style="height: 100px " alt=""  src="${contextRoot}/member/img?id=${m.id}"> </td>
+									
 								</tr>
 							</table>
 							<div class="edit-link">
