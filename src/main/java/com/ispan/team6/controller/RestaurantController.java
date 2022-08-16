@@ -63,7 +63,7 @@ public class RestaurantController {
 			newRest.setName(name);
 			newRest.setPhone(phone);
 			newRest.setAddress(address);
-			newRest.setfk_type_id(rest_type_id);
+//			newRest.setfk_type_id(rest_type_id);
 			newRest.setStarttime(starttime);
 			newRest.setEndtime(endtime);
 			newRest.setStartDate(startdate);
@@ -71,6 +71,8 @@ public class RestaurantController {
 			newRest.setRemark(remark);
 			newRest.setPhoto(bytes);
 
+			m.addAttribute("allRestaurantType", rest_type_id);
+			
 			rService.insertRestaurant(newRest);
 
 			return "addRestaurant";
@@ -113,7 +115,7 @@ public class RestaurantController {
 			@RequestParam("starttime") String starttime, @RequestParam("endtime") String endtime,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("remark") String remark, @RequestParam("restaurantType") Integer rest_type_id,
-			@RequestParam("restaurantImg") MultipartFile file) throws IOException {
+			@RequestParam("restaurantImg") MultipartFile file, Model m) throws IOException {
 
 		byte[] bytes = file.getBytes();
 
@@ -123,7 +125,7 @@ public class RestaurantController {
 		editRest.setName(name);
 		editRest.setPhone(phone);
 		editRest.setAddress(address);
-		editRest.setfk_type_id(rest_type_id);
+//		editRest.setfk_type_id(rest_type_id);
 		editRest.setStarttime(starttime);
 		editRest.setEndtime(endtime);
 		editRest.setStartDate(startDate);
@@ -131,6 +133,8 @@ public class RestaurantController {
 		editRest.setRemark(remark);
 		editRest.setPhoto(bytes);
 
+		m.addAttribute("allRestaurantType", rest_type_id);
+		
 		rService.insertRestaurant(editRest);
 
 		return "redirect:/restaurant/viewRestaurants";

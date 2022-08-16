@@ -1,10 +1,16 @@
 package com.ispan.team6.model;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,9 +25,12 @@ public class RestaurantType {
 	@Column(name = "rest_type")
 	private String rest_type;
 
+	@OneToMany(mappedBy = "restaurantType", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Restaurant> restaurant = new LinkedHashSet<Restaurant>();
+
 	public RestaurantType() {
 	}
-	
+
 	public RestaurantType(Integer rest_type_id, String rest_type) {
 		super();
 		this.rest_type_id = rest_type_id;

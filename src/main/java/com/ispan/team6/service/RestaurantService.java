@@ -33,6 +33,10 @@ public class RestaurantService {
 	public void insertRestaurant(Restaurant r) {
 		rDao.save(r);
 	}
+	
+	public void insertRestaurantType(RestaurantType rt) {
+		rtDao.save(rt);
+	}
 
 	public Restaurant findById(Integer Id) {
 		Optional<Restaurant> optional = rDao.findById(Id);

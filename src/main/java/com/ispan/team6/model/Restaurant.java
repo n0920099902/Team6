@@ -2,10 +2,13 @@ package com.ispan.team6.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -45,8 +48,12 @@ public class Restaurant {
 	@Column(name = "remark")
 	private String remark;
 
-	@Column(name = "fk_type_id")
-	private Integer fk_type_id;
+//	@Column(name = "fk_type_id")
+//	private Integer fk_type_id;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "fk_type_id")
+	private RestaurantType restaurantType;
 
 	@Lob
 	@Column(name = "photo")
@@ -56,12 +63,12 @@ public class Restaurant {
 	}
 
 	public Restaurant(Integer id, String name, String phone, String address, String type, String starttime,
-			String endtime, String startDate, String endDate, String remark, Integer fk_type_id,byte[] photo) {
+			String endtime, String startDate, String endDate, String remark, byte[] photo) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
-		this.fk_type_id = fk_type_id;
+//		this.fk_type_id = fk_type_id;
 		this.address = address;
 		this.starttime = starttime;
 		this.endtime = endtime;
@@ -143,21 +150,21 @@ public class Restaurant {
 		this.remark = remark;
 	}
 
-	public Integer getfk_type_id() {
-		return fk_type_id;
-	}
-
-	public void setfk_type_id(Integer fk_type_id) {
-		this.fk_type_id = fk_type_id;
-	}
-
-	public Integer getFk_type_id() {
-		return fk_type_id;
-	}
-
-	public void setFk_type_id(Integer fk_type_id) {
-		this.fk_type_id = fk_type_id;
-	}
+//	public Integer getfk_type_id() {
+//		return fk_type_id;
+//	}
+//
+//	public void setfk_type_id(Integer fk_type_id) {
+//		this.fk_type_id = fk_type_id;
+//	}
+//
+//	public Integer getFk_type_id() {
+//		return fk_type_id;
+//	}
+//
+//	public void setFk_type_id(Integer fk_type_id) {
+//		this.fk_type_id = fk_type_id;
+//	}
 
 	public byte[] getPhoto() {
 		return photo;

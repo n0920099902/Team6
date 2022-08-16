@@ -42,7 +42,7 @@
 										class="card-img-top">
 									<div class="headline">${restaurant.name }</div>
 									<div class="card-footer text-end">
-										<span class="me-5">${restaurant.address }</span>
+										<span class="me-5">${restaurant.startdate }</span>
 
 									</div>
 								</div>

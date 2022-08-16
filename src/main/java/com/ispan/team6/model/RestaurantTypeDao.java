@@ -9,4 +9,5 @@ public interface RestaurantTypeDao extends JpaRepository<RestaurantType, Integer
 
 	@Query(value = "select * from Restaurant_type where rest_type like %:keyword%", nativeQuery = true)
 	public List<RestaurantType> findByType(String keyword);
+
 }
