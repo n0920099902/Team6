@@ -28,7 +28,7 @@ public class MemberController {
 	@Autowired
 	private MemberService service;
 
-	@PostMapping("/postMember2")
+	@PostMapping("/rigister")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
 			@RequestParam("email") String email, @RequestParam("phone") int phone,
@@ -48,12 +48,11 @@ public class MemberController {
 		u.setPhoto(bytes);
 
 		service.insertMember(u);
-		System.out.println(access);
-		System.out.println(password);
-		System.out.println(birthday);
-		System.out.println(email);
-		System.out.println(phone);
-		System.out.println(access);
+		System.out.println("access:"+access);
+		System.out.println("password:"+password);
+		System.out.println("email:"+email);
+		System.out.println("phone:"+phone);
+		System.out.println("birthday:"+birthday);
 //		System.out.println(remark);
 		System.out.println(bytes);
 
@@ -73,21 +72,8 @@ public class MemberController {
 
 	}
 
-//	@PostMapping("/postMember")
-//	public String addMemberPage(Users m, Model model) {
-//		
-//		
-//		service.insertMember(m); //service 方法
-//
-//		Users newMember = new Users();
-//		Users date = new Users();
-//		model.addAttribute("member", newMember);
-//		model.addAttribute("latestMsg", date);	
-//		
-//		return "memberin";
-//	}
 
-	@GetMapping("/member/select")
+	@GetMapping("/Users/select")
 	public String MemberSelect(Model model) {
 		List<Users> list = service.findAllMembers();
 
@@ -96,26 +82,47 @@ public class MemberController {
 		return "memberselect";
 	}
 
-	@GetMapping("/member/delete/{id}")
+	@GetMapping("/Users/delete/{id}")
 	public String deleteMember(@PathVariable Integer id) {
 		service.deleteMember(id);
-		return "redirect:/member/select";
+		return "redirect:/Users/select";
 	}
 
-	@GetMapping("/member/update/{id}")
+	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
 
-		model.addAttribute("update", update);
+		model.addAttribute("getAccount", update.getAccount());
+		model.addAttribute("getBirthday", update.getBirthday());
+		model.addAttribute("getEmail", update.getEmail());
+		model.addAttribute("getPassword", update.getPassword());
+		model.addAttribute("getPhone", update.getPhone());
 
 		return "updatePage";
 	}
 
-	@PostMapping("/member/update")
-	public String editMessagePost(@ModelAttribute Users m) {
-		service.insertMember(m);
+	@PostMapping("/Users/update")
+	public String editMessagePost(@RequestParam("account") String account, @RequestParam("password") String password,
+			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
+			@RequestParam("email") String email, @RequestParam("phone") int phone,
+			@RequestParam("access") String access,
+//			@RequestParam("remark") String remark,
+			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
+		
+		Users u = new Users();
+		byte[] bytes = file.getBytes();
+		u.setAccount(account);
+		u.setAccess(access);
+		u.setBirthday(birthday);
+		u.setEmail(email);
+		u.setPhone(phone);
+		u.setPassword(password);
+//		u.setAccess(remark);
+		u.setPhoto(bytes);
+		
+		service.insertMember(u);
 
-		return "redirect:/member/select";
+		return "redirect:/Users/select";
 	}
 
 	@GetMapping("/member/search")
