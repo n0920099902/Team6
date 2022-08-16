@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!DOCTYPE html>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<%-- <c:set var="contextRoot" value="${pageContext.request.contextPath}" /> --%>
 
 <jsp:include page="layout/navbar.jsp" />
 <html>
@@ -14,7 +14,7 @@
 <title>註冊頁面</title>
 </head>
 <body>
-	<form action="contextRoot/rigister"
+	<form action="${pageContext.request.contextPath}/rigister"
 		method="POST" enctype="multipart/form-data">
 		<div>
 			會員帳號： <input type="text" name="account" required>
