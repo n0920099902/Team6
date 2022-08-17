@@ -10,6 +10,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+<%-- <link href="${contextRoot}/css/headers.css" rel="stylesheet" /> --%>
 
 </head>
 <body>

@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${name}</title>
+<title>${restaurant.name}</title>
 </head>
 <body>
 	<h1>餐廳商品測試</h1>
