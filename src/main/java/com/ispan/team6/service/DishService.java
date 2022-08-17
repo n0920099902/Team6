@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.team6.dto.DishDTO;
-import com.ispan.team6.model.Dish;
+import com.ispan.team6.entity.Dish;
 import com.ispan.team6.model.DishDAO;
 
 @Service

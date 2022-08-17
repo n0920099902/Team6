@@ -1,5 +1,10 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
+import java.sql.Blob;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -9,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -19,56 +26,58 @@ public class Restaurant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
+//	@Column(name = "id")
 	private Integer id;
 
-	@Column(name = "name")
+//	@Column(name = "name")
 	private String name;
 
-	@Column(name = "phone")
+//	@Column(name = "phone")
 	private String phone;
 
-	@Column(name = "address")
+//	@Column(name = "address")
 	private String address;
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
-	@Column(name = "starttime")
+//	@Column(name = "starttime")
 	private String starttime;
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
-	@Column(name = "endtime")
+//	@Column(name = "endtime")
 	private String endtime;
 
-	@Column(name = "startdate")
+//	@Column(name = "startdate")
 	private String startDate;
 
-	@Column(name = "enddate")
+//	@Column(name = "enddate")
 	private String endDate;
 
-	@Column(name = "remark")
+//	@Column(name = "remark")
 	private String remark;
 
-//	@Column(name = "fk_type_id")
-//	private Integer fk_type_id;
+	@Lob
+//	@Column(name = "photo")
+	private byte[] photo;
 
+	//一對多 Restaurant對Orders外鍵(一間Restaurant可以有多筆Order)
+	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Orders> orders = new LinkedHashSet<Orders>();
+
+	//多對一 Restaurant對RestaurantType外鍵(一種RestaurantType會有多間Restaurant)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_type_id")
 	private RestaurantType restaurantType;
-	
-	@Lob
-	@Column(name = "photo")
-	private byte[] photo;
 
 	public Restaurant() {
 	}
 
 	public Restaurant(Integer id, String name, String phone, String address, String type, String starttime,
-			String endtime, String startDate, String endDate, String remark, Integer fk_type_id,byte[] photo) {
+			String endtime, String startDate, String endDate, String remark, Integer fk_type_id, byte[] photo,
+			Set<Orders> orders, RestaurantType restaurantType) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
-//		this.fk_type_id = fk_type_id;
 		this.address = address;
 		this.starttime = starttime;
 		this.endtime = endtime;
@@ -76,6 +85,8 @@ public class Restaurant {
 		this.endDate = endDate;
 		this.remark = remark;
 		this.photo = photo;
+		this.orders = orders;
+		this.restaurantType = restaurantType;
 	}
 
 	public Integer getId() {
@@ -150,28 +161,36 @@ public class Restaurant {
 		this.remark = remark;
 	}
 
-//	public Integer getfk_type_id() {
-//		return fk_type_id;
-//	}
-//
-//	public void setfk_type_id(Integer fk_type_id) {
-//		this.fk_type_id = fk_type_id;
-//	}
-//
-//	public Integer getFk_type_id() {
-//		return fk_type_id;
-//	}
-//
-//	public void setFk_type_id(Integer fk_type_id) {
-//		this.fk_type_id = fk_type_id;
-//	}
-
 	public byte[] getPhoto() {
 		return photo;
 	}
 
 	public void setPhoto(byte[] photo) {
 		this.photo = photo;
+	}
+
+	public RestaurantType getRestaurantType() {
+		return restaurantType;
+	}
+
+	public void setRestaurantType(RestaurantType restaurantType) {
+		this.restaurantType = restaurantType;
+	}
+
+	public Set<Orders> getOrder() {
+		return orders;
+	}
+
+	public void setOrder(Set<Orders> orders) {
+		this.orders = orders;
+	}
+
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
 	}
 
 }

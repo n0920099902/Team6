@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ispan.team6.model.Restaurant;
-import com.ispan.team6.model.RestaurantType;
+import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
@@ -27,16 +27,16 @@ public class RestaurantController {
 	private RestaurantService rService;
 
 	@GetMapping("/restaurant/downloadImage/{id}")
-	public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id){
+	public ResponseEntity<byte[]> downloadImage(@PathVariable Integer id) {
 		Restaurant photo1 = rService.findById(id);
-		
+
 		byte[] photoFile = photo1.getPhoto();
-		
+
 		HttpHeaders header = new HttpHeaders();
 		header.setContentType(MediaType.IMAGE_JPEG);
-		
-		                          // 要回傳的物件本體, header, HttpStatus 回應
-		return new ResponseEntity<byte[]>(photoFile,header,HttpStatus.OK);
+
+		// 要回傳的物件本體, header, HttpStatus 回應
+		return new ResponseEntity<byte[]>(photoFile, header, HttpStatus.OK);
 	}
 
 	@GetMapping("/restaurant/add")
@@ -60,10 +60,12 @@ public class RestaurantController {
 
 			Restaurant newRest = new Restaurant();
 
+			RestaurantType typeId = rService.findTypeById(rest_type_id);
+
 			newRest.setName(name);
 			newRest.setPhone(phone);
 			newRest.setAddress(address);
-//			newRest.setfk_type_id(rest_type_id);
+			newRest.setRestaurantType(typeId);
 			newRest.setStarttime(starttime);
 			newRest.setEndtime(endtime);
 			newRest.setStartDate(startdate);
@@ -119,11 +121,13 @@ public class RestaurantController {
 
 		Restaurant editRest = new Restaurant();
 
+		RestaurantType typeId = rService.findTypeById(rest_type_id);
+
 		editRest.setId(id);
 		editRest.setName(name);
 		editRest.setPhone(phone);
 		editRest.setAddress(address);
-//		editRest.setfk_type_id(rest_type_id);
+		editRest.setRestaurantType(typeId);
 		editRest.setStarttime(starttime);
 		editRest.setEndtime(endtime);
 		editRest.setStartDate(startDate);

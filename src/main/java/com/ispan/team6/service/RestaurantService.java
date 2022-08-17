@@ -8,9 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ispan.team6.model.Restaurant;
+import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.model.RestaurantDao;
-import com.ispan.team6.model.RestaurantType;
 import com.ispan.team6.model.RestaurantTypeDao;
 
 @Service
@@ -44,6 +44,15 @@ public class RestaurantService {
 		return null;
 	}
 	
+	public RestaurantType findTypeById(Integer rest_type_id) {
+		Optional<RestaurantType> optional = rtDao.findById(rest_type_id);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
 
 	public void deleteRestaurant(Integer id) {
 		rDao.deleteById(id);

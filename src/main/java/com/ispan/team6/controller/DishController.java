@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ispan.team6.dto.DishDTO;
-import com.ispan.team6.model.Dish;
+import com.ispan.team6.entity.Dish;
 import com.ispan.team6.service.DishService;
 
 @RestController
