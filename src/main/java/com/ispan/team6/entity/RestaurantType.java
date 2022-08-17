@@ -1,4 +1,4 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

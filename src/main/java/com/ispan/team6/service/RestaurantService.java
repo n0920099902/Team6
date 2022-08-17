@@ -8,9 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ispan.team6.model.Restaurant;
+import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.model.RestaurantDao;
-import com.ispan.team6.model.RestaurantType;
 import com.ispan.team6.model.RestaurantTypeDao;
 
 @Service

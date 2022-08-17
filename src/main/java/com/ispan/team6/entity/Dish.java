@@ -1,16 +1,17 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
-import javax.persistence.Column;
+import java.sql.Blob;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.springframework.data.annotation.Transient;
 
 @Entity
 @Table(name="Dish")
@@ -18,54 +19,34 @@ public class Dish {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
-	
-	@Column(name ="fk_rest_id")
-	@Transient
-	private int restID; 
-	
-	@ManyToOne(fetch= FetchType.EAGER )
-    @JoinColumn(name ="fk_rest_id", insertable=false, updatable=false)
-	private Restaurant rest; 
-	
-	@Column(name = "dishName")
-	private String dishName;
-	
-	@Column(name = "dishPrice")
-	private int dishPrice;
-	
-	@Column(name ="fk_dishType_id")
-	@Transient
-	private int dishTypeId;
+	private Integer id;
 	
 	@ManyToOne(fetch= FetchType.EAGER)
-    @JoinColumn(name ="fk_dishType_id", insertable=false, updatable=false)
+    @JoinColumn(name ="fk_rest_id")
+	private Restaurant rest;
+	
+	private String dishName;
+	
+	private Integer dishPrice;
+	
+	@ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name ="fk_dishType_id")
 	private DishType dishType;
 	
-	@Column(name = "dishPhoto")
-	private byte[] dishPhoto;
+	@Lob
+	private Blob dishPhoto;
 	
-	@Column(name = "dishStatus")
 	private String dishStatus;
 	
 	public Dish() {
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
-	}
-
-	public int getRestID() {
-		return restID;
-	}
-
-	public void setRestID(int restID) {
-		this.restID = restID;
 	}
 
 	public Restaurant getRest() {
@@ -84,20 +65,12 @@ public class Dish {
 		this.dishName = dishName;
 	}
 
-	public int getDishPrice() {
+	public Integer getDishPrice() {
 		return dishPrice;
 	}
 
-	public void setDishPrice(int dishPrice) {
+	public void setDishPrice(Integer dishPrice) {
 		this.dishPrice = dishPrice;
-	}
-
-	public int getDishTypeId() {
-		return dishTypeId;
-	}
-
-	public void setDishTypeId(int dishTypeId) {
-		this.dishTypeId = dishTypeId;
 	}
 
 	public DishType getDishType() {
@@ -108,11 +81,11 @@ public class Dish {
 		this.dishType = dishType;
 	}
 
-	public byte[] getDishPhoto() {
+	public Blob getDishPhoto() {
 		return dishPhoto;
 	}
 
-	public void setDishPhoto(byte[] dishPhoto) {
+	public void setDishPhoto(Blob dishPhoto) {
 		this.dishPhoto = dishPhoto;
 	}
 

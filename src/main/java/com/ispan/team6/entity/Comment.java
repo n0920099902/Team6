@@ -1,4 +1,4 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
 import java.util.Date;
 

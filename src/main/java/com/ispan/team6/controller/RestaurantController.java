@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ispan.team6.model.Restaurant;
-import com.ispan.team6.model.RestaurantType;
+import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller

@@ -1,26 +1,31 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Dish_type")
-public class DishType {
-
+@Table(name = "Orders_Detail")
+public class OrdersDetail {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private int id;
-
-	@Column(name = "category")
-	private String category;
 	
-	public DishType() {
-	}
+	@ManyToOne(cascade = CascadeType.ALL )
+	@JoinColumn(name = "fk_dish_id")
+	private Dish dish;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_order_id")
+	private OrdersBean OrdersBean;
 
 	public int getId() {
 		return id;
@@ -28,14 +33,6 @@ public class DishType {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public String getCategory() {
-		return category;
-	}
-
-	public void setCategory(String category) {
-		this.category = category;
 	}
 
 }

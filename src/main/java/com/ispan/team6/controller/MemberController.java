@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ispan.team6.model.Users;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.MemberService;
 
 @Controller
