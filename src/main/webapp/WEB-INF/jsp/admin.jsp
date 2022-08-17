@@ -239,7 +239,6 @@ table.table .avatar {
   	            {
   	            	console.log(desc);
   	            	console.log(err);
-  					alert("insert failed!!!");
   	            }
   	        });
 		}
@@ -295,7 +294,7 @@ table.table .avatar {
 	        const json = convertFormToJSON(form);
 	        const myFile = $("#photo")[0].files[0];
 	        fileArrayBuffer = getArrayBuffer(myFile).then(function(value) {
-	        	  json.dishPhoto = Array.from(new Uint8Array(value)); //add something
+	        	json.dishPhoto = Array.from(new Uint8Array(value)); //add something
 	  	        console.log(value);
 	  	        console.log(json);
 	  	        $.ajax({
