@@ -1,6 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+	<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+		<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+			<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+			<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+				<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -9,9 +12,6 @@
 <body>
 <h1>購物車頁面測試</h1>
 <table class="table table-bordered">
-
-
-
 						<thead>
 							<tr>
 								<th width="150">
@@ -50,5 +50,4 @@
 						</tbody>
 					</table>
 </body>
-
 </html>
