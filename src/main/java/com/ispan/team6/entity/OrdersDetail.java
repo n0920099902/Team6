@@ -1,7 +1,6 @@
 package com.ispan.team6.entity;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -28,7 +27,10 @@ public class OrdersDetail {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_order_id")
 	private Orders orders;
-
+	
+	public OrdersDetail() {
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -45,12 +47,13 @@ public class OrdersDetail {
 		this.dish = dish;
 	}
 
-	public Orders getOrdersBean() {
+	public Orders getOrders() {
 		return orders;
 	}
 
-	public void setOrdersBean(Orders orders) {
+	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
+
 
 }
