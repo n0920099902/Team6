@@ -1,12 +1,20 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,35 +30,44 @@ public class Users {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private int id;
+//	@Column(name = "ID")
+	private Integer id;
 
-	@Column(name = "ACCOUNT")
+//	@Column(name = "ACCOUNT")
 	private String account;
 
-	@Column(name = "PASSWORD")
+//	@Column(name = "PASSWORD")
 	private String password;
 
-	@Column(name = "EMAIL")
+//	@Column(name = "EMAIL")
 	private String email;
 
-	@Column(name = "PHONE")
-	private int phone;
+//	@Column(name = "PHONE")
+	private String phone;
 
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss") // json
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // springmvc
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "BIRTHDAY")
+	@JsonFormat(pattern = "yyyy/MM/dd") // json
+	@DateTimeFormat(pattern = "yyyy/MM/dd") // springmvc
+//	@Temporal(TemporalType.TIMESTAMP)
+//	@Column(name = "BIRTHDAY")
 	private Date birthday;
 
-	@Column(name = "ACCESS")
+//	@Column(name = "ACCESS")
 	private String access;
 
-	@Column(name = "PHOTO")
+	@Lob
+//	@Column(name = "PHOTO")
 	private byte[] photo;
 
-	@Column(name = "REMARK")
+//	@Column(name = "REMARK")
 	private String remark;
+
+	// 一對多 User對Comment(一個User可以有多筆Comment)
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Comment> comment = new LinkedHashSet<Comment>();
+
+	// 一對多 User對Order(一個User可以有多筆Order)
+	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
 	public Users() {
 	}
@@ -58,8 +75,8 @@ public class Users {
 	public int getId() {
 		return id;
 	}
-
-	public void setId(int id) {
+	
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -87,11 +104,11 @@ public class Users {
 		this.email = email;
 	}
 
-	public int getPhone() {
+	public String getPhone() {
 		return phone;
 	}
 
-	public void setPhone(int phone) {
+	public void setPhone(String phone) {
 		this.phone = phone;
 	}
 
@@ -134,5 +151,22 @@ public class Users {
 		}
 
 	}
+
+	public Set<Comment> getComment() {
+		return comment;
+	}
+
+	public void setComment(Set<Comment> comment) {
+		this.comment = comment;
+	}
+
+	public Set<Orders> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(Set<Orders> orders) {
+		this.orders = orders;
+	}
+
 
 }

@@ -1,4 +1,4 @@
-package com.ispan.team6.model;
+package com.ispan.team6.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,26 +13,44 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "Orders_Detail")
 public class OrdersDetail {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
-	private int id;
-	
-	@ManyToOne(cascade = CascadeType.ALL )
+//	@Column(name = "id")
+	private Integer id;
+
+	//多對一 OrderDetail對Dish外鍵(一種Dish可以有多筆OrderDetail)
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_dish_id")
 	private Dish dish;
-	
+
+	//多對一 OrderDetail對Order外鍵(一筆Order可以有多筆OrderDetail)
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_order_id")
-	private OrdersBean OrdersBean;
+	private Orders orders;
 
 	public int getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Dish getDish() {
+		return dish;
+	}
+
+	public void setDish(Dish dish) {
+		this.dish = dish;
+	}
+
+	public Orders getOrdersBean() {
+		return orders;
+	}
+
+	public void setOrdersBean(Orders orders) {
+		this.orders = orders;
 	}
 
 }

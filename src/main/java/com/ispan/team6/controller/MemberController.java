@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.ispan.team6.model.Users;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.MemberService;
 
 @Controller
@@ -31,7 +31,7 @@ public class MemberController {
 	@PostMapping("/rigister")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
-			@RequestParam("email") String email, @RequestParam("phone") int phone,
+			@RequestParam("email") String email, @RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
@@ -116,7 +116,7 @@ public class MemberController {
 	@PostMapping("/Users/update")
 	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
-			@RequestParam("email") String email, @RequestParam("phone") int phone,
+			@RequestParam("email") String email, @RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
