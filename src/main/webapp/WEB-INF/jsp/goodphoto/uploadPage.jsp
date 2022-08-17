@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <jsp:include page="../layout/navbar.jsp" />
 
 <!DOCTYPE html>
@@ -10,27 +10,21 @@
 </head>
 <body>
 
-<div class="container">
-    <h1>檔案上傳頁面</h1>
+	<div class="container">
+		<h1>檔案上傳頁面</h1>
 
-<form action="fileupload" method="post" enctype="multipart/form-data">
+		<form action="fileupload" method="post" enctype="multipart/form-data">
 
-name : <input id="photoName" name="photoName">
-
-<br />
-
-   file :     <input type="file" name="file">
-
-<br />
-
-<input type="submit" value="送出" />
+			name : <input id="photoName" name="photoName"> <br /> file :
+			<input type="file" name="file"> <br /> <input type="submit"
+				value="送出" />
 
 
-</form>
+		</form>
 
 
 
-</div>
+	</div>
 
 
 

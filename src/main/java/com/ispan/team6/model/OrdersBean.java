@@ -49,4 +49,79 @@ public class OrdersBean {
 	@JoinColumn(name = "fk_users_id")
 	private Users users;
 	
+	public OrdersBean () {
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getOrdersTime() {
+		return ordersTime;
+	}
+
+	public void setOrdersTime(String ordersTime) {
+		this.ordersTime = ordersTime;
+	}
+
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Integer getPhone() {
+		return phone;
+	}
+
+	public void setPhone(Integer phone) {
+		this.phone = phone;
+	}
+
+	public String getOrdersStatus() {
+		return ordersStatus;
+	}
+
+	public void setOrdersStatus(String ordersStatus) {
+		this.ordersStatus = ordersStatus;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
+	}
+
+	public Restaurant getRestaurant() {
+		return Restaurant;
+	}
+
+	public void setRestaurant(Restaurant restaurant) {
+		Restaurant = restaurant;
+	}
+
+	public Users getUsers() {
+		return users;
+	}
+
+	public void setUsers(Users users) {
+		this.users = users;
+	}
+	
 }
