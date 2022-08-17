@@ -26,28 +26,28 @@
 				餐廳電話： <input type="text" name="restaurantPhone" required />
 			</div>
 			<div>
-				餐廳地址： 
-<!-- 				<select name="address"> -->
-<!-- 					<option value="基隆市">基隆市</option> -->
-<!-- 					<option value="台北市">台北市</option> -->
-<!-- 					<option value="新北市">新北市</option> -->
-<!-- 					<option value="桃園縣">桃園縣</option> -->
-<!-- 					<option value="新竹市">新竹市</option> -->
-<!-- 					<option value="新竹縣">新竹縣</option> -->
-<!-- 					<option value="苗栗縣">苗栗縣</option> -->
-<!-- 					<option value="台中市">台中市</option> -->
-<!-- 					<option value="彰化縣">彰化縣</option> -->
-<!-- 					<option value="南投縣">南投縣</option> -->
-<!-- 					<option value="雲林縣">雲林縣</option> -->
-<!-- 					<option value="嘉義市">嘉義市</option> -->
-<!-- 					<option value="嘉義縣">嘉義縣</option> -->
-<!-- 					<option value="台南市">台南市</option> -->
-<!-- 					<option value="高雄市">高雄市</option> -->
-<!-- 					<option value="屏東縣">屏東縣</option> -->
-<!-- 					<option value="台東縣">台東縣</option> -->
-<!-- 					<option value="花蓮縣">花蓮縣</option> -->
-<!-- 					<option value="宜蘭縣">宜蘭縣</option> -->
-<!-- 				</select>  -->
+				餐廳地址：
+				<!-- 				<select name="address"> -->
+				<!-- 					<option value="基隆市">基隆市</option> -->
+				<!-- 					<option value="台北市">台北市</option> -->
+				<!-- 					<option value="新北市">新北市</option> -->
+				<!-- 					<option value="桃園縣">桃園縣</option> -->
+				<!-- 					<option value="新竹市">新竹市</option> -->
+				<!-- 					<option value="新竹縣">新竹縣</option> -->
+				<!-- 					<option value="苗栗縣">苗栗縣</option> -->
+				<!-- 					<option value="台中市">台中市</option> -->
+				<!-- 					<option value="彰化縣">彰化縣</option> -->
+				<!-- 					<option value="南投縣">南投縣</option> -->
+				<!-- 					<option value="雲林縣">雲林縣</option> -->
+				<!-- 					<option value="嘉義市">嘉義市</option> -->
+				<!-- 					<option value="嘉義縣">嘉義縣</option> -->
+				<!-- 					<option value="台南市">台南市</option> -->
+				<!-- 					<option value="高雄市">高雄市</option> -->
+				<!-- 					<option value="屏東縣">屏東縣</option> -->
+				<!-- 					<option value="台東縣">台東縣</option> -->
+				<!-- 					<option value="花蓮縣">花蓮縣</option> -->
+				<!-- 					<option value="宜蘭縣">宜蘭縣</option> -->
+				<!-- 				</select>  -->
 				<input type="text" name="restaurantAddress" required />
 			</div>
 			<div>
@@ -59,21 +59,21 @@
 			</div>
 			<div>
 				營業時間： <select name="startDate">
-					<option value="Sun">星期日</option>
-					<option value="Mon">星期一</option>
-					<option value="Tue">星期二</option>
-					<option value="Wed">星期三</option>
-					<option value="Thu">星期四</option>
-					<option value="Fri">星期五</option>
-					<option value="Sat">星期六</option>
+					<option value="星期日">星期日</option>
+					<option value="星期一">星期一</option>
+					<option value="星期二">星期二</option>
+					<option value="星期三">星期三</option>
+					<option value="星期四">星期四</option>
+					<option value="星期五">星期五</option>
+					<option value="星期六">星期六</option>
 				</select>～ <select name="endDate">
-					<option value="Sun">星期日</option>
-					<option value="Mon">星期一</option>
-					<option value="Tue">星期二</option>
-					<option value="Wed">星期三</option>
-					<option value="Thu">星期四</option>
-					<option value="Fri">星期五</option>
-					<option value="Sat">星期六</option>
+					<option value="星期日">星期日</option>
+					<option value="星期一">星期一</option>
+					<option value="星期二">星期二</option>
+					<option value="星期三">星期三</option>
+					<option value="星期四">星期四</option>
+					<option value="星期五">星期五</option>
+					<option value="星期六">星期六</option>
 				</select> <input type="time" name="startTime" required>～ <input
 					type="time" name="endTime" required>
 			</div>
