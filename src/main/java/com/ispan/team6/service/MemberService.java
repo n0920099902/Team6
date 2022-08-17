@@ -42,11 +42,9 @@ public class MemberService {
 			
 		}
 		public List<Users> SearchMember(String search){
-			System.out.println(search);
 			return mDao.queryLikeByName(search);
 }
 		public Users findByIdSerUsers(int id){
-	        Users users= mDao.findById(id);
 			return mDao.findById(id);
 			
 			

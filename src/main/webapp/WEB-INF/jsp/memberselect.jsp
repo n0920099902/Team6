@@ -39,18 +39,16 @@
 
 						<table>
 							<tr>
-								<td>帳號</td>
-								<td>密碼</td>
-								<td>信箱</td>
-								<td>電話</td>
-								<td>生日</td>
-								<td>圖片</td>
+								<th>帳號</th>
+								<th>密碼</th>
+								<th>信箱</th>
+								<th>電話</th>
+								<th>生日</th>
+								<th>圖片</th>
 							</tr>
-						</table>
 						<c:forEach items="${allmember}" var="m">
 
 
-							<table>
 								<tr>
 									<td>${m.account }</td>
 									<td>${m.password }</td>
@@ -59,16 +57,16 @@
 									<td>${m.birthday }</td>
 									<td>${m.remark }</td>
 									<td><img style="height: 100px " alt=""  src="${contextRoot}/member/img?id=${m.id}"> </td>
-									
-								</tr>
-							</table>
-							<div class="edit-link">
+									<td><div class="edit-link">
 								<a href="${contextRoot}/Users/update/${m.id}">編輯</a> <a
 									href="${contextRoot}/Users/delete/${m.id}"
 									onclick="return confirm('確認刪除?')">刪除</a>
-							</div>
+							</div></td>
+								</tr>
+							
 
 						</c:forEach>
+						</table>
 					</div>
 				</div>
 			</div>

@@ -37,9 +37,8 @@ public class Users {
 	@Column(name = "PHONE")
 	private int phone;
 
-	@JsonFormat(pattern = "yyyy/MM/dd HH:mm:ss") // json
-	@DateTimeFormat(pattern = "yyyy/MM/dd HH:mm:ss") // springmvc
-	@Temporal(TemporalType.TIMESTAMP)
+	@JsonFormat(pattern = "yyyy/MM/dd") // json
+	@DateTimeFormat(pattern = "yyyy/MM/dd") // springmvc
 	@Column(name = "BIRTHDAY")
 	private Date birthday;
 
