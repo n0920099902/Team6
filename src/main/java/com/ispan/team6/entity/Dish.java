@@ -1,70 +1,44 @@
 package com.ispan.team6.entity;
 
 import java.sql.Blob;
-import java.util.LinkedHashSet;
-import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Dish")
+@Table(name="Dish")
 public class Dish {
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id")
 	private Integer id;
-
-//	@Column(name = "dishName")
-	private String dishName;
-
-//	@Column(name = "dishPrice")
-	private Integer dishPrice;
-
-//	@Column(name = "dishPhoto")
-	private byte[] dishPhoto;
-
-//	@Column(name = "dishStatus")
-	private String dishStatus;
-
-	// 一對多 Dish對OrdersDetail外鍵(一個Dish可以有多筆OrderDetail) 
-	@OneToMany(mappedBy = "dish", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	private Set<OrdersDetail> ordersDetail = new LinkedHashSet<OrdersDetail>();
 	
-	// 多對一 Dish對Restaurant外鍵(一個Restaurant會有多種Dish)
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_rest_id", insertable = false, updatable = false)
+	@ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name ="fk_rest_id")
 	private Restaurant rest;
-
-	// 多對一 Dish對DishType外鍵(一個DishType會有多種Dish)
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "fk_dishType_id", insertable = false, updatable = false)
+	
+	private String dishName;
+	
+	private Integer dishPrice;
+	
+	@ManyToOne(fetch= FetchType.EAGER)
+    @JoinColumn(name ="fk_dishType_id")
 	private DishType dishType;
-
+	
+	@Lob
+	private Blob dishPhoto;
+	
+	private String dishStatus;
+	
 	public Dish() {
-	}
-
-	public Dish(Integer id, String dishName, Integer dishPrice, byte[] dishPhoto, String dishStatus, Restaurant rest,
-			DishType dishType, Set<OrdersDetail> ordersDetail) {
-		super();
-		this.id = id;
-		this.dishName = dishName;
-		this.dishPrice = dishPrice;
-		this.dishPhoto = dishPhoto;
-		this.dishStatus = dishStatus;
-		this.rest = rest;
-		this.dishType = dishType;
-		this.ordersDetail = ordersDetail;
 	}
 
 	public Integer getId() {
@@ -91,7 +65,7 @@ public class Dish {
 		this.dishName = dishName;
 	}
 
-	public int getDishPrice() {
+	public Integer getDishPrice() {
 		return dishPrice;
 	}
 
@@ -107,11 +81,11 @@ public class Dish {
 		this.dishType = dishType;
 	}
 
-	public byte[] getDishPhoto() {
+	public Blob getDishPhoto() {
 		return dishPhoto;
 	}
 
-	public void setDishPhoto(byte[] dishPhoto) {
+	public void setDishPhoto(Blob dishPhoto) {
 		this.dishPhoto = dishPhoto;
 	}
 
@@ -121,14 +95,6 @@ public class Dish {
 
 	public void setDishStatus(String dishStatus) {
 		this.dishStatus = dishStatus;
-	}
-
-	public Set<OrdersDetail> getOrdersDetail() {
-		return ordersDetail;
-	}
-
-	public void setOrdersDetail(Set<OrdersDetail> ordersDetail) {
-		this.ordersDetail = ordersDetail;
 	}
 
 }

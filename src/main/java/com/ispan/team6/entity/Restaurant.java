@@ -1,6 +1,5 @@
 package com.ispan.team6.entity;
 
-import java.sql.Blob;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,7 +14,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -40,11 +38,11 @@ public class Restaurant {
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
 //	@Column(name = "starttime")
-	private String starttime;
+	private String startTime;
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
 //	@Column(name = "endtime")
-	private String endtime;
+	private String endTime;
 
 //	@Column(name = "startdate")
 	private String startDate;
@@ -59,11 +57,11 @@ public class Restaurant {
 //	@Column(name = "photo")
 	private byte[] photo;
 
-	//一對多 Restaurant對Orders外鍵(一間Restaurant可以有多筆Order)
+	// 一對多 Restaurant對Orders外鍵(一間Restaurant可以有多筆Order)
 	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
-	//多對一 Restaurant對RestaurantType外鍵(一種RestaurantType會有多間Restaurant)
+	// 多對一 Restaurant對RestaurantType外鍵(一種RestaurantType會有多間Restaurant)
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "fk_type_id")
 	private RestaurantType restaurantType;
@@ -71,16 +69,16 @@ public class Restaurant {
 	public Restaurant() {
 	}
 
-	public Restaurant(Integer id, String name, String phone, String address, String type, String starttime,
-			String endtime, String startDate, String endDate, String remark, Integer fk_type_id, byte[] photo,
+	public Restaurant(Integer id, String name, String phone, String address, String type, String startTime,
+			String endTime, String startDate, String endDate, String remark, Integer fk_type_id, byte[] photo,
 			Set<Orders> orders, RestaurantType restaurantType) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.phone = phone;
 		this.address = address;
-		this.starttime = starttime;
-		this.endtime = endtime;
+		this.startTime = startTime;
+		this.endTime = endTime;
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.remark = remark;
@@ -122,19 +120,19 @@ public class Restaurant {
 	}
 
 	public String getStarttime() {
-		return starttime;
+		return startTime;
 	}
 
 	public void setStarttime(String starttime) {
-		this.starttime = starttime;
+		this.startTime = starttime;
 	}
 
 	public String getEndtime() {
-		return endtime;
+		return endTime;
 	}
 
 	public void setEndtime(String endtime) {
-		this.endtime = endtime;
+		this.endTime = endtime;
 	}
 
 	public String getStartDate() {

@@ -42,8 +42,8 @@
 										class="card-img-top">
 									<div class="headline">${restaurant.name }</div>
 									<div class="card-footer text-end">
-										<span class="me-5">${restaurant.address }</span>
-
+										<span class="me-5">營業時間：${restaurant.startDate}～${restaurant.endDate}<br/>
+										${restaurant.starttime}～${restaurant.endtime}</span>
 									</div>
 								</div>
 							</div>
