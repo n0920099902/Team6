@@ -4,21 +4,15 @@ import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.ispan.team6.dto.DishDTO;
 import com.ispan.team6.entity.Dish;
-<<<<<<< HEAD
-=======
 import com.ispan.team6.entity.DishType;
 import com.ispan.team6.entity.Restaurant;
->>>>>>> Dish11
 import com.ispan.team6.model.DishDAO;
 
 @Service
