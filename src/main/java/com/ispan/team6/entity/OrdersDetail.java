@@ -22,6 +22,9 @@ public class OrdersDetail {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_dish_id")
 	private Dish dish;
+	
+//	@Column(name = "quantity;")
+	private Integer quantity;
 
 	//多對一 OrderDetail對Order外鍵(一筆Order可以有多筆OrderDetail)
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -53,6 +56,14 @@ public class OrdersDetail {
 
 	public void setOrders(Orders orders) {
 		this.orders = orders;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 

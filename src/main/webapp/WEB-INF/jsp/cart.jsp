@@ -16,30 +16,7 @@
 <script th:src="@{js/axios.min.js}"></script>
 </head>
 <body>
-	<div class="table-responsive">
-		<table class="table">
-			<caption>响应式表格布局</caption>
-			<thead>
-				<tr>
-					<th>编号</th>
-					<th>商品名称</th>
-					<th>商品价格</th>
-					<th>商品描述</th>
-					<th>操作</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="Shoppings:${sysShoppings}">
-					<th th:text="${Shoppings.spid}"></th>
-					<th th:text="${Shoppings.getSpname()}"></th>
-					<th th:text="${Shoppings.spprice}"></th>
-					<th th:text="${Shoppings.spdesc}"></th>
-					<th th:if="${session.user==null}"><a href="/login">放入购物车</a></th>
-					<th th:if="${session.user!=null}"><a
-						th:href="@{/cart(spid=${Shoppings.spid})}">购买</a></th>
-			</tbody>
-		</table>
-	</div>
+	
 </body>
 
 <script type="text/javascript">
