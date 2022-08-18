@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package com.ispan.team6.service;
 //
 //import java.util.ArrayList;
@@ -26,6 +27,8 @@
 //		dish.setDishStatus(dishDto.getDishStatus());
 //		dish.setDishTypeId(Integer.parseInt(dishDto.getDishCategory()));
 //		dish.setRestID(Integer.parseInt(dishDto.getRestId()));
+=======
+>>>>>>> 25
 package com.ispan.team6.service;
 
 import java.sql.Blob;

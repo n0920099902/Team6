@@ -16,6 +16,11 @@
 </head>
 <body>
 	<h1>餐廳總覽頁面</h1>
+	<form action="${contextRoot}/restaurant/search" method="get">
+		搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
+		<button>GO</button>
+	</form>
+
 	<c:forEach var="restaurant" items="${allRestaurant}">
 		<div class="row justify-content-center">
 			<div class="col-8">
@@ -34,5 +39,6 @@
 		</div>
 		<br />
 	</c:forEach>
+
 </body>
 </html>

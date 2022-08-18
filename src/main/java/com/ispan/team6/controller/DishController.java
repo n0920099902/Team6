@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 //package com.ispan.team6.controller;
 //
 //import java.util.List;
@@ -18,6 +19,9 @@
 //	@Autowired
 //	private DishService service;
 //	
+=======
+
+>>>>>>> 25
 package com.ispan.team6.controller;
 
 import java.io.IOException;
@@ -51,6 +55,10 @@ public class DishController {
 	@Autowired
 	private DishService service;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 25
 //	@PostMapping("/dish")
 //	public Dish insert(@RequestBody DishDTO dishDto) { 
 //		Dish respDish = service.insertDish(dishDto);
