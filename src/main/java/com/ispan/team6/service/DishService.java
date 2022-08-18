@@ -1,34 +1,3 @@
-<<<<<<< HEAD
-//package com.ispan.team6.service;
-//
-//import java.util.ArrayList;
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.stereotype.Service;
-//import org.springframework.transaction.annotation.Transactional;
-//
-//import com.ispan.team6.dto.DishDTO;
-//import com.ispan.team6.entity.Dish;
-//import com.ispan.team6.model.DishDAO;
-//
-//@Service
-//@Transactional
-//public class DishService {
-//
-//	@Autowired
-//	private DishDAO dishDAO;
-//	
-//	public Dish insertDish(DishDTO dishDto) {
-//		Dish dish = new Dish();
-//		dish.setDishName(dishDto.getDishName());
-//		dish.setDishPhoto(dishDto.getDishPhoto());
-//		dish.setDishPrice(Integer.parseInt(dishDto.getDishPrice()));
-//		dish.setDishStatus(dishDto.getDishStatus());
-//		dish.setDishTypeId(Integer.parseInt(dishDto.getDishCategory()));
-//		dish.setRestID(Integer.parseInt(dishDto.getRestId()));
-=======
->>>>>>> 25
 package com.ispan.team6.service;
 
 import java.sql.Blob;
@@ -56,10 +25,10 @@ public class DishService {
 
 	@Autowired
 	private DishDAO dishDAO;
-	
+
 	@Autowired
 	private DishTypeDAO dishDao;
-	
+
 //	public Dish insertDish(DishDTO dishDto) {
 //		Dish dish = new Dish();
 //		dish.setDishName(dishDto.getDishName());
@@ -115,13 +84,12 @@ public class DishService {
 //	}
 //	
 //}
-	
-	
-	//以下先做給order測試用
-	public List<DishType> findAllDishType(){
+
+	// 以下先做給order測試用
+	public List<DishType> findAllDishType() {
 		return dishDao.findAll();
 	}
-	
+
 	public Dish insertDish(DishDTO dishDto) {
 		Dish dish = new Dish();
 		dish.setDishName(dishDto.getDishName());
@@ -132,10 +100,9 @@ public class DishService {
 //		dish.setRestID(Integer.parseInt(dishDto.getRestId()));
 		return dishDAO.save(dish);
 	}
-	
 
-	public List<Dish> listAllDish(){
+	public List<Dish> listAllDish() {
 		return dishDAO.findAll();
 	}
-	
+
 }

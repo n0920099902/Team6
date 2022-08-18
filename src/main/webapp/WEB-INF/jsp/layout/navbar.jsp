@@ -9,7 +9,7 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<link href="${contextRoot}/css/bootstrap_4.1.min.css" rel="stylesheet" />
+<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
 <%-- <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" /> --%>
 
 </head>
@@ -35,102 +35,85 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/Test">測試頁面</a></li>
+					href="${contextRoot}/test">測試頁面</a></li>
 
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/Users/register">後台會員新增</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/Users/select">後台會員管理</a></li>
-<<<<<<< HEAD
-=======
-
->>>>>>> 25
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/listPhoto">測試商品</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/restaurant/cart">購物車</a>
-      </li>
-     <li class="nav-item">
-        <a class="nav-link" href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a>
-      </li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/listPhoto">測試商品</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/restaurant/cart">購物車</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/cart">購物車</a></li>
 
-       <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
-          <c:if test="${empty member}">
-						<a href="${contextRoot}/login">
-							<button class="btn btn-primary">會員登入</button>
-						</a>
-					</c:if>
-
-					<c:if test="${!empty member}">
-						<a href="#"
-							class="d-block link-dark text-decoration-none dropdown-toggle"
-							 data-bs-toggle="dropdown"
-							aria-expanded="false"> <c:choose>
-								<c:when test="${!empty member.photo}">
-									<img src="${contextRoot}/img/sticker.jpeg" width="45"
-										height="45" class="rounded-circle">
-								</c:when>
-								<c:otherwise>
-									<img width="45" height="45" alt=""
-										src="${contextRoot}/member/img?id=${member.id}">
-
-								</c:otherwise>
-							</c:choose>
-          <span> ${member.account } </span>
-          </a>
-          </c:if>
-          </a>
-          <div class="dropdown-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-				<!-- 會員登入/登入成功圖案 -->
-				<div class="dropdown text-end">
-
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" data-toggle="dropdown"
+					aria-expanded="false"> 
 					<c:if test="${empty member}">
-						<a href="${contextRoot}/login">
-							<button class="btn btn-primary">會員登入</button>
-						</a>
-					</c:if>
-
-					<c:if test="${!empty member}">
-						<a href="#"
-							class="d-block link-dark text-decoration-none dropdown-toggle"
-							 data-bs-toggle="dropdown"
-							aria-expanded="false"> <c:choose>
-								<c:when test="${!empty member.photo}">
-									<img src="${contextRoot}/img/sticker.jpeg" width="45"
-										height="45" class="rounded-circle">
-								</c:when>
-								<c:otherwise>
-									<img width="45" height="45" alt=""
-										src="${contextRoot}/member/img?id=${member.id}">
-
-								</c:otherwise>
-							</c:choose> <span> ${member.account } </span>
-
-						</a>
-						<ul class="dropdown-menu text-small"
-							>
-							<li><a class="dropdown-item"
-								href="${contextRoot}/users/userCentre">會員中心</a></li>
-							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item"
-								href="${contextRoot}/member/logout">登出</a></li>
-						</ul>
-					</c:if>
-				</div>
+							<a href="${contextRoot}/login">
+								<button class="btn btn-primary">會員登入</button>
+							</a>
+						</c:if> <c:if test="${!empty member}">
+							<a href="#"
+								class="d-block link-dark text-decoration-none dropdown-toggle"
+								data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+									<c:when test="${!empty member.photo}">
+										<img src="${contextRoot}/img/sticker.jpeg" width="45"
+											height="45" class="rounded-circle">
+									</c:when>
+									<c:otherwise>
+										<img width="45" height="45" alt=""
+											src="${contextRoot}/member/img?id=${member.id}">
+									</c:otherwise>
+								</c:choose> <span> ${member.account } </span>
+								</a></c:if></a></li>
+<!-- 						<div class="dropdown-menu"> -->
+<!-- 							<a class="dropdown-item" href="#">Action</a> <a -->
+<!-- 								class="dropdown-item" href="#">Another action</a> <a -->
+<!-- 								class="dropdown-item" href="#">Something else here</a> -->
+<!-- 						</div></li> -->
 				<!-- 會員登入/登入成功圖案 -->
+				<!-- 				<div class="dropdown text-end"> -->
 
-			</ul>
+				<%-- 					<c:if test="${empty member}"> --%>
+				<%-- 						<a href="${contextRoot}/login"> --%>
+				<!-- 							<button class="btn btn-primary">會員登入</button> -->
+				<!-- 						</a> -->
+				<%-- 					</c:if> --%>
+
+				<%-- 					<c:if test="${!empty member}"> --%>
+				<!-- 						<a href="#" -->
+				<!-- 							class="d-block link-dark text-decoration-none dropdown-toggle" -->
+				<%-- 							data-bs-toggle="dropdown" aria-expanded="false"> <c:choose> --%>
+				<%-- 								<c:when test="${!empty member.photo}"> --%>
+				<%-- 									<img src="${contextRoot}/img/sticker.jpeg" width="45" --%>
+				<!-- 										height="45" class="rounded-circle"> -->
+				<%-- 								</c:when> --%>
+				<%-- 								<c:otherwise> --%>
+				<!-- 									<img width="45" height="45" alt="" -->
+				<%-- 										src="${contextRoot}/member/img?id=${member.id}"> --%>
+
+				<%-- 								</c:otherwise> --%>
+				<%-- 							</c:choose> <span> ${member.account } </span> --%>
+
+<!-- 				</a> -->
+<!-- 							<ul class="dropdown-menu text-small"> -->
+<!-- 								<li><a class="dropdown-item" -->
+<%-- 									href="${contextRoot}/users/userCentre">會員中心</a></li> --%>
+<!-- 								<li><hr class="dropdown-divider"></li> -->
+<!-- 								<li><a class="dropdown-item" -->
+<%-- 									href="${contextRoot}/member/logout">登出</a></li> --%>
+							</ul>
+		</div>
+		<!-- 會員登入/登入成功圖案 -->
+
+		</ul>
 		</div>
 	</nav>
 
