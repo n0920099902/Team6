@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //package com.ispan.team6.service;
 //
 //import java.util.ArrayList;
@@ -27,7 +26,6 @@
 //		dish.setDishStatus(dishDto.getDishStatus());
 //		dish.setDishTypeId(Integer.parseInt(dishDto.getDishCategory()));
 //		dish.setRestID(Integer.parseInt(dishDto.getRestId()));
-=======
 package com.ispan.team6.service;
 
 import java.sql.Blob;
@@ -81,7 +79,6 @@ public class DishService {
 //		Restaurant restaurant = new Restaurant();
 //		restaurant.setId(Integer.parseInt(dishDto.getRestId()));
 //		dish.setRest(restaurant);
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf
 //		return dishDAO.save(dish);
 //	}
 //	
@@ -94,9 +91,7 @@ public class DishService {
 //			dto.setDishName(d.getDishName());
 //			dto.setDishCategory(String.valueOf(d.getDishType().getCategory()));
 //			dto.setDishPrice(String.valueOf(d.getDishPrice()));
-<<<<<<< HEAD
 //			dto.setDishPhoto(d.getDishPhoto());
-=======
 //			int blobLength = 0;
 //			byte[] blobAsBytes = null;
 //			try {
@@ -107,7 +102,6 @@ public class DishService {
 //				e.printStackTrace();
 //			}
 //			dto.setDishPhoto(blobAsBytes);
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf
 //			dto.setDishStatus(d.getDishStatus());
 //			dto.setRestId(String.valueOf(d.getRest().getId()));
 //			
@@ -116,10 +110,8 @@ public class DishService {
 //		
 //		return result;
 //	}
-<<<<<<< HEAD
 //	
 //}
-=======
 	
 	
 	//以下先做給order測試用
@@ -144,4 +136,3 @@ public class DishService {
 	}
 	
 }
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf

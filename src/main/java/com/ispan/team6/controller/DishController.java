@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 //package com.ispan.team6.controller;
 //
 //import java.util.List;
@@ -19,7 +18,6 @@
 //	@Autowired
 //	private DishService service;
 //	
-=======
 package com.ispan.team6.controller;
 
 import java.io.IOException;
@@ -53,7 +51,6 @@ public class DishController {
 	@Autowired
 	private DishService service;
 
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf
 //	@PostMapping("/dish")
 //	public Dish insert(@RequestBody DishDTO dishDto) { 
 //		Dish respDish = service.insertDish(dishDto);
@@ -65,7 +62,6 @@ public class DishController {
 //		List<DishDTO> dishes = service.listAllDishes();
 //		return dishes;
 //	}
-<<<<<<< HEAD
 //	
 //	
 //	
@@ -73,7 +69,6 @@ public class DishController {
 //	
 //	
 //}
-=======
 
 	
 	//以下先做給order測試用
@@ -127,4 +122,3 @@ public class DishController {
 	}
 
 }
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf

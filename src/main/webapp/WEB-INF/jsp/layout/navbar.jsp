@@ -41,8 +41,6 @@
 					href="${contextRoot}/Users/register">後台會員新增</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/Users/select">後台會員管理</a></li>
-
-<<<<<<< HEAD
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/listPhoto">測試商品</a>
       </li>
@@ -52,12 +50,10 @@
      <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a>
       </li>
-=======
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/cart">購物車</a></li>
->>>>>>> b2c9b4d606dd6bb64c9fbd1ca7f9b4199b7a2cdf
 
        <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="false">
