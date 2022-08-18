@@ -1,18 +1,24 @@
 package com.ispan.team6.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ispan.team6.entity.Dish;
+import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.OrdersDetail;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.UsersDao;
@@ -38,16 +44,12 @@ public class OrderController {
 	@Autowired
 	private OrdersService OService;
 
-//	@Autowired
-//	private OrdersDetail ordersDetail;
-
 	@Autowired
 	private DishService dishSer;
-	
+
 	@Autowired
 	private MemberService memberService;
 
-	
 	@GetMapping("/restaurant/cart")
 	public String ProcessCart() {
 		return "cart";
@@ -58,7 +60,14 @@ public class OrderController {
 		return "cartOrder";
 	}
 
-	
+	@PostMapping(path = "/orderMeal")
+	@RequestMapping
+	public String OrderMeal(@RequestBody OrdersDetail ordersDetail, HttpServletRequest request, ModelMap Model) {
+		List<OrdersDetail> cart = (List<OrdersDetail>) Model.getAttribute("cart");
+		
+
+		return null;
+	}
 
 //		@RequestMapping("/login")
 //		public String login(SysUser sysUser, HttpServletRequest request) {
