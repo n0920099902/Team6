@@ -56,6 +56,9 @@ public class RestaurantController {
 			@RequestParam("restaurantImg") MultipartFile file, Model m) {
 
 		try {
+
+			String REG_EXP = "^([0]{1}[0-9]{1}-?[0-9]{7}|[0]{1}[9]{1}-?[0-9]{8})$";
+
 			byte[] bytes = file.getBytes();
 
 			Restaurant newRest = new Restaurant();
@@ -63,7 +66,11 @@ public class RestaurantController {
 			RestaurantType typeId = rService.findTypeById(rest_type_id);
 
 			newRest.setName(name);
-			newRest.setPhone(phone);
+			if (phone.matches(REG_EXP)) {
+				newRest.setPhone(phone);
+			} else {
+				return "addRestaurant";
+			}
 			newRest.setAddress(address);
 			newRest.setRestaurantType(typeId);
 			newRest.setStarttime(starttime);

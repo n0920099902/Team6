@@ -41,7 +41,7 @@
 				</select>
 			</div>
 			<div>
-				營業時間： <select name="startDate">
+				營業時間： <select name="startDate" value="${restaurant.startDate }">
 					<option value="Sun">星期日</option>
 					<option value="Mon">星期一</option>
 					<option value="Tue">星期二</option>
@@ -57,8 +57,8 @@
 					<option value="Thu">星期四</option>
 					<option value="Fri">星期五</option>
 					<option value="Sat">星期六</option>
-				</select> <input type="time" name="starttime" value="${starttime }" required>～
-				<input type="time" name="endtime" value="${endtime }" required>
+				</select> <input type="time" name="starttime" min="00:00" max="23:59" value="${startTime }" required>～
+				<input type="time" name="endtime" value="${endTime }" required>
 			</div>
 			<div>
 				餐廳圖片: <input type="file" name="restaurantImg"
