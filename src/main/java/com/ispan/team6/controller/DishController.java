@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-//package com.ispan.team6.controller;
-//
-//import java.util.List;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.web.bind.annotation.GetMapping;
-//import org.springframework.web.bind.annotation.PostMapping;
-//import org.springframework.web.bind.annotation.RequestBody;
-//import org.springframework.web.bind.annotation.RestController;
-//
-//import com.ispan.team6.dto.DishDTO;
-//import com.ispan.team6.entity.Dish;
-//import com.ispan.team6.service.DishService;
-//
-//@RestController
-//public class DishController {
-//
-//	@Autowired
-//	private DishService service;
-//	
-=======
-
->>>>>>> 25
 package com.ispan.team6.controller;
 
 import java.io.IOException;
@@ -55,10 +31,7 @@ public class DishController {
 	@Autowired
 	private DishService service;
 
-<<<<<<< HEAD
-=======
 
->>>>>>> 25
 //	@PostMapping("/dish")
 //	public Dish insert(@RequestBody DishDTO dishDto) { 
 //		Dish respDish = service.insertDish(dishDto);
