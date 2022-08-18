@@ -37,6 +37,20 @@ public class PageController {
 		return "RegisterUsers";
 	}
 
+	@GetMapping("login")
+	public String loginIndex() {
+		return "login";
+	}
+	@GetMapping("sign")
+	public String signIndex() {
+		return "sign";
+	}
+	
+	@GetMapping("/users/userCentre")
+	public String userCentre() {
+		return "userCentre";
+	}
+	
 //	@GetMapping("/search")
 //	public String SearchPage() {
 //		return "Search";
@@ -53,7 +67,7 @@ public class PageController {
 		return "restaurantIntro";
 	}
 
-	@GetMapping("restaurant/Test")
+	@GetMapping("/test")
 	public String testAction() {
 		return "Test";
 	}

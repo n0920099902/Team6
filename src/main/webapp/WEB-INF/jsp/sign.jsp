@@ -1,39 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="layout/navbar.jsp" />
+
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<!-- jQuery 3.6.0 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>註冊頁面</title>
+<title>sign</title>
 </head>
 <body>
-	<form action="${contextRoot}/register"
-		method="POST" enctype="multipart/form-data">
+	<form action="${contextRoot}/member/sign" method="POST"
+		enctype="multipart/form-data">
 		<div>
-			會員帳號： <input type="text" name="account" required>
+			會員帳號： <input type="text" name="mAccount" required>
 		</div>
 		<div>
-			會員密碼： <input type="password" name="password" required>
+			會員密碼： <input type="password" name="mPassword" required>
 		</div>
 		<div>
-			會員信箱： <input type="email" name="email" required>
+			會員信箱： <input type="email" name="mEmail" required>
 		</div>
 		<div>
-			會員電話： <input type="tel" id="mPhone" name="phone"  onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span style="color: red" id="phoneout"></span>
+			會員電話： <input type="text" id="mPhone" name="mPhone" onblur="ckPhone()"
+				onfocus="defaultPhoneOut()" required><span
+				style="color: red" id="phoneout"></span>
 		</div>
 		<div>
-			會員生日： <input type="date" name="Birthday" required >
+			會員生日： <input type="date" name="mBirthday" required>
 		</div>
 		<div>
 			<!-- 			權限 -->
-			<input type="text" name="access" value="Shop" hidden="" required>
+			<input type="text" name="mAccess" value="User" hidden="" required>
 		</div>
 
 		<div>

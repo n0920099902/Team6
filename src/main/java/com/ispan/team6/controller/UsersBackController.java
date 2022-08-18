@@ -23,12 +23,12 @@ import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.MemberService;
 
 @Controller
-public class MemberController {
+public class UsersBackController {
 
 	@Autowired
 	private MemberService service;
 
-	@PostMapping("/rigister")
+	@PostMapping("/register")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
@@ -60,17 +60,17 @@ public class MemberController {
 //		
 	}
 
-	@GetMapping(path = "member/img")
-	public void processAction(@RequestParam("id") int id, HttpServletResponse response) throws IOException {
-		Users m = service.findByIdSerUsers(id);
-		byte[] bytes = m.getPhoto();
-		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-		OutputStream out = response.getOutputStream();
-		out.write(bytes);
-		out.flush();
-		out.close();
-
-	}
+//	@GetMapping(path = "member/img")
+//	public void processAction(@RequestParam("id") int id, HttpServletResponse response) throws IOException {
+//		Users m = service.findByIdSerUsers(id);
+//		byte[] bytes = m.getPhoto();
+//		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+//		OutputStream out = response.getOutputStream();
+//		out.write(bytes);
+//		out.flush();
+//		out.close();
+//
+//	}
 
 
 	@GetMapping("/Users/select")
@@ -122,7 +122,7 @@ public class MemberController {
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
 		
 		Users u = new Users();
-		u.setId(id);
+//		u.setId(id);
 		byte[] bytes = file.getBytes();
 		u.setAccount(account);
 		u.setAccess(access);
