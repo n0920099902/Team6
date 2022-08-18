@@ -102,16 +102,6 @@ public class UsersBackController {
 	}
 
 	
-//	@PostMapping("/Users/update2/{id}")
-//	public String UpdateMember2(@PathVariable Integer id, Model model) {
-//		
-//		Users update = service.UpdateById(id);
-//		
-//		model.addAttribute("getAll", update);
-//		
-//		return "redirect:/Users/select";
-//	}
-//	
 	
 	@PostMapping("/Users/update")
 	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,

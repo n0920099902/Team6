@@ -14,8 +14,9 @@
 <title>註冊頁面</title>
 </head>
 <body>
-	<form action="${contextRoot}/register"
-		method="POST" enctype="multipart/form-data">
+
+
+	<form action="${pageContext.request.contextPath}/rigister">
 		<div>
 			會員帳號： <input type="text" name="account" required>
 		</div>

@@ -21,19 +21,15 @@
 				<li><a
 					href="${pageContext.request.contextPath}/getallaction.controller"
 					class="nav-link px-2 link-dark">商品頁面</a></li>
-<!-- 				<li><a -->
-<%-- 					href="${pageContext.request.contextPath}/shoppingCart.com" --%>
-<!-- 					class="nav-link px-2 link-dark">購物車</a></li> -->
-					
-				<c:if test="${users.name=='admin' }">
-<!-- 					<li><a -->
-<%-- 						href="${pageContext.request.contextPath}/admin.com" --%>
-<!-- 						class="nav-link px-2 link-dark">後台管理</a></li> -->
-						<li><a
-						href="${pageContext.request.contextPath}/add.com"
+				<li><a
+					href="${pageContext.request.contextPath}/shoppingCart.com"
+					class="nav-link px-2 link-dark">購物車</a></li>
+
+				<%-- 				<c:if test="${users.name=='admin' }"> --%>
+					<li><a href="${pageContext.request.contextPath}/add.com"
 						class="nav-link px-2 link-dark">新增商品</a></li>
-				</c:if>
-	
+<%-- 				</c:if> --%>
+
 
 			</ul>
 			<!-- 導覽選項 -->
@@ -41,25 +37,34 @@
 			<!-- 會員登入/登入成功圖案 -->
 			<div class="dropdown text-end">
 
-				<c:if test="${empty users}">
-					<a href="${pageContext.request.contextPath}/login.com">
+				<c:if test="${empty member}">
+					<a href="${contextRoot}/login">
 						<button class="btn btn-primary">會員登入</button>
 					</a>
 				</c:if>
 
-				<c:if test="${!empty users}">
+				<c:if test="${!empty member}">
 					<a href="#"
 						class="d-block link-dark text-decoration-none dropdown-toggle"
-						id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-<%-- 						<img src="data:image/jpeg;base64,${users.photoBase64 }" width="45" height="45" class="rounded-circle"> --%>
-						<span>${users.name }</span>
+						data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+							<c:when test="${!empty member.photo}">
+								<img src="${contextRoot}/img/sticker.jpeg" width="45"
+									height="45" class="rounded-circle">
+							</c:when>
+							<c:otherwise>
+								<img width="45" height="45" alt=""
+									src="${contextRoot}/member/img?id=${member.id}">
+
+							</c:otherwise>
+						</c:choose> <span> ${member.account } </span>
 
 					</a>
-					<ul class="dropdown-menu text-small"
-						aria-labelledby="dropdownUser1">
-<!-- 						<li><a class="dropdown-item" href="#">會員資訊(建置中)</a></li> -->
-<!-- 						<li><hr class="dropdown-divider"></li> -->
-						<li><a class="dropdown-item" href="${pageContext.request.contextPath}/logoutaction.controller">登出</a></li>
+					<ul class="dropdown-menu text-small">
+						<li><a class="dropdown-item"
+							href="${contextRoot}/users/userCentre">會員中心</a></li>
+						<li><hr class="dropdown-divider"></li>
+						<li><a class="dropdown-item"
+							href="${contextRoot}/member/logout">登出</a></li>
 					</ul>
 				</c:if>
 			</div>
