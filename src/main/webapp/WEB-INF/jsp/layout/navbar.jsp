@@ -50,7 +50,9 @@
       <li class="nav-item">
         <a class="nav-link" href="${contextRoot}/restaurant/cart">購物車</a>
       </li>
-     
+     <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a>
+      </li>
 
     </ul>
   </div>

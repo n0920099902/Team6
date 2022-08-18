@@ -14,6 +14,8 @@
 <title>註冊頁面</title>
 </head>
 <body>
+
+
 	<form action="${pageContext.request.contextPath}/rigister"
 		method="POST" enctype="multipart/form-data">
 		<div>

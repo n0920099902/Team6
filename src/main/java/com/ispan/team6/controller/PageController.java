@@ -57,5 +57,9 @@ public class PageController {
 	public String testAction() {
 		return "Test";
 	}
+	@GetMapping("shoppincar/Test")
+	public String testAction2() {
+		return "shoppincar";
+	}
 
 }
