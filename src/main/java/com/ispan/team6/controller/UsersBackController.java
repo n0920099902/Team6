@@ -30,7 +30,7 @@ public class UsersBackController {
 
 	@PostMapping("/register")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
+			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,
@@ -105,7 +105,7 @@ public class UsersBackController {
 	
 	@PostMapping("/Users/update")
 	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") Date birthday,
+			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,

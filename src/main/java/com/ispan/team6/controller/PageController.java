@@ -50,6 +50,8 @@ public class PageController {
 	public String userCentre() {
 		return "userCentre";
 	}
+
+
 	
 //	@GetMapping("/search")
 //	public String SearchPage() {

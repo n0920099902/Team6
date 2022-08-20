@@ -31,10 +31,6 @@ public class DishController {
 	@Autowired
 	private DishService service;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 0818_25
 //	@PostMapping("/dish")
 //	public Dish insert(@RequestBody DishDTO dishDto) { 
 //		Dish respDish = service.insertDish(dishDto);
@@ -46,12 +42,6 @@ public class DishController {
 //		List<DishDTO> dishes = service.listAllDishes();
 //		return dishes;
 //	}
-//	
-//	
-//	
-//	
-//	
-//	
 //}
 
 	

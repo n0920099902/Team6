@@ -27,4 +27,17 @@ public class UsersService {
 		return null;
 	}
 	
+	public Users findByAccount(String account) {
+		 Optional<Users> optional = uDao.findByAccount(account);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
+	
+	public void insertUser(Users u) {
+		uDao.save(u);
+	}
 }

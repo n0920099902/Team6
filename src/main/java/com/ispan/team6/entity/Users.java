@@ -41,10 +41,10 @@ public class Users {
 //	@Column(name = "PHONE")
 	private String phone;
 
-	@JsonFormat(pattern = "yyyy/MM/dd") // json
-	@DateTimeFormat(pattern = "yyyy/MM/dd") // springmvc
-	@Column(name = "BIRTHDAY")
-	private Date birthday;
+//	@JsonFormat(pattern = "yyyy/MM/dd") // json
+//	@DateTimeFormat(pattern = "yyyy/MM/dd") // springmvc
+//	@Column(name = "BIRTHDAY")
+	private String birthday;
 
 //	@Column(name = "ACCESS")
 	private String access;
@@ -103,11 +103,11 @@ public class Users {
 		this.phone = phone;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
@@ -135,13 +135,13 @@ public class Users {
 		this.remark = remark;
 	}
 
-	@PrePersist // 物件轉換成 persistant狀態以前執行的方法
-	public void onCreate() {
-		if (birthday == null) {
-			birthday = new Date();
-		}
-
-	}
+//	@PrePersist // 物件轉換成 persistant狀態以前執行的方法
+//	public void onCreate() {
+//		if (birthday == null) {
+//			birthday = new Date();
+//		}
+//
+//	}
 
 	public Set<Comment> getComment() {
 		return comment;

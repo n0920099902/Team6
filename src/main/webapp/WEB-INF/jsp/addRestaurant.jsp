@@ -74,38 +74,22 @@
 	<jsp:include page="layout/footer.jsp" />
 </body>
 <script type="text/javascript">
-// 	function defaultPhoneOut() {
-// 		document.getElementById("phoneout").innerHTML = "";
-// 	}
-// 	function ckPhone() {
-// 		let phone = document.getElementById("restaurantPhone").value;
-// 		if (phone != "" && phone.search(/^09\d{8}$/ == -1) {
-// 			document.getElementById("phoneout").innerHTML = "輸入格式錯誤";
-// 		}
-// 	}
-// 	function isTelAvailable() {
-// 		    var myreg = /^(([0\+]\d{2,3}-)?(0\d{2,3})-)(\d{7,8})(-(\d{3,}))?$/;
-// 		    if (!myreg.test(tel)) {
-// 		      return false;
-// 		    } else {
-// 		      return true;
-// 		    }
-// 		  },
+	function openFile(event) {
+		var input = event.target; //取得上傳檔案
+		var reader = new FileReader(); //建立FileReader物件
+
+		reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
+
+		reader.onload = function() { //FileReader取得上傳檔案後執行以下內容
+			var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
+			$('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
+		};
+	}
 	
-// 	function openFile(event) {
-// 		var input = event.target; //取得上傳檔案
-// 		var reader = new FileReader(); //建立FileReader物件
-
-// 		reader.readAsDataURL(input.files[0]); //以.readAsDataURL將上傳檔案轉換為base64字串
-
-// 		reader.onload = function() { //FileReader取得上傳檔案後執行以下內容
-// 			var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
-// 			$('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
-// 		};
-// 	}
 	function defaultPhoneOut() {
 		document.getElementById("phoneout").innerHTML = "";
 	}
+	
 	function ckPhone() {
 		let phone = document.getElementById("restaurantPhone").value;
 		if (phone != "" && phone.search(/^09\d{8}$/) == -1) {
