@@ -3,28 +3,32 @@ package com.ispan.team6.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.team6.entity.Dish;
+import com.ispan.team6.entity.DishQ;
 import com.ispan.team6.entity.DishType;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.service.DishService;
 
-@RestController
+@Controller
+@SessionAttributes("buy")
 public class DishController {
-
 	@Autowired
 	private DishDAO dao;
 
@@ -42,24 +46,18 @@ public class DishController {
 //		List<DishDTO> dishes = service.listAllDishes();
 //		return dishes;
 //	}
-//}
 
-	
-	//以下先做給order測試用
-	@GetMapping("/dish/Add")
-	public String listAllDishes(@RequestParam Integer id, @RequestParam String name, Model m) {
+	@GetMapping("/dish/Add/{id}/{name}")
+	public String listAllDishes(@PathVariable("id") int id, @PathVariable("name") String name, Model m) {
 		List<DishType> l = service.findAllDishType();
 		m.addAttribute("dishType", l);
-		m.addAttribute("id", id);
-		m.addAttribute("name", name);
 		return "AddDis";
 	}
 
 	@PostMapping("dish/go")
-	public String Sign(@RequestParam("rID") Integer id, @RequestParam("rName") String name,
-			@RequestParam("dName") String dName, @RequestParam("dPrice") Integer dPrice,
-			@RequestParam("dishType") Integer cat, @RequestParam("dS") String status,
-			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
+	public String Sign(@RequestParam("rID") int id, @RequestParam("rName") String name,
+			@RequestParam("dName") String dName, @RequestParam("dPrice") int dPrice, @RequestParam("dishType") int cat,
+			@RequestParam("dS") String status, @RequestParam("Img") MultipartFile file, Model m) throws IOException {
 		byte[] bytes = file.getBytes();
 		Dish d = new Dish();
 		Restaurant r = new Restaurant();
@@ -95,4 +93,71 @@ public class DishController {
 		return new ResponseEntity<byte[]>(photoFile, header, HttpStatus.OK);
 	}
 
+	@GetMapping("/buyList/{rid}/{id}")
+	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
+		Dish d = dao.findById(id);
+		List<DishQ> buyList = (List<DishQ>) m.getAttribute("buy");
+		DishQ dq = new DishQ();
+		int temp = -1;
+		if (buyList == null) {
+			dq.setDish(d);
+			dq.setQ(quantity);
+			buyList.add(dq);
+		}
+		if (buyList != null) {
+
+			for (int i = 0; i < buyList.size(); i++) {
+				Dish listDish = buyList.get(i).getDish();
+				if (d.getId() == listDish.getId()) {
+					temp = i;
+				}
+			}
+			if (temp != -1) {
+				int q = buyList.get(temp).getQ();
+				q += quantity;
+				buyList.get(temp).setQ(q);
+			}
+			if (temp == -1) {
+				dq.setDish(d);
+				dq.setQ(quantity);
+				buyList.add(dq);
+			}
+
+		}
+		return "redirect:/getAlldish/{rid}";
+
+	}
+//	
+//	@PostMapping("/buyList.controller")
+//	@ResponseStatus(value = HttpStatus.OK)
+//	public void addBuy(@RequestParam("id") int id, Model m, @RequestParam("quantity") int quantity) {
+//		Dish d = dao.findById(id);
+//		List<Dish> buyList = (List<Dish>) m.getAttribute("buy");
+//		for (int i = 0; i < quantity; i++) {
+//			buyList.add(d);
+//		}
+//
+//	}
+
+	@GetMapping("/goCart.controller")
+	public String goCart(Model m) {
+		List<Dish> buyList = (List<Dish>) m.getAttribute("buy");
+		return "bL";
+	}
+	
+	@GetMapping("/showOrderList")
+	public List<DishQ> showOrderList(Model m) {
+		List<DishQ> buyList = (List<DishQ>) m.getAttribute("buy");
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAA");
+		System.out.println(buyList.get(0));
+       return buyList;
+	}
+	 @GetMapping("shopHouse/add")
+	 public String getC2Id(HttpSession session,Model model) {
+	  Integer c2Id =((DishQ)session.getAttribute("buy")).getQ();
+	  
+	  model.addAttribute("c2Id", c2Id);
+	  
+	  return "shopHouseTest";
+	 }
 }

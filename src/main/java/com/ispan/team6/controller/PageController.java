@@ -8,8 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
+import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
@@ -17,6 +19,9 @@ public class PageController {
 
 	@Autowired
 	private RestaurantService rService;
+	
+	@Autowired
+	private DishDAO dDao;
 	
 	@GetMapping("/")
 	public String welcomeIndex() {
@@ -77,5 +82,24 @@ public class PageController {
 	public String testAction2() {
 		return "shoppincar";
 	}
-
+    //新增食物testForOrder
+	@GetMapping("/getAlldish/{id}")
+	public String processDishMainAction(@PathVariable("id") int id, Model m) {
+		List<Dish> list = dDao.findByRestId(id);
+		m.addAttribute("allDish", list);
+		m.addAttribute("rid", id);
+		return "dish";
+	}
+	//testForOrder
+	@GetMapping("/dish")
+	public String processAction(Model m) {
+		List<Restaurant> list = rService.findAllRestuarant();
+		m.addAttribute("allRestaurant", list);
+		return "AddDish";
+	}
+	//testForOrder
+	@GetMapping("/b")
+	public String process() {
+		return "bL";
+	}
 }

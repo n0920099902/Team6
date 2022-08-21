@@ -34,7 +34,7 @@
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>
-						<a href="${pageContext.request.contextPath}/dish/Add?id=${restaurant.id}&name=${restaurant.name}"  style="color: black ; text-decoration:none">
+						<a href="${pageContext.request.contextPath}/dish/Add/${restaurant.id}/${restaurant.name }"  style="color: black ; text-decoration:none">
 							<div class="col">
 								<div class="card">
 									<img style="height: 200px"
