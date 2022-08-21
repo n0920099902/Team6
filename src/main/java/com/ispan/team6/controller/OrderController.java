@@ -1,5 +1,6 @@
 package com.ispan.team6.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,16 +22,20 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.OrdersDetail;
+import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
+import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.UsersDao;
 import com.ispan.team6.service.DishService;
 import com.ispan.team6.service.MemberService;
 import com.ispan.team6.service.OrdersDetailService;
 import com.ispan.team6.service.OrdersService;
+import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.testForOders.GoodPhotoService;
+import com.ispan.team6.entity.DishQ;
 
 @Controller
-@SessionAttributes({ "dish", "users" })
+@SessionAttributes({ "dish", "users", "buy" })
 public class OrderController {
 
 	@Autowired
@@ -49,10 +55,64 @@ public class OrderController {
 
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private DishDAO dDao;
+	
+	@Autowired
+	private RestaurantService rService;
+	
 
+	
+
+
+//	@GetMapping("/restaurant/cart")
+//	public String ProcessCart() {
+//		return "cart";
+//	}
+	//導向購物車頁面 列出所有餐廳
 	@GetMapping("/restaurant/cart")
-	public String ProcessCart() {
+	public String processRestaurantMainAction(Model m) {
+		List<DishQ>buylist=new ArrayList<DishQ>();
+		m.addAttribute("buy", buylist);
+		List<Restaurant> list = rService.findAllRestuarant();
+		m.addAttribute("allRestaurant", list);
 		return "cart";
+	}
+	
+	@GetMapping("/buyList/{rid}/{id}")
+	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
+		Dish d = dDao.findById(id);
+		List<DishQ> buyList = (List<DishQ>) m.getAttribute("buy");
+		DishQ dq = new DishQ();
+		int temp = -1;
+		if (buyList == null) {
+			dq.setDish(d);
+			dq.setQ(quantity);
+			buyList.add(dq);
+		}
+		if (buyList != null) {
+
+			for (int i = 0; i < buyList.size(); i++) {
+				Dish listDish = buyList.get(i).getDish();
+				if (d.getId() == listDish.getId()) {
+					temp = i;
+				}
+			}
+			if (temp != -1) {
+				int q = buyList.get(temp).getQ();
+				q += quantity;
+				buyList.get(temp).setQ(q);
+			}
+			if (temp == -1) {
+				dq.setDish(d);
+				dq.setQ(quantity);
+				buyList.add(dq);
+			}
+
+		}
+		return "redirect:/getAlldish/{rid}";
+
 	}
 
 	@GetMapping("/restaurant/cartOrder")
@@ -68,6 +128,14 @@ public class OrderController {
 
 		return null;
 	}
+	
+//	@GetMapping("/getAlldish/{id}")
+//	public String processDishMainAction(@PathVariable("id") int id, Model m) {
+//		List<Dish> list = dDao.findByRestId(id);
+//		m.addAttribute("allDish", list);
+//		m.addAttribute("rid", id);
+//		return "dish";
+//	}
 
 //		@RequestMapping("/login")
 //		public String login(SysUser sysUser, HttpServletRequest request) {
