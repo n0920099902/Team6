@@ -9,7 +9,7 @@
 <link rel="icon" href="${pageContext.request.contextPath}/img/favicon1.ico">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>筆電專賣店</title>
+<title>foodtiger</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
@@ -224,6 +224,7 @@ table.table .avatar {
   					var tboby = $('#dishes tbody');
   					$(data).each(function () {                               
                             var tr = $('<tr></tr>')
+                            tr.append('<td style="display:none;">' + this.dishId + '</td>')
                             tr.append('<td>' + this.restName + '</td>')
                             tr.append('<td>' + this.dishName + '</td>')
                             tr.append('<td>' + this.dishCategory + '</td>')
@@ -231,7 +232,8 @@ table.table .avatar {
                             var imgsrc = "data:image/png;base64," + this.dishPhoto;
                             tr.append('<td>' + '<img id="ItemPreview" src=' + imgsrc + ' />' + '</td>')
                             tr.append('<td>' + this.dishStatus + '</td>')
-                            tr.append('<td>' + '<a href="#" class="settings" title="Settings" data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a><a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>' + '</td>')
+                            tr.append('<td style="display:none;">' + this.dishCategoryId + '</td>')
+                            tr.append('<td>' + '<a href="#" class="settings" title="Settings" data-bs-toggle="modal"><i class="material-icons">&#xE8B8;</i></a><a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>' + '</td>')
                             tboby.append(tr);
                     });     
   	            },
@@ -243,22 +245,55 @@ table.table .avatar {
   	        });
 		}
 		
-		$('[data-toggle="tooltip"]').tooltip();
+ 		$('[data-toggle="tooltip"]').tooltip();
+ 		
+ 		//delete dish
+ 		$(document).on("click", ".delete", function() {
+ 			var is_delete = confirm("你確定要刪除此商品嗎?");
+ 			if (is_delete) {
+ 				var dishId = $(this).closest('tr').children('td:eq(0)').text();
+ 	 			$.ajax({
+ 	  	            url: "http://localhost:8080/my-app/dish/" + dishId,
+ 	  	            type: "DELETE",
+ 	  	            success: function (data, status)
+ 	  	            {
+ 	  	            	var yes = confirm("delete successfully!!!");
+ 	  					if (yes) {
+ 	  						location.reload();
+ 	  					}
+ 	  	            },
+ 	  	            error: function (xhr, desc, err)
+ 	  	            {
+ 	  	            	console.log(desc);
+ 	  	            	console.log(err);
+ 	  	            }
+ 	  	        });
+ 			}
+		});
+ 		
+ 		function readURL(input){
+ 			if(input.files && input.files[0]){
+ 			    var reader = new FileReader();
+ 			    reader.onload = function (e) {
+ 			    	$(input).siblings("#preview_photo").attr('src', e.target.result);
+ 			    }
+ 			    reader.readAsDataURL(input.files[0]);
+ 			  }
+ 			}
+ 		$("#addProductModal #photo, #editProductModal #photo").change(function(){
+ 		      //當檔案改變後，做一些事 
+ 		     readURL(this);   // this代表<input id="photo">
+ 		   });
 		
-		$("a.settings").click(function() {
-			var productId = $(this).closest('tr').children('td:eq(0)').text();
-			var productName = $(this).closest('tr').children('td:eq(1)').text();
-			var productPrice = $(this).closest('tr').children('td:eq(2)').text();
-			$("#editProductModal input[name=product_id]").val(productId);
-			$("#editProductModal input[name=name]").val(productName);
-			$("#editProductModal input[name=price]").val(productPrice);
-			$('#editProductModal').modal('show');
-		});
-		$("a.delete").click(function() {
-			var productId = $(this).closest('tr').children('td:eq(0)').text();
-			$("#deleteProductModal input[name=product_id]").val(productId);
-			$('#deleteProductModal').modal('show');
-		});
+// 		$("a.settings").click(function() {
+// 			var productId = $(this).closest('tr').children('td:eq(0)').text();
+// 			var productName = $(this).closest('tr').children('td:eq(1)').text();
+// 			var productPrice = $(this).closest('tr').children('td:eq(2)').text();
+// 			$("#editProductModal input[name=product_id]").val(productId);
+// 			$("#editProductModal input[name=name]").val(productName);
+// 			$("#editProductModal input[name=price]").val(productPrice);
+// 			$('#editProductModal').modal('show');
+// 		});
 		function getArrayBuffer(fileObj) {
 			  return new Promise((resolve, reject) => {
 			    const reader = new FileReader();
@@ -292,7 +327,7 @@ table.table .avatar {
 	        e.preventDefault();
 	        const form = $(e.target);
 	        const json = convertFormToJSON(form);
-	        const myFile = $("#photo")[0].files[0];
+	        const myFile = $("#add-dish-form #photo")[0].files[0];
 	        fileArrayBuffer = getArrayBuffer(myFile).then(function(value) {
 	        	json.dishPhoto = Array.from(new Uint8Array(value)); //add something
 	  	        console.log(value);
@@ -320,8 +355,87 @@ table.table .avatar {
 	        	});
 	        
 	    });
-	});
-	
+		
+// 		$('[data-toggle="tooltip"]').tooltip();
+		
+		//edit dish
+		$(document).on("click", ".settings", function() {
+//          $(".settings").click(function() {
+             var dishId = $(this).closest('tr').children('td:eq(0)').text();
+// 	 			var restId = $(this).closest('tr').children('td:eq(1)').text();
+	 			var restName = $(this).closest('tr').children('td:eq(1)').text();
+	 			var dishName = $(this).closest('tr').children('td:eq(2)').text();
+	 			var dishCategory = $(this).closest('tr').children('td:eq(3)').text();
+	 			var dishPrice = $(this).closest('tr').children('td:eq(4)').text();
+	 			var dishPhoto = $(this).closest('tr').find("#ItemPreview").attr('src');
+	 			var dishStatus = $(this).closest('tr').children('td:eq(6)').text();
+	 			var dishCategoryId = $(this).closest('tr').children('td:eq(7)').text();
+	 			console.log(dishPhoto);
+	 			$("#editProductModal input[name=dishId]").val(dishId);
+// 	 			$("#editProductModal input[name=restId]").val(restId);
+	 			$("#editProductModal input[name=restName]").val(restName);
+	 			$("#editProductModal input[name=dishName]").val(dishName);
+	 			$("#dishCategory").val(dishCategoryId);
+	 			$("#editProductModal input[name=dishPrice]").val(dishPrice);
+	 			$("#dishStatus").val(dishStatus);
+	 			$("#editProductModal #preview_photo").attr("src", dishPhoto);
+	 			$('#editProductModal').modal('show');
+		 });
+	 			
+			$("#edit-dish-form").on("submit", function (e) {
+				e.preventDefault();
+		        const form = $(e.target);
+		        const json = convertFormToJSON(form);
+		        const myFile = $("#edit-dish-form #photo")[0].files[0];
+		        console.log(myFile);
+		        if (myFile === undefined) {
+		        	json.dishPhoto = $("#editProductModal #preview_photo").attr('src').split(",")[1];
+		        	$.ajax({
+		  	            url: "http://localhost:8080/my-app/dish/",
+		  	            type: "PUT",
+		  	            contentType : "application/json; charset=utf-8",
+		  	            data: JSON.stringify(json),
+		  	            success: function (data, status)
+		  	            {
+		  	            	var yes = confirm("updated  successfully!!!");
+		  					if (yes) {
+		  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish";
+		  					}
+		  	            },
+		  	            error: function (xhr, desc, err)
+		  	            {
+		  	            	console.log(desc);
+		  	            	console.log(err);
+		  					alert("updated  failed!!!");
+		  	            }
+			        });
+		        } else {
+		        	fileArrayBuffer = getArrayBuffer(myFile).then(function(value) {
+			        	json.dishPhoto = Array.from(new Uint8Array(value)); //add something
+					$.ajax({
+			  	            url: "http://localhost:8080/my-app/dish/",
+			  	            type: "PUT",
+			  	            contentType : "application/json; charset=utf-8",
+			  	            data: JSON.stringify(json),
+			  	            success: function (data, status)
+			  	            {
+			  	            	var yes = confirm("updated  successfully!!!");
+			  					if (yes) {
+			  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish";
+			  					}
+			  	            },
+			  	            error: function (xhr, desc, err)
+			  	            {
+			  	            	console.log(desc);
+			  	            	console.log(err);
+			  					alert("updated  failed!!!");
+			  	            }
+				        });
+				 });
+		        }
+		        
+	    });
+});	
 	
 </script>
 <link
@@ -342,12 +456,13 @@ table.table .avatar {
 	crossorigin="anonymous"></script>
 
 <!-- 自定義CSS -->
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/css/shop.css">
+<!-- <link rel="stylesheet" -->
+<%-- 	href="${pageContext.request.contextPath}/css/shop.css"> --%>
 
 </head>
 <body>
-	<jsp:include page="navigate.jsp" />
+<jsp:include page="layout/navbar.jsp" />
+<%-- 	<jsp:include page="navbar.jsp" /> --%>
 	<div class="container-xl">
 		<div class="table-responsive">
 			<div class="table-wrapper">
@@ -360,6 +475,7 @@ table.table .avatar {
 						</div>
 						<div class="col-sm-7">
 							<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a>
+<!-- 							<a href="#editProductModal" class="btn btn-info" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a> -->
 						</div>
 					</div>
 				</div>
@@ -377,19 +493,6 @@ table.table .avatar {
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${products }" var="p">
-						<tr>
-							<td hidden="hidden">${p.id}</td>
-							<td><b><font size="4">${p.name}<b></td>
-							<td><b><font size="3">${p.price}<b></td>
-							<td><img src="${pageContext.request.contextPath}/GetImg.do?name=${p.id}" class="card-img-top" width="100" height="100"></td>
-
-							<td><a href="#" class="settings" title="Settings"
-								data-toggle="tooltip"><i class="material-icons">&#xE8B8;</i></a>
-								<a href="#" class="delete" title="Delete" data-toggle="tooltip"><i
-									class="material-icons">&#xE5C9;</i></a></td>
-						</tr>
-						</c:forEach>
 					</tbody>
 				</table>
 			</div>
@@ -409,7 +512,7 @@ table.table .avatar {
 						<label>店家名稱</label>
 						<input type="text" id="rest" name="rest" value="Mcdonlad" class="form-control" disabled>
 						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
-					</div>
+					</div>	
 					<div class="form-group">
 						<label>商品名稱</label>
 						<input type="text" name="dishName" class="form-control" required>
@@ -434,7 +537,8 @@ table.table .avatar {
   						<br>
   						<br>
 						<label>商品圖片</label>
-						<input type="file" id="photo" name="photo" required>
+						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png" required>
+						<img id="preview_photo" src="#" />
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -449,27 +553,67 @@ table.table .avatar {
 <div id="editProductModal" class="modal fade">
 	<div class="modal-dialog">
 		<div class="modal-content">
-			<form action="${pageContext.request.contextPath}/EditProduct.do" method="POST" enctype="multipart/form-data">
+			<form id="edit-dish-form" name="edit-dish-form">
 				<div class="modal-header">						
 					<h4 class="modal-title">修改</h4>
 					<button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
 				</div>
-				<div class="modal-body">	
+<!-- 				<div class="modal-body">	 -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<input type="hidden" class="form-control" name="product_id" required> -->
+<!-- 					</div>				 -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>商品名稱</label> -->
+<!-- 						<input type="text" class="form-control" name="name" required> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>商品價格</label> -->
+<!-- 						<input type="text" class="form-control" name="price" required> -->
+<!-- 					</div> -->
+<!-- 					<div class="form-group"> -->
+<!-- 						<label>商品圖片</label> -->
+<!-- 						<input type="file" name="image" > -->
+<!-- 					</div>				 -->
+<!-- 				</div> -->
+				<div class="modal-body">
 					<div class="form-group">
-						<input type="hidden" class="form-control" name="product_id" required>
-					</div>				
+						<input type="hidden" class="form-control" name="dishId" required>
+					</div>	
+<!-- 					<div class="form-group"> -->
+<!-- 						<input type="hidden" class="form-control" name="restId" required> -->
+<!-- 					</div>	 -->
+					<div class="form-group">
+						<label>店家名稱</label>
+						<input type="text" id="rest" name="rest" value="Mcdonlad" class="form-control" disabled>
+						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
+					</div>	
 					<div class="form-group">
 						<label>商品名稱</label>
-						<input type="text" class="form-control" name="name" required>
+						<input type="text" name="dishName" class="form-control" required>
 					</div>
 					<div class="form-group">
 						<label>商品價格</label>
-						<input type="text" class="form-control" name="price" required>
+						<input type="text" name="dishPrice" class="form-control" required>
 					</div>
 					<div class="form-group">
+						<span style="padding-left:60px;"></span>
+						<label>商品種類</label>
+						<select id="dishCategory" name="dishCategory" required>
+    						<option value="1">主餐</option>
+    						<option value="2">飲料</option>
+  						</select>
+  						<span style="padding-left:35px;"></span>
+						<label>商品狀態</label>
+						<select id="dishStatus" name="dishStatus" required>
+    						<option value="未上架">未上架</option>
+    						<option value="已上架">已上架</option>
+  						</select>
+  						<br>
+  						<br>
 						<label>商品圖片</label>
-						<input type="file" name="image" >
-					</div>				
+						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png">
+						<img id="preview_photo" src="#" />
+					</div>
 				</div>
 				<div class="modal-footer">
 					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
@@ -479,30 +623,6 @@ table.table .avatar {
 		</div>
 	</div>
 </div>
-<!-- Delete Modal HTML -->
-<div id="deleteProductModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form action="${pageContext.request.contextPath}/DeleteProduct.do" method="POST" >
-				<div class="modal-header">						
-					<h4 class="modal-title">刪除</h4>
-					<button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="form-group">
-						<input type="hidden" class="form-control" name="product_id" required>
-					</div>	
-				<div class="modal-body">					
-					<p>您確定要刪除這個商品嗎？</p>
-					<p class="text-warning"><small>注意,刪除後無法復原</small></p>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-danger" value="Delete">
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
-<jsp:include page="footer.jsp" />
+<%-- <jsp:include page="footer.jsp" /> --%>
 </body>
 </html>

@@ -2,13 +2,23 @@ package com.ispan.team6.dto;
 
 public class DishDTO {
 	
+	private String dishId;
 	private String restId;
 	private String restName;
 	private String dishName;
 	private String dishPrice;
 	private String dishCategory;
+	private String dishCategoryId;
 	private String dishStatus;
 	private byte[] dishPhoto;
+	
+	public String getDishId() {
+		return dishId;
+	}
+
+	public void setDishId(String dishId) {
+		this.dishId = dishId;
+	}
 
 	public String getRestId() {
 		return restId;
@@ -51,6 +61,14 @@ public class DishDTO {
 		this.dishCategory = dishCategory;
 	}
 
+	public String getDishCategoryId() {
+		return dishCategoryId;
+	}
+
+	public void setDishCategoryId(String dishCategoryId) {
+		this.dishCategoryId = dishCategoryId;
+	}
+
 	public String getDishStatus() {
 		return dishStatus;
 	}
@@ -68,7 +86,6 @@ public class DishDTO {
 	}
 
 	public DishDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 }

@@ -58,6 +58,7 @@
 				</a>
 			</c:if>
 
+<<<<<<< HEAD
 			<c:if test="${!empty member}">
 				<div class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown06"
@@ -73,6 +74,21 @@
 						</c:choose>
 						<span style="color:white">${member.account }</span>
 						</a>
+=======
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/listPhoto">測試商品</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/restaurant/cart">購物車</a>
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/menu/dish">菜單頁面(前台)</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="${contextRoot}/backend/dish">商品總覽(後台)</a>
+      </li>
+>>>>>>> Dish
 
 					<div class="dropdown-menu" aria-labelledby="dropdown06">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
