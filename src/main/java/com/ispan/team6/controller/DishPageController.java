@@ -8,7 +8,12 @@ public class DishPageController {
 
 	@GetMapping("/backend/dish")
 	public String dishPage() {
-		return "admin";
+		return "adminDish";
+	}
+	
+	@GetMapping("/menu/dish")
+	public String dishPage2() {
+		return "menu";
 	}
 	
 }
