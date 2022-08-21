@@ -22,11 +22,7 @@
 			<button>GO</button>
 		</form>
 	</div>
-	<!-- 		<div class="py-5 text-center container"> -->
-	<!-- 			金錢排序(由小到大)<input type="checkbox" id="cbox1" name="cbox1" value="ok" -->
-	<!-- 				onclick="ch()"> <a href="" id="change"><button>套用</button></a> -->
-	<!-- 		</div> -->
-
+	<a href="${contextRoot}/goCart.controller"><button>前往購物車</button></a>
 	<div class="album py-5 bg-light">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -34,52 +30,53 @@
 				<!-- 重複的結構 -->
 				<c:forEach items="${allDish }" var="d">
 					<div>
-						<a href="restaurant/intro/${restaurant.id}"  style="color: black ; text-decoration:none">
-							<div class="col">
-								<div class="card">
-									<img style="height: 200px"
-										src="${contextRoot}/dish/downloadImage/${d.id}"
-										class="card-img-top">
-									<div class="headline">${d.dishName }</div>
-									<div >${d.dishPrice }</div>
-									<div><a href=""><button>加入購物車</button></a></div>
+
+						<div class="col">
+							<div class="card">
+								<img style="height: 200px"
+									src="${contextRoot}/dish/downloadImage/${d.id}"
+									class="card-img-top">
+								<div class="headline">餐點名稱: ${d.dishName }</div>
+								<div>價格: ${d.dishPrice }</div>
+							
+								<div>
+									<form action="${contextRoot}/buyList/${rid }/${d.id }"
+										method="get">
+										數量<input type="number" name="quantity" min="0"
+											style="width: 20%; margin-right: 40%" value="1" required>
+										<button onclick="add()">加入購物車</button>
+									</div>
+						    	</form>
 								
-								</div>
+							
+
 							</div>
+						</div>
 						</a>
 					</div>
 				</c:forEach>
-				<!-- 重複的結構 -->
-
-<!-- 				<a -->
-<%-- 					href="/retaurant/intro/${restaurant.id}" --%>
-<!-- 					data-flood-closed-message="" class="hreview-aggregate url" -->
-<!-- 					data-vendor-id='135218'> -->
-<!-- 					<figure class="vendor-tile  item"> -->
-<!-- 						<picture> -->
-<!-- 						<div class="vendor-picture b-lazy" -->
-<!-- 							data-src="https://images.deliveryhero.io/image/fd-tw/LH/rap6-listing.jpg?width=400&amp;height=292|https://images.deliveryhero.io/image/fd-tw/LH/rap6-listing.jpg?width=800&amp;height=584"></div> -->
-<!-- 						</picture> -->
-<!-- 						<figcaption class="vendor-info"> -->
-<%-- 							<span class="headline"> <span class="name fn">${restaurant.name }</span> --%>
-<!-- 							</span> -->
-<!-- 							<ul class="categories summary"> -->
-<!-- 								<li><span class="budget-symbol--filled">$</span> <span -->
-<!-- 									class="budget-symbol--filled">$</span> <span>$</span></li> -->
-<!-- 								<li class="vendor-characteristic"><span>&lt;店內價&gt;</span> -->
-<!-- 									<span>台式</span></li> -->
-<!-- 							</ul> -->
-<!-- 							<ul class="extra-info mov-df-extra-info"> -->
-<!-- 							</ul> -->
-
-
-<!-- 						</figcaption> -->
-
-
-<!-- 					</figure> -->
-				</a>
+				
+				
 			</div>
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	function add() {
+		alert('加入購物車');
+	}
+	
+	$(“*”)(function() {
+	var chart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+	        datasets: [{
+	            label: '# of Votes',
+	            data: [12, 19, 3, 5, 2, 3]
+	        }]
+	    }
+	});
+	}
+</script>
 </html>
