@@ -12,7 +12,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.ispan.team6.entity.Comment;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.CommentDao;
+import com.ispan.team6.model.UsersDao;
 
 @Service
 @Transactional 
@@ -20,6 +22,21 @@ public class CommentService {
 
 	@Autowired
 	private CommentDao cDao;
+	
+	@Autowired
+	private UsersDao uDao;
+	
+	@Autowired
+	private UsersService uService;
+	
+	public Boolean validateUserInfo (Integer id) {
+		Users currentUser = uService.findById(id);
+		
+		if(currentUser == null) {
+			return false;
+		}
+		return true;
+	}
 	
 	//新增
 	public void insertComment(Comment cmt) {
@@ -48,4 +65,5 @@ public class CommentService {
 	public void deleteComment(Integer id) {
 		cDao.deleteById(id);
 	}
+	
 }
