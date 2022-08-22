@@ -51,7 +51,7 @@
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>
-						<a href="restaurant/intro/${restaurant.id}"
+						<a href="restaurant/${restaurant.id}/menu"
 							style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">

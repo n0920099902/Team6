@@ -8,9 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import com.ispan.team6.entity.Dish;
 
 public interface DishDAO extends JpaRepository<Dish, Integer> {
+	@Query(value="from Dish where fk_rest_id=?1 and dishStatus='已上架'")
+	public List<Dish> findAllByRestIdAndDishStatusIsPublished(Integer restId);
 
-	public Dish findById(int id);
-	
-	@Query(value = "select * from Dish where fk_rest_id =:keyword", nativeQuery = true)
-	public List<Dish> findByRestId(int keyword);
 }

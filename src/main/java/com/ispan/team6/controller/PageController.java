@@ -82,21 +82,21 @@ public class PageController {
 	public String testAction2() {
 		return "shoppincar";
 	}
-    //新增食物testForOrder
-	@GetMapping("/getAlldish/{id}")
-	public String processDishMainAction(@PathVariable("id") int id, Model m) {
-		List<Dish> list = dDao.findByRestId(id);
-		m.addAttribute("allDish", list);
-		m.addAttribute("rid", id);
-		return "dish";
-	}
+//    //新增食物testForOrder
+//	@GetMapping("/getAlldish/{id}")
+//	public String processDishMainAction(@PathVariable("id") int id, Model m) {
+//		List<Dish> list = dDao.findByRestId(id);
+//		m.addAttribute("allDish", list);
+//		m.addAttribute("rid", id);
+//		return "dish";
+//	}
 	//testForOrder
-	@GetMapping("/dish")
-	public String processAction(Model m) {
-		List<Restaurant> list = rService.findAllRestuarant();
-		m.addAttribute("allRestaurant", list);
-		return "AddDish";
-	}
+//	@GetMapping("/dish")
+//	public String processAction(Model m) {
+//		List<Restaurant> list = rService.findAllRestuarant();
+//		m.addAttribute("allRestaurant", list);
+//		return "AddDish";
+//	}
 	//testForOrder
 	@GetMapping("/b")
 	public String process() {
