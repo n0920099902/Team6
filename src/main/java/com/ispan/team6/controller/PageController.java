@@ -19,10 +19,10 @@ public class PageController {
 
 	@Autowired
 	private RestaurantService rService;
-	
+
 	@Autowired
 	private DishDAO dDao;
-	
+
 	@GetMapping("/")
 	public String welcomeIndex() {
 		return "index";
@@ -46,18 +46,17 @@ public class PageController {
 	public String loginIndex() {
 		return "login";
 	}
+
 	@GetMapping("sign")
 	public String signIndex() {
 		return "sign";
 	}
-	
+
 	@GetMapping("/users/userCentre")
 	public String userCentre() {
 		return "userCentre";
 	}
 
-
-	
 //	@GetMapping("/search")
 //	public String SearchPage() {
 //		return "Search";
@@ -78,11 +77,13 @@ public class PageController {
 	public String testAction() {
 		return "Test";
 	}
+
 	@GetMapping("shoppincar/Test")
 	public String testAction2() {
 		return "shoppincar";
 	}
-    //新增食物testForOrder
+
+	// 新增食物testForOrder
 	@GetMapping("/getAlldish/{id}")
 	public String processDishMainAction(@PathVariable("id") int id, Model m) {
 		List<Dish> list = dDao.findByRestId(id);
@@ -90,14 +91,16 @@ public class PageController {
 		m.addAttribute("rid", id);
 		return "dish";
 	}
-	//testForOrder
+
+	// testForOrder
 	@GetMapping("/dish")
 	public String processAction(Model m) {
 		List<Restaurant> list = rService.findAllRestuarant();
 		m.addAttribute("allRestaurant", list);
 		return "AddDish";
 	}
-	//testForOrder
+
+	// testForOrder
 	@GetMapping("/b")
 	public String process() {
 		return "bL";

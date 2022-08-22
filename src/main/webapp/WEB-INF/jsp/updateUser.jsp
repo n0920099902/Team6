@@ -24,7 +24,7 @@
 					<div class="card-body">
 
 						<form:form class="form" method="post" modelAttribute="member"
-							action="${contextRoot}/member/updateUser"
+							action="${contextRoot}/users/updateUser"
 							enctype='multipart/form-data'>
 							<table>
 								<form:input type="hidden" path="id" />
@@ -35,7 +35,7 @@
 							<ul>
 								<form:input type="hidden" path="access" />
 								<%--<li>請輸入舊密碼:<form:input type="password" path="password" value="${users.password }" /></li> --%>
-								<li>請輸入新密碼:&nbsp;<form:input type="password" path="" /></li>
+<%-- 								<li>請輸入新密碼:&nbsp;<form:input type="password" path="password" /></li> --%>
 								<li>修改電子郵件:&nbsp;<form:input type="email" path="email"
 										value="${member.email }" /></li>
 								<li>修改電話:&nbsp;<form:input type="text" path="phone"
@@ -43,7 +43,7 @@
 								<li>修改出生年月日:&nbsp;<form:input type="date" path="birthday"
 										value="${member.birthday }" /></li>
 								<li>修改大頭貼:${users.photo }<form:input type="file"
-										path="photo" /></li>
+ 										path="photo" /></li>
 							</ul>
 							<br />
 							<button type="submit" class="btn btn-primary">Submit</button>
