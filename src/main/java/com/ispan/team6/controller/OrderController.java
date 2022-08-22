@@ -80,40 +80,40 @@ public class OrderController {
 		return "cart";
 	}
 	
-	@GetMapping("/buyList/{rid}/{id}")
-	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
-		Dish d = dDao.findById(id);
-		List<DishQ> buyList = (List<DishQ>) m.getAttribute("buy");
-		DishQ dq = new DishQ();
-		int temp = -1;
-		if (buyList == null) {
-			dq.setDish(d);
-			dq.setQ(quantity);
-			buyList.add(dq);
-		}
-		if (buyList != null) {
-
-			for (int i = 0; i < buyList.size(); i++) {
-				Dish listDish = buyList.get(i).getDish();
-				if (d.getId() == listDish.getId()) {
-					temp = i;
-				}
-			}
-			if (temp != -1) {
-				int q = buyList.get(temp).getQ();
-				q += quantity;
-				buyList.get(temp).setQ(q);
-			}
-			if (temp == -1) {
-				dq.setDish(d);
-				dq.setQ(quantity);
-				buyList.add(dq);
-			}
-
-		}
-		return "redirect:/getAlldish/{rid}";
-
-	}
+//	@GetMapping("/buyList/{rid}/{id}")
+//	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
+//		Dish d = dDao.findById(id);
+//		List<DishQ> buyList = (List<DishQ>) m.getAttribute("buy");
+//		DishQ dq = new DishQ();
+//		int temp = -1;
+//		if (buyList == null) {
+//			dq.setDish(d);
+//			dq.setQ(quantity);
+//			buyList.add(dq);
+//		}
+//		if (buyList != null) {
+//
+//			for (int i = 0; i < buyList.size(); i++) {
+//				Dish listDish = buyList.get(i).getDish();
+//				if (d.getId() == listDish.getId()) {
+//					temp = i;
+//				}
+//			}
+//			if (temp != -1) {
+//				int q = buyList.get(temp).getQ();
+//				q += quantity;
+//				buyList.get(temp).setQ(q);
+//			}
+//			if (temp == -1) {
+//				dq.setDish(d);
+//				dq.setQ(quantity);
+//				buyList.add(dq);
+//			}
+//
+//		}
+//		return "redirect:/getAlldish/{rid}";
+//
+//	}
 
 	@GetMapping("/restaurant/cartOrder")
 	public String ProcessCartOrder() {
