@@ -33,12 +33,8 @@ public class Dish {
     @JoinColumn(name ="fk_dishType_id")
 	private DishType dishType;
 	
-//	@Lob
-//	private Blob dishPhoto;
-
-	//先做給order測試用
 	@Lob
-	private byte[] dishPhoto;
+	private Blob dishPhoto;
 	
 	private String dishStatus;
 	
@@ -85,21 +81,11 @@ public class Dish {
 		this.dishType = dishType;
 	}
 
-//	public byte[] getDishPhoto() {
-//		return dishPhoto;
-//	}
-
-	//先做給order測試用
-	public byte[] getDishPhoto() {
+	public Blob getDishPhoto() {
 		return dishPhoto;
 	}
-	
-//	public void setDishPhoto(Blob dishPhoto) {
-//		this.dishPhoto = dishPhoto;
-//	}
-	
-	//先做給order測試用
-	public void setDishPhoto(byte[] dishPhoto) {
+
+	public void setDishPhoto(Blob dishPhoto) {
 		this.dishPhoto = dishPhoto;
 	}
 
