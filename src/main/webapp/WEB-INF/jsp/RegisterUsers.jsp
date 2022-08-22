@@ -16,7 +16,7 @@
 <body>
 
 
-	<form action="${pageContext.request.contextPath}/rigister">
+	<form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data">
 		<div>
 			會員帳號： <input type="text" name="account" required>
 		</div>

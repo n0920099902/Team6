@@ -48,6 +48,13 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/listPhoto">測試商品</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/restaurant/cart">購物車</a></li>
+
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
+				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 			</ul>
 
@@ -62,7 +69,6 @@
 				</a>
 			</c:if>
 
-			<<<<<<< HEAD
 			<c:if test="${!empty member}">
 				<div class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="dropdown06"
@@ -75,16 +81,7 @@
 								<img width="35" height="35" alt="" class="rounded-circle"
 									src="${contextRoot}/img/sticker.jpeg">
 							</c:when>
-						</c:choose> <span style="color: white">${member.account }</span> </a> =======
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/listPhoto">測試商品</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/restaurant/cart">購物車</a></li>
-
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/backend/dish">商品總覽(後台)</a></li> >>>>>>> Dish
+						</c:choose> </a>
 
 					<div class="dropdown-menu" aria-labelledby="dropdown06">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>

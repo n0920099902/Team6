@@ -58,7 +58,7 @@ public class UsersApi {
 	@PostMapping("member/sign")
 	public String Sign(@RequestParam("mAccount") String account, @RequestParam("mPassword") String pwd,
 			@RequestParam("mEmail") String email, @RequestParam("mPhone") String phone,
-			@RequestParam("mBirthday") @DateTimeFormat(pattern = "yyyy-MM-dd")  String birthday,
+			@RequestParam("mBirthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
 			@RequestParam("mAccess") String access, @RequestParam("Img") MultipartFile file, Model m)
 			throws IOException {
 		Users mem = new Users();
@@ -91,16 +91,43 @@ public class UsersApi {
 
 	}
 
-	@GetMapping("/users/updateUser")
+	@GetMapping("/users/updateUserPage")
 	public String updateUserPage() {
 
 		return "updateUser";
 	}
 
-	@PostMapping("/member/updateUser")
-	public String updateUserAction(@ModelAttribute("member") Users member) {
+	@PostMapping("/users/updateUser")
+	public String updateUserAction(@ModelAttribute("member") Users member, MultipartFile file) throws IOException {
+//		member.setPhoto(file.getBytes());
+
 		uService.insertUser(member);
 
 		return "userCentre";
 	}
+
+	@GetMapping("/users/typeUserOldPasswordPage")
+	public String typeUserOldPasswordPage() {
+
+		return "typeUserOldPassword";
+	}
+
+	@PostMapping("/users/checkUserOldPassword")
+	public String updateUserPassword(@ModelAttribute("member") Users member,String password, Model model) {
+
+		String oldPassword = member.getPassword();
+		System.out.println("oldPassword==>" + oldPassword);
+		if ((model.addAttribute("member", member).toString()).equals(password)){
+			System.out.println("passwod ==>" + password);
+			return "/users/updateUserPassword";
+		}
+		return "userCentre";
+	}
+
+	@GetMapping("/users/updateUserPassword")
+	public String updateUserPasswordPage() {
+
+		return "updateUserPassword";
+	}
+
 }

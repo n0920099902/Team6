@@ -14,6 +14,7 @@
 </head>
 <body>
 	<h1>會員中心頁面測試</h1>
-		<a href="${contextRoot }/users/updateUser">會員資料修改</a>
+		<a href="${contextRoot }/users/typeUserOldPasswordPage">修改密碼</a><br/>
+		<a href="${contextRoot }/users/updateUserPage">會員資料修改</a>
 </body>
 </html>
