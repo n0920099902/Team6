@@ -14,7 +14,7 @@
 <title>註冊頁面</title>
 </head>
 <body>
-	<form action="${pageContext.request.contextPath}/Users/update?id=${id}"
+	<form action="${pageContext.request.contextPath}/Users/update?id=${getId}"
 		method="post" enctype="multipart/form-data">
 		<div>
 			會員帳號： <input type="text" name="account" required value="${getAccount }">

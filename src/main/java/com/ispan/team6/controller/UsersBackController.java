@@ -91,7 +91,7 @@ public class UsersBackController {
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
-		model.addAttribute("id", update.getId());
+		model.addAttribute("getId", update.getId());
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
@@ -122,9 +122,11 @@ public class UsersBackController {
 		u.setPassword(password);
 //		u.setAccess(remark);
 		u.setPhoto(bytes);
-		
+		System.out.println("id:"+u.getId());
+		System.out.println("account:"+u.getAccess());
 		service.insertMember(u);
 
+		
 		return "redirect:/Users/select";
 	}
 
