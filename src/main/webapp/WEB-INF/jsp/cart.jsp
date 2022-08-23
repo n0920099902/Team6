@@ -30,11 +30,11 @@
 	<div class="album py-5 bg-light">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-
+<%-- /getAlldish/${restaurant.id} --%>
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>
-						<a href="${contextRoot}/getAlldish/${restaurant.id}"  style="color: black ; text-decoration:none">
+						<a href="${contextRoot}/restaurant/cart/getAlldish/${restaurant.id}"  style="color: black ; text-decoration:none">
 							<div class="col">
 								<div class="card">
 									<img style="height: 200px"
