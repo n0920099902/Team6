@@ -15,6 +15,7 @@ import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -64,13 +65,16 @@ public class Users {
 	@OneToMany(mappedBy = "users", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
+	@Transient
+	private String confimation_password;
+
 	public Users() {
 	}
 
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public String getAccount() {
 		return account;
 	}
@@ -159,5 +163,12 @@ public class Users {
 		this.orders = orders;
 	}
 
+	public String getConfimation_password() {
+		return confimation_password;
+	}
+
+	public void setConfimation_password(String confimation_password) {
+		this.confimation_password = confimation_password;
+	}
 
 }

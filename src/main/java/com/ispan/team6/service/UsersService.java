@@ -16,7 +16,7 @@ public class UsersService {
 
 	@Autowired
 	private UsersDao uDao;
-	
+
 	public Users findById(Integer Id) {
 		Optional<Users> optional = uDao.findById(Id);
 
@@ -26,9 +26,9 @@ public class UsersService {
 
 		return null;
 	}
-	
+
 	public Users findByAccount(String account) {
-		 Optional<Users> optional = uDao.findByAccount(account);
+		Optional<Users> optional = uDao.findByAccount(account);
 
 		if (optional.isPresent()) {
 			return optional.get();
@@ -36,8 +36,12 @@ public class UsersService {
 
 		return null;
 	}
-	
+
 	public void insertUser(Users u) {
 		uDao.save(u);
+	}
+
+	public Users findPasswordById(Integer id) {
+		return uDao.findPasswordById(id);
 	}
 }

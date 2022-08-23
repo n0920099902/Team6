@@ -2,8 +2,6 @@ package com.ispan.team6.controller;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Date;
-import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -85,8 +82,10 @@ public class UsersApi {
 		byte[] bytes = m.getPhoto();
 		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
 		OutputStream out = response.getOutputStream();
-		out.write(bytes);
-		out.flush();
+		if (bytes != null) {
+			out.write(bytes);
+			out.flush();
+		}
 		out.close();
 
 	}
@@ -112,14 +111,12 @@ public class UsersApi {
 		return "typeUserOldPassword";
 	}
 
-	@PostMapping("/users/checkUserOldPassword")
-	public String updateUserPassword(@ModelAttribute("member") Users member,String password, Model model) {
+	@PostMapping("/users/checkUserOldPassword/{id}")
+	public String checkUserOldPassword(@ModelAttribute Users member, @PathVariable Integer id, String password,
+			Model model) {
 
-		String oldPassword = member.getPassword();
-		System.out.println("oldPassword==>" + oldPassword);
-		if ((model.addAttribute("member", member).toString()).equals(password)){
-			System.out.println("passwod ==>" + password);
-			return "/users/updateUserPassword";
+		if (uService.findPasswordById(id).getPassword().equals(password)) {
+			return "updateUserPassword";
 		}
 		return "userCentre";
 	}
@@ -128,6 +125,23 @@ public class UsersApi {
 	public String updateUserPasswordPage() {
 
 		return "updateUserPassword";
+	}
+
+	@PostMapping("/users/updateUserPassword/{id}")
+	public String updateUserPassword(@ModelAttribute("member") Users member, @PathVariable Integer id, String password,
+			String confimation_password, Model model) {
+		if (id != null) {
+			Users members = uService.findById(id);
+			model.addAttribute("member", members);
+		}
+		if (password.equals(confimation_password)) {
+
+			uService.insertUser(member);
+
+			return "userCentre";
+		}
+		return "updateUserPassword";
+
 	}
 
 }

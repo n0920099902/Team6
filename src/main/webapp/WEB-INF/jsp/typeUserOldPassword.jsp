@@ -16,7 +16,7 @@
 	<h1>請輸入舊密碼</h1>
 
 	<form:form class="form" method="post" modelAttribute="member"
-		action="${contextRoot}/users/checkUserOldPassword"
+		action="${contextRoot}/users/checkUserOldPassword/${member.id }"
 		enctype='multipart/form-data'>
 
 		<form:hidden path="id" />
