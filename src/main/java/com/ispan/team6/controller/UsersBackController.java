@@ -44,7 +44,6 @@ public class UsersBackController {
 		u.setEmail(email);
 		u.setPhone(phone);
 		u.setPassword(password);
-//		u.setAccess(remark);
 		u.setPhoto(bytes);
 
 		service.insertMember(u);
@@ -91,7 +90,11 @@ public class UsersBackController {
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
+<<<<<<< HEAD
 		model.addAttribute("getId", update.getId());
+=======
+//		model.addAttribute("id", update.getId());
+>>>>>>> 25
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
@@ -112,15 +115,14 @@ public class UsersBackController {
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
 		
 		Users u = new Users();
-//		u.setId(id);
 		byte[] bytes = file.getBytes();
+		u.setId(id);
 		u.setAccount(account);
 		u.setAccess(access);
 		u.setBirthday(birthday);
 		u.setEmail(email);
 		u.setPhone(phone);
 		u.setPassword(password);
-//		u.setAccess(remark);
 		u.setPhoto(bytes);
 		System.out.println("id:"+u.getId());
 		System.out.println("account:"+u.getAccess());

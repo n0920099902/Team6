@@ -75,6 +75,10 @@ public class Users {
 		return id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
 	public String getAccount() {
 		return account;
 	}

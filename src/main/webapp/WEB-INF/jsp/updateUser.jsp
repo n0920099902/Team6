@@ -34,8 +34,6 @@
 							</table>
 							<ul>
 								<form:input type="hidden" path="access" />
-								<%--<li>請輸入舊密碼:<form:input type="password" path="password" value="${users.password }" /></li> --%>
-<%-- 								<li>請輸入新密碼:&nbsp;<form:input type="password" path="password" /></li> --%>
 								<li>修改電子郵件:&nbsp;<form:input type="email" path="email"
 										value="${member.email }" /></li>
 								<li>修改電話:&nbsp;<form:input type="text" path="phone"

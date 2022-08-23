@@ -16,31 +16,36 @@
 <body>
 	<form action="${pageContext.request.contextPath}/Users/update?id=${getId}"
 		method="post" enctype="multipart/form-data">
+		<input type="hidden" name="id" value="${getId }" required />
 		<div>
-			會員帳號： <input type="text" name="account" required value="${getAccount }">
+			會員帳號： <input type="hidden" name="account" value="${getAccount }" required>${getAccount }
 		</div>
 		<div>
-			會員密碼： <input type="password" name="password" required value="${getPassword }" >
+			會員密碼： <input type="password" name="password" required
+				value="${getPassword }">
 		</div>
 		<div>
 			會員信箱： <input type="email" name="email" required value="${getEmail }">
 		</div>
 		<div>
-			會員電話： <input type="tel" id="phone" name="phone"  value="${getPhone }" onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span style="color: red" id="phoneout"></span>
+			會員電話： <input type="tel" id="phone" name="phone" value="${getPhone }"
+				onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span
+				style="color: red" id="phoneout"></span>
 		</div>
 		<div>
-			會員生日： <input type="text" name="Birthday" required value="${getBirthday }"  >
+			會員生日： <input type="text" name="Birthday" required
+				value="${getBirthday }">
 		</div>
 		<div>
 			<!-- 			權限 -->
-			<input type="text" name="access" value="Shop" hidden="" required >
+			<input type="text" name="access" value="Shop" hidden="" required>
 		</div>
 
 		<div>
-			會員圖片： <input type="file" name="Img" onchange="openFile(event)" >
+			會員圖片： <input type="file" name="Img" onchange="openFile(event)">
 		</div>
 
-		<img id="output" height="200" style="display: none" >
+		<img id="output" height="200" style="display: none">
 		<button>修改</button>
 	</form>
 </body>
