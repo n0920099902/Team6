@@ -29,10 +29,11 @@
   					console.log(data);
   					$(data).each(function () {
   						var imgsrc = "data:image/png;base64," + this.dishPhoto;
-  						$(".card").append('<img width: "50px", height: "50px" class="img-thumbnail" class="card-img-top" src=' + imgsrc + ' />')
-  						.append('<button type="button">Add Shopping Cart!</button>')
-  						
-  					});
+  						$(".card").append('<img width="300" height="300" class="img-thumbnail" class="card-img-top" src=' + imgsrc + ' />')
+  						          .append('<strong><font size="5">' + this.dishName + '</strong>')
+  						          .append('<td><i><u><font size="3">' + "$" + this.dishPrice + '</td>')
+  						          .append('<button type="button" class="btn btn-danger">Add Shopping Cart!</button>')
+  					});	
   	            },
   	            error: function (xhr, desc, err)
   	            {
@@ -51,14 +52,17 @@
 	
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
 		<div class="col">
-			<div class="card">
+			<div class="card" style="border:15px #cccccc groove;" cellpadding="10" border='0'>
 <!--          <img width: "50px", height: "50px" class="img-thumbnail" src="" class="card-img-top">  -->
-				<img width: "50px", height: "50px" src="" class="card-img-top">
+				<img width="0" height="0" src="" class="card-img-top">
+			</div>
 			</div>
 		</div>
-	</div>
+		</div>
+		</div>
+		</div>
 </body>
 <jsp:include page="layout/footer.jsp" />
 </html>
