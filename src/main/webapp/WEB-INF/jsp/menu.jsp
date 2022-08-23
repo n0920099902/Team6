@@ -10,6 +10,7 @@
 
 <html>
 <head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>菜單</title>
 </head>
@@ -63,6 +64,32 @@
 		</div>
 		</div>
 		</div>
+		
+<!-------------------------------------------------------------------------------------------------------->	
+		
+		<h2>評論</h2>
+		
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th scope="col">No.</th>
+				<th scope="col">帳號</th>
+				<th scope="col">評論內容</th>
+				<th scope="col">評論時間</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+			<tr>
+				<th scope="row">1</th>
+				<td>${comment.id}</td>
+				<td>${comment.comments}</td>
+				<td>${comment.time}</td>
+			</tr>
+			
+		</tbody>
+	</table>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
 </body>
 <jsp:include page="layout/footer.jsp" />
 </html>

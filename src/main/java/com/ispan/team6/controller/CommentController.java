@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.team6.entity.Comment;
 import com.ispan.team6.entity.Orders;
+import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.CommentService;
 import com.ispan.team6.service.OrdersService;
@@ -36,7 +37,7 @@ public class CommentController {
 	public String addCommentPage(HttpSession httpSession, Model m) {
 
 		Comment newCmt = new Comment();
-
+		
 		Comment latestCmt = cService.lastestComment();
 
 		m.addAttribute("comment", newCmt);
