@@ -3,9 +3,7 @@ package com.ispan.team6.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,14 +14,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.ispan.team6.entity.Dish;
-import com.ispan.team6.entity.Orders;
+import com.ispan.team6.entity.DishQ;
 import com.ispan.team6.entity.OrdersDetail;
 import com.ispan.team6.entity.Restaurant;
-import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.UsersDao;
 import com.ispan.team6.service.DishService;
@@ -32,7 +27,6 @@ import com.ispan.team6.service.OrdersDetailService;
 import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.testForOders.GoodPhotoService;
-import com.ispan.team6.entity.DishQ;
 
 @Controller
 @SessionAttributes({ "dish", "users", "buy" })
@@ -60,7 +54,7 @@ public class OrderController {
 	private DishDAO dDao;
 	
 	@Autowired
-	private RestaurantService rService;
+	private RestaurantService restaurantService;
 	
 
 	
@@ -75,10 +69,23 @@ public class OrderController {
 	public String processRestaurantMainAction(Model m) {
 		List<DishQ>buylist=new ArrayList<DishQ>();
 		m.addAttribute("buy", buylist);
-		List<Restaurant> list = rService.findAllRestuarant();
+		List<Restaurant> list = restaurantService.findAllRestuarant();
 		m.addAttribute("allRestaurant", list);
 		return "cart";
 	}
+	
+	@GetMapping("/restaurant/cart/getAlldish/{id}")
+	public String cartGetAlldish(@PathVariable Integer id,Model m ) {
+		Restaurant restaurant = restaurantService.findById(id);
+		m.addAttribute("restaurant", restaurant);
+		
+		return "cartGetAllDish";
+	}
+	
+//	@PostMapping("/restaurant/cart")
+//	Public @ResponseBody list<DishQ> showOrders() {
+//		
+//	}
 	
 //	@GetMapping("/buyList/{rid}/{id}")
 //	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
