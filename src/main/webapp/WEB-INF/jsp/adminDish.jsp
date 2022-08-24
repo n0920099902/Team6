@@ -510,7 +510,7 @@ table.table .avatar {
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="Mcdonlad" class="form-control" disabled>
+						<input type="text" id="rest" name="rest" value="McDonlad" class="form-control" disabled>
 						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
 					</div>	
 					<div class="form-group">
@@ -584,7 +584,7 @@ table.table .avatar {
 <!-- 					</div>	 -->
 					<div class="form-group">
 						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="Mcdonlad" class="form-control" disabled>
+						<input type="text" id="rest" name="rest" value=${restaurant.id} class="form-control" disabled>
 						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
 					</div>	
 					<div class="form-group">
