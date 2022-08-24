@@ -1,19 +1,13 @@
 package com.ispan.team6.controller;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Date;
 import java.util.List;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -123,11 +117,9 @@ public class UsersBackController {
 		u.setPhone(phone);
 		u.setPassword(password);
 		u.setPhoto(bytes);
-		System.out.println("id:"+u.getId());
-		System.out.println("account:"+u.getAccess());
+		
 		service.insertMember(u);
 
-		
 		return "redirect:/Users/select";
 	}
 

@@ -16,9 +16,9 @@
 <body>
 	<form action="${pageContext.request.contextPath}/Users/update?id=${getId}"
 		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="id" value="${getId }" required />
+		<input type="hidden" name="id" value="" required />
 		<div>
-			會員帳號： <input type="hidden" name="account" value="${getAccount }" required>${getAccount }
+			會員帳號： <input type="text" name="account" required value="${getAccount }" id="account" onchange="checkAccount()">
 		</div>
 		<div>
 			會員密碼： <input type="password" name="password" required
@@ -70,5 +70,17 @@
 			document.getElementById("phoneout").innerHTML = "輸入格式錯誤";
 		}
 	}
+	function checkAccount() {
+		  const account = document.getElementById("account");
+		  $.ajax({
+			  url:"${contextRoot}/member/get/"+account.value , 
+			  success: function(result){
+				   if(result){
+					   alert("帳號重複");
+		 			   account.value = "";
+				   }
+		  	  }
+		  });
+		}
 </script>
 </html>
