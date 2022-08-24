@@ -84,18 +84,18 @@ public class UsersBackController {
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
-<<<<<<< HEAD
+
 		model.addAttribute("getId", update.getId());
 
 //		model.addAttribute("id", update.getId());
 		
-=======
+
 
 		model.addAttribute("getId", update.getId());
 
 //		model.addAttribute("id", update.getId());
 
->>>>>>> Dish5
+
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
