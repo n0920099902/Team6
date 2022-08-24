@@ -13,6 +13,40 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>菜單</title>
+
+<style>
+
+ .card{
+ 	   margin-bottom: 30px;
+}
+	 
+ #card1{
+   		border-style: ridge;
+ 		border-radius: 23px;
+	 	border-color: #FF7575;
+	 	border-width: 8px;
+}	 
+ 
+ #img1{
+ 		border-radius: 100px;
+ 		
+}
+
+ #strong1{
+		  font-size: 25px;
+}
+
+#i1{
+	font-size: 15px;
+	text-decoration: underline;
+}
+ 
+ #button1{
+ 		  border-radius: 100px;
+}
+
+ 
+</style>
 </head>
 <script>
 	$(document).ready(function() {
@@ -30,10 +64,23 @@
   					console.log(data);
   					$(data).each(function () {
   						var imgsrc = "data:image/png;base64," + this.dishPhoto;
+<<<<<<< HEAD
   						$(".card").append('<img width="300" height="300" class="img-thumbnail" class="card-img-top" src=' + imgsrc + ' />')
   						          .append('<strong><font size="5">' + this.dishName + '</strong>')
   						          .append('<td><i><u><font size="3">' + "$" + this.dishPrice + '</td>')
   						          .append('<button type="button" class="btn btn-danger">Add Shopping Cart!</button>')
+=======
+  						var col=$('<div class="col"></div>')
+  						var card=$('<div class="card" id="card1"</div>')
+  						card.append('<img width="400px" height="150px"  class="card-img-top" id="img1" src=' + imgsrc + ' />')
+  							.append('<p style="display:none;">' + this.dishId)
+				          	.append('<strong id="strong1">' + this.dishName + '</strong>')
+					        .append('<i id="i1" />' + "$" + this.dishPrice)
+					        .append('<button id="button1" type="button" class="btn btn-danger">Add Shopping Cart!</button>')
+					    col.append(card)
+  						$(".row").append(col)
+  								  
+>>>>>>> Dish5
   					});	
   	            },
   	            error: function (xhr, desc, err)
@@ -47,6 +94,7 @@
 	});	
 </script>
 <body>
+<<<<<<< HEAD
 <div class="py-5 text-center container">
 	<h1>${restaurant.name} 菜單</h1>
 	<input type="hidden" id="restaurantId" value="${restaurant.id}">
@@ -59,6 +107,15 @@
 <!--          <img width: "50px", height: "50px" class="img-thumbnail" src="" class="card-img-top">  -->
 				<img width="0" height="0" src="" class="card-img-top">
 			</div>
+=======
+	<div class="py-5 text-center container">
+		<h1>${restaurant.name} 菜單</h1>
+		<input type="hidden" id="restaurantId" value="${restaurant.id}">
+		<div class="album py-4 bg-light">
+			<div class="container">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+				</div>
+>>>>>>> Dish5
 			</div>
 		</div>
 		</div>
