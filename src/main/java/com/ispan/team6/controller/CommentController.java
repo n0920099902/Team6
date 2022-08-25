@@ -59,9 +59,9 @@ public class CommentController {
 		// 沒有的話需要先登入	
 		if (currentUser != null) {
 			
-			Orders currenOrder = oService.findById(orderId);
+//			Orders currenOrder = oService.findById(orderId);
 			
-			cmt.setOrders(currenOrder);
+//			cmt.setOrders(currenOrder);
 			cmt.setUsers(currentUser);
 
 			cService.insertComment(cmt);
