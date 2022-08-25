@@ -14,12 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ispan.team6.entity.DishQ;
+import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.OrdersDetail;
 import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.DishDAO;
+import com.ispan.team6.model.OrdersDao;
+import com.ispan.team6.model.OrdersDetailDao;
 import com.ispan.team6.model.UsersDao;
 import com.ispan.team6.service.DishService;
 import com.ispan.team6.service.MemberService;
@@ -29,64 +34,78 @@ import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.testForOders.GoodPhotoService;
 
 @Controller
-@SessionAttributes({ "dish", "users", "buy" })
+@SessionAttributes({ "dish", "member", "buy" })
 public class OrderController {
 
 	@Autowired
-	private GoodPhotoService gService;
-
-	@Autowired
-	private OrdersDetailService ODService;
-
-	@Autowired
-	private UsersDao usersDao;
-
-	@Autowired
-	private OrdersService OService;
-
-	@Autowired
-	private DishService dishSer;
-
-	@Autowired
-	private MemberService memberService;
-	
-	@Autowired
-	private DishDAO dDao;
-	
-	@Autowired
 	private RestaurantService restaurantService;
-	
 
-	
+	@Autowired
+	private OrdersDao ordersDao;
 
+	@Autowired
+	private OrdersDetailDao ordersDetailDao;
 
+	// 查詢使用者歷史訂單
+	@GetMapping("/getUsersOrder")
+	public String getUsrsOrder(Model m, @SessionAttribute("member") Users us) {
+		System.out.println(ordersDao);
+		List<Orders> orders = ordersDao.findOrdersByUsersId(us.getId());
+		System.out.println(orders);
+		if (orders.size() == 0) {
+			m.addAttribute("message", "沒有歷史訂單");
+		} else {
+			m.addAttribute("Horders", orders);
+		}
+
+		return "historyOrder";
+	}
+
+	// 查詢使用者歷史訂單deteil
+	@GetMapping("/OrderDetail/{id}")
+	public String getDetail(Model m, @PathVariable("id") int id) {
+
+		List<OrdersDetail> od = ordersDetailDao.findByOrderId(id);
+		m.addAttribute("OrderDetail", od);
+
+		return "oderDetail";
+	}
+
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+// -------------------------------------------------------------
+//--------------------------------------------------------------
+//	--------------------------以下均為實驗版-----------------------
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//--------------------------------------------------------------
 //	@GetMapping("/restaurant/cart")
 //	public String ProcessCart() {
 //		return "cart";
 //	}
-	//導向購物車頁面 列出所有餐廳
+	// 導向購物車頁面 列出所有餐廳
 	@GetMapping("/restaurant/cart")
 	public String processRestaurantMainAction(Model m) {
-		List<DishQ>buylist=new ArrayList<DishQ>();
+		List<DishQ> buylist = new ArrayList<DishQ>();
 		m.addAttribute("buy", buylist);
 		List<Restaurant> list = restaurantService.findAllRestuarant();
 		m.addAttribute("allRestaurant", list);
 		return "cart";
 	}
-	
+
 	@GetMapping("/restaurant/cart/getAlldish/{id}")
-	public String cartGetAlldish(@PathVariable Integer id,Model m ) {
+	public String cartGetAlldish(@PathVariable Integer id, Model m) {
 		Restaurant restaurant = restaurantService.findById(id);
 		m.addAttribute("restaurant", restaurant);
-		
+
 		return "cartGetAllDish";
 	}
-	
+
 //	@PostMapping("/restaurant/cart")
 //	Public @ResponseBody list<DishQ> showOrders() {
 //		
 //	}
-	
+
 //	@GetMapping("/buyList/{rid}/{id}")
 //	public String addBuy(@PathVariable int rid, @PathVariable int id, Model m, @RequestParam("quantity") int quantity) {
 //		Dish d = dDao.findById(id);
@@ -131,11 +150,10 @@ public class OrderController {
 	@RequestMapping
 	public String OrderMeal(@RequestBody OrdersDetail ordersDetail, HttpServletRequest request, ModelMap Model) {
 		List<OrdersDetail> cart = (List<OrdersDetail>) Model.getAttribute("cart");
-		
 
 		return null;
 	}
-	
+
 //	@GetMapping("/getAlldish/{id}")
 //	public String processDishMainAction(@PathVariable("id") int id, Model m) {
 //		List<Dish> list = dDao.findByRestId(id);

@@ -87,6 +87,7 @@
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="${contextRoot}/member/logout">登出</a>
+						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
 					</div>
 				</div>
 			</c:if>
