@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
@@ -42,11 +41,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/Users/select">後台會員管理</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/cart">購物車</a></li>
-				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -61,6 +56,7 @@
 
 		</div>
 		<!-- 會員登入/登入成功圖案 -->
+
 		<div class="nav-item dropdown fixed-bottom-end">
 
 			<c:if test="${empty member}">
@@ -85,6 +81,12 @@
 
 					<div class="dropdown-menu" aria-labelledby="dropdown06">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
+						<c:if test="${member.access == 'Shop' }">
+							<a class="dropdown-item"
+								href="${contextRoot}/shop/findRestByUser">商家後臺 </a>
+							<a class="dropdown-item"
+								href="${contextRoot}/restaurant/editRestaurant/${member.id}">修改餐廳資料 </a>
+						</c:if>
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="${contextRoot}/member/logout">登出</a>
 					</div>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.RestaurantType;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.RestaurantDao;
 import com.ispan.team6.model.RestaurantTypeDao;
 
@@ -43,7 +44,7 @@ public class RestaurantService {
 
 		return null;
 	}
-	
+
 	public RestaurantType findTypeById(Integer rest_type_id) {
 		Optional<RestaurantType> optional = rtDao.findById(rest_type_id);
 
@@ -61,9 +62,18 @@ public class RestaurantService {
 	public List<Restaurant> findByNameLike(String name) {
 		return rDao.findByNameLike(name);
 	}
-	
+
 	public List<RestaurantType> findByTypeLike(String name) {
 		return rtDao.findByType(name);
 	}
-	
+
+	public Users findByUsers(Users users) {
+		Optional<Users> optional = rDao.findByUsers(users);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
 }

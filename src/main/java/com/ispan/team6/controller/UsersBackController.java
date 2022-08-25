@@ -1,7 +1,10 @@
 package com.ispan.team6.controller;
 
 import java.io.IOException;
+import java.sql.Blob;
 import java.util.List;
+
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -38,17 +41,24 @@ public class UsersBackController {
 		u.setEmail(email);
 		u.setPhone(phone);
 		u.setPassword(password);
-		u.setPhoto(bytes);
-
+		if (file != null && !file.isEmpty()) {
+			try {
+				Blob blob = new SerialBlob(bytes);
+				u.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		service.insertMember(u);
-		System.out.println("access:"+access);
-		System.out.println("password:"+password);
-		System.out.println("email:"+email);
-		System.out.println("phone:"+phone);
-		System.out.println("birthday:"+birthday);
+//		System.out.println("access:" + access);
+//		System.out.println("password:" + password);
+//		System.out.println("email:" + email);
+//		System.out.println("phone:" + phone);
+//		System.out.println("birthday:" + birthday);
 //		System.out.println(remark);
-		System.out.println(bytes);
-		
+//		System.out.println(bytes);
+
 		return "memberin";
 //		
 	}
@@ -64,7 +74,6 @@ public class UsersBackController {
 //		out.close();
 //
 //	}
-
 
 	@GetMapping("/Users/select")
 	public String MemberSelect(Model model) {
@@ -86,19 +95,6 @@ public class UsersBackController {
 		Users update = service.UpdateById(id);
 
 		model.addAttribute("getId", update.getId());
-<<<<<<< HEAD
-
-//		model.addAttribute("id", update.getId());
-		
-
-
-		model.addAttribute("getId", update.getId());
-
-//		model.addAttribute("id", update.getId());
-
-
-=======
->>>>>>> 25
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
@@ -107,15 +103,16 @@ public class UsersBackController {
 
 		return "updatePage";
 	}
-	
+
 	@PostMapping("/Users/update")
-	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,
+	public String editMessagePost(@RequestParam("id") Integer id, @RequestParam("account") String account,
+			@RequestParam("password") String password,
 			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
 			@RequestParam("email") String email, @RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
-		
+
 		Users u = new Users();
 		byte[] bytes = file.getBytes();
 		u.setId(id);
@@ -125,14 +122,18 @@ public class UsersBackController {
 		u.setEmail(email);
 		u.setPhone(phone);
 		u.setPassword(password);
-		u.setPhoto(bytes);
-		
-		service.insertMember(u);
-<<<<<<< HEAD
+		if (file != null && !file.isEmpty()) {
+			try {
+				Blob blob = new SerialBlob(bytes);
+				u.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 
-=======
-		
->>>>>>> 25
+		service.insertMember(u);
+
 		return "redirect:/Users/select";
 	}
 
