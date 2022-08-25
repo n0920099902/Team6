@@ -33,7 +33,7 @@
 				style="color: red" id="phoneout"></span>
 		</div>
 		<div>
-			會員生日： <input type="text" name="Birthday" required
+			會員生日： <input type="date" name="Birthday" required
 				value="${getBirthday }">
 		</div>
 		<div>

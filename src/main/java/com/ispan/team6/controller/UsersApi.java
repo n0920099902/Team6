@@ -132,9 +132,19 @@ public class UsersApi {
 	}
 
 	@PostMapping("/users/updateUser")
-	public String updateUserAction(@ModelAttribute("member") Users member, MultipartFile file) throws IOException {
+	public String updateUserAction(@ModelAttribute("member") Users member) throws IOException {
 //		member.setPhoto(file.getBytes());
-
+		MultipartFile file = member.getImage();
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Blob blob = new SerialBlob(bytes);	
+				member.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		uService.insertUser(member);
 
 		return "userCentre";

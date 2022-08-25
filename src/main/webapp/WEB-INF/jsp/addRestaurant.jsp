@@ -5,10 +5,10 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 
+<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
 <jsp:include page="layout/navbar.jsp" />
 
-
-<c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
 <head>
 <meta charset="UTF-8">

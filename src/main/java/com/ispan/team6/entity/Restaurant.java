@@ -4,7 +4,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -14,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -66,12 +66,17 @@ public class Restaurant {
 	@JoinColumn(name = "fk_type_id")
 	private RestaurantType restaurantType;
 
+	// 一對一 Restaurant對Users外鍵(一個access為shop的user_account對一間Restaurant)
+	@OneToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name="fk_user_id")
+	private Users users;
+	
 	public Restaurant() {
 	}
 
 	public Restaurant(Integer id, String name, String phone, String address, String type, String startTime,
 			String endTime, String startDate, String endDate, String remark, Integer fk_type_id, byte[] photo,
-			Set<Orders> orders, RestaurantType restaurantType) {
+			Set<Orders> orders, RestaurantType restaurantType,Users users) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -85,6 +90,7 @@ public class Restaurant {
 		this.photo = photo;
 		this.orders = orders;
 		this.restaurantType = restaurantType;
+		this.users = users;
 	}
 
 	public Integer getId() {
@@ -189,6 +195,14 @@ public class Restaurant {
 
 	public void setOrders(Set<Orders> orders) {
 		this.orders = orders;
+	}
+
+	public Users getUser() {
+		return users;
+	}
+
+	public void setUser(Users users) {
+		this.users = users;
 	}
 
 }
