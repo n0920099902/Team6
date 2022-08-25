@@ -1,5 +1,6 @@
 package com.ispan.team6.entity;
 
+import java.sql.Blob;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -18,6 +19,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -52,7 +54,7 @@ public class Users {
 
 	@Lob
 //	@Column(name = "PHOTO")
-	private byte[] photo;
+	private Blob photo;
 
 //	@Column(name = "REMARK")
 	private String remark;
@@ -67,6 +69,9 @@ public class Users {
 
 	@Transient
 	private String confimation_password;
+	
+	@Transient
+	private MultipartFile Image;
 
 	public Users() {
 	}
@@ -127,11 +132,11 @@ public class Users {
 		this.access = access;
 	}
 
-	public byte[] getPhoto() {
+	public Blob getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
 
@@ -173,6 +178,14 @@ public class Users {
 
 	public void setConfimation_password(String confimation_password) {
 		this.confimation_password = confimation_password;
+	}
+
+	public MultipartFile getImage() {
+		return Image;
+	}
+
+	public void setImage(MultipartFile image) {
+		Image = image;
 	}
 
 }

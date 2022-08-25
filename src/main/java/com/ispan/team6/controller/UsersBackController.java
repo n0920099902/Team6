@@ -86,6 +86,7 @@ public class UsersBackController {
 		Users update = service.UpdateById(id);
 
 		model.addAttribute("getId", update.getId());
+<<<<<<< HEAD
 
 //		model.addAttribute("id", update.getId());
 		
@@ -96,6 +97,8 @@ public class UsersBackController {
 //		model.addAttribute("id", update.getId());
 
 
+=======
+>>>>>>> 25
 		model.addAttribute("getAccount", update.getAccount());
 		model.addAttribute("getBirthday", update.getBirthday());
 		model.addAttribute("getEmail", update.getEmail());
@@ -104,8 +107,6 @@ public class UsersBackController {
 
 		return "updatePage";
 	}
-
-	
 	
 	@PostMapping("/Users/update")
 	public String editMessagePost(@RequestParam("id" ) Integer id ,@RequestParam("account") String account, @RequestParam("password") String password,
@@ -127,7 +128,11 @@ public class UsersBackController {
 		u.setPhoto(bytes);
 		
 		service.insertMember(u);
+<<<<<<< HEAD
 
+=======
+		
+>>>>>>> 25
 		return "redirect:/Users/select";
 	}
 
