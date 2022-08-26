@@ -21,14 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.entity.Users;
-import com.ispan.team6.model.RestaurantDao;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
 public class RestaurantController {
 	
-	@Autowired
-	private RestaurantDao rDao;
 
 	@Autowired
 	private RestaurantService rService;
@@ -122,10 +119,14 @@ public class RestaurantController {
 
 	@GetMapping("/restaurant/editRestaurant/{id}")
 	public String editRestaurantPage(@PathVariable("id") Integer id, Model m,Users member,HttpSession session) throws IOException {
-		Users user = (Users)session.getAttribute("member");
-		Restaurant res = rDao.findByUid(user.getId());
-//		System.out.println("aaaaaaaaaa"+res.getId());
-		m.addAttribute("restaurant", res);
+//		Users user = (Users)session.getAttribute("member");
+//		Restaurant res = rDao.findByUid(user.getId());
+//		m.addAttribute("restaurant", res);
+		
+		Users user = (Users) session.getAttribute("member");
+		Restaurant res = rService.findByUsers(user);
+		Restaurant resId = rService.findById(res.getId());
+		m.addAttribute("restaurant", resId);
 
 		// 餐廳類別顯示
 		List<RestaurantType> list = rService.findAllRestuarantType();

@@ -19,8 +19,8 @@
 	<div class="m-5">
 		<form action="${contextRoot}/restaurant/editRestaurant"  name="restaurant" method="post"
 			enctype="multipart/form-data">
-			ID: ${member.id }<input type="hidden" name="id" value="${member.id}" />
-			ID: ${restaurant.id }<input type="hidden" name="id" value="${restaurant.id}" />
+			uID: ${member.id }<input type="hidden" name="id" value="${member.id}" /><br/>
+			rID: ${restaurant.id }<input type="hidden" name="id" value="${restaurant.id}" />
 
 			<div>
 				餐廳名稱：<input type="text" name="restaurantName" value="${restaurant.name }"

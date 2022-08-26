@@ -67,8 +67,8 @@ public class RestaurantService {
 		return rtDao.findByType(name);
 	}
 
-	public Users findByUsers(Users users) {
-		Optional<Users> optional = rDao.findByUsers(users);
+	public Restaurant findByUsers(Users users) {
+		Optional<Restaurant> optional = rDao.findByUsers(users);
 
 		if (optional.isPresent()) {
 			return optional.get();
