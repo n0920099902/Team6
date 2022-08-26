@@ -46,6 +46,23 @@ public class OrderController {
 	@Autowired
 	private OrdersDetailDao ordersDetailDao;
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
 	public String getUsrsOrder(Model m, @SessionAttribute("member") Users us) {
@@ -98,7 +115,7 @@ public class OrderController {
 		Restaurant restaurant = restaurantService.findById(id);
 		m.addAttribute("restaurant", restaurant);
 
-		return "cartGetAllDish";
+		return "menuTestForOrder";
 	}
 
 //	@PostMapping("/restaurant/cart")
