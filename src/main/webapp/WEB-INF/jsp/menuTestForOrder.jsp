@@ -10,6 +10,7 @@
 
 <html>
 <head>
+	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
 <meta charset="UTF-8">
 <title>菜單</title>
@@ -49,7 +50,7 @@
 </style>
 </head>
 <script>
-	$(document).ready(function() {
+	 $(document).ready(function() {
 		var restId = $("#restaurantId").val();
 		console.log(restId);
 		listDishesForRest(restId);
@@ -67,37 +68,42 @@
   						var col=$('<div class="col"></div>')
   						var card=$('<div class="card" id="card1"</div>')
   						card.append('<img width="400px" height="150px"  class="card-img-top" id="img1" src=' + imgsrc + ' />')
-  							.append('<p style="display:none;"name="id">' + this.dishId)
-				          	.append('<strong id="strong1">' + this.dishName + '</strong>')
-					        .append('<i id="i1" />' + "$" + this.dishPrice)
-					        .append('<button id="button1" type="button" class="cartBut">Add Shopping Cart!</button>')
+  							.append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
+				          	.append('<strong class="dishName">' + this.dishName + '</strong>')
+					        .append('<i id="i1" class="dishPrice" />' + "$" + this.dishPrice)
+					        .append('<button id="ssd" type="button" class="ssd cartBut">Add Shopping Cart!</button>')
 					    col.append(card)
   						$(".row").append(col)	
-						  msg_data += '送出'
-                      $('#button1').append(msg_data)							  
+												  
   					});	
 
 
-	var rid =document.getElementById('rID').value;
-    sessionStorage.setItem('rID', JSON.stringify(rid));
+	// var rid =document.getElementById('rID').value;s
+    // sessionStorage.setItem('rID', JSON.stringify(rid));
     
-	var buy  = JSON.parse(sessionStorage.getItem('buy'));
+	// var buy  = JSON.parse(sessionStorage.getItem('buy'));
 	
-	var mbuttons = document.getElementsByClassName('cartBut');
-	for (var i = 0; i < mbuttons.length; i++) {
-		mbuttons[i].addEventListener("click", add);
-	}
-	function add() {
-		alert('加入購物車');
-		
-		let temp = -1;
-		var buttonId = event.target.id;
-		var rowId = buttonId.split("_")[1];
+	// var mbuttons = document.getElementsByClassName('cartBut');
+	// for (var i = 0; i < mbuttons.length; i++) {
+	// 	mbuttons[i].addEventListener("click", add);
+	// }
 
-		let name = document.getElementById('n' + rowId).value;
-		let id = +(document.getElementById('id' + rowId).value);
-		let quantity = +(document.getElementById('quantity' + rowId).value);
-		let price = +(document.getElementById('price' + rowId).value);
+	$('.ssd').click(function () {
+		alert('加入購物車');
+		//let dishName = $(this).find("strong1").text();
+		let name = console.log($(this).parent().find(".dishName").text());
+		let id = console.log($(this).parent().find(".dishId").text());
+	
+		let price = console.log($(this).parent().find(".dishPrice").text());
+
+		let temp = -1;
+		// var buttonId = event.target.id;
+		// var rowId = buttonId.split("_")[1];
+
+		// let name = document.getElementById('strong1' + rowId).value;
+		// let id = +(document.getElementById('"dishId"'+ dishId).value);
+		// let quantity = +(document.getElementById('quantity' + rowId).value);
+		// let price = +(document.getElementById('price' + rowId).value);
 		
 		var dish = {
 			id: id,
@@ -134,7 +140,7 @@
 // 		alert(JSON.stringify(obj));
 		document.getElementById('quantity' + rowId).value=1;
 
-	}
+	})
   	            },
   	            error: function (xhr, desc, err)
   	            {
@@ -148,6 +154,7 @@
 </script>
 <body>
 	<div class="py-5 text-center container">
+	<a href="" id="keepBuy"><button>修改訂單</button></a> 
 		<h1>${restaurant.name} 菜單</h1>
 		<input type="hidden" id="restaurantId" value="${restaurant.id}">
 		<div class="album py-4 bg-light">
@@ -162,7 +169,7 @@
 		
 		<h2>評論</h2>
 		
-		<table class="table table-striped">
+		<table id="retailerTable" class="table table-striped">
 		<thead>
 			<tr>
 				<th scope="col">No.</th>
@@ -182,7 +189,36 @@
 			
 		</tbody>
 	</table>
+	<script type="text/javascript">
+		$(document).ready( function () {
+		   $('#retailerTable').DataTable(
+			{  
+				 "lengthMenu":[10, 5, 2, 1],
+				 "language": {
+				  "lengthMenu": "顯示 MENU 項結果",
+				  "search": "搜尋:",
+				  "info": "顯示第 START 至 END 項結果，共 TOTAL 項",
+				  "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+				  "paginate": {
+						 "first": "第一頁",
+						 "previous": "上一頁",
+						 "next": "下一頁",
+						 "last": "最後一頁"
+					 }
+					
+				 }
+			   }); 
+		} );
+	   </script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </body>
+
 <jsp:include page="layout/footer.jsp" />
 </html>
+<script type="text/javascript">
+var rid  = JSON.parse(sessionStorage.getItem('rID'));
+document.getElementById("rID").value=rid;
+
+document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/cart/eidtOrder"+rid;
+</script>

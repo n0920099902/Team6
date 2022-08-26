@@ -22,16 +22,9 @@ import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.OrdersDetail;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
-import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.model.OrdersDetailDao;
-import com.ispan.team6.model.UsersDao;
-import com.ispan.team6.service.DishService;
-import com.ispan.team6.service.MemberService;
-import com.ispan.team6.service.OrdersDetailService;
-import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.RestaurantService;
-import com.ispan.team6.testForOders.GoodPhotoService;
 
 @Controller
 @SessionAttributes({ "dish", "member", "buy" })
@@ -49,20 +42,18 @@ public class OrderController {
 	
 	
 	
+	//導向無登入訂單頁面
+	@GetMapping("cart/noLoginCart")
+	public String process() {
+		return "menuNoLoginCart";
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	//導向修改訂單頁面
+	@GetMapping("/cart/eidtOrder")
+	public String prosseceToEidtOrder() {
+		return "menuTestForOrderEdit";
+	}
+
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
 	public String getUsrsOrder(Model m, @SessionAttribute("member") Users us) {
