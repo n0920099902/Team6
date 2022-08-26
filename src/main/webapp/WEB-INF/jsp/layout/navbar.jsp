@@ -79,17 +79,15 @@
 							</c:when>
 						</c:choose> </a>
 
-					<div class="dropdown-menu" aria-labelledby="dropdown06">
+					<div class="dropdown-menu fixed-bottom-left" aria-labelledby="dropdown06" style="left: -60px;">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<c:if test="${member.access == 'Shop' }">
 							<a class="dropdown-item"
-								href="${contextRoot}/shop/findRestByUser">商家後臺 </a>
-							<a class="dropdown-item"
-								href="${contextRoot}/restaurant/editRestaurant/${member.id}">修改餐廳資料 </a>
+								href="${contextRoot}/shop/shopBack">商家後臺 </a>
 						</c:if>
+						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="${contextRoot}/member/logout">登出</a>
-						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
 					</div>
 				</div>
 			</c:if>

@@ -13,7 +13,7 @@ public interface RestaurantDao extends JpaRepository<Restaurant, Integer> {
 
 	List<Restaurant> findByNameLike(String keyword);
 
-	Optional<Users> findByUsers(Users users);
+	Optional<Restaurant> findByUsers(Users users);
 	
 	@Query(value = "select * from Restaurant where fk_user_id =:keyword", nativeQuery = true)
 	Restaurant findByUid(Integer keyword );

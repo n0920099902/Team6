@@ -225,6 +225,7 @@ table.table .avatar {
   					$(data).each(function () {                               
                             var tr = $('<tr></tr>')
                             tr.append('<td style="display:none;">' + this.dishId + '</td>')
+                            tr.append('<td style="">' + this.restId + '</td>')
                             tr.append('<td>' + this.restName + '</td>')
                             tr.append('<td>' + this.dishName + '</td>')
                             tr.append('<td>' + this.dishCategory + '</td>')
@@ -510,7 +511,7 @@ table.table .avatar {
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="McDonlad" class="form-control" disabled>
+						<input type="text" id="rest" name="rest" value="${rest.name }" class="form-control" disabled>
 						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
 					</div>	
 					<div class="form-group">
