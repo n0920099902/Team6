@@ -5,7 +5,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
@@ -42,15 +41,21 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/Users/select">後台會員管理</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/cart">購物車</a></li>
-				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
+<<<<<<< HEAD
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/cart">購物車</a></li>
+=======
+				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/restaurant/cart">購物車</a></li></c:if>
+				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
+>>>>>>> 188a5a96c907e12ef2a8a7941a8202a5e9123bdc
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 			</ul>
@@ -58,6 +63,7 @@
 
 		</div>
 		<!-- 會員登入/登入成功圖案 -->
+
 		<div class="nav-item dropdown fixed-bottom-end">
 
 			<c:if test="${empty member}">
@@ -80,8 +86,13 @@
 							</c:when>
 						</c:choose> </a>
 
-					<div class="dropdown-menu" aria-labelledby="dropdown06">
+					<div class="dropdown-menu fixed-bottom-left" aria-labelledby="dropdown06" style="left: -60px;">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
+						<c:if test="${member.access == 'Shop' }">
+							<a class="dropdown-item"
+								href="${contextRoot}/shop/shopBack">商家後臺 </a>
+						</c:if>
+						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="${contextRoot}/member/logout">登出</a>
 					</div>

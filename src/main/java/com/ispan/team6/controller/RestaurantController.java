@@ -3,6 +3,8 @@ package com.ispan.team6.controller;
 import java.io.IOException;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,10 +20,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.RestaurantType;
+import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
 public class RestaurantController {
+	
 
 	@Autowired
 	private RestaurantService rService;
@@ -39,6 +43,13 @@ public class RestaurantController {
 		return new ResponseEntity<byte[]>(photoFile, header, HttpStatus.OK);
 	}
 
+	@GetMapping("/shop/findRestByUser")
+	public String findByUser(Users member, HttpSession session) {
+		Users user = (Users) session.getAttribute("member");
+		rService.findByUsers(user);
+		return "/backend/dish";
+	}
+
 	@GetMapping("/restaurant/add")
 	public String addRestaurantPage(Model m) {
 		List<RestaurantType> list = rService.findAllRestuarantType();
@@ -53,7 +64,7 @@ public class RestaurantController {
 			@RequestParam("startTime") String starttime, @RequestParam("endTime") String endtime,
 			@RequestParam("startDate") String startdate, @RequestParam("endDate") String enddate,
 			@RequestParam("remark") String remark, @RequestParam("restaurantType") Integer rest_type_id,
-			@RequestParam("restaurantImg") MultipartFile file, Model m) {
+			@RequestParam("restaurantImg") MultipartFile file, Model m, Users member, HttpSession session) {
 
 		try {
 
@@ -61,6 +72,7 @@ public class RestaurantController {
 
 			byte[] bytes = file.getBytes();
 
+			Users user = (Users) session.getAttribute("member");
 			Restaurant newRest = new Restaurant();
 
 			RestaurantType typeId = rService.findTypeById(rest_type_id);
@@ -79,6 +91,7 @@ public class RestaurantController {
 			newRest.setEndDate(enddate);
 			newRest.setRemark(remark);
 			newRest.setPhoto(bytes);
+			newRest.setUser(user);
 
 			rService.insertRestaurant(newRest);
 
@@ -105,9 +118,15 @@ public class RestaurantController {
 	}
 
 	@GetMapping("/restaurant/editRestaurant/{id}")
-	public String editRestaurantPage(@PathVariable Integer id, Model m) throws IOException {
-		Restaurant res = rService.findById(id);
-		m.addAttribute("restaurant", res);
+	public String editRestaurantPage(@PathVariable("id") Integer id, Model m,Users member,HttpSession session) throws IOException {
+//		Users user = (Users)session.getAttribute("member");
+//		Restaurant res = rDao.findByUid(user.getId());
+//		m.addAttribute("restaurant", res);
+		
+		Users user = (Users) session.getAttribute("member");
+		Restaurant res = rService.findByUsers(user);
+		Restaurant resId = rService.findById(res.getId());
+		m.addAttribute("restaurant", resId);
 
 		// 餐廳類別顯示
 		List<RestaurantType> list = rService.findAllRestuarantType();
@@ -122,10 +141,11 @@ public class RestaurantController {
 			@RequestParam("starttime") String starttime, @RequestParam("endtime") String endtime,
 			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
 			@RequestParam("remark") String remark, @RequestParam("restaurantType") Integer rest_type_id,
-			@RequestParam("restaurantImg") MultipartFile file) throws IOException {
+			@RequestParam("restaurantImg") MultipartFile file,Users member,HttpSession session) throws IOException {
 
 		byte[] bytes = file.getBytes();
 
+		Users user = (Users) session.getAttribute("member");
 		Restaurant editRest = new Restaurant();
 
 		RestaurantType typeId = rService.findTypeById(rest_type_id);
@@ -141,6 +161,7 @@ public class RestaurantController {
 		editRest.setEndDate(endDate);
 		editRest.setRemark(remark);
 		editRest.setPhoto(bytes);
+		editRest.setUser(user);
 
 		rService.insertRestaurant(editRest);
 

@@ -82,6 +82,11 @@ public class PageController {
 	public String testAction2() {
 		return "shoppincar";
 	}
+	
+	@GetMapping("/shop/shopBack")
+	public String shopBackProcess(){
+		return "shopBack";
+	}
 //    //新增食物testForOrder
 //	@GetMapping("/getAlldish/{id}")
 //	public String processDishMainAction(@PathVariable("id") int id, Model m) {
@@ -102,4 +107,6 @@ public class PageController {
 	public String process() {
 		return "bL";
 	}
+	
+
 }

@@ -40,8 +40,8 @@
 										value="${member.phone }" /></li>
 								<li>修改出生年月日:&nbsp;<form:input type="date" path="birthday"
 										value="${member.birthday }" /></li>
-								<li>修改大頭貼:${users.photo }<form:input type="file"
- 										path="photo" /></li>
+								<li>修改大頭貼:<form:input type="file" path="Image"
+										 /></li>
 							</ul>
 							<br />
 							<button type="submit" class="btn btn-primary">Submit</button>

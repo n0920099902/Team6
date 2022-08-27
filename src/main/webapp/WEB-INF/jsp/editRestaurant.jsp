@@ -17,9 +17,10 @@
 	<h1>修改頁面測試</h1>
 
 	<div class="m-5">
-		<form action="${contextRoot}/restaurant/editRestaurant" name="restaurant" method="post"
+		<form action="${contextRoot}/restaurant/editRestaurant"  name="restaurant" method="post"
 			enctype="multipart/form-data">
-			<input type="hidden" name="id" value="${restaurant.id}" />
+			uID: ${member.id }<input type="hidden" name="id" value="${member.id}" /><br/>
+			rID: ${restaurant.id }<input type="hidden" name="id" value="${restaurant.id}" />
 
 			<div>
 				餐廳名稱：<input type="text" name="restaurantName" value="${restaurant.name }"
@@ -42,21 +43,21 @@
 			</div>
 			<div>
 				營業時間： <select name="startDate" value="${restaurant.startDate }">
-					<option value="Sun">星期日</option>
-					<option value="Mon">星期一</option>
-					<option value="Tue">星期二</option>
-					<option value="Wed">星期三</option>
-					<option value="Thu">星期四</option>
-					<option value="Fri">星期五</option>
-					<option value="Sat">星期六</option>
+					<option value="星期日">星期日</option>
+					<option value="星期一">星期一</option>
+					<option value="星期二">星期二</option>
+					<option value="星期三">星期三</option>
+					<option value="星期四">星期四</option>
+					<option value="星期五">星期五</option>
+					<option value="星期六">星期六</option>
 				</select> ～ <select name="endDate">
-					<option value="Sun">星期日</option>
-					<option value="Mon">星期一</option>
-					<option value="Tue">星期二</option>
-					<option value="Wed">星期三</option>
-					<option value="Thu">星期四</option>
-					<option value="Fri">星期五</option>
-					<option value="Sat">星期六</option>
+					<option value="星期日">星期日</option>
+					<option value="星期一">星期一</option>
+					<option value="星期二">星期二</option>
+					<option value="星期三">星期三</option>
+					<option value="星期四">星期四</option>
+					<option value="星期五">星期五</option>
+					<option value="星期六">星期六</option>
 				</select> <input type="time" name="starttime" min="00:00" max="23:59" value="${startTime }" required>～
 				<input type="time" name="endtime" value="${endTime }" required>
 			</div>

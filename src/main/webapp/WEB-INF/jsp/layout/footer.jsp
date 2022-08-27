@@ -36,8 +36,6 @@
 						<use xlink:href="#facebook"></use></svg></a></li>
 		</ul>
 	</footer>
-	<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
-	<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

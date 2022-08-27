@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>首頁</title>
 </head>
 <body>
 	<h1>首頁測試</h1>

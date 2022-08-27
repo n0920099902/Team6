@@ -1,10 +1,15 @@
 package com.ispan.team6.controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -59,14 +64,22 @@ public class UsersApi {
 			@RequestParam("mAccess") String access, @RequestParam("Img") MultipartFile file, Model m)
 			throws IOException {
 		Users mem = new Users();
-		byte[] bytes = file.getBytes();
 		mem.setAccount(account);
 		mem.setPassword(pwd);
 		mem.setEmail(email);
 		mem.setPhone(phone);
 		mem.setBirthday(birthday);
 		mem.setAccess(access);
-		mem.setPhoto(bytes);
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Blob blob = new SerialBlob(bytes);
+				mem.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		Users resMem = dao.save(mem);
 		if (resMem == null) {
 			m.addAttribute("message", "註冊失敗");
@@ -77,17 +90,39 @@ public class UsersApi {
 
 	// 拿大頭貼
 	@GetMapping(path = "member/img")
-	public void processAction(@RequestParam("id") Integer id, HttpServletResponse response) throws IOException {
+	public void processAction(@RequestParam("id") Integer id, HttpServletResponse response, Model model)
+			throws IOException {
 		Users m = uService.findById(id);
-		byte[] bytes = m.getPhoto();
-		response.setContentType(MediaType.IMAGE_JPEG_VALUE);
-		OutputStream out = response.getOutputStream();
-		if (bytes != null) {
-			out.write(bytes);
-			out.flush();
+		int len = 0;
+		try {
+			len = (int) m.getPhoto().length();
+			byte[] bytes = m.getPhoto().getBytes(1, len);
+			response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+			OutputStream out = response.getOutputStream();
+			if (bytes != null) {
+				out.write(bytes);
+				out.flush();
+			}
+			out.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
-		out.close();
 
+	}
+
+	public byte[] blobToByteArray(Blob blob) {
+		byte[] result = null;
+		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+			byte[] b = new byte[819200];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			result = baos.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 	@GetMapping("/users/updateUserPage")
@@ -97,9 +132,19 @@ public class UsersApi {
 	}
 
 	@PostMapping("/users/updateUser")
-	public String updateUserAction(@ModelAttribute("member") Users member, MultipartFile file) throws IOException {
+	public String updateUserAction(@ModelAttribute("member") Users member) throws IOException {
 //		member.setPhoto(file.getBytes());
-
+		MultipartFile file = member.getImage();
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Blob blob = new SerialBlob(bytes);	
+				member.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
 		uService.insertUser(member);
 
 		return "userCentre";
