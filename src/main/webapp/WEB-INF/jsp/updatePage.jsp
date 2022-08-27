@@ -16,7 +16,7 @@
 <body>
 	<form action="${pageContext.request.contextPath}/Users/update?id=${getId}"
 		method="post" enctype="multipart/form-data">
-		<input type="hidden" name="id" value="" required />
+		<input type="hidden" name="id" value="${getId}" required />
 		<div>
 			會員帳號： <input type="text" name="account" required value="${getAccount }" id="account" onchange="checkAccount()">
 		</div>
