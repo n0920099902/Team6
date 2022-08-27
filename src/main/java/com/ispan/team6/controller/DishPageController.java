@@ -24,9 +24,6 @@ public class DishPageController {
 	public String dishPage2(@PathVariable Integer id, Model model) {
 		Restaurant restaurant = restaurantService.findById(id);
 		model.addAttribute("restaurant", restaurant);
-		
 		return "menu";
 	}
-	
-	
 }

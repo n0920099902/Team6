@@ -10,7 +10,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
-
+<link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
 
 </head>
 <body>
@@ -51,9 +51,6 @@
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/cart">購物車</a></li>
-
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 			</ul>

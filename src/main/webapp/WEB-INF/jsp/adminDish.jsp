@@ -5,11 +5,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- web icon -->
-<link rel="icon" href="${pageContext.request.contextPath}/img/favicon1.ico">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>foodtiger</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
@@ -230,7 +229,7 @@ table.table .avatar {
                             tr.append('<td>' + this.dishCategory + '</td>')
                             tr.append('<td>' + this.dishPrice + '</td>')
                             var imgsrc = "data:image/png;base64," + this.dishPhoto;
-                            tr.append('<td>' + '<img id="ItemPreview" src=' + imgsrc + ' />' + '</td>')
+                            tr.append('<td>' + '<img width="50px" height="50px" id="ItemPreview" src=' + imgsrc + ' />' + '</td>')
                             tr.append('<td>' + this.dishStatus + '</td>')
                             tr.append('<td style="display:none;">' + this.dishCategoryId + '</td>')
                             tr.append('<td>' + '<a href="#" class="settings" title="Settings" data-bs-toggle="modal"><i class="material-icons">&#xE8B8;</i></a><a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>' + '</td>')
@@ -538,7 +537,7 @@ table.table .avatar {
   						<br>
 						<label>商品圖片</label>
 						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png" required>
-						<img id="preview_photo" src="#" />
+						<img width="150px" height="150px" id="preview_photo" src="#" />
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -612,7 +611,7 @@ table.table .avatar {
   						<br>
 						<label>商品圖片</label>
 						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png">
-						<img id="preview_photo" src="#" />
+						<img width="150px" height="150px" id="preview_photo" src="#" />
 					</div>
 				</div>
 				<div class="modal-footer">
