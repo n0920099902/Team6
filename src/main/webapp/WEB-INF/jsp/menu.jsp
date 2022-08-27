@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <jsp:include page="layout/navbar.jsp" />
 <html>
+
 	<head>
   		<meta charset="utf-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -16,6 +17,71 @@
 	</head>
 	<body>
 		<section class="food_section layout_padding">
+
+<script>
+	$(document).ready(function() {
+		var restId = $("#restaurantId").val();
+		console.log(restId);
+		listDishesForRest(restId);
+		getComments(restId);
+		function listDishesForRest(restId) {
+			$.ajax({
+  	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
+  	            type: "GET",
+  	            dataType: "JSON",
+  	            contentType : "application/json; charset=utf-8",
+  	            success: function (data, status)
+  	            {
+  					console.log(data);
+  					$(data).each(function () {
+  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
+  						var col=$('<div class="col"></div>')
+  						var card=$('<div class="card" id="card1"</div>')
+  						card.append('<img width="400px" height="150px"  class="card-img-top" id="img1" src=' + imgsrc + ' />')
+  							.append('<p style="display:none;">' + this.dishId)
+				          	.append('<strong id="strong1">' + this.dishName + '</strong>')
+					        .append('<i id="i1" />' + "$" + this.dishPrice)
+					        .append('<button id="button1" type="button" class="btn btn-danger">Add Shopping Cart!</button>')
+					    col.append(card)
+  						$(".row").append(col)								  
+  					});	
+  	            },
+  	            error: function (xhr, desc, err)
+  	            {
+  	            	console.log(desc);
+  	            	console.log(err);
+  	            }
+  	        });
+		}
+		
+		function getComments(restId) {
+			$.ajax({
+  	            url: "http://localhost:8080/my-app/comment?restId=" + restId,
+  	            type: "GET",
+  	            dataType: "JSON",
+  	            contentType : "application/json; charset=utf-8",
+  	            success: function (data, status)
+  	            {
+  					$(data).each(function (index) {
+						var cmt = '<tr>'+				
+										'<td>' + this.accountName + '</td>'+
+										'<td>' + this.comments + '</td>'+
+										'<td>' + this.time + '</td>'+
+								  '</tr>';
+							
+						$('#commentBody').append(cmt);							  
+  					});	
+  	            },
+  	            error: function (xhr, desc, err)
+  	            {
+  	            	console.log(desc);
+  	            	console.log(err);
+  	            }
+  	        });
+		}
+	});	
+</script>
+
 			<div class="container">
 				<input type="hidden" id="restaurantId" value="${restaurant.id}">
 	      		<div class="heading_container heading_center">
@@ -36,21 +102,13 @@
 		<table class="table table-striped">
 		<thead>
 			<tr>
-				<th scope="col">No.</th>
 				<th scope="col">帳號</th>
 				<th scope="col">評論內容</th>
 				<th scope="col">評論時間</th>
 			</tr>
 		</thead>
-		<tbody>
-		
-			<tr>
-				<th scope="row">1</th>
-				<td>${comment.id}</td>
-				<td>${comment.comments}</td>
-				<td>${comment.time}</td>
-			</tr>
-			
+		<tbody id="commentBody">
+
 		</tbody>
 	</table>
 	

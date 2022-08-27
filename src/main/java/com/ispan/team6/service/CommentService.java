@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import com.ispan.team6.dto.CommentDto;
 import com.ispan.team6.entity.Comment;
 import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.Restaurant;
@@ -74,16 +75,23 @@ public class CommentService {
 		cDao.deleteById(id);
 	}
 	
-	public List<Comment> findCommentByRest(Integer id) {
+	public List<CommentDto> findCommentByRest(Integer id) {
 		
 		Restaurant r = rService.findById(id);
 		Set<Orders> orders = r.getOrders();
-		
-		List<Comment> result = new ArrayList<>();
+		List<CommentDto> result = new ArrayList<>();
 		
 		for(Orders i : orders) {
 			Comment cmt = i.getComment();
-			result.add(cmt);
+			
+			CommentDto dto = new CommentDto();
+			dto.setAccountName(i.getUsers().getAccount());
+			dto.setId(cmt.getId());
+			dto.setComments(cmt.getComments());
+			dto.setTime(cmt.getTime());
+			
+			result.add(dto);
+			
 		}
 		return result;
 	}
