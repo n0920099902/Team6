@@ -65,17 +65,18 @@
 </html>
 <script type="text/javascript">
 
-    var rid  = JSON.parse(sessionStorage.getItem('rID'));
-    document.getElementById("rID").value=rid;
+    // var rid  = JSON.parse(sessionStorage.getItem('rID'));
+    // document.getElementById("rID").value=rid;
     
-    document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/getAlldish/"+rid;
-    
+    // document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/getAlldish/"+rid;
+    console.log(sessionStorage);
 	var list = JSON.parse(sessionStorage.getItem('buy'));
+	console.log(list);
 	
 	
 	for (let i = 0; i < list.length; i++) {
 		var dish = list[i];
-		document.getElementById("show").innerHTML += '<div class="col"><div class="card"><img style="height: 200px"src="${contextRoot}/dish/downloadImage/'+dish.id+' "class="card-img-top">';
+		document.getElementById("show").innerHTML += '<div class="col"><div class="card"><img style="height: 200px"src="${contextRoot}/cart/downloadImage/'+dish.id+' "class="card-img-top">';
 
 		document.getElementById("show").innerHTML += '<div class="headline">餐點名稱: '
 				+ dish.name
