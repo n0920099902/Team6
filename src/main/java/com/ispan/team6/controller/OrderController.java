@@ -105,7 +105,7 @@ public class OrderController {
 	public String cartGetAlldish(@PathVariable Integer id, Model m) {
 		Restaurant restaurant = restaurantService.findById(id);
 		m.addAttribute("restaurant", restaurant);
-
+		m.addAttribute("rid", id);
 		return "menuTestForOrder";
 	}
 

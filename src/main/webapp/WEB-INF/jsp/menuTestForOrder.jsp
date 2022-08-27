@@ -50,6 +50,12 @@
 </style>
 </head>
 <script>
+
+	// var rid =document.getElementById('rID').value;
+    // sessionStorage.setItem('rID', JSON.stringify(rid));
+    
+	//var buy  = JSON.parse(sessionStorage.getItem('buy'));
+
 	 $(document).ready(function() {
 		var restId = $("#restaurantId").val();
 		console.log(restId);
@@ -70,6 +76,7 @@
   						card.append('<img width="400px" height="150px"  class="card-img-top" id="img1" src=' + imgsrc + ' />')
   							.append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
 				          	.append('<strong class="dishName">' + this.dishName + '</strong>')
+							.append('<input id="quantity" type="number" name="quantity" class="quantity" min="1"style="width: 20%; margin-right: 40%" value="1" required>')
 					        .append('<i id="i1" class="dishPrice" />' + "$" + this.dishPrice)
 					        .append('<button id="ssd" type="button" class="ssd cartBut">Add Shopping Cart!</button>')
 					    col.append(card)
@@ -78,10 +85,9 @@
   					});	
 
 
-	// var rid =document.getElementById('rID').value;
-    // sessionStorage.setItem('rID', JSON.stringify(rid));
-    
-	// var buy  = JSON.parse(sessionStorage.getItem('buy'));
+
+
+	
 	
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
@@ -93,17 +99,27 @@
 		//let dishName = $(this).find("strong1").text();
 		let name = console.log($(this).parent().find(".dishName").text());
 		let id = console.log($(this).parent().find(".dishId").text());
-	
-		let price = console.log($(this).parent().find(".dishPrice").text());
+		
 
+		let quantity = document.getElementById("quantity").value;
+		// let quantity = console.log($(document.getElementById('quantity').value));
+        // let quantity = console.log($(this).parent().find(".quantity").text());
+		console.log(quantity);
+
+		var price = $(this).parent().find(".dishPrice").text().split("$")[1];
+		console.log(price);
 		let temp = -1;
 		// var buttonId = event.target.id;
-		// var rowId = buttonId.split("_")[1];
+		// console.log(price1);
+		// var price = price1.split("$")[1];
 
 		// let name = document.getElementById('strong1' + rowId).value;
 		// let id = +(document.getElementById('"dishId"'+ dishId).value);
 		// let quantity = +(document.getElementById('quantity' + rowId).value);
 		// let price = +(document.getElementById('price' + rowId).value);
+		 var rid =document.getElementById('rID').value;
+         sessionStorage.setItem('rID', JSON.stringify(rid));
+		var buy  = JSON.parse(sessionStorage.getItem('buy'));
 		
 		var dish = {
 			id: id,
@@ -111,8 +127,13 @@
 			quantity : quantity,
 			price : price
 		};
-				if(buy.length==0){
+
+				alert(buy)
+				if(buy==null){
+					var buy=[];
+					// if(buy.length==0){
 				buy.push(dish);
+				alert(buy)
 				}
 				else{
 					for(let i=0;i<buy.length;i++){
@@ -134,12 +155,12 @@
 					}
 				}
 
-		sessionStorage.setItem('buy', JSON.stringify(buy));
+		var aaa =sessionStorage.setItem('buy', JSON.stringify(buy));
 // 		var obj = JSON.parse(sessionStorage.buy);
-
+	alert(aaa)
 // 		alert(JSON.stringify(obj));
-		document.getElementById('quantity' + rowId).value=1;
-
+		// document.getElementById('quantity' ).value=1;
+		// quantity
 	})
   	            },
   	            error: function (xhr, desc, err)
@@ -153,6 +174,8 @@
 	});	
 </script>
 <body>
+	<!-- 	取得餐廳ID -->
+	<input type="number" id="rID" name="rID" value="${rid }" hidden="">
 	<div class="py-5 text-center container">
 	<a href="" id="keepBuy"><button>修改訂單</button></a> 
 		<h1>${restaurant.name} 菜單</h1>
@@ -220,5 +243,5 @@
 var rid  = JSON.parse(sessionStorage.getItem('rID'));
 document.getElementById("rID").value=rid;
 
-document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/cart/eidtOrder"+rid;
+document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/cart/eidtOrder";
 </script>
