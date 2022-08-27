@@ -44,18 +44,11 @@
 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
-<<<<<<< HEAD
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/listPhoto">測試商品</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/cart">購物車</a></li>
-=======
 				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant/cart">購物車</a></li></c:if>
 				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
->>>>>>> 188a5a96c907e12ef2a8a7941a8202a5e9123bdc
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 			</ul>
