@@ -78,17 +78,17 @@
   					});	
 
 
-	// var rid =document.getElementById('rID').value;s
-    // sessionStorage.setItem('rID', JSON.stringify(rid));
+	var rid =document.getElementById('rID').value;
+    sessionStorage.setItem('rID', JSON.stringify(rid));
     
-	// var buy  = JSON.parse(sessionStorage.getItem('buy'));
+	var buy  = JSON.parse(sessionStorage.getItem('buy'));
 	
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
 	// 	mbuttons[i].addEventListener("click", add);
 	// }
 
-	$('.ssd').click(function () {
+	$('.cartBut').click(function () {
 		alert('加入購物車');
 		//let dishName = $(this).find("strong1").text();
 		let name = console.log($(this).parent().find(".dishName").text());
