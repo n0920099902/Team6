@@ -17,77 +17,17 @@
 	</head>
 	<body>
 		<section class="food_section layout_padding">
+			<!-- 	取得餐廳ID -->
+	<input type="number" id="rID" name="rID" value="${rid }" hidden="">
 
-<script>
-	$(document).ready(function() {
-		var restId = $("#restaurantId").val();
-		console.log(restId);
-		listDishesForRest(restId);
-		getComments(restId);
-		function listDishesForRest(restId) {
-			$.ajax({
-  	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
-  	            type: "GET",
-  	            dataType: "JSON",
-  	            contentType : "application/json; charset=utf-8",
-  	            success: function (data, status)
-  	            {
-  					console.log(data);
-  					$(data).each(function () {
-  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
-  						var col=$('<div class="col"></div>')
-  						var card=$('<div class="card" id="card1"</div>')
-  						card.append('<img width="400px" height="150px"  class="card-img-top" id="img1" src=' + imgsrc + ' />')
-  							.append('<p style="display:none;">' + this.dishId)
-				          	.append('<strong id="strong1">' + this.dishName + '</strong>')
-					        .append('<i id="i1" />' + "$" + this.dishPrice)
-					        .append('<button id="button1" type="button" class="btn btn-danger">Add Shopping Cart!</button>')
-					    col.append(card)
-  						$(".row").append(col)								  
-  					});	
-  	            },
-  	            error: function (xhr, desc, err)
-  	            {
-  	            	console.log(desc);
-  	            	console.log(err);
-  	            }
-  	        });
-		}
-		
-		function getComments(restId) {
-			$.ajax({
-  	            url: "http://localhost:8080/my-app/comment?restId=" + restId,
-  	            type: "GET",
-  	            dataType: "JSON",
-  	            contentType : "application/json; charset=utf-8",
-  	            success: function (data, status)
-  	            {
-  					$(data).each(function (index) {
-						var cmt = '<tr>'+				
-										'<td>' + this.accountName + '</td>'+
-										'<td>' + this.comments + '</td>'+
-										'<td>' + this.time + '</td>'+
-								  '</tr>';
-							
-						$('#commentBody').append(cmt);							  
-  					});	
-  	            },
-  	            error: function (xhr, desc, err)
-  	            {
-  	            	console.log(desc);
-  	            	console.log(err);
-  	            }
-  	        });
-		}
-	});	
-</script>
+
 
 			<div class="container">
 				<input type="hidden" id="restaurantId" value="${restaurant.id}">
 				<div class="heading_container heading_center">
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
-			
+			<div>	<a href="" id="keepBuy"><button>送出訂單</button></a> </div>
 				<div class="filters-content">
 					<div class="row grid">
 					</div>
@@ -138,11 +78,11 @@
 									//   .append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
 									//   .append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
 
-									.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
-                                    .append('<h5 class="dishName">' + this.dishName + '</h5>')
-									.append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
-									.append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
-									.append('<button type="button" class="cartBut btn-danger">加入購物車</button>')
+									  .append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
+									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
+									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
+									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
+									  .append('<button type="button" class="cartBut btn-danger">加入購物車</button>')
 
 
 
@@ -166,10 +106,7 @@
 	  					});	
 
 
-	// var rid =document.getElementById('rID').value;
-    // sessionStorage.setItem('rID', JSON.stringify(rid));
-    
-	// var buy  = JSON.parse(sessionStorage.getItem('buy'));
+	
 	
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
@@ -183,9 +120,10 @@
 		let name = console.log($(this).parent().find(".dishName").text());
 		let id = console.log($(this).parent().find(".dishId").text());
 	    let quantity = document.getElementById("quantity").value;
+		console.log(quantity);
 		//let price = console.log($(this).parent().find(".quantity").text());
 	    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
-
+		console.log(price);
 		let temp = -1;
 		// var buttonId = event.target.id;
 		// var rowId = buttonId.split("_")[1];
@@ -196,6 +134,9 @@
 		// let price = +(document.getElementById('price' + rowId).value);
 
 
+		var rid =document.getElementById('rID').value;
+        sessionStorage.setItem('rID', JSON.stringify(rid));
+        var buy  = JSON.parse(sessionStorage.getItem('buy'));
 
 		var dish = {
 			id: id,
@@ -203,7 +144,8 @@
 			quantity : quantity,
 			price : price
 		};
-				if(buy.length==0){
+				if(buy==null){
+					var buy=[];
 				buy.push(dish);
 				}
 				else{
@@ -230,7 +172,7 @@
 // 		var obj = JSON.parse(sessionStorage.buy);
 
 // 		alert(JSON.stringify(obj));
-		document.getElementById('quantity' + rowId).value=1;
+		// document.getElementById('quantity' + rowId).value=1;
 
 	})
 
@@ -246,3 +188,9 @@
 	</script>
 <jsp:include page="layout/footer.jsp" />
 </html>
+<script type="text/javascript">
+	var rid  = JSON.parse(sessionStorage.getItem('rID'));
+	document.getElementById("rID").value=rid;
+	
+	document.getElementById("keepBuy").href = "${pageContext.request.contextPath}/cart/eidtOrder";
+	</script>

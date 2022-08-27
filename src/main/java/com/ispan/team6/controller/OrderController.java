@@ -48,7 +48,7 @@ public class OrderController {
 		return "menuNoLoginCart";
 	}
 	
-	//導向修改訂單頁面
+	//導向修改訂單頁面並結帳
 	@GetMapping("/cart/eidtOrder")
 	public String prosseceToEidtOrder() {
 		return "menuTestForOrderEdit";
