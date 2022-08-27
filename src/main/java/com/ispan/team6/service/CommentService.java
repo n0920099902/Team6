@@ -38,6 +38,9 @@ public class CommentService {
 	@Autowired
 	private RestaurantService rService;
 	
+	@Autowired
+	private OrdersService oService;
+	
 	public Boolean validateUserInfo (Integer id) {
 		Users currentUser = uService.findById(id);
 		
@@ -94,6 +97,15 @@ public class CommentService {
 			
 		}
 		return result;
+	}
+	
+public Comment findCommentByOrder(Integer id) {
+		
+		Orders order = oService.findById(id);
+		
+		Comment comment = order.getComment();
+		
+		return comment;
 	}
 	
 }

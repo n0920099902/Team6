@@ -84,36 +84,30 @@
 
 			<div class="container">
 				<input type="hidden" id="restaurantId" value="${restaurant.id}">
-	      		<div class="heading_container heading_center">
-	        		<h2> ${restaurant.name} Menu </h2>
-	      		</div>
-	      		
-	      		<div class="filters-content">
-	        		<div class="row grid">
-	        		</div>
-	      		</div>
-	     	</div>
-	     </section>
-		
-<!-------------------------------------------------------------------------------------------------------->	
-		
-		<h2>評論</h2>
-		
-		<table class="table table-striped">
-		<thead>
-			<tr>
-				<th scope="col">帳號</th>
-				<th scope="col">評論內容</th>
-				<th scope="col">評論時間</th>
-			</tr>
-		</thead>
-		<tbody id="commentBody">
+				<div class="heading_container heading_center">
+					<h2> ${restaurant.name} Menu </h2>
+				</div>
+			
+				<div class="filters-content">
+					<div class="row grid">
+					</div>
+				</div>
+				<h2>評論</h2>
+			
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">帳號</th>
+							<th scope="col">評論內容</th>
+							<th scope="col">評論時間</th>
+						</tr>
+					</thead>
+					<tbody id="commentBody">
+					</tbody>
+				</table>
+			</div>
+</section>
 
-		</tbody>
-	</table>
-	
-<!-------------------------------------------------------------------------------------------------------->	
-	
 </body>
 	<script>
 		$(document).ready(function() {

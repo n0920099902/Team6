@@ -1,9 +1,11 @@
 package com.ispan.team6.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.team6.entity.Comment;
-import com.ispan.team6.entity.Orders;
-import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.CommentService;
 import com.ispan.team6.service.OrdersService;
@@ -83,11 +83,14 @@ public class CommentController {
 		return cService.lastestComment();
 	}
 
-	@GetMapping("/comment/viewComment")
-	public String viewComment(@RequestParam(name = "p", defaultValue = "1") Integer pageNumber, Model m) {
-		Page<Comment> page = cService.findByPage(pageNumber);
+	@GetMapping("/comment/viewComment/{id}")
+	public String viewComment(@PathVariable("id") Integer id, Model m) {
+		
+		Comment cmt = cService.findCommentByOrder(id);
 
-		m.addAttribute("page", page);
+		List <Comment> cmt1 = new ArrayList<>();
+		cmt1.add(cmt);
+		m.addAttribute("comment", cmt1);
 		return "viewComment";
 	}
 
@@ -103,14 +106,25 @@ public class CommentController {
 	@PostMapping("/comment/editComment")
 	public String editCommentPost(@ModelAttribute Comment cmt) {
 		cService.insertComment(cmt);
-
-		return "redirect:/comment/viewComment";
+		var id = cmt.getId();
+		return "redirect:/comment/viewComment2/" + id ;
 	}
 
 	@GetMapping("/comment/deleteComment/{id}")
 	public String deleteComment(@PathVariable Integer id) {
 		cService.deleteComment(id);
-		return "redirect:/comment/viewComment";
+		return "redirect:/getUsersOrder";
+	}
+	
+	@GetMapping("/comment/viewComment2/{id}")
+	public String viewComment2(@PathVariable("id") Integer id, Model m) {
+		
+		Comment cmt = cService.findById(id);
+
+		List <Comment> cmt1 = new ArrayList<>();
+		cmt1.add(cmt);
+		m.addAttribute("comment", cmt1);
+		return "viewComment";
 	}
 
 }

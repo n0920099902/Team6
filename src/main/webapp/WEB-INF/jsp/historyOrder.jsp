@@ -33,6 +33,7 @@ ${message }
 									訂單地址:  ${o.address }<br>
 									訂單時間:  ${o.ordersTime }<br>
 									<a href="${pageContext.request.contextPath}/OrderDetail/${o.id}"><button>訂單詳細資訊</button></a>
+									<a href="${pageContext.request.contextPath}/comment/viewComment/${o.id}"><button>評論</button></a>
 								</div>
 							</div>
 						</div>
