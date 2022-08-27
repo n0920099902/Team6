@@ -53,6 +53,7 @@
 		var restId = $("#restaurantId").val();
 		console.log(restId);
 		listDishesForRest(restId);
+		getComments(restId);
 		function listDishesForRest(restId) {
 			$.ajax({
   	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
@@ -83,6 +84,31 @@
   	        });
 		}
 		
+		function getComments(restId) {
+			$.ajax({
+  	            url: "http://localhost:8080/my-app/comment?restId=" + restId,
+  	            type: "GET",
+  	            dataType: "JSON",
+  	            contentType : "application/json; charset=utf-8",
+  	            success: function (data, status)
+  	            {
+  					$(data).each(function (index) {
+						var cmt = '<tr>'+				
+										'<td>' + this.accountName + '</td>'+
+										'<td>' + this.comments + '</td>'+
+										'<td>' + this.time + '</td>'+
+								  '</tr>';
+							
+						$('#commentBody').append(cmt);							  
+  					});	
+  	            },
+  	            error: function (xhr, desc, err)
+  	            {
+  	            	console.log(desc);
+  	            	console.log(err);
+  	            }
+  	        });
+		}
 	});	
 </script>
 <body>
@@ -104,21 +130,13 @@
 		<table class="table table-striped">
 		<thead>
 			<tr>
-				<th scope="col">No.</th>
 				<th scope="col">帳號</th>
 				<th scope="col">評論內容</th>
 				<th scope="col">評論時間</th>
 			</tr>
 		</thead>
-		<tbody>
-		
-			<tr>
-				<th scope="row">1</th>
-				<td>${comment.id}</td>
-				<td>${comment.comments}</td>
-				<td>${comment.time}</td>
-			</tr>
-			
+		<tbody id="commentBody">
+
 		</tbody>
 	</table>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
