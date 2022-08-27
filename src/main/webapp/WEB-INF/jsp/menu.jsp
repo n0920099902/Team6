@@ -82,7 +82,7 @@
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
 									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
-									  .append('<button type="button" class="cartBut btn-danger">加入購物車</button>')
+									  .append('<button type="button" class="cartBut btn-danger" id="c_'+this.dishId +'">加入購物車</button>')
 
 
 
@@ -112,13 +112,20 @@
 	// for (var i = 0; i < mbuttons.length; i++) {
 	// 	mbuttons[i].addEventListener("click", add);
 	// }
+
+	
 	$('.cartBut').click(function() {
 		alert('加入購物車');
 		
 
 		
-		let name = console.log($(this).parent().find(".dishName").text());
-		let id = console.log($(this).parent().find(".dishId").text());
+		// let name = console.log($(this).parent().find(".dishName").text());
+		// let id = console.log($(this).parent().find(".dishId").text());
+
+		let name = $(this).parent().find(".dishName").text();
+		console.log(name);
+		let id = $(this).parent().find(".dishId").text();
+        console.log(id);
 	    let quantity = document.getElementById("quantity").value;
 		console.log(quantity);
 		//let price = console.log($(this).parent().find(".quantity").text());
@@ -138,13 +145,14 @@
         sessionStorage.setItem('rID', JSON.stringify(rid));
         var buy  = JSON.parse(sessionStorage.getItem('buy'));
 
+	
 		var dish = {
 			id: id,
 			name : name,
 			quantity : quantity,
 			price : price
 		};
-				if(buy==null){
+				if(buy.length==0){
 					var buy=[];
 				buy.push(dish);
 				}
@@ -168,13 +176,16 @@
 					}
 				}
 
+			
 		sessionStorage.setItem('buy', JSON.stringify(buy));
-// 		var obj = JSON.parse(sessionStorage.buy);
+		var buy = JSON.parse(sessionStorage.buy);
 
-// 		alert(JSON.stringify(obj));
+		
+		// alert(JSON.stringify(buy));
 		// document.getElementById('quantity' + rowId).value=1;
 
 	})
+				
 
 
 	  	            },
@@ -185,6 +196,9 @@
 	  	        });
 			}
 		});
+	
+
+
 	</script>
 <jsp:include page="layout/footer.jsp" />
 </html>

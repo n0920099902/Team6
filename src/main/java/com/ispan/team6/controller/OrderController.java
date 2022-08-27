@@ -1,11 +1,17 @@
 package com.ispan.team6.controller;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -17,11 +23,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.DishQ;
 import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.OrdersDetail;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
+import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.model.OrdersDetailDao;
 import com.ispan.team6.service.RestaurantService;
@@ -38,6 +46,9 @@ public class OrderController {
 
 	@Autowired
 	private OrdersDetailDao ordersDetailDao;
+	
+	@Autowired
+	private DishDAO dao;
 
 	
 	
@@ -53,6 +64,26 @@ public class OrderController {
 	public String prosseceToEidtOrder() {
 		return "menuTestForOrderEdit";
 	}
+	
+//	//將購物車session裡的商品圖片印出來
+	@GetMapping("/cart/downloadImage/{id}")
+	public ResponseEntity<Blob> downloadImage(@PathVariable String id) {
+		 Dish dish = dao.findById(id);
+		 Blob photoFile = dish.getDishPhoto();
+
+		HttpHeaders header = new HttpHeaders();
+		header.setContentType(MediaType.IMAGE_JPEG);
+
+		// 要回傳的物件本體, header, HttpStatus 回應
+		return new ResponseEntity<Blob>(photoFile, header, HttpStatus.OK);
+	}
+	//將購物車session裡的商品圖片印出來
+//	@GetMapping("/cart/downloadImage/{id}")
+//	public String CartdownloadImage(@PathVariable int id, Model model) {
+//		Restaurant restaurant = restaurantService.findById(id);
+//		model.addAttribute("restaurant", restaurant);
+//		return null;
+//	}
 
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
