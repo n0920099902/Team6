@@ -59,7 +59,7 @@
 		$(document).ready(function() {
 			var restId = $("#restaurantId").val();
 			listDishesForRest(restId);
-			
+	        getComments(restId);
 			function listDishesForRest(restId) {
 				$.ajax({
 	  	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
@@ -185,6 +185,33 @@
 	  	        });
 			}
 		});
+		
+	//評論
+	 function getComments(restId) {
+            $.ajax({
+                  url: "http://localhost:8080/my-app/comment?restId=" + restId,
+                  type: "GET",
+                  dataType: "JSON",
+                  contentType : "application/json; charset=utf-8",
+                  success: function (data, status)
+                  {
+                      $(data).each(function (index) {
+                        var cmt = '<tr>'+                
+                                        '<td>' + this.accountName + '</td>'+
+                                        '<td>' + this.comments + '</td>'+
+                                        '<td>' + this.time + '</td>'+
+                                  '</tr>';
+                            
+                        $('#commentBody').append(cmt);                              
+                      });    
+                  },
+                  error: function (xhr, desc, err)
+                  {
+                      console.log(desc);
+                      console.log(err);
+                  }
+              });
+        }
 	</script>
 <jsp:include page="layout/footer.jsp" />
 </html>
