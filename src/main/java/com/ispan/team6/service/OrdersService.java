@@ -45,6 +45,17 @@ public class OrdersService {
 		}
 		return null;
 	}
+	
+	//session訂單圖片
+	public Dish findOrderImgbyId(Integer id) {
+		Optional<Dish> optional = dishDAO.findById(id);
+		
+		if(optional.isPresent()) {
+			return optional.get();
+		}
+		return null;
+	}
+	
 
 //	public DishDTO DishesByOrder(Integer Id) {
 //		Optional<Dish> dishes = dishDAO.findById(Id);
