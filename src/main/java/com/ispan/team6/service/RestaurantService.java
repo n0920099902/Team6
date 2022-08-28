@@ -34,6 +34,10 @@ public class RestaurantService {
 	public void insertRestaurant(Restaurant r) {
 		rDao.save(r);
 	}
+	
+	public void insertRestaurantType(RestaurantType r) {
+		rtDao.save(r);
+	}
 
 	public Restaurant findById(Integer Id) {
 		Optional<Restaurant> optional = rDao.findById(Id);
@@ -54,6 +58,14 @@ public class RestaurantService {
 
 		return null;
 	}
+	
+	public RestaurantType findIdByType(String type) {
+		return rtDao.findIdByType(type);
+	}
+
+	public RestaurantType findByType(String keyword) {
+		return rtDao.findByType(keyword);
+	}
 
 	public void deleteRestaurant(Integer id) {
 		rDao.deleteById(id);
@@ -63,9 +75,13 @@ public class RestaurantService {
 		return rDao.findByNameLike(name);
 	}
 
-	public List<RestaurantType> findByTypeLike(String name) {
-		return rtDao.findByType(name);
+	public List<Restaurant> findByRestaurantType(RestaurantType result) {
+		return rDao.findByRestaurantType(result);
 	}
+
+//	public List<RestaurantType> findByTypeLike(String name) {
+//		return rtDao.findByType(name);
+//	}
 
 	public Restaurant findByUsers(Users users) {
 		Optional<Restaurant> optional = rDao.findByUsers(users);

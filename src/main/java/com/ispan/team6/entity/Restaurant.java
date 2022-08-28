@@ -1,5 +1,6 @@
 package com.ispan.team6.entity;
 
+import java.sql.Blob;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -15,8 +16,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "Restaurant")
@@ -24,59 +27,52 @@ public class Restaurant {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@Column(name = "id")
 	private Integer id;
 
-//	@Column(name = "name")
 	private String name;
 
-//	@Column(name = "phone")
 	private String phone;
 
-//	@Column(name = "address")
 	private String address;
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
-//	@Column(name = "starttime")
 	private String startTime;
 
 	@DateTimeFormat(pattern = "HH:mm:ss") // SpringMVC
-//	@Column(name = "endtime")
 	private String endTime;
 
-//	@Column(name = "startdate")
 	private String startDate;
 
-//	@Column(name = "enddate")
 	private String endDate;
 
-//	@Column(name = "remark")
 	private String remark;
 
 	@Lob
-//	@Column(name = "photo")
-	private byte[] photo;
+	private Blob photo;
 
 	// 一對多 Restaurant對Orders外鍵(一間Restaurant可以有多筆Order)
 	@OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Set<Orders> orders = new LinkedHashSet<Orders>();
 
 	// 多對一 Restaurant對RestaurantType外鍵(一種RestaurantType會有多間Restaurant)
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_type_id")
 	private RestaurantType restaurantType;
 
 	// 一對一 Restaurant對Users外鍵(一個access為shop的user_account對一間Restaurant)
 	@OneToOne(cascade = CascadeType.MERGE)
-	@JoinColumn(name="fk_user_id")
+	@JoinColumn(name = "fk_user_id")
 	private Users users;
-	
+
+	@Transient
+	private MultipartFile Image;
+
 	public Restaurant() {
 	}
 
 	public Restaurant(Integer id, String name, String phone, String address, String type, String startTime,
-			String endTime, String startDate, String endDate, String remark, Integer fk_type_id, byte[] photo,
-			Set<Orders> orders, RestaurantType restaurantType,Users users) {
+			String endTime, String startDate, String endDate, String remark, Integer fk_type_id, Blob photo,
+			Set<Orders> orders, RestaurantType restaurantType, Users users) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -125,20 +121,20 @@ public class Restaurant {
 		this.address = address;
 	}
 
-	public String getStarttime() {
+	public String getStartTime() {
 		return startTime;
 	}
 
-	public void setStarttime(String starttime) {
-		this.startTime = starttime;
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
 	}
 
-	public String getEndtime() {
+	public String getEndTime() {
 		return endTime;
 	}
 
-	public void setEndtime(String endtime) {
-		this.endTime = endtime;
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 
 	public String getStartDate() {
@@ -165,11 +161,11 @@ public class Restaurant {
 		this.remark = remark;
 	}
 
-	public byte[] getPhoto() {
+	public Blob getPhoto() {
 		return photo;
 	}
 
-	public void setPhoto(byte[] photo) {
+	public void setPhoto(Blob photo) {
 		this.photo = photo;
 	}
 
@@ -197,12 +193,20 @@ public class Restaurant {
 		this.orders = orders;
 	}
 
-	public Users getUser() {
+	public Users getUsers() {
 		return users;
 	}
 
-	public void setUser(Users users) {
+	public void setUsers(Users users) {
 		this.users = users;
+	}
+
+	public MultipartFile getImage() {
+		return Image;
+	}
+
+	public void setImage(MultipartFile image) {
+		Image = image;
 	}
 
 }
