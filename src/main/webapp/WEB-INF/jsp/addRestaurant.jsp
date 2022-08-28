@@ -35,7 +35,7 @@
 			<div>
 				餐廳類別： <select name="restaurantType">
 					<c:forEach items="${allRestaurantType}" var="rt">
-						<option value="${rt.rest_type_id}">${rt.rest_type}</option>
+						<option value="${rt.id}">${rt.type}</option>
 					</c:forEach>
 				</select>
 			</div>

@@ -59,7 +59,7 @@
 									<div>
 										<span class="me-5">營業時間：<br />
 											${restaurant.startDate}～${restaurant.endDate}<br />
-											${restaurant.starttime}～${restaurant.endtime}
+											${restaurant.startTime}～${restaurant.endTime}
 										</span>
 									</div>
 								</div>
