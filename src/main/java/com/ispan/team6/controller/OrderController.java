@@ -32,6 +32,7 @@ import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.model.OrdersDetailDao;
+import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
@@ -43,6 +44,9 @@ public class OrderController {
 
 	@Autowired
 	private OrdersDao ordersDao;
+	
+	@Autowired
+	private OrdersService ordersService;
 
 	@Autowired
 	private OrdersDetailDao ordersDetailDao;
@@ -67,15 +71,13 @@ public class OrderController {
 	
 //	//將購物車session裡的商品圖片印出來
 	@GetMapping("/cart/downloadImage/{id}")
-	public ResponseEntity<Blob> downloadImage(@PathVariable String id) {
-		 Dish dish = dao.findById(id);
-		 Blob photoFile = dish.getDishPhoto();
-
-		HttpHeaders header = new HttpHeaders();
-		header.setContentType(MediaType.IMAGE_JPEG);
-
-		// 要回傳的物件本體, header, HttpStatus 回應
-		return new ResponseEntity<Blob>(photoFile, header, HttpStatus.OK);
+	public ResponseEntity<Blob> downloadImage(@PathVariable Integer id) {
+		  Dish photo1 = ordersService.findOrderImgbyId(id);
+		  Blob photoFile = photo1.getDishPhoto();
+		  HttpHeaders header = new HttpHeaders();
+		  header.setContentType(MediaType.IMAGE_JPEG);
+		  
+		  return new ResponseEntity<Blob>(photoFile,header,HttpStatus.OK);
 	}
 	//將購物車session裡的商品圖片印出來
 //	@GetMapping("/cart/downloadImage/{id}")

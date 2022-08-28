@@ -18,12 +18,12 @@
 	<body>
 		<section class="food_section layout_padding">
 			<!-- 	取得餐廳ID -->
-	<input type="number" id="rID" name="rID" value="${rid }" hidden="">
+	<input type="number" id="rID" name="rID" value="${rid }" hidden="" >
 
 
 
 			<div class="container">
-				<input type="hidden" id="restaurantId" value="${restaurant.id}">
+				<input type="hidden" id="restaurantId" value="${restaurant.id}" >
 				<div class="heading_container heading_center">
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
@@ -50,10 +50,10 @@
 
 </body>
 	<script>
-
-    // var rid =document.getElementById('rID').value;
-    // sessionStorage.setItem('rID', JSON.stringify(rid));
-    
+    //返回餐廳繼續購買
+    var rid =document.getElementById('rID').value;
+    sessionStorage.setItem('rID', JSON.stringify(rid));
+    //訂單session
 	var buy  = JSON.parse(sessionStorage.getItem('buy'));
 
 		$(document).ready(function() {
@@ -72,27 +72,14 @@
 	  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
 	  						
 	  						var detail_box=$('<div class="detail-box"></div>')
-	  						detail_box
-							        //   .append('<h5 class="dishName" id="dishName">' + this.dishName + '</h5>')
-	  								//   .append('<div class="dishPrice">' + "$" + this.dishPrice + '<button type="button" class="cartBut btn-danger">加入購物車</button>' +'</div>')
-									//   .append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
-									//   .append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
-
+	  						detail_box							        
 									  .append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
 									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
 									  .append('<button type="button" class="cartBut btn-danger" id="c_'+this.dishId +'">加入購物車</button>')
-
-
-
-							// .append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
-				          	// .append('<strong class="dishName">' + this.dishName + '</strong>')
-							// .append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="1">' + this.quantity +'</>')
-					        // .append('<i id="i1" class="dishPrice" />' + "$" + this.dishPrice)
-					        // .append('<button id="ssd" type="button" class="ssd cartBut">Add Shopping Cart!</button>')
-	  						
-							var img_box=$('<div class="img-box"></div>')
+					
+	  						var img_box=$('<div class="img-box"></div>')
 	  						img_box.append('<img src=' + imgsrc + ' />')
 	  						
 	  						var box=$('<div class="box"></div>')
@@ -105,8 +92,6 @@
 	  						$('.row').append(category)
 	  					});	
 
-
-	
 	
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
@@ -116,9 +101,6 @@
 	
 	$('.cartBut').click(function() {
 		alert('加入購物車');
-		
-
-		
 		// let name = console.log($(this).parent().find(".dishName").text());
 		// let id = console.log($(this).parent().find(".dishId").text());
 
@@ -126,7 +108,8 @@
 		console.log(name);
 		let id = $(this).parent().find(".dishId").text();
         console.log(id);
-	    let quantity = document.getElementById("quantity").value;
+	    // let quantity = document.getElementById("quantity").value;
+		let quantity = $(this).parent().find(".quantity").val();
 		console.log(quantity);
 		//let price = console.log($(this).parent().find(".quantity").text());
 	    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
@@ -134,7 +117,6 @@
 		let temp = -1;
 		// var buttonId = event.target.id;
 		// var rowId = buttonId.split("_")[1];
-
 		// let name = document.getElementById('n' + rowId).value;
 		// let id = +(document.getElementById('id' + rowId).value);
 		// let quantity = +(document.getElementById('quantity' + rowId).value);

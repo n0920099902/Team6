@@ -5,13 +5,14 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
-	
-<jsp:include page="layout/navbar.jsp" />
 
+<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="layout/cartBar.jsp"/>	
 <html>
 <head>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
 <meta charset="UTF-8">
 <title>菜單</title>
 
@@ -238,6 +239,7 @@
 </body>
 
 <jsp:include page="layout/footer.jsp" />
+
 </html>
 <script type="text/javascript">
 var rid  = JSON.parse(sessionStorage.getItem('rID'));
