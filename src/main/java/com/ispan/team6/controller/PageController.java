@@ -106,7 +106,10 @@ public class PageController {
 	@GetMapping("/b")
 	public String process() {
 		return "bL";
+		
 	}
-	
+	@GetMapping("/GM")
+	public String GM() {
+		return "GM";}
 
 }
