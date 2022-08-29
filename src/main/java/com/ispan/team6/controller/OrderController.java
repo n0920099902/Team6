@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
@@ -33,10 +32,8 @@ import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.model.OrdersDetailDao;
-import com.ispan.team6.service.OrdersDetailService;
 import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.RestaurantService;
-import com.ispan.team6.service.UsersService;
 
 @Controller
 @SessionAttributes({ "dish", "member", "buy" })
@@ -47,86 +44,48 @@ public class OrderController {
 
 	@Autowired
 	private OrdersDao ordersDao;
-
+	
 	@Autowired
 	private OrdersService ordersService;
 
 	@Autowired
 	private OrdersDetailDao ordersDetailDao;
+	
+	@Autowired
+	private DishDAO dao;
 
-	@Autowired
-	private UsersService usersService;
-	
-	@Autowired
-	private DishDAO dishDAO;
-	@Autowired
-	private OrdersDetailService ordersDetailService;
 	
 	
-
-	// 導向無登入訂單頁面
+	
+	//導向無登入訂單頁面
 	@GetMapping("cart/noLoginCart")
 	public String process() {
 		return "menuNoLoginCart";
 	}
-
-	// 導向修改訂單頁面並結帳
+	
+	//導向修改訂單頁面並結帳
 	@GetMapping("/cart/eidtOrder")
 	public String prosseceToEidtOrder() {
 		return "menuTestForOrderEdit";
 	}
-
+	
 //	//將購物車session裡的商品圖片印出來
 	@GetMapping("/cart/downloadImage/{id}")
 	public ResponseEntity<Blob> downloadImage(@PathVariable Integer id) {
-		Dish photo1 = ordersService.findOrderImgbyId(id);
-		Blob photoFile = photo1.getDishPhoto();
-		HttpHeaders header = new HttpHeaders();
-		header.setContentType(MediaType.IMAGE_JPEG);
-
-		return new ResponseEntity<Blob>(photoFile, header, HttpStatus.OK);
+		  Dish photo1 = ordersService.findOrderImgbyId(id);
+		  Blob photoFile = photo1.getDishPhoto();
+		  HttpHeaders header = new HttpHeaders();
+		  header.setContentType(MediaType.IMAGE_JPEG);
+		  
+		  return new ResponseEntity<Blob>(photoFile,header,HttpStatus.OK);
 	}
-
-	@PostMapping("/confirmBuy")
-	public String confirmBuy(@RequestParam("id") List<Integer> id,@RequestParam("price") List<Integer> price,
-			@RequestParam("quantity") List<Integer> quantity,@RequestParam("rID") int rID,
-			@RequestParam("UID") int UID,@RequestParam("address") String address,
-			@RequestParam("orderStatus") String orderStatus,@RequestParam("time") String time,
-			@RequestParam("phone") Integer phone, Model m) {
-		int totalPrice = 0;
-		for (int i = 0; i < price.size(); i++) {
-			int p = price.get(i);
-			int q = quantity.get(i);
-			totalPrice += p * q;
-		}
-		Restaurant r = restaurantService.findById(rID);
-		Users u = usersService.findById(UID);
-		Orders orders = new Orders();
-		orders.setUsers(u);
-		orders.setRestaurant(r);
-		orders.setAddress(address);
-		orders.setOrdersStatus(orderStatus);
-		orders.setOrdersTime(time);
-		orders.setPhone(phone);
-		orders.setTotalPrice(totalPrice);
-		ordersDao.save(orders);
-	
-//		for(int i= 0; i < id.size(); i++) {
-//			OrdersDetail detail = new OrdersDetail();
-//			
-//			 Dish dish = ordersDetailService.OrderFindDishById((Integer) id.get(i));
-//			 System.out.println(id + "basd");
-//			 Integer q = quantity.get(i);
-//			 detail.setDish(dish);
-//			 detail.setQuantity(q);
-//			 detail.setOrders(orders);
-//			 ordersDetailDao.save(detail);
-//			 
-//		}
-//		System.out.println("c");
-//		m.addAttribute("message", "訂單已送出");
-		return "redirect:/getUsersOrder";
-	}
+	//將購物車session裡的商品圖片印出來
+//	@GetMapping("/cart/downloadImage/{id}")
+//	public String CartdownloadImage(@PathVariable int id, Model model) {
+//		Restaurant restaurant = restaurantService.findById(id);
+//		model.addAttribute("restaurant", restaurant);
+//		return null;
+//	}
 
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
@@ -161,15 +120,6 @@ public class OrderController {
 //--------------------------------------------------------------
 //--------------------------------------------------------------
 //--------------------------------------------------------------
-
-	// 將購物車session裡的商品圖片印出來
-//	@GetMapping("/cart/downloadImage/{id}")
-//	public String CartdownloadImage(@PathVariable int id, Model model) {
-//		Restaurant restaurant = restaurantService.findById(id);
-//		model.addAttribute("restaurant", restaurant);
-//		return null;
-//	}
-
 //	@GetMapping("/restaurant/cart")
 //	public String ProcessCart() {
 //		return "cart";

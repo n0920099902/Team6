@@ -6,7 +6,6 @@
 <!DOCTYPE html>
 
 <jsp:include page="layout/navbar.jsp" />
-<jsp:include page="layout/cartBar.jsp" />
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>

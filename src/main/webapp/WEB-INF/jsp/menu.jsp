@@ -90,11 +90,15 @@
 	  						category.append(box)
 	  						
 	  						$('.row').append(category)
-	  					});		
+	  					});	
+
+	
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
 	// 	mbuttons[i].addEventListener("click", add);
-	// }	
+	// }
+
+	
 	$('.cartBut').click(function() {
 		alert('加入購物車');
 		// let name = console.log($(this).parent().find(".dishName").text());
@@ -102,28 +106,32 @@
 
 		let name = $(this).parent().find(".dishName").text();
 		console.log(name);
-
 		let id = $(this).parent().find(".dishId").text();
         console.log(id);
-	    
+	    // let quantity = document.getElementById("quantity").value;
 		let quantity = $(this).parent().find(".quantity").val();
 		console.log(quantity);
-		
+		//let price = console.log($(this).parent().find(".quantity").text());
 	    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
 		console.log(price);
 
 		let photo = $(this).parent().parent().find("img").attr("src");
-		console.log(photo);			
+		console.log(photo);
+		// img_box.append('<img src=' + imgsrc + ' />')
+		let temp = -1;
 		// var buttonId = event.target.id;
 		// var rowId = buttonId.split("_")[1];
 		// let name = document.getElementById('n' + rowId).value;
 		// let id = +(document.getElementById('id' + rowId).value);
 		// let quantity = +(document.getElementById('quantity' + rowId).value);
 		// let price = +(document.getElementById('price' + rowId).value);
+
+
 		// var rid =document.getElementById('rID').value;
         // sessionStorage.setItem('rID', JSON.stringify(rid));
-        var buy  = JSON.parse(sessionStorage.getItem('buy'));	
-		let temp = -1;
+        var buy  = JSON.parse(sessionStorage.getItem('buy'));
+
+	
 		var dish = {
 			id: id,
 			name : name,

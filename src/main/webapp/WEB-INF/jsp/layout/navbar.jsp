@@ -45,7 +45,7 @@
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
 				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/cart/getAlldish/{id}">購物車</a></li></c:if>
+					href="${contextRoot}/restaurant/cart">購物車</a></li></c:if>
 				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
