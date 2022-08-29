@@ -108,7 +108,7 @@
 
 	<form action="${pageContext.request.contextPath}/register" method="post" enctype="multipart/form-data">
 	
-		<h2 class="text-center"><strong>Member</strong>Register</h2>
+		<h2 class="text-center"><strong>餐廳註冊</strong></h2>
 		<div>
 			會員帳號： <input type="text" name="account" required id="account" onchange="checkAccount()">
 		</div>
@@ -121,9 +121,9 @@
 		<div>
 			會員電話： <input type="tel" id="mPhone" name="phone"  onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span style="color: red" id="phoneout"></span>
 		</div>
-		<div>
-			會員生日： <input type="date" name="Birthday" required >
-		</div>
+<!-- 		<div> -->
+<!-- 			會員生日： <input type="date" name="Birthday" required > -->
+<!-- 		</div> -->
 		<div>
 			<!-- 			權限 -->
 			<input type="text" name="access" value="Shop" hidden="" required>
@@ -135,7 +135,7 @@
 
 		<img id="output" height="200" style="display: none">
 		<div class="form-group">
-				<button class="btn btn-primary btn-block" type="submit">Send</button>
+				<button class="btn btn-primary btn-block" type="submit">送出</button>
 		</div>
 	</form>
 	

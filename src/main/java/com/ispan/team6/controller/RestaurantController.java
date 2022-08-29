@@ -22,6 +22,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,7 +41,7 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantService rService;
-	
+
 	@Autowired
 	private UsersService uService;
 
@@ -137,11 +138,34 @@ public class RestaurantController {
 		return "viewRestaurants";
 	}
 
-	@GetMapping("/restaurant/deleteRestaurant/{id}")
+	@DeleteMapping("/restaurant/deleteRestaurant/{id}")
 	public String deleteRestaurantById(@PathVariable Integer id) {
 		rService.deleteRestaurant(id);
 
 		return "redirect:/restaurant/viewRestaurants ";
+	}
+
+	@GetMapping("/restaurant/editRestaurantPageByAdmin/{id}")
+	public String editRestaurantPageByAdmin(@PathVariable Integer id, Model m,Users member,Restaurant restaurant) {
+		Restaurant resId = rService.findById(id);
+		
+		m.addAttribute("restaurant", resId);
+		// 餐廳類別顯示
+		List<RestaurantType> list = rService.findAllRestuarantType();
+		m.addAttribute("allRestaurantType", list);
+
+		// 顯示營業時間
+		Map<String, String> DateMap = new LinkedHashMap<>();
+		DateMap.put("星期日", "星期日");
+		DateMap.put("星期一", "星期一");
+		DateMap.put("星期二", "星期二");
+		DateMap.put("星期三", "星期三");
+		DateMap.put("星期四", "星期四");
+		DateMap.put("星期五", "星期五");
+		DateMap.put("星期六", "星期六");
+		m.addAttribute("DateMap", DateMap);
+		
+		return "editRestaurant2";
 	}
 
 	@GetMapping("/restaurant/editRestaurant/{id}")
@@ -161,6 +185,7 @@ public class RestaurantController {
 		List<RestaurantType> list = rService.findAllRestuarantType();
 		m.addAttribute("allRestaurantType", list);
 
+		// 顯示營業時間
 		Map<String, String> DateMap = new LinkedHashMap<>();
 		DateMap.put("星期日", "星期日");
 		DateMap.put("星期一", "星期一");
@@ -210,8 +235,8 @@ public class RestaurantController {
 
 	// form:form表單做法
 	@PostMapping("/restaurant/editRestaurant")
-	public String editRestaurant(@ModelAttribute("restaurant") Restaurant restaurant,RestaurantType restaurantType, Users member, HttpSession session,
-			Model model) throws IOException {
+	public String editRestaurant(@ModelAttribute("restaurant") Restaurant restaurant, RestaurantType restaurantType,
+			Users member, HttpSession session, Model model) throws IOException {
 		Users user = (Users) session.getAttribute("member");
 		MultipartFile file = restaurant.getImage();
 		if (file != null && !file.isEmpty()) {
@@ -225,7 +250,6 @@ public class RestaurantController {
 			}
 		}
 		RestaurantType typeId = rService.findTypeById(restaurant.getRestaurantType().getId());
-		System.out.println("type===>"+typeId);
 		restaurant.setUsers(user);
 		restaurant.setRestaurantType(typeId);
 		rService.insertRestaurant(restaurant);

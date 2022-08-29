@@ -51,16 +51,8 @@ public class UsersBackController {
 			}
 		}
 		service.insertMember(u);
-//		System.out.println("access:" + access);
-//		System.out.println("password:" + password);
-//		System.out.println("email:" + email);
-//		System.out.println("phone:" + phone);
-//		System.out.println("birthday:" + birthday);
-//		System.out.println(remark);
-//		System.out.println(bytes);
 
 		return "memberin";
-//		
 	}
 
 //	@GetMapping(path = "member/img")
