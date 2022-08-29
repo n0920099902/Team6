@@ -1,7 +1,6 @@
 package com.ispan.team6.model;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -15,6 +14,5 @@ public interface DishDAO extends JpaRepository<Dish, Integer> {
 
 	@Query(value="from Dish where fk_rest_id=?1")
 	public List<Dish> findAllByRestId(Integer restId);
-
 
 }

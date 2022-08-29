@@ -62,9 +62,7 @@
 		$(document).ready(function() {
 			var restId = $("#restaurantId").val();
 			listDishesForRest(restId);
-<<<<<<< HEAD
 	        getComments(restId);
-=======
 //底下程式碼還在做修改,請先不要去刪除			
 // 			listAllDishCategories(restId);
 			
@@ -89,7 +87,6 @@
 // 	  	        })
 // 			}
 			
->>>>>>> Dish1
 			function listDishesForRest(restId) {
 				$.ajax({
 	  	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
@@ -102,24 +99,13 @@
 	  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
 	  						
 	  						var detail_box=$('<div class="detail-box"></div>')
-<<<<<<< HEAD
-	  						detail_box							        
-									  .append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
+							detail_box.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
 									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
 									  .append('<button type="button" class="cartBut btn-danger" id="c_'+this.dishId +'">加入購物車</button>')
 					
 	  						var img_box=$('<div class="img-box"></div>')
-=======
-							detail_box.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
-									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
-									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
-									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
-									  .append('<button type="button" class="cartBut btn-danger">加入購物車</button>')
-
-							var img_box=$('<div class="img-box"></div>')
->>>>>>> Dish1
 	  						img_box.append('<img src=' + imgsrc + ' />')
 	  						
 	  						var box=$('<div class="box"></div>')
