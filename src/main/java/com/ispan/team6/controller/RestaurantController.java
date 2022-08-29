@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,10 +15,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -42,9 +38,6 @@ public class RestaurantController {
 	@Autowired
 	private RestaurantService rService;
 
-	@Autowired
-	private UsersService uService;
-
 	@GetMapping("/restaurant/downloadImage/{id}")
 	public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
 		Restaurant r = rService.findById(id);
@@ -63,17 +56,6 @@ public class RestaurantController {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-//		byte[] bytes = file.getBytes();
-//		Blob blob = new SerialBlob(bytes);	
-
-//		byte[] photoFile = photo1.getPhoto(blob);
-//
-//		HttpHeaders header = new HttpHeaders();
-//		header.setContentType(MediaType.IMAGE_JPEG);
-//
-//		// 要回傳的物件本體, header, HttpStatus 回應
-//		return new ResponseEntity<byte[]>(photoFile, header, HttpStatus.OK);
 	}
 
 	@GetMapping("/shop/findRestByUser")

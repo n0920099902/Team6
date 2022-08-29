@@ -14,6 +14,31 @@
 <meta charset="UTF-8">
 <title>餐廳總覽</title>
 </head>
+<script>
+	$.ajax({
+		type : 'post',
+		url : 'http://localhost:8080/my-app/restaurant/viewRestaurants',
+		data : JSON.stringify(
+			{
+				"name" : name,
+				"address" : address,
+				"phone" : phone,
+				"startDate" : startDate,
+				"endDate" : endDate,
+				"startTime" : startTime,
+				"endTime" : endTime,
+				"fk_type_id" : RestaurantType,
+				"fk_user_id" : Users,
+			}
+		),
+		contentType : 'application/json; charset=UTF-8',
+		dataType : 'json',
+		success : function(data) {
+
+		}
+
+	})
+</script>
 <body>
 	<h1>餐廳總覽頁面</h1>
 	<form action="${contextRoot}/restaurant/search" method="get">
@@ -21,30 +46,39 @@
 		<button>GO</button>
 	</form>
 
-	<c:forEach var="restaurant" items="${allRestaurant}">
-		<div class="row justify-content-center">
-			<div class="col-8">
-				<div class="card">
-					<div class="card-body">
-						<div>${restaurant.name}</div>
-						<div>${restaurant.address}</div>
-						<div>${restaurant.phone}</div>
-						<div>${restaurant.startDate}</div>
-						<div>${restaurant.endDate}</div>
-						<div>${restaurant.startTime}</div>
-						<div>${restaurant.endTime}</div>
-						<div class="edit-link">
-							<a
-								href="${contextRoot}/restaurant/editRestaurantPageByAdmin/${restaurant.id}">編輯</a>
-							<a onclick="return confirm('確認刪除?')"
-								href="${contextRoot}/restaurant/deleteRestaurant/${restaurant.id}">刪除</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<br />
-	</c:forEach>
-
+	<table id="dishes" class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th hidden="hidden">#</th>
+				<th>店家帳號</th>
+				<th>店家名稱</th>
+				<th>店家地址</th>
+				<th>店家電話</th>
+				<th>營業開始時間</th>
+				<th>營業結束時間</th>
+				<th>營業開始時間</th>
+				<th>營業結束時間</th>
+				<th>設定</th>
+			</tr>
+		</thead>
+		<tbody>
+			<c:forEach var="restaurant" items="${allRestaurant}">
+				<tr>
+					<td>${restaurant.users.account}</td>
+					<td>${restaurant.name}</td>
+					<td>${restaurant.address}</td>
+					<td>${restaurant.phone}</td>
+					<td>${restaurant.startDate}</td>
+					<td>${restaurant.endDate}</td>
+					<td>${restaurant.startTime}</td>
+					<td>${restaurant.endTime}</td>
+					<td><a
+						href="${contextRoot}/restaurant/editRestaurantPageByAdmin/${restaurant.id}">編輯</a></td>
+					<td><a onclick="return confirm('確認刪除?')"
+						href="${contextRoot}/restaurant/deleteRestaurant/${restaurant.id}">刪除</a></td>
+				</tr>
+			</c:forEach>
+		</tbody>
+	</table>
 </body>
 </html>

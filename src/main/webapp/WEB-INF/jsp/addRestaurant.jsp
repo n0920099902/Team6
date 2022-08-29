@@ -53,7 +53,7 @@
 					<h5>餐廳類別：</h5>
 					<select name="restaurantType">
 						<c:forEach items="${allRestaurantType}" var="rt">
-							<option value="${rt.rest_type_id}">${rt.rest_type}</option>
+							<option value="${rt.id}">${rt.type}</option>
 						</c:forEach>
 					</select>
 				</div>

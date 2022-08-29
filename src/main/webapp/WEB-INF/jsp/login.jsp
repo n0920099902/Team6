@@ -8,98 +8,98 @@
 <jsp:include page="layout/navbar.jsp" />
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+
 <html>
 <head>
 <meta charset="UTF-8">
 
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Login</title>
-<style>
-body {font-family: Arial, Helvetica, sans-serif;}
-form {border: 3px solid #f1f1f1;}
 
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
-}
+<!-- bootstrap 5.1.3 CSS -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 
-button {
-  background-color: #04AA6D;
-  color: white;
-  padding: 14px 20px;
-  margin: 8px 0;
-  border: none;
-  cursor: pointer;
-  width: 100%;
-}
+<!-- bootstrap 5.1.3 JS -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
 
-button:hover {
-  opacity: 0.8;
-}
+<!-- jQuery 3.6.0 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+	crossorigin="anonymous"></script>
 
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-}
-
-img.avatar {
-  width: 20%;
-  border-radius: 20%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
-</style>
-
+<!-- 自定義CSS -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
-<h2>${message }</h2>
-	<form action="${contextRoot}/member/login"
-		method="POST" enctype="multipart/form-data">
+	<h2>${message }</h2>
+	<form action="${contextRoot}/member/login" method="POST"
+		enctype="multipart/form-data">
 		<div class="imgcontainer">
-    <img src="${contextRoot}/img/login.png" alt="Avatar" class="avatar">
-  </div>
-		 <div class="container">
-			<label for="uname"><b>會員帳號 </b></label>
-			<input type="text"  placeholder="Enter Username"  name="mAccount" required>
-		
-		  <label for="psw"><b>會員密碼</b></label>
-			 <input type="password" placeholder="Enter Password" name="mPassword" required>
-	
-		 <button type="submit">登入</button>
-		 <label>
-    <span class="psw"> <a href="${contextRoot}/sign"><h5>註冊</h5></a></span>
-    </label>
-    	</div>
-		   
-		</form>
+			<img src="${contextRoot}/img/login.png" alt="Avatar" class="avatar">
+		</div>
+		<div class="container">
+			<label for="uname"><b>會員帳號 </b></label> <input type="text"
+				placeholder="Enter Username" name="mAccount" id="mAccount" required>
+			<label for="psw"><b>會員密碼</b></label><i id="checkEye" class="fas fa-eye-slash"></i>
+			<input type="password" placeholder="Enter Password" name="mPassword"
+				id="mPassword" required>
+
+			<button type="submit">登入</button>
+			<label class="right"> <span class="psw"> <a
+					href="${contextRoot}/sign"><h5>點我加入會員</h5></a></span>
+			</label>
+		</div>
+		<div class="container">
+			快速登入:
+			<button class=" btn btn-outline-primary fastLogin"
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Admin</button>
+			<button class=" btn btn-outline-success fastLogin2"
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop</button>
+			<button class=" btn btn-outline-success fastLogin3"
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">User</button>
+
+		</div>
+	</form>
+
 
 </body>
+<script type="text/javascript">
+	//快速登入
+	$(".fastLogin").click(function() {
+		$("#mAccount").val("admin");
+		$("#mPassword").val("admin1234");
+	});
+	$(".fastLogin2").click(function() {
+		$("#mAccount").val("shop02");
+		$("#mPassword").val("1234");
+	});
+	$(".fastLogin3").click(function() {
+		$("#mAccount").val("member02");
+		$("#mPassword").val("1234");
+	});
+	//密碼可視切換
+	$("#checkEye").click(function() {
+		if ($(this).hasClass('fa-eye')) {
+			$("#mPassword").attr('type', 'password');
+		} else {
+			$("#mPassword").attr('type', 'text');
+		}
+		$(this).toggleClass('fa-eye').toggleClass('fa-eye-slash');
+	});
+
+	//取消按鈕返回上頁
+	$("#cancel").click(function(event) {
+		event.preventDefault(); //取消預設行為
+		window.history.back(); //返回上一頁
+	})
+</script>
 </html>
