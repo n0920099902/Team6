@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ispan.team6.dto.AddCommentDto;
+import com.ispan.team6.dto.CommentDto;
 import com.ispan.team6.entity.Comment;
+import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.service.CommentService;
 import com.ispan.team6.service.OrdersService;
@@ -33,21 +36,19 @@ public class CommentController {
 	@Autowired
 	private OrdersService oService;
 
-	@GetMapping("/comment/add")
-	public String addCommentPage(HttpSession httpSession, Model m) {
+	@GetMapping("/comment/add/{id}")
+	public String addCommentPage(@PathVariable("id") Integer id, Model m) {
 
 		Comment newCmt = new Comment();
-		
-		Comment latestCmt = cService.lastestComment();
-
-		m.addAttribute("comment", newCmt);
-		m.addAttribute("latestCmt", latestCmt);
+		AddCommentDto cDto = new AddCommentDto();
+		m.addAttribute("addCommentDto", cDto);
+		m.addAttribute("orderId", id);
 
 		return "addComment";
 	}
 
 	@PostMapping("/postComment")
-	public String postComment(@ModelAttribute Comment cmt, HttpSession httpSession, Model m, Integer orderId) {
+	public String postComment(@ModelAttribute AddCommentDto cmt, HttpSession httpSession, Model m, Integer orderId) {
 
 		// 取當前登入者
 		Users u = (Users) httpSession.getAttribute("member");
@@ -59,18 +60,15 @@ public class CommentController {
 		// 沒有的話需要先登入	
 		if (currentUser != null) {
 			
-//			Orders currenOrder = oService.findById(orderId);
+			Orders currentOrder = oService.findById(cmt.getOrderId());
 			
-//			cmt.setOrders(currenOrder);
-			cmt.setUsers(currentUser);
-
-			cService.insertComment(cmt);
-
-			Comment newCmt = new Comment();
-			Comment latestCmt = cService.lastestComment();
-
-			m.addAttribute("comment", newCmt);
-			m.addAttribute("latestCmt", latestCmt);
+			Comment cmt1 = new Comment(); 
+			cmt1.setOrders(currentOrder);
+			cmt1.setUsers(currentUser);
+			cmt1.setComments(cmt.getComments());
+//			cmt1.setTime();
+			
+			cService.insertComment(cmt1);
 
 			return "addComment";
 		}
@@ -105,8 +103,8 @@ public class CommentController {
 
 	@PostMapping("/comment/editComment")
 	public String editCommentPost(@ModelAttribute Comment cmt) {
-		cService.insertComment(cmt);
-		var id = cmt.getId();
+		cService.updateComment(cmt);
+		Integer id = cmt.getId();
 		return "redirect:/comment/viewComment2/" + id ;
 	}
 

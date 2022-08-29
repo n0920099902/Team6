@@ -180,7 +180,7 @@
 		});
 
 		
-	//評論
+	//顯示評論
 	 function getComments(restId) {
             $.ajax({
                   url: "http://localhost:8080/my-app/comment?restId=" + restId,

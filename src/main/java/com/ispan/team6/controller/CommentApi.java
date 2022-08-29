@@ -17,7 +17,6 @@ public class CommentApi {
 	@Autowired
 	private CommentService cService;
 	
-	//test
 	@Autowired
 	private RestaurantService rService;
 	
