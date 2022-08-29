@@ -28,6 +28,9 @@
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
 			<div>	<a href="" id="keepBuy"><button>送出訂單</button></a> </div>
+				<div id="categories" class="heading_container heading_center">
+					
+				</div>
 				<div class="filters-content">
 					<div class="row grid">
 					</div>
@@ -59,6 +62,29 @@
 		$(document).ready(function() {
 			var restId = $("#restaurantId").val();
 			listDishesForRest(restId);
+//底下程式碼還在做修改,請先不要去刪除			
+// 			listAllDishCategories(restId);
+			
+// 			function listAllDishCategories(restId) {
+// 				$.ajax({
+// 	  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+// 	  	            type: "GET",
+// 	  	            dataType: "JSON",
+// 	  	            contentType : "application/json; charset=utf-8",
+// 	  	            success: function (data, status)
+// 	  	            {
+// 	  					var div = $('#categories');
+// 	  					$(data).each(function () {
+// 	  						div.append('<h2>' + this.dishTypeCategory + '</h2>').append('<br>')
+// 	                    });     
+// 	  	            },
+// 	  	            error: function (xhr, desc, err)
+// 	  	            {
+// 	  	            	console.log(desc);
+// 	  	            	console.log(err);
+// 	  	            }
+// 	  	        })
+// 			}
 			
 			function listDishesForRest(restId) {
 				$.ajax({
@@ -72,26 +98,12 @@
 	  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
 	  						
 	  						var detail_box=$('<div class="detail-box"></div>')
-	  						detail_box
-							        //   .append('<h5 class="dishName" id="dishName">' + this.dishName + '</h5>')
-	  								//   .append('<div class="dishPrice">' + "$" + this.dishPrice + '<button type="button" class="cartBut btn-danger">加入購物車</button>' +'</div>')
-									//   .append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
-									//   .append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
-
-									  .append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
+							detail_box.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
 									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
 									  .append('<button type="button" class="cartBut btn-danger">加入購物車</button>')
 
-
-
-							// .append('<p class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</p>' )
-				          	// .append('<strong class="dishName">' + this.dishName + '</strong>')
-							// .append('<input id="quntity${d.id}" type="number" name="quantity" class="quantity" min="1">' + this.quantity +'</>')
-					        // .append('<i id="i1" class="dishPrice" />' + "$" + this.dishPrice)
-					        // .append('<button id="ssd" type="button" class="ssd cartBut">Add Shopping Cart!</button>')
-	  						
 							var img_box=$('<div class="img-box"></div>')
 	  						img_box.append('<img src=' + imgsrc + ' />')
 	  						
@@ -103,6 +115,8 @@
 	  						category.append(box)
 	  						
 	  						$('.row').append(category)
+	  						
+	  						return data;
 	  					});	
 
 

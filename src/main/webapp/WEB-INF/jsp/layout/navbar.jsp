@@ -51,6 +51,8 @@
 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/backend/dish/category">商品種類(後台)</a></li>
 			</ul>
 
 

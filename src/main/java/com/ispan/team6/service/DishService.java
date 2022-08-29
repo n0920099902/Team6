@@ -56,6 +56,8 @@ public class DishService {
 		List<Dish> dishes = null;
 		if ("portal".equals(mode)) {
 			dishes = dishDAO.findAllByRestIdAndDishStatusIsPublished(restId);
+		} else if ("backend".equals(mode)) {
+			dishes = dishDAO.findAllByRestId(restId);
 		} else {
 			dishes = dishDAO.findAll();
 		}
