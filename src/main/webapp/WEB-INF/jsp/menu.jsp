@@ -189,11 +189,13 @@
                   contentType : "application/json; charset=utf-8",
                   success: function (data, status)
                   {
-                      $(data).each(function (index) {
+                	  console.log(data);
+                      $(data).each(function (index, element) {
+//                     	  var cmt = '<p>'+element.id+'</p>';
                         var cmt = '<tr>'+                
-                                        '<td>' + this.accountName + '</td>'+
-                                        '<td>' + this.comments + '</td>'+
-                                        '<td>' + this.time + '</td>'+
+                                        '<td>' + element.accountName + '</td>'+
+                                        '<td>' + element.comments + '</td>'+
+                                        '<td>' + element.time + '</td>'+
                                   '</tr>';
                             
                         $('#commentBody').append(cmt);                              
