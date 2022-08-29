@@ -20,7 +20,7 @@
 </head>
 <body>
  <nav class="w3-sidebar w3-black w3-collapse w3-top w3-large w3-padding"
-  style="z-index: 3; width: 200px; font-weight: bold;" id="mySidebar">
+  style="z-index: 0; width: 200px; font-weight: bold;" id="mySidebar">
   <br> <a href="javascript:void(0)"
    class="w3-button w3-hide-large w3-display-topleft"
    style="width: 100%; font-size: 22px">Close Menu</a>

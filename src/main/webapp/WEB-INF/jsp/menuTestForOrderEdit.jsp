@@ -76,7 +76,7 @@
 	
 	for (let i = 0; i < list.length; i++) {
 		var dish = list[i];
-		document.getElementById("show").innerHTML += '<div class="col"><div class="card"><img style="height: 200px"src="${contextRoot}/cart/downloadImage/1 "class="card-img-top">';
+		document.getElementById("show").innerHTML += '<div class="col"><div class="card"><img style="height: 200px" src="'+dish.photo+'" class="card-img-top">';
 
 		document.getElementById("show").innerHTML += '<div class="headline">餐點名稱: '
 				+ dish.name
