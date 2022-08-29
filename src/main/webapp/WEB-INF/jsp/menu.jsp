@@ -116,15 +116,13 @@
 	  						category.append(box)
 	  						
 	  						$('.row').append(category)
-<<<<<<< HEAD
+
 	  						
 	  						return data;
 	  					});	
 
 	
-=======
-	  					});		
->>>>>>> 27/08_29
+
 	// var mbuttons = document.getElementsByClassName('cartBut');
 	// for (var i = 0; i < mbuttons.length; i++) {
 	// 	mbuttons[i].addEventListener("click", add);
