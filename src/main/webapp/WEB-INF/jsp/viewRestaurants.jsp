@@ -17,7 +17,7 @@
 <body>
 	<h1>餐廳總覽頁面</h1>
 	<form action="${contextRoot}/restaurant/search" method="get">
-		搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
+		搜尋:<input type="text" name="keyword" placeholder="想要搜尋的餐廳">
 		<button>GO</button>
 	</form>
 
@@ -27,9 +27,15 @@
 				<div class="card">
 					<div class="card-body">
 						<div>${restaurant.name}</div>
+						<div>${restaurant.address}</div>
+						<div>${restaurant.phone}</div>
+						<div>${restaurant.startDate}</div>
+						<div>${restaurant.endDate}</div>
+						<div>${restaurant.startTime}</div>
+						<div>${restaurant.endTime}</div>
 						<div class="edit-link">
 							<a
-								href="${contextRoot}/restaurant/editRestaurant/${restaurant.id}">編輯</a>
+								href="${contextRoot}/restaurant/editRestaurantPageByAdmin/${restaurant.id}">編輯</a>
 							<a onclick="return confirm('確認刪除?')"
 								href="${contextRoot}/restaurant/deleteRestaurant/${restaurant.id}">刪除</a>
 						</div>

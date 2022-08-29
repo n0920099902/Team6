@@ -9,7 +9,8 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
-<link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/images/shortcut.ico">
 
 </head>
 <body>
@@ -28,31 +29,46 @@
 				</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/restaurant">餐廳主頁</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/add">新增餐廳</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a></li>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/restaurant/add">新增餐廳</a></li> --%>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a></li> --%>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/test">測試頁面</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/sign">會員新增</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/Users/register">後台會員新增</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/Users/select">後台會員管理</a></li>
+					href="${contextRoot}/sign">會員註冊</a></li>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/Users/register">餐廳帳號新增</a></li> --%>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/Users/select">後台會員管理</a></li> --%>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
+<<<<<<< HEAD
 				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/cart/eidtOrder">購物車</a></li></c:if>
 				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
+=======
+				<c:if test="${!empty member}">
+					<li class="nav-item"><a class="nav-link"
+						href="${contextRoot}/restaurant/cart">購物車</a></li>
+				</c:if>
+				<c:if test="${empty member}">
+					<li class="nav-item"><a class="nav-link"
+						href="${contextRoot}/cart/noLoginCart">購物車</a></li>
+				</c:if>
+>>>>>>> 0829_25
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 <<<<<<< HEAD
+<<<<<<< HEAD
 					<li class="nav-item"><a class="nav-link"
+=======
+				<li class="nav-item"><a class="nav-link"
+>>>>>>> 0829_25
 					href="${contextRoot}/GM">後台管理</a></li>
 =======
 				<li class="nav-item"><a class="nav-link"
@@ -86,11 +102,18 @@
 							</c:when>
 						</c:choose> </a>
 
-					<div class="dropdown-menu fixed-bottom-left" aria-labelledby="dropdown06" style="left: -60px;">
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="dropdown06" style="">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<c:if test="${member.access == 'Shop' }">
+							<a class="dropdown-item" href="${contextRoot}/shop/shopBack">商家後臺</a>
+							<a class="dropdown-item" href="${contextRoot}/restaurant/add">新增餐廳</a>
+						</c:if>
+						<c:if test="${member.access == 'Admin' }">
+							<a class="dropdown-item" href="${contextRoot}/Users/select">後台會員管理</a>
+							<a class="dropdown-item" href="${contextRoot}/Users/register">餐廳帳號新增</a>
 							<a class="dropdown-item"
-								href="${contextRoot}/shop/shopBack">商家後臺 </a>
+								href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a>
 						</c:if>
 						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
 						<hr class="dropdown-divider">

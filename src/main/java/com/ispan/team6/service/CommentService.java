@@ -87,7 +87,7 @@ public class CommentService {
 		Restaurant r = rService.findById(id);
 //		Set<Orders> orders = r.getOrders();
 		
-		List<Orders> orders= oDao.findOrdersByRestId(id);
+		List<Orders> orders= oDao.findOrdersByRestid(id);
 		
 		List<Comment> comments=  new ArrayList<>();;
 		for(int i=0;i<orders.size();i++) {
