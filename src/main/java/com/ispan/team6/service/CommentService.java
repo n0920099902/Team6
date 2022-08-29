@@ -20,6 +20,7 @@ import com.ispan.team6.entity.Orders;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.CommentDao;
+import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.model.UsersDao;
 
 @Service
@@ -40,6 +41,9 @@ public class CommentService {
 
 	@Autowired
 	private OrdersService oService;
+	
+	@Autowired
+	private OrdersDao oDao;
 
 	public Boolean validateUserInfo(Integer id) {
 		Users currentUser = uService.findById(id);
@@ -81,21 +85,43 @@ public class CommentService {
 	public List<CommentDto> findCommentByRest(Integer id) {
 
 		Restaurant r = rService.findById(id);
-		Set<Orders> orders = r.getOrders();
-		List<CommentDto> result = new ArrayList<>();
-
-		for (Orders i : orders) {
-			Comment cmt = i.getComment();
-
-			CommentDto dto = new CommentDto();
-			dto.setAccountName(i.getUsers().getAccount());
-			dto.setId(cmt.getId());
-			dto.setComments(cmt.getComments());
-			dto.setTime(cmt.getTime());
-
-			result.add(dto);
-
+//		Set<Orders> orders = r.getOrders();
+		
+		List<Orders> orders= oDao.findOrdersByRestId(id);
+		
+		List<Comment> comments=  new ArrayList<>();;
+		for(int i=0;i<orders.size();i++) {
+			Comment c= cDao.findCommentByOrderId(orders.get(i).getId());
+			comments.add(c);
 		}
+	
+		
+		
+		List<CommentDto> result = new ArrayList<>();
+		for(int i=0;i<comments.size();i++) {
+			CommentDto dto = new CommentDto();
+			Users users=comments.get(i).getUsers();
+			
+			dto.setAccountName(users.getAccount());
+			dto.setId(comments.get(i).getId());
+			dto.setComments(comments.get(i).getComments());
+			dto.setTime(comments.get(i).getTime());
+			result.add(dto);
+			
+		}
+
+//		for (Orders i : orders) {
+//			Comment cmt = i.getComment();
+//
+//			CommentDto dto = new CommentDto();
+//			dto.setAccountName(i.getUsers().getAccount());
+//			dto.setId(cmt.getId());
+//			dto.setComments(cmt.getComments());
+//			dto.setTime(cmt.getTime());
+//
+//			result.add(dto);
+//
+//		}
 		return result;
 	}
 
