@@ -101,4 +101,9 @@
 	</div>
 	<jsp:include page="layout/footer.jsp" />
 </body>
+<script type="text/javascript">
+var b=[];
+sessionStorage.setItem('buy', JSON.stringify(b));
+
+</script>
 </html>

@@ -55,7 +55,7 @@
     sessionStorage.setItem('rID', JSON.stringify(rid));
     //訂單session
 	var buy  = JSON.parse(sessionStorage.getItem('buy'));
-
+	
 		$(document).ready(function() {
 			var restId = $("#restaurantId").val();
 			listDishesForRest(restId);
@@ -114,6 +114,10 @@
 		//let price = console.log($(this).parent().find(".quantity").text());
 	    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
 		console.log(price);
+
+		let photo = $(this).parent().parent().find("img").attr("src");
+		console.log(photo);
+		// img_box.append('<img src=' + imgsrc + ' />')
 		let temp = -1;
 		// var buttonId = event.target.id;
 		// var rowId = buttonId.split("_")[1];
@@ -123,8 +127,8 @@
 		// let price = +(document.getElementById('price' + rowId).value);
 
 
-		var rid =document.getElementById('rID').value;
-        sessionStorage.setItem('rID', JSON.stringify(rid));
+		// var rid =document.getElementById('rID').value;
+        // sessionStorage.setItem('rID', JSON.stringify(rid));
         var buy  = JSON.parse(sessionStorage.getItem('buy'));
 
 	
@@ -132,7 +136,8 @@
 			id: id,
 			name : name,
 			quantity : quantity,
-			price : price
+			price : price,
+			photo : photo
 		};
 				if(buy.length==0){
 					var buy=[];
@@ -141,15 +146,15 @@
 				else{
 					for(let i=0;i<buy.length;i++){
 						var d=buy[i];
-						if(dish.name==d.name){
+						if(dish.id==d.id){
 							temp=1;
 						}
 					}
 					if(temp==1){
 						for(let i=0;i<buy.length;i++){
 							var d=buy[i];
-							if(dish.name==d.name){
-								d.quantity+=dish.quantity;
+							if(dish.id==d.id){
+								d.quantity=parseInt(d.quantity)+parseInt(dish.quantity);
 							}
 						}
 					}
