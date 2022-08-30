@@ -34,7 +34,7 @@ public class OrdersDetail {
 	public OrdersDetail() {
 	}
 	
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 

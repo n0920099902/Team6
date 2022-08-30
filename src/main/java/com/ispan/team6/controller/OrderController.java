@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -89,21 +90,24 @@ public class OrderController {
 
 	@PostMapping("/confirmBuy")
 	public String confirmBuy(@RequestParam("id") List<Integer> id,@RequestParam("price") List<Integer> price,
-			@RequestParam("quantity") List<Integer> quantity,@RequestParam("rID") int rID,
+			@RequestParam("quantity") List<Integer> quantity,@RequestParam("rID") Integer rID,
 			@RequestParam("UID") int UID,@RequestParam("address") String address,
 			@RequestParam("orderStatus") String orderStatus,@RequestParam("time") String time,
-			@RequestParam("phone") Integer phone, Model m) {
+			@RequestParam("phone") Integer phone, Model m,HttpSession session) {
 		int totalPrice = 0;
 		for (int i = 0; i < price.size(); i++) {
 			int p = price.get(i);
 			int q = quantity.get(i);
 			totalPrice += p * q;
 		}
-		Restaurant r = restaurantService.findById(rID);
+		Restaurant r = new Restaurant();
+		r.setId(rID);
+		Restaurant rId = restaurantService.findById(rID);
 		Users u = usersService.findById(UID);
+//		Users u = (Users)session.getAttribute("member");
 		Orders orders = new Orders();
 		orders.setUsers(u);
-		orders.setRestaurant(r);
+		orders.setRestaurant(rId);
 		orders.setAddress(address);
 		orders.setOrdersStatus(orderStatus);
 		orders.setOrdersTime(time);
@@ -111,21 +115,30 @@ public class OrderController {
 		orders.setTotalPrice(totalPrice);
 		ordersDao.save(orders);
 	
-//		for(int i= 0; i < id.size(); i++) {
-//			OrdersDetail detail = new OrdersDetail();
-//			
-//			 Dish dish = ordersDetailService.OrderFindDishById((Integer) id.get(i));
-//			 System.out.println(id + "basd");
-//			 Integer q = quantity.get(i);
-//			 detail.setDish(dish);
-//			 detail.setQuantity(q);
-//			 detail.setOrders(orders);
-//			 ordersDetailDao.save(detail);
-//			 
-//		}
-//		System.out.println("c");
-//		m.addAttribute("message", "訂單已送出");
-		return "redirect:/getUsersOrder";
+		
+		System.out.println("列印出id1:" + id + "數量" + quantity + "orders" + orders);
+		
+		for(int i= 0; i < id.size(); i++) {
+			OrdersDetail detail = new OrdersDetail();
+			
+			 Dish dish = ordersDetailService.OrderFindDishById((Integer) id.get(i));
+			 System.out.println("列印出id2:" + id + "數量" + quantity + "orders" + orders);
+			 Integer q = quantity.get(i);
+			 System.out.println("q"+q);
+			 detail.setDish(dish);
+			 System.out.println("dish" +dish);
+			 detail.setQuantity(q);
+			 detail.setOrders(orders);
+			 System.out.println("orders" +orders);
+			 System.out.println("detail=====>" +detail);
+			 System.out.println("detail.getId()=====>" +detail.getId());
+			 ordersDetailDao.save(detail);
+			 
+		}
+		System.out.println("c");
+		m.addAttribute("message", "訂單已送出");
+//		return "redirect:/getUsersOrder";
+		return "index";
 	}
 
 	// 查詢使用者歷史訂單
