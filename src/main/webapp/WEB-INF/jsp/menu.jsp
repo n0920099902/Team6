@@ -42,6 +42,7 @@
 						<tr>
 							<th scope="col">帳號</th>
 							<th scope="col">評論內容</th>
+							<th scope="col">評分</th>
 							<th scope="col">評論時間</th>
 						</tr>
 					</thead>
@@ -221,9 +222,15 @@
                 	  console.log(data);
                       $(data).each(function (index, element) {
 //                     	  var cmt = '<p>'+element.id+'</p>';
+
+                        var str = '';
+                        for(let i=0;i<element.score;i++){
+                        	str+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
+                        }
                         var cmt = '<tr>'+                
                                         '<td>' + element.accountName + '</td>'+
                                         '<td>' + element.comments + '</td>'+
+                                        '<td>' + str+ '</td>'+
                                         '<td>' + element.time + '</td>'+
                                   '</tr>';
                             

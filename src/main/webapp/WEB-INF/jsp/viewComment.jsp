@@ -19,28 +19,35 @@
 	<h1>查看評論</h1>
 </div>
 
-<c:forEach items="${comment}" var="cmt">
+
+<c:if test="${empty comment }">
+<h3>${message }</h3>
+<a href="${contextRoot}/comment/add/${orderId}"><button>新增評論</button></a>
+</c:if>
+
+<c:if test="${!empty comment }">
 <div class="row justify-content-center">
 			<div class="col-4">
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">評論 
-					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${cmt.time}"/></span>
+					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${comment.time}"/></span>
 					</div>
 					<div class="card-body">
-					
-					<div>${cmt.comments}</div>
+					<div>
+					<c:forEach begin="1" end="${comment.score }">
+  <img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">
+                    </c:forEach></div>
+					<div>${comment.comments}</div>
 					<div class="edit-link">
-					<a href="${contextRoot}/comment/editComment/${cmt.id}">修改</a>
-					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${cmt.id}">刪除</a>
+					<a href="${contextRoot}/comment/editComment/${comment.id}">修改</a>
+					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${comment.id}">刪除</a>
 					</div>
 					</div>
 				</div>
 				<br/>
 			</div>
+			
 		</div>
-
-</c:forEach>
-
-
+</c:if>
 </body>
 </html>

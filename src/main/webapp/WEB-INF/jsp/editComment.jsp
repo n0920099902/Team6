@@ -23,16 +23,23 @@
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">修改評論</h5>
-						<form:form class="form" method="post" modelAttribute="comment"
-							action="${contextRoot}/comment/editComment">
+<%-- 						<form:form class="form" method="post" modelAttribute="comment" --%>
+<%-- 							action="${contextRoot}/comment/editComment"> --%>
 							
-							<form:input type="hidden" path="id"/>
-							<form:input type="hidden" path="time"/>
-							<form:textarea path="comments" class="form-control" />
-							<br />
-							<button type="submit">確認</button>
+<%-- 							<form:input type="hidden" path="id"/> --%>
+<%-- 							<form:input type="text" path="time"/> --%>
+<%-- 							<form:textarea path="comments" class="form-control" /> --%>
+<!-- 							<br /> -->
+<!-- 							<button type="submit">確認</button> -->
 
-						</form:form>
+<%-- 						</form:form> --%>
+
+<form action="${contextRoot}/comment/editComment" method="post">
+<input type="number" name="id" value="${comment.id }" hidden="">
+<textarea rows="" cols="" name="comments" >${comment.comments }</textarea>
+<br>
+<button type="submit">確認</button>
+</form>
 					</div>
 				</div>
 			</div>
