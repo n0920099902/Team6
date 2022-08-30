@@ -1,6 +1,7 @@
 package com.ispan.team6.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -79,7 +80,7 @@ public class CommentService {
 	}
 
 	public void deleteComment(Integer id) {
-		cDao.deleteById(id);
+		cDao.deleteByCmtId(id);
 	}
 
 	public List<CommentDto> findCommentByRest(Integer id) {
@@ -106,6 +107,7 @@ public class CommentService {
 			dto.setId(comments.get(i).getId());
 			dto.setComments(comments.get(i).getComments());
 			dto.setTime(comments.get(i).getTime());
+			dto.setScore(comments.get(i).getScore());
 			result.add(dto);
 			
 		}
@@ -138,6 +140,8 @@ public class CommentService {
 		Comment cmt1 = findById(cmt.getId());
 
 		cmt1.setComments(cmt.getComments());
+		Date date=new Date();
+		cmt1.setTime(date);
 
 		cDao.save(cmt1);
 	}

@@ -11,6 +11,8 @@ public class CommentDto {
 	private Date time;
 	
 	private String accountName;
+	
+	private Integer score;
 
 	public Integer getId() {
 		return id;
@@ -44,4 +46,13 @@ public class CommentDto {
 		this.accountName = accountName;
 	}
 
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
+
+	
 }

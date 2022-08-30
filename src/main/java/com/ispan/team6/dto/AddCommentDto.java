@@ -7,6 +7,16 @@ public class AddCommentDto {
 	private Integer orderId;
 	
 	private String comments;
+	
+	private Integer score;
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 
 	public Integer getOrderId() {
 		return orderId;
