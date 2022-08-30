@@ -59,7 +59,7 @@ public class Orders {
 	
 	//多對一 Order對Restaurant外鍵(一間Restaurant可以有多筆Order)
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "fk_rest_id", insertable = false, updatable = false)
+	@JoinColumn(name = "fk_rest_id")
 	private Restaurant restaurant;
 
 	//多對一 Order對User外鍵(一個User可以有多筆Order)
