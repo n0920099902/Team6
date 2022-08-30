@@ -76,6 +76,27 @@ public class Users {
 	public Users() {
 	}
 
+	
+	public Users(Integer id, String account, String password, String email, String phone, String birthday,
+			String access, Blob photo, String remark, Set<Comment> comment, Set<Orders> orders,
+			String confimation_password, MultipartFile image) {
+		super();
+		this.id = id;
+		this.account = account;
+		this.password = password;
+		this.email = email;
+		this.phone = phone;
+		this.birthday = birthday;
+		this.access = access;
+		this.photo = photo;
+		this.remark = remark;
+		this.comment = comment;
+		this.orders = orders;
+		this.confimation_password = confimation_password;
+		Image = image;
+	}
+
+
 	public Integer getId() {
 		return id;
 	}

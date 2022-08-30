@@ -8,7 +8,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>foodtiger</title>
-<link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
+<link rel="icon"
+	href="${pageContext.request.contextPath}/images/shortcut.ico">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
@@ -18,7 +19,8 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 <style>
@@ -486,8 +488,8 @@ table.table .avatar {
 
 </head>
 <body>
-<jsp:include page="layout/navbar.jsp" />
-<%-- 	<jsp:include page="navbar.jsp" /> --%>
+	<jsp:include page="layout/navbar.jsp" />
+	<%-- 	<jsp:include page="navbar.jsp" /> --%>
 	<div class="container-xl">
 		<div class="table-responsive">
 			<div class="table-wrapper">
@@ -499,7 +501,8 @@ table.table .avatar {
 							</h2>
 						</div>
 						<div class="col-sm-7">
-							<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a>
+							<a href="#addProductModal" class="btn btn-success"
+								data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a>
 						</div>
 					</div>
 				</div>
@@ -523,126 +526,122 @@ table.table .avatar {
 		</div>
 	</div>
 	<!-- ADD Modal HTML -->
-<div id="addProductModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form id="add-dish-form" name="add-dish-form">
-				<div class="modal-header">						
-					<h4 class="modal-title">新增</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-				<div class="modal-body">					
-					<div class="form-group">
-						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="${restaurantName}" class="form-control" disabled>
-						<input type="hidden" id="restId" name="restId" value="${restaurantId}" class="form-control">
-					</div>	
-					<div class="form-group">
-						<label>商品名稱</label>
-						<input type="text" name="dishName" class="form-control" required>
+	<div id="addProductModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="add-dish-form" name="add-dish-form">
+					<div class="modal-header">
+						<h4 class="modal-title">新增</h4>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">&times;</button>
 					</div>
-					<div class="form-group">
-						<label>商品價格</label>
-						<input type="text" name="dishPrice" class="form-control" required>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>店家名稱</label> <input type="text" id="rest" name="rest"
+								value="${restaurantName}" class="form-control" disabled>
+							<input type="hidden" id="restId" name="restId"
+								value="${restaurantId}" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>商品名稱</label> <input type="text" name="dishName"
+								class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>商品價格</label> <input type="text" name="dishPrice"
+								class="form-control" required>
+						</div>
+						<div class="form-group">
+							<span style="padding-left: 60px;"></span> <label>商品種類</label> <select
+								id="dishCategory" name="dishCategory" required>
+							</select> <span style="padding-left: 35px;"></span> <label>商品狀態</label> <select
+								name="dishStatus" required>
+								<option value="未上架">未上架</option>
+								<option value="已上架">已上架</option>
+							</select> <br> <br> <label>商品圖片</label> <input type="file"
+								id="photo" name="photo"
+								accept="image/gif, image/jpeg, image/png" required> <img
+								width="150px" height="150px" id="preview_photo" src="#" />
+						</div>
 					</div>
-					<div class="form-group">
-					<span style="padding-left:60px;"></span>
-						<label>商品種類</label>
-						<select id="dishCategory" name="dishCategory" required>
-  						</select>
-  						<span style="padding-left:35px;"></span>
-						<label>商品狀態</label>
-						<select name="dishStatus" required>
-    						<option value="未上架">未上架</option>
-    						<option value="已上架">已上架</option>
-  						</select>
-  						<br>
-  						<br>
-						<label>商品圖片</label>
-						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png" required>
-						<img width="150px" height="150px" id="preview_photo" src="#" />
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default" data-dismiss="modal"
+							value="Cancel"> <input type="submit"
+							class="btn btn-success" value="Add">
 					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-success" value="Add">
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-<!-- Edit Modal HTML -->
-<div id="editProductModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<form id="edit-dish-form" name="edit-dish-form">
-				<div class="modal-header">						
-					<h4 class="modal-title">修改</h4>
-					<button type="button" class="close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-				</div>
-<!-- 				<div class="modal-body">	 -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<input type="hidden" class="form-control" name="product_id" required> -->
-<!-- 					</div>				 -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>商品名稱</label> -->
-<!-- 						<input type="text" class="form-control" name="name" required> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>商品價格</label> -->
-<!-- 						<input type="text" class="form-control" name="price" required> -->
-<!-- 					</div> -->
-<!-- 					<div class="form-group"> -->
-<!-- 						<label>商品圖片</label> -->
-<!-- 						<input type="file" name="image" > -->
-<!-- 					</div>				 -->
-<!-- 				</div> -->
-				<div class="modal-body">
-					<div class="form-group">
-						<input type="hidden" class="form-control" name="dishId" required>
-					</div>	
-					<div class="form-group">
-						<input type="hidden" class="form-control" name="restId" required>
-					</div>	
-					<div class="form-group">
-						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="${restaurantName}" class="form-control" disabled>
-						<input type="hidden" id="restId" name="restId" value="${restaurantId}" class="form-control">
-					</div>	
-					<div class="form-group">
-						<label>商品名稱</label>
-						<input type="text" name="dishName" class="form-control" required>
+	<!-- Edit Modal HTML -->
+	<div id="editProductModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="edit-dish-form" name="edit-dish-form">
+					<div class="modal-header">
+						<h4 class="modal-title">修改</h4>
+						<button type="button" class="close" data-bs-dismiss="modal"
+							aria-hidden="true">&times;</button>
 					</div>
-					<div class="form-group">
-						<label>商品價格</label>
-						<input type="text" name="dishPrice" class="form-control" required>
+					<!-- 				<div class="modal-body">	 -->
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<input type="hidden" class="form-control" name="product_id" required> -->
+					<!-- 					</div>				 -->
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label>商品名稱</label> -->
+					<!-- 						<input type="text" class="form-control" name="name" required> -->
+					<!-- 					</div> -->
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label>商品價格</label> -->
+					<!-- 						<input type="text" class="form-control" name="price" required> -->
+					<!-- 					</div> -->
+					<!-- 					<div class="form-group"> -->
+					<!-- 						<label>商品圖片</label> -->
+					<!-- 						<input type="file" name="image" > -->
+					<!-- 					</div>				 -->
+					<!-- 				</div> -->
+					<div class="modal-body">
+						<div class="form-group">
+							<input type="hidden" class="form-control" name="dishId" required>
+						</div>
+						<div class="form-group">
+							<input type="hidden" class="form-control" name="restId" required>
+						</div>
+						<div class="form-group">
+							<label>店家名稱</label> <input type="text" id="rest" name="rest"
+								value="${restaurantName}" class="form-control" disabled>
+							<input type="hidden" id="restId" name="restId"
+								value="${restaurantId}" class="form-control">
+						</div>
+						<div class="form-group">
+							<label>商品名稱</label> <input type="text" name="dishName"
+								class="form-control" required>
+						</div>
+						<div class="form-group">
+							<label>商品價格</label> <input type="text" name="dishPrice"
+								class="form-control" required>
+						</div>
+						<div class="form-group">
+							<span style="padding-left: 60px;"></span> <label>商品種類</label> <select
+								id="dishCategory" name="dishCategory" required>
+							</select> <span style="padding-left: 35px;"></span> <label>商品狀態</label> <select
+								id="dishStatus" name="dishStatus" required>
+								<option value="未上架">未上架</option>
+								<option value="已上架">已上架</option>
+							</select> <br> <br> <label>商品圖片</label> <input type="file"
+								id="photo" name="photo"
+								accept="image/gif, image/jpeg, image/png"> <img
+								width="150px" height="150px" id="preview_photo" src="#" />
+						</div>
 					</div>
-					<div class="form-group">
-						<span style="padding-left:60px;"></span>
-						<label>商品種類</label>
-						<select id="dishCategory" name="dishCategory" required>
-  						</select>
-  						<span style="padding-left:35px;"></span>
-						<label>商品狀態</label>
-						<select id="dishStatus" name="dishStatus" required>
-    						<option value="未上架">未上架</option>
-    						<option value="已上架">已上架</option>
-  						</select>
-  						<br>
-  						<br>
-						<label>商品圖片</label>
-						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png">
-						<img width="150px" height="150px" id="preview_photo" src="#" />
+					<div class="modal-footer">
+						<input type="button" class="btn btn-default"
+							data-bs-dismiss="modal" value="Cancel"> <input
+							type="submit" class="btn btn-info" value="Edit">
 					</div>
-				</div>
-				<div class="modal-footer">
-					<input type="button" class="btn btn-default" data-bs-dismiss="modal" value="Cancel">
-					<input type="submit" class="btn btn-info" value="Edit">
-				</div>
-			</form>
+				</form>
+			</div>
 		</div>
 	</div>
-</div>
-<%-- <jsp:include page="footer.jsp" /> --%>
+	<%-- <jsp:include page="footer.jsp" /> --%>
 </body>
 </html>

@@ -19,19 +19,19 @@
 	<h1>查看評論</h1>
 </div>
 
-<c:forEach var="comment" items="${page.content}">
+<c:forEach items="${comment}" var="cmt">
 <div class="row justify-content-center">
 			<div class="col-4">
 				<div class="card" style="width: 18rem;">
 					<div class="card-header">評論 
-					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${comment.time}"/></span>
+					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${cmt.time}"/></span>
 					</div>
 					<div class="card-body">
 					
-					<div>${comment.comments}</div>
+					<div>${cmt.comments}</div>
 					<div class="edit-link">
-					<a href="${contextRoot}/comment/editComment/${comment.id}">修改</a>
-					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${comment.id}">刪除</a>
+					<a href="${contextRoot}/comment/editComment/${cmt.id}">修改</a>
+					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${cmt.id}">刪除</a>
 					</div>
 					</div>
 				</div>
@@ -41,27 +41,6 @@
 
 </c:forEach>
 
-<div class="row justify-content-center">
-<div class="col-4">
-<c:forEach var="pageNumber" begin="1" end="${page.totalPages}">
-				
-				
-				<c:choose>
-				
-					<c:when  test="${page.number != pageNumber -1}">
-					<a href="${contextRoot}/comment/viewComment?p=${pageNumber}">
-							${pageNumber} </a>
-					
-					</c:when>
-					
-				    <c:otherwise>
-				       ${pageNumber}
-				    </c:otherwise>
-					
-				</c:choose>
 
-				</c:forEach>
-				</div>
-				</div>
 </body>
 </html>

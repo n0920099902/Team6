@@ -10,8 +10,14 @@ import com.ispan.team6.entity.Dish;
 public interface DishDAO extends JpaRepository<Dish, Integer> {
 	@Query(value="from Dish where fk_rest_id=?1 and dishStatus='已上架'")
 	public List<Dish> findAllByRestIdAndDishStatusIsPublished(Integer restId);
+<<<<<<< HEAD
 	
 	@Query(value="from Dish where fk_rest_id=?1")
 	public List<Dish> findAllByRestId(Integer restId);
 
+=======
+
+	@Query(value="from Dish where fk_rest_id=?1")
+	public List<Dish> findAllByRestId(Integer restId);
+>>>>>>> 0830_25
 }

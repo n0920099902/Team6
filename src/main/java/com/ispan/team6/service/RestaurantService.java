@@ -34,7 +34,11 @@ public class RestaurantService {
 	public void insertRestaurant(Restaurant r) {
 		rDao.save(r);
 	}
-	
+
+	public Restaurant insertRestaurant2(Restaurant r) {
+		return rDao.save(r);
+	}
+
 	public void insertRestaurantType(RestaurantType r) {
 		rtDao.save(r);
 	}
@@ -58,7 +62,7 @@ public class RestaurantService {
 
 		return null;
 	}
-	
+
 	public RestaurantType findIdByType(String type) {
 		return rtDao.findIdByType(type);
 	}

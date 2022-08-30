@@ -24,10 +24,12 @@
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
 						<h5 class="card-title">新增評論</h5>
-						<form:form class="form" method="post" modelAttribute="comment"
+						
+						<form:form class="form" method="post" modelAttribute="addCommentDto"
 							action="${contextRoot}/postComment">
-
+							<form:label path="orderId">訂單編號:${orderId}</form:label>
 							<form:textarea path="comments" class="form-control" />
+							
 							<br />
 							<button type="reset">取消</button>
 							<button type="submit">張貼</button>
@@ -37,17 +39,7 @@
 			</div>
 		</div>
 		<br />
-		<div class="row justify-content-center">
-			<div class="col-4">
-				<div class="card" style="width: 18rem;">
-					<div class="card-header">
-						最新留言 <span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss"
-								value="${latestCmt.time}" /></span>
-					</div>
-					<div class="card-body">${latestCmt.comments}</div>
-				</div>
-			</div>
-		</div>
+		
 
 	</div>
 </body>

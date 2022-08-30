@@ -4,24 +4,15 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
+
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+
+
+
 <!-- web icon -->
-<link rel="icon"
-	href="${pageContext.request.contextPath}/img/favicon.ico">
+<!-- <link rel="icon" -->
+<%-- 	href="${contextRoot}/img/favicon.ico"> --%>
 
-<!-- bootstrap 5.1.3 CSS -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-	crossorigin="anonymous">
-
-<!-- bootstrap 5.1.3 JS -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-	
 <jsp:include page="layout/navbar.jsp" />
 
 
@@ -29,6 +20,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Restuarant</title>
+
+
 </head>
 <body>
 	<h1>店家頁面測試</h1>
@@ -66,7 +59,7 @@
 									<div>
 										<span class="me-5">營業時間：<br />
 											${restaurant.startDate}～${restaurant.endDate}<br />
-											${restaurant.starttime}～${restaurant.endtime}
+											${restaurant.startTime}～${restaurant.endTime}
 										</span>
 									</div>
 								</div>
@@ -108,4 +101,9 @@
 	</div>
 	<jsp:include page="layout/footer.jsp" />
 </body>
+<script type="text/javascript">
+var b=[];
+sessionStorage.setItem('buy', JSON.stringify(b));
+
+</script>
 </html>

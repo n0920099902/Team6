@@ -120,17 +120,17 @@ public class RestaurantController {
 		return "viewRestaurants";
 	}
 
-	@DeleteMapping("/restaurant/deleteRestaurant/{id}")
+	@GetMapping("/restaurant/deleteRestaurant/{id}")
 	public String deleteRestaurantById(@PathVariable Integer id) {
 		rService.deleteRestaurant(id);
 
-		return "redirect:/restaurant/viewRestaurants ";
+		return "redirect:/restaurant/viewRestaurants";
 	}
 
 	@GetMapping("/restaurant/editRestaurantPageByAdmin/{id}")
-	public String editRestaurantPageByAdmin(@PathVariable Integer id, Model m,Users member,Restaurant restaurant) {
+	public String editRestaurantPageByAdmin(@PathVariable Integer id, Model m, Users member, Restaurant restaurant) {
 		Restaurant resId = rService.findById(id);
-		
+
 		m.addAttribute("restaurant", resId);
 		// 餐廳類別顯示
 		List<RestaurantType> list = rService.findAllRestuarantType();
@@ -146,8 +146,8 @@ public class RestaurantController {
 		DateMap.put("星期五", "星期五");
 		DateMap.put("星期六", "星期六");
 		m.addAttribute("DateMap", DateMap);
-		
-		return "editRestaurant2";
+
+		return "editRestaurant";
 	}
 
 	@GetMapping("/restaurant/editRestaurant/{id}")
@@ -237,6 +237,29 @@ public class RestaurantController {
 		rService.insertRestaurant(restaurant);
 
 		return "redirect:/restaurant";
+	}
+
+	@PostMapping("/restaurant/editRestaurantAdmin")
+	public String editRestaurantAdmin(@ModelAttribute("restaurant") Restaurant restaurant, RestaurantType restaurantType,
+			Users member, HttpSession session, Model model) throws IOException {
+//		Users user = (Users) session.getAttribute("member");
+		MultipartFile file = restaurant.getImage();
+		if (file != null && !file.isEmpty()) {
+			try {
+				byte[] bytes = file.getBytes();
+				Blob blob = new SerialBlob(bytes);
+				restaurant.setPhoto(blob);
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
+			}
+		}
+		RestaurantType typeId = rService.findTypeById(restaurant.getRestaurantType().getId());
+//		restaurant.setUsers(user);
+		restaurant.setRestaurantType(typeId);
+		rService.insertRestaurant(restaurant);
+
+		return "redirect:/restaurant/viewRestaurants";
 	}
 
 	@GetMapping(value = "/restaurant/search", produces = "text/pain;charset=UTF-8")

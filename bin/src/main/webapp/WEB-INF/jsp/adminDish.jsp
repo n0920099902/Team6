@@ -5,11 +5,10 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<!-- web icon -->
-<link rel="icon" href="${pageContext.request.contextPath}/img/favicon1.ico">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>foodtiger</title>
+<link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
 <link rel="stylesheet"
@@ -212,9 +211,11 @@ table.table .avatar {
 <script>
 	$(document).ready(function() {
 		listAllDishes();
+		listAllDishCategories();
 		function listAllDishes() {
+			var restId = $("#restId").val();
 			$.ajax({
-  	            url: "http://localhost:8080/my-app/dish",
+  	            url: "http://localhost:8080/my-app/dish?showMode=backend&restId=" + restId,
   	            type: "GET",
   	            dataType: "JSON",
   	            contentType : "application/json; charset=utf-8",
@@ -225,16 +226,40 @@ table.table .avatar {
   					$(data).each(function () {                               
                             var tr = $('<tr></tr>')
                             tr.append('<td style="display:none;">' + this.dishId + '</td>')
+//                             tr.append('<td style="display:none;">' + this.restId + '</td>')
                             tr.append('<td>' + this.restName + '</td>')
                             tr.append('<td>' + this.dishName + '</td>')
                             tr.append('<td>' + this.dishCategory + '</td>')
                             tr.append('<td>' + this.dishPrice + '</td>')
                             var imgsrc = "data:image/png;base64," + this.dishPhoto;
-                            tr.append('<td>' + '<img id="ItemPreview" src=' + imgsrc + ' />' + '</td>')
+                            tr.append('<td>' + '<img width="50px" height="50px" id="ItemPreview" src=' + imgsrc + ' />' + '</td>')
                             tr.append('<td>' + this.dishStatus + '</td>')
                             tr.append('<td style="display:none;">' + this.dishCategoryId + '</td>')
                             tr.append('<td>' + '<a href="#" class="settings" title="Settings" data-bs-toggle="modal"><i class="material-icons">&#xE8B8;</i></a><a href="#" class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE5C9;</i></a>' + '</td>')
                             tboby.append(tr);
+                    });     
+  	            },
+  	            error: function (xhr, desc, err)
+  	            {
+  	            	console.log(desc);
+  	            	console.log(err);
+  	            }
+  	        });
+		}
+		
+		function listAllDishCategories() {
+			var restId = $("#restId").val();
+			$.ajax({
+  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+  	            type: "GET",
+  	            dataType: "JSON",
+  	            contentType : "application/json; charset=utf-8",
+  	            success: function (data, status)
+  	            {
+  					console.log(data);
+  					var select = $('#addProductModal #dishCategory,#editProductModal #dishCategory');
+  					$(data).each(function () {
+                        select.append('<option value=' + this.dishTypeId + '>' + this.dishTypeCategory + '</option>');
                     });     
   	            },
   	            error: function (xhr, desc, err)
@@ -372,10 +397,10 @@ table.table .avatar {
 	 			var dishCategoryId = $(this).closest('tr').children('td:eq(7)').text();
 	 			console.log(dishPhoto);
 	 			$("#editProductModal input[name=dishId]").val(dishId);
-// 	 			$("#editProductModal input[name=restId]").val(restId);
+	 			$("#editProductModal input[name=restId]").val(restId);
 	 			$("#editProductModal input[name=restName]").val(restName);
 	 			$("#editProductModal input[name=dishName]").val(dishName);
-	 			$("#dishCategory").val(dishCategoryId);
+	 			$("#editProductModal #dishCategory").val(dishCategoryId);
 	 			$("#editProductModal input[name=dishPrice]").val(dishPrice);
 	 			$("#dishStatus").val(dishStatus);
 	 			$("#editProductModal #preview_photo").attr("src", dishPhoto);
@@ -470,12 +495,11 @@ table.table .avatar {
 					<div class="row">
 						<div class="col-sm-5">
 							<h2>
-								<b>產品</b>
+								<b>${restaurantName}產品</b>
 							</h2>
 						</div>
 						<div class="col-sm-7">
 							<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a>
-<!-- 							<a href="#editProductModal" class="btn btn-info" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a> -->
 						</div>
 					</div>
 				</div>
@@ -510,8 +534,8 @@ table.table .avatar {
 				<div class="modal-body">					
 					<div class="form-group">
 						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value="McDonlad" class="form-control" disabled>
-						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
+						<input type="text" id="rest" name="rest" value="${restaurantName}" class="form-control" disabled>
+						<input type="hidden" id="restId" name="restId" value="${restaurantId}" class="form-control">
 					</div>	
 					<div class="form-group">
 						<label>商品名稱</label>
@@ -524,9 +548,7 @@ table.table .avatar {
 					<div class="form-group">
 					<span style="padding-left:60px;"></span>
 						<label>商品種類</label>
-						<select name="dishCategory" required>
-    						<option value="1">主餐</option>
-    						<option value="2">飲料</option>
+						<select id="dishCategory" name="dishCategory" required>
   						</select>
   						<span style="padding-left:35px;"></span>
 						<label>商品狀態</label>
@@ -538,7 +560,7 @@ table.table .avatar {
   						<br>
 						<label>商品圖片</label>
 						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png" required>
-						<img id="preview_photo" src="#" />
+						<img width="150px" height="150px" id="preview_photo" src="#" />
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -579,13 +601,13 @@ table.table .avatar {
 					<div class="form-group">
 						<input type="hidden" class="form-control" name="dishId" required>
 					</div>	
-<!-- 					<div class="form-group"> -->
-<!-- 						<input type="hidden" class="form-control" name="restId" required> -->
-<!-- 					</div>	 -->
+					<div class="form-group">
+						<input type="hidden" class="form-control" name="restId" required>
+					</div>	
 					<div class="form-group">
 						<label>店家名稱</label>
-						<input type="text" id="rest" name="rest" value=${restaurant.id} class="form-control" disabled>
-						<input type="hidden" id="restId" name="restId" value="1" class="form-control">
+						<input type="text" id="rest" name="rest" value="${restaurantName}" class="form-control" disabled>
+						<input type="hidden" id="restId" name="restId" value="${restaurantId}" class="form-control">
 					</div>	
 					<div class="form-group">
 						<label>商品名稱</label>
@@ -599,8 +621,6 @@ table.table .avatar {
 						<span style="padding-left:60px;"></span>
 						<label>商品種類</label>
 						<select id="dishCategory" name="dishCategory" required>
-    						<option value="1">主餐</option>
-    						<option value="2">飲料</option>
   						</select>
   						<span style="padding-left:35px;"></span>
 						<label>商品狀態</label>
@@ -612,7 +632,7 @@ table.table .avatar {
   						<br>
 						<label>商品圖片</label>
 						<input type="file" id="photo" name="photo" accept="image/gif, image/jpeg, image/png">
-						<img id="preview_photo" src="#" />
+						<img width="150px" height="150px" id="preview_photo" src="#" />
 					</div>
 				</div>
 				<div class="modal-footer">

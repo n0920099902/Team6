@@ -44,4 +44,14 @@ public class UsersService {
 	public Users findPasswordById(Integer id) {
 		return uDao.findPasswordById(id);
 	}
+
+	public Users findAccountById(Integer id) {
+		Optional<Users> optional = uDao.findAccountById(id);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
 }
