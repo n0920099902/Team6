@@ -7,7 +7,8 @@
 <!DOCTYPE html>
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="layout/navbar.jsp" />
+<%-- <jsp:include page="layout/navbar.jsp" /> --%>
+<jsp:include page="layout/navbar2.jsp" />
 <html>
 <head>
 <style type="text/css">

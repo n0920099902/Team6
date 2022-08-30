@@ -6,7 +6,7 @@
 
 
 <jsp:include page="layout/navbar.jsp" />
-
+<jsp:include page="layout/navbar2.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
