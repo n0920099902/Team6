@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 
 <jsp:include page="layout/navbar.jsp" />
-<jsp:include page="layout/cartBar.jsp" />
+
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
@@ -53,10 +53,13 @@
 							style="color: red" id="phoneout"></span>
 					</div>
 
+					<!-- <div>
+						<input type="number">
+					</div> -->
 
 
 
-					<button onclick="getTime()">確認購買</button>
+					<button id = "confirmBuy" onclick="getTime()">確認購買</button>
 
 				</form>
 			</div>
@@ -183,10 +186,10 @@
 	}
 	function getTime() {
 		
-// 		if(document.getElementById("UID").value=""){
-// 			alert('請登入');
-// 			window.location.reload();
-// 		}
+		// if(document.getElementById("UID").value=""){
+		// 	alert('請登入');
+		// 	window.location.reload();      
+		// }
 		
 		var date = new Date();
 

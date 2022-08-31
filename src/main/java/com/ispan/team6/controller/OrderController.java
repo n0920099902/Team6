@@ -137,8 +137,8 @@ public class OrderController {
 		}
 		System.out.println("c");
 		m.addAttribute("message", "訂單已送出");
-//		return "redirect:/getUsersOrder";
-		return "index";
+		//		return "redirect:/getUsersOrder";
+		return "redirect:/restaurant/cart/payment";
 	}
 
 	// 查詢使用者歷史訂單
