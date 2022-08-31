@@ -490,6 +490,9 @@ table.table .avatar {
 <body>
 	<jsp:include page="layout/navbar.jsp" />
 	<%-- 	<jsp:include page="navbar.jsp" /> --%>
+<%-- <jsp:include page="layout/navbar.jsp" /> --%>
+<%-- <jsp:include page="layout/navbar2.jsp" /> --%>
+<%-- 	<jsp:include page="navbar.jsp" /> --%>
 	<div class="container-xl">
 		<div class="table-responsive">
 			<div class="table-wrapper">

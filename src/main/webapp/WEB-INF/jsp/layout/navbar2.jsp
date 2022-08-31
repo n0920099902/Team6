@@ -15,9 +15,20 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
      <meta name="viewport" content="width=device-width, initial-scale=1.0">
   	<link href="${contextRoot}/css/GM.css" rel="stylesheet" />
-   
+   <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+ 
    </head>
 <body>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<div id="wrapper" class="active">  
+
+
+
+
   <div class="sidebar">
     <div class="logo-details">
       <i class='bx bxl-c-plus-plus'></i>
@@ -50,54 +61,55 @@
           </a>
         </li>
         <li>
-          <a href="#">
-            <i class='bx bx-coin-stack' ></i>
-            <span class="links_name">Stock</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-book-alt' ></i>
-            <span class="links_name">Total order</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-user' ></i>
-            <span class="links_name">Team</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-message' ></i>
-            <span class="links_name">Messages</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-heart' ></i>
-            <span class="links_name">Favrorites</span>
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cog' ></i>
-            <span class="links_name">Setting</span>
-          </a>
-        </li>
-        <li class="log_out">
-          <a href="#">
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-coin-stack' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-book-alt' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-user' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+    <li class="log_out">
+          <a href="${contextRoot}/">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
           </a>
         </li>
       </ul>
+<!--         <li> -->
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-message' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-heart' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+<!--         <li> -->
+<!--           <a href="#"> -->
+<!--             <i class='bx bx-cog' ></i> -->
+<!--             <span class="links_name"></span> -->
+<!--           </a> -->
+<!--         </li> -->
+    
   </div>
   <section class="home-section">
     <nav>
       <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Dashboard</span>
+        <span class="dashboard">會員管理</span>
       </div>
       <div class="search-box">
         <input type="text" placeholder="Search...">
