@@ -24,18 +24,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.UsersDao;
+import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
-@SessionAttributes("member")
+@SessionAttributes({"member","shop"})
 public class UsersApi {
 	@Autowired
 	private UsersDao dao;
 
 	@Autowired
 	private UsersService uService;
+	
+	@Autowired
+	private RestaurantService rService;
 
 	@PostMapping("member/login")
 	public String Login(@RequestParam("mAccount") String account, @RequestParam("mPassword") String pwd, Model m) {
@@ -44,16 +49,24 @@ public class UsersApi {
 			m.addAttribute("message", "登入失敗,請重新登入");
 			return "login";
 		}
+		Restaurant r=rService.findByUsers(member);
+		if(member.getAccess().equals("Shop")&&r==null) {
+			m.addAttribute("shop", "NO");
+		}
+		if(member.getAccess().equals("Shop")&&r!=null) {
+			m.addAttribute("shop", "YES");
+		}
 		m.addAttribute("member", member);
 
-		return "index";
+		return "redirect:/restaurant";
 	}
 
 	@GetMapping("member/logout")
 	public String LogOutAction(@ModelAttribute("member") Users member, HttpSession httpSession, Model m) {
 		httpSession.invalidate();
 		m.addAttribute("member", null);
-		return "index";
+		m.addAttribute("shop", null);
+		return "redirect:/restaurant";
 
 	}
 

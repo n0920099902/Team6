@@ -13,6 +13,8 @@
 <html>
 <head>
 <link href="${contextRoot}/css/addRestaurant.css" rel="stylesheet" />
+
+
 <meta charset="UTF-8">
 <title>餐廳新增頁面</title>
 </head>
@@ -54,7 +56,7 @@
 				</div>
 				<div>
 					<h5>營業時間：</h5>
-					<select name="startDate">
+					<select name="startDate" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
 						<option value="星期日">星期日</option>
 						<option value="星期一">星期一</option>
 						<option value="星期二">星期二</option>

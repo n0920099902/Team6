@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.Restaurant;
@@ -15,6 +16,7 @@ import com.ispan.team6.model.DishDAO;
 import com.ispan.team6.service.RestaurantService;
 
 @Controller
+
 public class PageController {
 
 	@Autowired
@@ -25,7 +27,7 @@ public class PageController {
 	
 	@GetMapping("/")
 	public String welcomeIndex() {
-		return "index";
+		return "redirect:/restaurant";
 	}
 
 	@GetMapping("/member/view")

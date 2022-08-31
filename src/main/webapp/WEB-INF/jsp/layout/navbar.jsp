@@ -111,7 +111,7 @@
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<c:if test="${member.access == 'Shop' }">
 							<a class="dropdown-item" href="${contextRoot}/shop/shopBack">商家後臺</a>
-							<c:if test="${restaurant.users.id == null }">
+							<c:if test="${shop == 'NO' }">
 								<a class="dropdown-item" href="${contextRoot}/restaurant/add">新增餐廳</a>
 							</c:if>
 						</c:if>

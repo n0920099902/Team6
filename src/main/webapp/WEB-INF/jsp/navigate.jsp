@@ -1,9 +1,9 @@
 <%-- <%@ page language="java" contentType="text/html; charset=UTF-8" --%>
-<%-- 	pageEncoding="UTF-8"%> --%>
-<%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%>
+<%-- <%-- 	pageEncoding="UTF-8"%> --%> --%>
+<%-- <%-- <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%> --%> --%>
 
 <%-- <%-- <link href="${pageContext.request.contextPath}/css/bootstrap.min.css" rel="stylesheet" /> --%> --%>
-<!-- <header class="p-3 mb-3 border-bottom">	 -->
+<!-- <!-- <header class="p-3 mb-3 border-bottom">	 --> -->
 <!-- 	<div class="container"> -->
 <!-- 		<div -->
 <!-- 			class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start"> -->
@@ -41,7 +41,7 @@
 <%-- 					<a href="${pageContext.request.contextPath}/page/login.jsp"> --%>
 <!-- 						<button class="btn btn-primary">後台登入</button> -->
 <!-- 					</a> -->
-<%-- 				</c:if> --%>
+<!-- 				</c:if> -->
 
 <%-- 				<c:if test="${!empty users}"> --%>
 <!-- 				<a href="#" 空連結 這樣寫 顯示 是連結效果(比如滑鼠變小手)但是沒有頁面跳轉 -->
@@ -58,7 +58,7 @@
 <!-- <!-- 						<li><hr class="dropdown-divider"></li> --> -->
 <!-- 						<li><a class="dropdown-item" href="/LaptopsShop/Logout.do">登出</a></li> -->
 <!-- 					</ul> -->
-<%-- 				</c:if> --%>
+<!-- 				</c:if> -->
 <!-- 			</div> -->
 <!-- 			<!-- 會員登入/登入成功圖案 --> -->
 
