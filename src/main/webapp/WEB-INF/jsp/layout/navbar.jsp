@@ -53,16 +53,16 @@
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/cart/noLoginCart">購物車</a></li>
 				</c:if>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/GM">後台管理</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
+				
+<!-- 				<li class="nav-item"><a class="nav-link" -->
+<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/GM">後台管理</a></li>
-				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish/category">商品種類(後台)</a></li>
+				<li class="nav-item"><a class="nav-link"
+					href="${contextRoot}/GM">後台管理</a></li>
+					
 
 
 				<div class="nav-item dropdown">
