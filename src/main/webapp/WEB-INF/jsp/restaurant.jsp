@@ -44,8 +44,8 @@
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>
-						<a href="restaurant/${restaurant.id}/menu"
-							style="color: black; text-decoration: none">
+<%-- 						<a href="restaurant/${restaurant.id}/menu" --%>
+<!-- 							style="color: black; text-decoration: none"> -->
 							<div class="col">
 								<div class="card">
 									<img
@@ -61,6 +61,10 @@
 											${restaurant.startDate}～${restaurant.endDate}<br />
 											${restaurant.startTime}～${restaurant.endTime}
 										</span>
+										<div>
+										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu"><button type="button">菜單</button></a>
+										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a>
+										</div>
 									</div>
 								</div>
 							</div>

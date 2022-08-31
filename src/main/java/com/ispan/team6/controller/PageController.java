@@ -124,5 +124,9 @@ public class PageController {
 	@GetMapping("/GM")
 	public String GM() {
 		return "GM";}
+	
+	@GetMapping("/restaurant/restaurantComment")
+	public String restaurantComment() {
+		return "restaurantComment";}
 
 }

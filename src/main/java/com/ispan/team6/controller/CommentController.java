@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ispan.team6.dto.AddCommentDto;
+import com.ispan.team6.dto.CommentDto;
 import com.ispan.team6.entity.Comment;
 import com.ispan.team6.entity.Orders;
+import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.Users;
+import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.service.CommentService;
 import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.UsersService;
@@ -36,6 +39,9 @@ public class CommentController {
 	
 	@Autowired
 	private OrdersService oService;
+	
+	@Autowired
+	private OrdersDao oDao;
 
 	@GetMapping("/comment/add/{id}")
 	public String addCommentPage(@PathVariable("id") Integer id, Model m) {
@@ -147,4 +153,11 @@ System.out.println("asasasasasasas"+orderId);
 		return "viewComment";
 	}
 
+	@GetMapping("/restaurant/{id}/comment")
+	public String commentPage(@PathVariable Integer id, Model model) {
+		List<CommentDto>commentResult=cService.findCommentByRest(id);
+		model.addAttribute("comment", commentResult);
+		model.addAttribute("rid", id); //cart導回餐廳用參數
+		return "NewComment";
+	}
 }

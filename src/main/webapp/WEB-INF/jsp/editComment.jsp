@@ -38,7 +38,7 @@
 <input type="number" name="id" value="${comment.id }" hidden="">
 <textarea rows="" cols="" name="comments" >${comment.comments }</textarea>
 <br>
-<button type="submit">確認</button>
+<button type="submit" class="btn btn-primary">確認</button>
 </form>
 					</div>
 				</div>
