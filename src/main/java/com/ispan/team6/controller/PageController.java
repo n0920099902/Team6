@@ -128,5 +128,10 @@ public class PageController {
 	@GetMapping("/restaurant/restaurantComment")
 	public String restaurantComment() {
 		return "restaurantComment";}
+	
+	@GetMapping("/webSocket")
+	public String webSocket() {
+		return "chat";
+	}
 
 }
