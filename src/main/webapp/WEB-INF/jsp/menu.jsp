@@ -14,29 +14,66 @@
 		<link href="../../css/font-awesome.min.css" rel="stylesheet" />
 		<link href="../../css/style.css" rel="stylesheet" />
 		<link href="../../css/responsive.css" rel="stylesheet" />
+		<style>
+			.v-effect-link {
+  				list-style-type: none;
+  				margin: 0;
+  				padding: 0;
+  				text-align: center;
+			}
+			.v-effect-link li {
+  				display: inline-block;
+  				min-width: 5em;
+  				margin: 0 0.5em;
+			}
+			.v-effect-link a {
+  				text-decoration: none;
+  				display: block;
+  				font-family:Arial;
+  				position: relative;
+  				color: black;
+  				padding:.5em 0
+			}
+			.v-effect-link a:hover {
+  				color: #c69f73;
+			}
+			.v-effect-link a:hover:before {
+  				left: 0;
+  				width: 100%;
+			}
+			.v-effect-link a:before {
+  				content: "";
+  				position: absolute;
+  				width: 0;
+  				height: .5px;
+ 				background-color: #c69f73;
+  				bottom: calc(-1px);
+  				right: 0;
+  				transition: all 0.3s cubic-bezier(0.785, 0.135, 0.15, 0.86);
+			}
+		</style>
 	</head>
 	<body>
 		<section class="food_section layout_padding">
 			<!-- 	取得餐廳ID -->
-	<input type="number" id="rID" name="rID" value="${rid }" hidden="" >
-
-
-
+			<input type="number" id="rID" name="rID" value="${rid}" hidden="" >
 			<div class="container">
 				<input type="hidden" id="restaurantId" value="${restaurant.id}" >
 				<div class="heading_container heading_center">
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
-			<div>	<a href="" id="keepBuy"><button>送出訂單</button></a> </div>
-				<div id="categories" class="heading_container heading_center">
-					
+				<div>
+					<a href="" id="keepBuy"><button>送出訂單</button></a>
 				</div>
+				<ul id="categories" class="v-effect-link">
+				</ul>
 				<div class="filters-content">
 					<div class="row grid">
 					</div>
 				</div>
-				<h2>評論</h2>
-			
+				<div class="heading_container heading_center">
+					<h2>Comment</h2>
+				</div>
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -49,9 +86,8 @@
 					</tbody>
 				</table>
 			</div>
-</section>
-
-</body>
+		</section>
+	</body>
 	<script>
     //返回餐廳繼續購買
     var rid =document.getElementById('rID').value;
@@ -64,36 +100,54 @@
 			listDishesForRest(restId);
 	        getComments(restId);
 //底下程式碼還在做修改,請先不要去刪除			
-// 			listAllDishCategories(restId);
+			listAllDishCategories(restId);
 			
-// 			function listAllDishCategories(restId) {
-// 				$.ajax({
-// 	  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
-// 	  	            type: "GET",
-// 	  	            dataType: "JSON",
-// 	  	            contentType : "application/json; charset=utf-8",
-// 	  	            success: function (data, status)
-// 	  	            {
-// 	  					var div = $('#categories');
-// 	  					$(data).each(function () {
-// 	  						div.append('<h2>' + this.dishTypeCategory + '</h2>').append('<br>')
-// 	                    });     
-// 	  	            },
-// 	  	            error: function (xhr, desc, err)
-// 	  	            {
-// 	  	            	console.log(desc);
-// 	  	            	console.log(err);
-// 	  	            }
-// 	  	        })
-// 			}
-			
-			function listDishesForRest(restId) {
+			function listAllDishCategories(restId) {
 				$.ajax({
-	  	            url: "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId,
+	  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+	  	            type: "GET",
+	  	            dataType: "JSON",
+	  	            contentType : "application/json; charset=utf-8",
+	  	            success: function (data, status)
+	  	            {
+	  					var ul = $('#categories');
+	  					ul.append('<li value="all"><a href="#">全部</a></li>')
+	  					$(data).each(function () {
+	  						ul.append('<li value=' + this.dishTypeId + '><a href="#">' + this.dishTypeCategory + '</a></li>')
+	                    });     
+	  	            },
+	  	            error: function (xhr, desc, err)
+	  	            {
+	  	            	console.log(desc);
+	  	            	console.log(err);
+	  	            }
+	  	        })
+			}
+			
+			$(document).on("click", "#categories li", function() {
+				var categoryId = $(this).attr("value");
+				$('.row').children().remove();
+				if (categoryId == "all") {
+					listDishesForRest(restId);
+				} else {
+					listDishesForRest(restId, categoryId);
+				}
+			});
+			
+			function listDishesForRest(restId, categoryId) {
+				var url = "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId
+				if (categoryId !== undefined) {
+					url += "&categoryId=" + categoryId
+				}
+				$.ajax({
+	  	            url: url,
 	  	            type: "GET",
 	  	            dataType: "JSON",
 	  	            contentType : "application/json; charset=utf-8",
 	  	            success: function (data, status){
+	  	            	if (data.length == 0) {
+	  	            		$('.row').append('<div class="col-sm-4"></div><div class="col-sm-4"><h1>商品即將上架</h1></div>')
+	  	            	}
 	  					$(data).each(function () {
 	  						console.log(data)
 	  						var imgsrc = "data:image/png;base64," + this.dishPhoto;
@@ -102,7 +156,7 @@
 							detail_box.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
-									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0"style="width: 20%; margin-right: 40%" value="1" required>')
+									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0" style="width: 20%; margin-right: 40%; background-color: #343a40; color: white" value="1" required>')
 									  .append('<button type="button" class="cartBut btn-danger" id="c_'+this.dishId +'">加入購物車</button>')
 					
 	  						var img_box=$('<div class="img-box"></div>')

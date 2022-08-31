@@ -210,12 +210,17 @@ table.table .avatar {
 </style>
 <script>
 	$(document).ready(function() {
-		listAllDishes();
+		listAllDishes(null);
 		listAllDishCategories();
-		function listAllDishes() {
+		function listAllDishes(keyword) {
 			var restId = $("#restId").val();
+			var url = "http://localhost:8080/my-app/dish?showMode=backend&restId=" + restId
+			if (keyword != "" && keyword !== undefined && keyword != null) {
+				url += "&keyword=" + keyword
+			}
+			console.log(url);
 			$.ajax({
-  	            url: "http://localhost:8080/my-app/dish?showMode=backend&restId=" + restId,
+  	            url: url,
   	            type: "GET",
   	            dataType: "JSON",
   	            contentType : "application/json; charset=utf-8",
@@ -460,6 +465,15 @@ table.table .avatar {
 		        }
 		        
 	    });
+			$("#search-button").on("click", function (e) {
+				$('#dishes tbody').children().remove();
+				var keyword = $("#keyword").val()
+				if (keyword == ""){
+					listAllDishes(null);
+				} else {
+					listAllDishes(keyword);
+				}
+			});
 });	
 	
 </script>
@@ -493,12 +507,14 @@ table.table .avatar {
 			<div class="table-wrapper">
 				<div class="table-title">
 					<div class="row">
-						<div class="col-sm-5">
-							<h2>
-								<b>${restaurantName}產品</b>
-							</h2>
+						<div class="col-sm-2">
+							<h2><b>${restaurantName}產品</b></h2>
 						</div>
-						<div class="col-sm-7">
+						<div class="col-sm-4">
+								<input type="text" id="keyword" placeholder="產品搜尋">
+								<button id="search-button">Search</button>
+						</div>
+						<div class="col-sm-6">
 							<a href="#addProductModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>加入商品</span></a>
 						</div>
 					</div>

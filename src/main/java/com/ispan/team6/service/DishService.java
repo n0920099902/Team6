@@ -52,12 +52,21 @@ public class DishService {
 	}
 
 	// 列出全部商品
-	public List<DishDTO> listAllDishes(String mode, Integer restId) {
+	public List<DishDTO> listAllDishes(String mode, Integer restId, Integer categoryId, String keyword) {
 		List<Dish> dishes = null;
 		if ("portal".equals(mode)) {
-			dishes = dishDAO.findAllByRestIdAndDishStatusIsPublished(restId);
+			if (categoryId == null) {
+				dishes = dishDAO.findAllByRestIdAndDishStatusIsPublished(restId);
+			} else {
+				dishes = dishDAO.findAllByRestIdAndDishStatusIsPublishedAndCategory(restId, categoryId);
+			}
 		} else if ("backend".equals(mode)) {
-			dishes = dishDAO.findAllByRestId(restId);
+			if (keyword == null) {
+				dishes = dishDAO.findAllByRestId(restId);
+			} else {
+				
+				dishes = dishDAO.findAllByRestIdAndKeywordLike(restId, "%" + keyword + "%");
+			}
 		} else {
 			dishes = dishDAO.findAll();
 		}
