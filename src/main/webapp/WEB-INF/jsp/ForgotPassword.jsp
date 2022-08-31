@@ -11,12 +11,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>商家後臺</title>
+<title>請輸入您的郵件</title>
 </head>
 <body>
-	<h1>商家後臺測試</h1>
-	<a href="${contextRoot}/restaurant/editRestaurant/${member.id}">修改餐廳資料 </a><br/>
-	<a href="${contextRoot}/backend/dish">新增商家商品 </a>
-	
+	<h1>請輸入您的郵件</h1>
+
+	<form action="${contextRoot }/users/send/email" method="post">
+		請輸入您的郵件: <input type="text" name="email">
+		<button type="submit">送出</button>
+	</form>
 </body>
 </html>

@@ -71,16 +71,16 @@ public class RestaurantService {
 		return rtDao.findByType(keyword);
 	}
 
-	public void deleteRestaurant(Integer id) {
-		rDao.deleteById(id);
+	public void deleteRestaurantById(Integer id) {
+		 rDao.deleteRestaurantById(id);
 	}
 
 	public List<Restaurant> findByNameLike(String name) {
 		return rDao.findByNameLike(name);
 	}
 
-	public List<Restaurant> findByRestaurantType(RestaurantType result) {
-		return rDao.findByRestaurantType(result);
+	public List<Restaurant> findByRestaurantType(RestaurantType type) {
+		return rDao.findByRestaurantType(type);
 	}
 
 	public Restaurant findByUsers(Users users) {
@@ -92,5 +92,5 @@ public class RestaurantService {
 
 		return null;
 	}
-	
+
 }

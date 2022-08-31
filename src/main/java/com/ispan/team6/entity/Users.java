@@ -69,14 +69,13 @@ public class Users {
 
 	@Transient
 	private String confimation_password;
-	
+
 	@Transient
 	private MultipartFile Image;
 
 	public Users() {
 	}
 
-	
 	public Users(Integer id, String account, String password, String email, String phone, String birthday,
 			String access, Blob photo, String remark, Set<Comment> comment, Set<Orders> orders,
 			String confimation_password, MultipartFile image) {
@@ -95,7 +94,6 @@ public class Users {
 		this.confimation_password = confimation_password;
 		Image = image;
 	}
-
 
 	public Integer getId() {
 		return id;

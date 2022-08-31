@@ -66,5 +66,4 @@ public class OrdersDetail {
 		this.quantity = quantity;
 	}
 
-
 }

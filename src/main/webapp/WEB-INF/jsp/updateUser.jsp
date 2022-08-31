@@ -26,21 +26,24 @@
 						<form:form class="form" method="post" modelAttribute="member"
 							action="${contextRoot}/users/updateUser"
 							enctype='multipart/form-data'>
-								<form:input type="hidden" path="id" />
+							<form:input type="hidden" path="id" />
 							<ul>
 								<li>帳號:&nbsp;<form:hidden path="account" />${member.account }</li>
 								<form:input type="hidden" path="access" />
 								<li>修改電子郵件:&nbsp;<form:input type="email" path="email"
 										value="${member.email }" /></li>
 								<li>修改電話:&nbsp;<form:input type="text" path="phone"
-										value="${member.phone }" /></li>
+										value="${member.phone }"
+										onblur="ckPhone()" onfocus="defaultPhoneOut()" />
+										<span style="color: red" id="phoneout"></span></li>
 								<c:if test="${member.access == 'User' }">
-								<li>修改出生年月日:&nbsp;<form:input type="date" path="birthday"
-										value="${member.birthday }" /></li>
+									<li>修改出生年月日:&nbsp;<form:input type="date" path="birthday"
+											value="${member.birthday }" /></li>
 								</c:if>
 								<li>修改大頭貼:<form:input type="file" path="Image"
-										 /></li>
+										onchange="openFile(event)" /></li>
 							</ul>
+							<img id="output" height="200" style="display: none">
 							<br />
 							<button type="submit" class="btn btn-primary">Submit</button>
 						</form:form>
@@ -62,6 +65,15 @@
 			var dataURL = reader.result; //設定變數dataURL為上傳圖檔的base64字串
 			$('#output').attr('src', dataURL).show(); //將img的src設定為dataURL並顯示
 		};
+	}
+	function defaultPhoneOut() {
+		document.getElementById("phoneout").innerHTML = "";
+	}
+	function ckPhone() {
+		let phone = document.getElementById("mPhone").value;
+		if (phone != "" && phone.search(/^09\d{8}$/) == -1) {
+			document.getElementById("phoneout").innerHTML = "輸入格式錯誤";
+		}
 	}
 </script>
 </html>

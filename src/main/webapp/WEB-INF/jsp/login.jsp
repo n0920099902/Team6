@@ -49,14 +49,17 @@
 		<div class="container">
 			<label for="uname"><b>會員帳號 </b></label> <input type="text"
 				placeholder="Enter Username" name="mAccount" id="mAccount" required>
-			<label for="psw"><b>會員密碼</b></label><i id="checkEye" class="fas fa-eye-slash"></i>
-			<input type="password" placeholder="Enter Password" name="mPassword"
-				id="mPassword" required>
+			<label for="psw"><b>會員密碼</b></label><i id="checkEye"
+				class="fas fa-eye-slash"></i> <input type="password"
+				placeholder="Enter Password" name="mPassword" id="mPassword"
+				required>
 
 			<button type="submit">登入</button>
 			<label class="right"> <span class="psw"> <a
 					href="${contextRoot}/sign"><h5>點我加入會員</h5></a></span>
-			</label>
+			</label> <br />
+			<label><span class="right"><span class="psw"><a
+						href="${contextRoot}/users/forgotPassword"><h5>忘記密碼</h5></a></span></label>
 		</div>
 		<div class="container">
 			快速登入:

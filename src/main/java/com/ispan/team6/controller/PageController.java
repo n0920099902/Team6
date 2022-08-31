@@ -56,7 +56,15 @@ public class PageController {
 		return "userCentre";
 	}
 
-
+	@GetMapping("users/forgotPassword")
+	public String forgotPassword() {
+		return "ForgotPassword";
+	}
+	
+	@GetMapping("email/confirmmail")
+	public String confirmCode() {
+		return "confirmVerificationCode";
+	}
 	
 //	@GetMapping("/search")
 //	public String SearchPage() {

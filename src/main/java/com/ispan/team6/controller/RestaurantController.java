@@ -128,7 +128,7 @@ public class RestaurantController {
 
 	@GetMapping("/restaurant/deleteRestaurant/{id}")
 	public String deleteRestaurantById(@PathVariable Integer id) {
-		rService.deleteRestaurant(id);
+		rService.deleteRestaurantById(id);
 
 		return "redirect:/restaurant/viewRestaurants";
 	}

@@ -62,7 +62,7 @@ public class Restaurant {
 	private RestaurantType restaurantType;
 
 	// 一對一 Restaurant對Users外鍵(一個access為shop的user_account對一間Restaurant)
-	@OneToOne(cascade = CascadeType.MERGE)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "fk_user_id")
 	private Users users;
 
