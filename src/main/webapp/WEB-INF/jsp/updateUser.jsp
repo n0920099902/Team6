@@ -26,20 +26,18 @@
 						<form:form class="form" method="post" modelAttribute="member"
 							action="${contextRoot}/users/updateUser"
 							enctype='multipart/form-data'>
-							<table>
 								<form:input type="hidden" path="id" />
-								<tr>
-									<td>帳號:&nbsp;<form:hidden path="account" />${member.account }</td>
-								</tr>
-							</table>
 							<ul>
+								<li>帳號:&nbsp;<form:hidden path="account" />${member.account }</li>
 								<form:input type="hidden" path="access" />
 								<li>修改電子郵件:&nbsp;<form:input type="email" path="email"
 										value="${member.email }" /></li>
 								<li>修改電話:&nbsp;<form:input type="text" path="phone"
 										value="${member.phone }" /></li>
+								<c:if test="${member.access == 'User' }">
 								<li>修改出生年月日:&nbsp;<form:input type="date" path="birthday"
 										value="${member.birthday }" /></li>
+								</c:if>
 								<li>修改大頭貼:<form:input type="file" path="Image"
 										 /></li>
 							</ul>

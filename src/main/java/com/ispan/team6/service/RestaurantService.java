@@ -83,10 +83,6 @@ public class RestaurantService {
 		return rDao.findByRestaurantType(result);
 	}
 
-//	public List<RestaurantType> findByTypeLike(String name) {
-//		return rtDao.findByType(name);
-//	}
-
 	public Restaurant findByUsers(Users users) {
 		Optional<Restaurant> optional = rDao.findByUsers(users);
 
@@ -96,4 +92,5 @@ public class RestaurantService {
 
 		return null;
 	}
+	
 }

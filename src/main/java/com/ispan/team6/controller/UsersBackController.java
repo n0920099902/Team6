@@ -24,11 +24,12 @@ public class UsersBackController {
 
 	@Autowired
 	private MemberService service;
-
+	
 	@PostMapping("/register")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
-			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
-			@RequestParam("email") String email, @RequestParam("phone") String phone,
+//			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
+			@RequestParam("email") String email, 
+			@RequestParam("phone") String phone,
 			@RequestParam("access") String access,
 //			@RequestParam("remark") String remark,
 			@RequestParam("Img") MultipartFile file, Model m) throws IOException {
@@ -37,7 +38,7 @@ public class UsersBackController {
 		byte[] bytes = file.getBytes();
 		u.setAccount(account);
 		u.setAccess(access);
-		u.setBirthday(birthday);
+//		u.setBirthday(birthday);
 		u.setEmail(email);
 		u.setPhone(phone);
 		u.setPassword(password);
@@ -84,11 +85,14 @@ public class UsersBackController {
 
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
+		Users users = new Users();
 		Users update = service.UpdateById(id);
 
 		model.addAttribute("getId", update.getId());
 		model.addAttribute("getAccount", update.getAccount());
+//		if( users.getAccess().equals("User")) {
 		model.addAttribute("getBirthday", update.getBirthday());
+//		}
 		model.addAttribute("getEmail", update.getEmail());
 		model.addAttribute("getPassword", update.getPassword());
 		model.addAttribute("getPhone", update.getPhone());

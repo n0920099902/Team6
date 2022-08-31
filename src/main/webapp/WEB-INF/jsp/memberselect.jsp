@@ -77,7 +77,7 @@ cover
 		</c:when>
 		<c:when test="${member.access == 'Admin' }">
 			<c:choose>
-				<c:when test="${empty m}">
+				<c:when test="${!empty m}">
 	   			 沒有任何會員資料<br />
 				</c:when>
 				<c:otherwise>
