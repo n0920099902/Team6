@@ -43,9 +43,9 @@
 	<h2>${message }</h2>
 	<form action="${contextRoot}/member/login" method="POST"
 		enctype="multipart/form-data">
-		<div class="imgcontainer">
-			<img src="${contextRoot}/img/login.png" alt="Avatar" class="avatar">
-		</div>
+<!-- 		<div class="imgcontainer"> -->
+<%-- 			<img src="${contextRoot}/img/login.png" alt="Avatar" class="avatar"> --%>
+<!-- 		</div> -->
 		<div class="container">
 			<label for="uname"><b>會員帳號 </b></label> <input type="text"
 				placeholder="Enter Username" name="mAccount" id="mAccount" required>
