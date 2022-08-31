@@ -14,6 +14,7 @@ import com.ispan.team6.model.MemberDao;
 public class MemApi {
 	@Autowired
 	private MemberDao mDao;
+
 	@GetMapping("member/get/{account}")
 	public boolean getMemberById(@PathVariable String account) {
 		try {
@@ -26,6 +27,9 @@ public class MemApi {
 			return false;
 		}		
 	}
+	
+
+	
 
 }
 	

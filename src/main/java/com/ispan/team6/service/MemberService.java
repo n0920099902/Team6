@@ -22,6 +22,7 @@ public class MemberService {
 	public void insertMember(Users u) {
 		mDao.save(u);
 }
+	
 		
 		public List<Users> findAllMembers(){
 			return  mDao.findAll();

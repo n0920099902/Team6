@@ -22,5 +22,7 @@ public interface  MemberDao extends JpaRepository <Users, Integer> {
 
 	public List<Users> findByAccount(String account);
 
+
+
 	
 }
