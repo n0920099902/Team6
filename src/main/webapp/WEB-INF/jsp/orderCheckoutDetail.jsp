@@ -14,30 +14,30 @@
 <title>Insert title here</title>
 </head>
 <body>
+	${message }
 
 	<div class="album py-5 bg-light">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 
 				<!-- 重複的結構 -->
-				<c:forEach items="${OrderDetail }" var="o">
 					<div>
 						<div class="col">
 							<div class="card">
-								
-								<div class="headline">訂單編號${o.orders.id } 餐點:${o.dish.dishName }</div>
-								<div class="card-footer text-end">
-								<img style="height: 200px"
-									src="${contextRoot}/cart/downloadImage/${o.dish.id}"
-									class="card-img-top">
 
-									價錢:  ${o.dish.dishPrice}<br>
-									數量:  ${o.quantity }<br>
+								<div class="headline">訂單編號${Horders.id }</div>
+								<div class="card-footer text-end">
+									訂單總金額: ${o.totalPrice }<br> 訂單電話: ${Horders.phone }<br>
+									訂單地址: ${o.address }<br> 訂單時間: ${Horders.ordersTime }<br> <a
+										href="${pageContext.request.contextPath}/OrderDetail/${Horders.id}"><button>訂單詳細資訊</button></a>
+									<a
+										href="${pageContext.request.contextPath}/comment/viewComment/${Horders.id}"><button>評論</button></a>
 								</div>
 							</div>
 						</div>
 					</div>
-				</c:forEach>
-
+			</div>
+		</div>
+	</div>
 </body>
 </html>

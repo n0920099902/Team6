@@ -37,7 +37,7 @@ public class OrdersService {
 		ordersDao.deleteById(id);
 	}
 
-	public Orders findById(Integer Id) {
+	public Orders findOrdersById(Integer Id) {
 		Optional<Orders> optional = ordersDao.findById(Id);
 
 		if (optional.isPresent()) {
