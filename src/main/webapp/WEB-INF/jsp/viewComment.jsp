@@ -16,13 +16,19 @@
 <body>
 
 <div class="container">
-	<h1>查看評論</h1>
+	<h1 style="text-align:center">查看評論</h1>
 </div>
-
+<br>
+<br>
+<br>
+<br>
 
 <c:if test="${empty comment }">
-<h3>${message }</h3>
-<a href="${contextRoot}/comment/add/${orderId}"><button>新增評論</button></a>
+<h4 style="text-align:center">${message }</h4>
+
+<div style="text-align:center">
+<a href="${contextRoot}/comment/add/${orderId}" class="card-link"><button type="button" class="btn btn-outline-primary">去評論</button></a>
+</div>
 </c:if>
 
 <c:if test="${!empty comment }">
@@ -39,8 +45,8 @@
                     </c:forEach></div>
 					<div>${comment.comments}</div>
 					<div class="edit-link">
-					<a href="${contextRoot}/comment/editComment/${comment.id}">修改</a>
-					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${comment.id}">刪除</a>
+					<a href="${contextRoot}/comment/editComment/${comment.id}" class="card-link"><button type="button" class="btn btn-primary">修改</button></a>
+					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${comment.id}" class="card-link"><button type="button" class="btn btn-danger">刪除</button></a>
 					</div>
 					</div>
 				</div>

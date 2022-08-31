@@ -32,8 +32,8 @@ ${message }
 									訂單電話:  ${o.phone }<br>
 									訂單地址:  ${o.address }<br>
 									訂單時間:  ${o.ordersTime }<br>
-									<a href="${pageContext.request.contextPath}/OrderDetail/${o.id}"><button>訂單詳細資訊</button></a>
-									<a href="${pageContext.request.contextPath}/comment/viewComment/${o.id}"><button>評論</button></a>
+									<a href="${pageContext.request.contextPath}/OrderDetail/${o.id}" class="card-link"><button type="button" class="btn btn-outline-success">訂單詳細資訊</button></a>
+									<a href="${pageContext.request.contextPath}/comment/viewComment/${o.id}" class="card-link"><button type="button" class="btn btn-outline-primary">我的評論</button></a>
 								</div>
 							</div>
 						</div>

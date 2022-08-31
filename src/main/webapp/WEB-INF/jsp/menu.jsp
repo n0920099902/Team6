@@ -230,7 +230,7 @@
                         var cmt = '<tr>'+                
                                         '<td>' + element.accountName + '</td>'+
                                         '<td>' + element.comments + '</td>'+
-                                        '<td>' + str+ '</td>'+
+                                        '<td>' + str + '</td>'+
                                         '<td>' + element.time + '</td>'+
                                   '</tr>';
                             
