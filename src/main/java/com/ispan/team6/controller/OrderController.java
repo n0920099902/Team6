@@ -1,11 +1,15 @@
 package com.ispan.team6.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.ispan.team6.dto.DishDTO;
 import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.DishQ;
 import com.ispan.team6.entity.Orders;
@@ -40,7 +45,7 @@ import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
-@SessionAttributes({ "dish", "member", "buy" })
+@SessionAttributes({ "dish", "member", "buy" ,"orderPay" })
 public class OrderController {
 
 	@Autowired
@@ -64,6 +69,7 @@ public class OrderController {
 	private OrdersDetailService ordersDetailService;
 	
 	
+	
 
 	// 導向無登入訂單頁面
 	@GetMapping("cart/noLoginCart")
@@ -79,15 +85,25 @@ public class OrderController {
 
 //	//將購物車session裡的商品圖片印出來
 	@GetMapping("/cart/downloadImage/{id}")
-	public ResponseEntity<Blob> downloadImage(@PathVariable Integer id) {
-		Dish photo1 = ordersService.findOrderImgbyId(id);
-		Blob photoFile = photo1.getDishPhoto();
-		HttpHeaders header = new HttpHeaders();
-		header.setContentType(MediaType.IMAGE_JPEG);
+	public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
+		 Dish r = ordersService.findOrderImgbyId(id);
 
-		return new ResponseEntity<Blob>(photoFile, header, HttpStatus.OK);
+		int len = 0;
+		try {
+			len = (int) r.getDishPhoto().length();
+			byte[] bytes = r.getDishPhoto().getBytes(1, len);
+			response.setContentType(MediaType.IMAGE_JPEG_VALUE);
+			OutputStream out = response.getOutputStream();
+			if (bytes != null) {
+				out.write(bytes);
+				out.flush();
+			}
+			out.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
-
+//確認購買並送出訂單導向結帳頁
 	@PostMapping("/confirmBuy")
 	public String confirmBuy(@RequestParam("id") List<Integer> id,@RequestParam("price") List<Integer> price,
 			@RequestParam("quantity") List<Integer> quantity,@RequestParam("rID") Integer rID,
@@ -136,11 +152,29 @@ public class OrderController {
 			 
 		}
 		System.out.println("c");
-		m.addAttribute("message", "訂單已送出");
+		m.addAttribute("orderPay", orders);
 		//		return "redirect:/getUsersOrder";
 		return "redirect:/restaurant/cart/payment";
 	}
 
+	//  結帳後跳轉頁面
+		@GetMapping("/restaurant/cart/payment/checkoutDetails")
+		public String checkoutDetails(HttpSession session,Model m, @SessionAttribute("member") Users us) {
+			System.out.println(ordersDao);
+			Orders order = (Orders)session.getAttribute("orderPay");
+			Integer oId = order.getId();
+			System.out.println("order.getId() ====>"+order.getId());
+			Orders orders = ordersDao.findById(oId).get();
+			System.out.println("orders ======>"+orders);
+			if (orders==null) {
+				m.addAttribute("message", "沒有歷史訂單");
+			} else {
+				m.addAttribute("Horders", orders);
+			}
+
+			return "orderCheckoutDetail";
+		}
+	
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
 	public String getUsrsOrder(Model m, @SessionAttribute("member") Users us) {
