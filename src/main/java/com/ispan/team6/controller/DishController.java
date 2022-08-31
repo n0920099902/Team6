@@ -29,8 +29,8 @@ public class DishController {
 	}
 	
 	@GetMapping("/dish")
-	public List<DishDTO> listAllDishes(@RequestParam(value="restId", required=false) Integer restId, @RequestParam(value="showMode", required=false) String mode) {
-		List<DishDTO> dishes = service.listAllDishes(mode, restId);
+	public List<DishDTO> listAllDishes(@RequestParam(value="restId", required=false) Integer restId, @RequestParam(value="showMode", required=false) String mode, @RequestParam(value="categoryId", required=false) Integer categoryId, @RequestParam(value="keyword", required=false) String keyword) {
+		List<DishDTO> dishes = service.listAllDishes(mode, restId, categoryId, keyword);
 		
 		return dishes;
 	}
