@@ -71,6 +71,12 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-crypto</artifactId>
 		</dependency>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 27/08_31
+
 		<dependency>
 			<groupId>org.subethamail</groupId>
 			<artifactId>subethasmtp</artifactId>
