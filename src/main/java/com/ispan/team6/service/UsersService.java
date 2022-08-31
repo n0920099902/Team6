@@ -54,4 +54,15 @@ public class UsersService {
 
 		return null;
 	}
+	
+	public Users findUsersById(Integer id) {
+		Optional<Users> optional = uDao.findAccountById(id);
+
+		if (optional.isPresent()) {
+			return optional.get();
+		}
+
+		return null;
+	}
+	
 }

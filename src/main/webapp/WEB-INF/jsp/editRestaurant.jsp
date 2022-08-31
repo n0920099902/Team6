@@ -17,7 +17,7 @@
 	<h1>修改頁面測試</h1>
 
 	<div class="m-5">
-		<form:form action="${contextRoot}/restaurant/editRestaurant"
+		<form:form action="${contextRoot}/restaurant/editRestaurantAdmin"
 			modelAttribute="restaurant" method="post"
 			enctype="multipart/form-data">
 			uID: ${restaurant.users.id }<form:hidden path="users.id" />

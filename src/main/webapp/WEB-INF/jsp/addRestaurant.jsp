@@ -43,11 +43,6 @@
 						class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
 						placeholder="餐廳地址：" id="name" />
 				</p>
-				<p class="name">
-					<input name="restaurantAddress" type="text"
-						class="validate[required,custom[onlyLetter],length[0,100]] feedback-input"
-						placeholder="餐廳地址：" id="name" />
-				</p>
 
 				<div>
 					<h5>餐廳類別：</h5>

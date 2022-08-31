@@ -15,7 +15,10 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -37,6 +40,9 @@ public class RestaurantController {
 
 	@Autowired
 	private RestaurantService rService;
+
+	@Autowired
+	private UsersService uService;
 
 	@GetMapping("/restaurant/downloadImage/{id}")
 	public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
@@ -109,7 +115,7 @@ public class RestaurantController {
 
 		rService.insertRestaurant(newRest);
 
-		return "addRestaurant";
+		return "redirect:/shop/shopBack";
 	}
 
 	@GetMapping("/restaurant/viewRestaurants")
@@ -127,36 +133,9 @@ public class RestaurantController {
 		return "redirect:/restaurant/viewRestaurants";
 	}
 
-	@GetMapping("/restaurant/editRestaurantPageByAdmin/{id}")
-	public String editRestaurantPageByAdmin(@PathVariable Integer id, Model m, Users member, Restaurant restaurant) {
-		Restaurant resId = rService.findById(id);
-
-		m.addAttribute("restaurant", resId);
-		// 餐廳類別顯示
-		List<RestaurantType> list = rService.findAllRestuarantType();
-		m.addAttribute("allRestaurantType", list);
-
-		// 顯示營業時間
-		Map<String, String> DateMap = new LinkedHashMap<>();
-		DateMap.put("星期日", "星期日");
-		DateMap.put("星期一", "星期一");
-		DateMap.put("星期二", "星期二");
-		DateMap.put("星期三", "星期三");
-		DateMap.put("星期四", "星期四");
-		DateMap.put("星期五", "星期五");
-		DateMap.put("星期六", "星期六");
-		m.addAttribute("DateMap", DateMap);
-
-		return "editRestaurant";
-	}
-
 	@GetMapping("/restaurant/editRestaurant/{id}")
 	public String editRestaurantPage(@PathVariable("id") Integer id, Model m, Users member, HttpSession session)
 			throws IOException {
-//		Users user = (Users)session.getAttribute("member");
-//		Restaurant res = rDao.findByUid(user.getId());
-//		m.addAttribute("restaurant", res);
-
 		Users user = (Users) session.getAttribute("member");
 		Restaurant res = rService.findByUsers(user);
 		Restaurant resId = rService.findById(res.getId());
@@ -239,10 +218,32 @@ public class RestaurantController {
 		return "redirect:/restaurant";
 	}
 
+	@GetMapping("/restaurant/editRestaurantPageByAdmin/{id}")
+	public String editRestaurantPageByAdmin(@PathVariable Integer id, Model m, Users member, Restaurant restaurant) {
+		Restaurant resId = rService.findById(id);
+		m.addAttribute("restaurant", resId);
+		// 餐廳類別顯示
+		List<RestaurantType> list = rService.findAllRestuarantType();
+		m.addAttribute("allRestaurantType", list);
+
+		// 顯示營業時間
+		Map<String, String> DateMap = new LinkedHashMap<>();
+		DateMap.put("星期日", "星期日");
+		DateMap.put("星期一", "星期一");
+		DateMap.put("星期二", "星期二");
+		DateMap.put("星期三", "星期三");
+		DateMap.put("星期四", "星期四");
+		DateMap.put("星期五", "星期五");
+		DateMap.put("星期六", "星期六");
+		m.addAttribute("DateMap", DateMap);
+
+		return "editRestaurant";
+	}
+
 	@PostMapping("/restaurant/editRestaurantAdmin")
-	public String editRestaurantAdmin(@ModelAttribute("restaurant") Restaurant restaurant, RestaurantType restaurantType,
-			Users member, HttpSession session, Model model) throws IOException {
-//		Users user = (Users) session.getAttribute("member");
+	public String editRestaurantAdmin(@ModelAttribute("restaurant") Restaurant restaurant,
+			RestaurantType restaurantType, Users member, HttpSession session, Model model) throws IOException {
+
 		MultipartFile file = restaurant.getImage();
 		if (file != null && !file.isEmpty()) {
 			try {
@@ -254,9 +255,10 @@ public class RestaurantController {
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
+		Users u = uService.findUsersById(restaurant.getUsers().getId());
 		RestaurantType typeId = rService.findTypeById(restaurant.getRestaurantType().getId());
-//		restaurant.setUsers(user);
 		restaurant.setRestaurantType(typeId);
+		restaurant.setUsers(u);
 		rService.insertRestaurant(restaurant);
 
 		return "redirect:/restaurant/viewRestaurants";

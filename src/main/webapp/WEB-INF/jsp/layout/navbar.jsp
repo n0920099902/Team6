@@ -45,9 +45,12 @@
 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/listPhoto">測試商品</a></li>
+<<<<<<< HEAD
 				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/cart/eidtOrder">購物車</a></li></c:if>
 				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
+=======
+>>>>>>> d212caec5deae128b118f2c168334231e5c03c15
 				<c:if test="${!empty member}">
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/restaurant/cart">購物車</a></li>
@@ -58,12 +61,14 @@
 				</c:if>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/GM">後台管理</a></li>
-				
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
+<<<<<<< HEAD
 
+=======
+>>>>>>> d212caec5deae128b118f2c168334231e5c03c15
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/GM">後台管理</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -101,7 +106,9 @@
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<c:if test="${member.access == 'Shop' }">
 							<a class="dropdown-item" href="${contextRoot}/shop/shopBack">商家後臺</a>
+							<c:if test="${restaurant.users.id == null }">
 							<a class="dropdown-item" href="${contextRoot}/restaurant/add">新增餐廳</a>
+							</c:if>
 						</c:if>
 						<c:if test="${member.access == 'Admin' }">
 							<a class="dropdown-item" href="${contextRoot}/Users/select">後台會員管理</a>

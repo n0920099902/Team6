@@ -115,7 +115,7 @@
 			<h2 class="text-center"><strong>Member</strong>Update</h2>
 		<input type="hidden" name="id" value="${getId}" required />
 		<div>
-			會員帳號： <input type="text" name="account" required value="${getAccount }" id="account" onchange="checkAccount()">
+			會員帳號：${getAccount } <input type="hidden" name="account" required value="${getAccount }" id="account" onchange="checkAccount()">
 		</div>
 		<div>
 			會員密碼： <input type="password" name="password" required
@@ -129,12 +129,16 @@
 				onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span
 				style="color: red" id="phoneout"></span>
 		</div>
+		<input type="hidden" name="access" value="${getAccess}"/>
+		
+		<c:if test="${getAccess == 'User' }">
 		<div>
 			會員生日： <input type="date" name="Birthday" required
 				value="${getBirthday }">
 		</div>
+		</c:if>
 		<div>
-			<!-- 			權限 -->
+<!-- 			<!-- 			權限 -->
 			<input type="text" name="access" value="Shop" hidden="" required>
 		</div>
 
