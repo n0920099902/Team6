@@ -110,43 +110,42 @@
 		<div class="image-holder"></div>
 
 
-	<form action="${pageContext.request.contextPath}/Users/update?id=${getId}"
-		method="post" enctype="multipart/form-data">
+<form:form action="${pageContext.request.contextPath}/Users/update"
+		method="post" enctype="multipart/form-data" modelAttribute="update"> 
 			<h2 class="text-center"><strong>Member</strong>Update</h2>
-		<input type="hidden" name="id" value="${getId}" required />
+		<form:input type="hidden" name="id" path="id" required />
 		<div>
-			會員帳號： <input type="text" name="account" required value="${getAccount }" id="account" onchange="checkAccount()">
+			會員帳號： <form:input type="text" name="account"  path="account"  id="account1" onchange="checkAccount()"></form:input>
 		</div>
 		<div>
-			會員密碼： <input type="password" name="password" required
-				value="${getPassword }">
+			會員密碼： <form:input type="password" name="password"  path="password"></form:input>
 		</div>
 		<div>
-			會員信箱： <input type="email" name="email" required value="${getEmail }">
+			會員信箱： <form:input type="email" name="email"   path="email"></form:input>
 		</div>
 		<div>
-			會員電話： <input type="tel" id="phone" name="phone" value="${getPhone }"
-				onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span
+			會員電話： <form:input type="tel" id="phone" name="phone" path="email"
+				onblur="ckPhone()" onfocus="defaultPhoneOut()" ></form:input><span
 				style="color: red" id="phoneout"></span>
 		</div>
 		<div>
-			會員生日： <input type="date" name="Birthday" required
-				value="${getBirthday }">
+			會員生日： <form:input type="date" name="Birthday" 
+				path="birthday"></form:input>
 		</div>
 		<div>
 			<!-- 			權限 -->
-			<input type="text" name="access" value="Shop" hidden="" required>
+			<form:input type="text" name="access" value="Shop" hidden=""  path="access" ></form:input>
 		</div>
 
 		<div>
-			會員圖片： <input type="file" name="Img" onchange="openFile(event)">
+			會員圖片： <form:input type="file" path="Image"/> 
 		</div>
 
 		<img id="output" height="200" style="display: none">
 		<div class="form-group">
 				<button class="btn btn-primary btn-block" type="submit">Send</button>
 		</div>
-	</form>
+	</form:form>
 		</div>
 </div>
 </body>

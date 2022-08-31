@@ -8,7 +8,7 @@
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
-<jsp:include page="layout/navbar.jsp" />
+<%-- <jsp:include page="layout/navbar.jsp" /> --%>
 <jsp:include page="layout/navbar2.jsp" />
 
 
@@ -77,7 +77,7 @@ cover
 		</c:when>
 		<c:when test="${member.access == 'Admin' }">
 			<c:choose>
-				<c:when test="${empty allmember}">
+				<c:when test="${!empty m}">
 	   			 沒有任何會員資料<br />
 				</c:when>
 				<c:otherwise>
