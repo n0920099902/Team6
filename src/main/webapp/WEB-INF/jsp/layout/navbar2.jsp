@@ -8,24 +8,28 @@
 <meta charset="UTF-8">
 
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
+<link href="${contextRoot}/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="icon"
+	href="${pageContext.request.contextPath}/images/shortcut.ico">
 <!--<title> Responsiive Admin Dashboard | CodingLab </title>-->
-<link rel="stylesheet" href="style.css">
+<!-- <link rel="stylesheet" href="style.css"> -->
 
 <!--     儀錶板功能\ -->
 <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css'
 	rel='stylesheet'>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="${contextRoot}/css/GM.css" rel="stylesheet" />
-<link
-	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!-- <link -->
+<!-- 	href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" -->
+<!-- 	rel="stylesheet" id="bootstrap-css"> -->
+<!-- <script -->
+<!-- 	src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script> -->
+<!-- <script src="//code.jquery.com/jquery-1.11.1.min.js"></script> -->
 
 </head>
 <body>
-
+<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
 	<!------ Include the above in your HEAD tag ---------->
 
 	<div id="wrapper" class="active">

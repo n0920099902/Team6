@@ -63,7 +63,7 @@
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
 				<div>
-					<a href="" id="keepBuy"><button>送出訂單</button></a>
+<!-- 					<a href="" id="keepBuy"><button>送出訂單</button></a> -->
 				</div>
 				<ul id="categories" class="v-effect-link">
 				</ul>

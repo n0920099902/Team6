@@ -8,7 +8,7 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>新增商品</title>
+<title>新增商品種類</title>
 <link rel="icon" href="${pageContext.request.contextPath}/images/shortcut.ico">
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
