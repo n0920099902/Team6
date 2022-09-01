@@ -63,6 +63,7 @@
 										</span>
 										<div>
 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu"><button type="button">菜單</button></a>
+<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu2"><button type="button">評論</button></a> --%>
 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a>
 										</div>
 									</div>

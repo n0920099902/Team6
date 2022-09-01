@@ -26,6 +26,7 @@ import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.OrdersDao;
 import com.ispan.team6.service.CommentService;
 import com.ispan.team6.service.OrdersService;
+import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
@@ -39,6 +40,9 @@ public class CommentController {
 	
 	@Autowired
 	private OrdersService oService;
+	
+	@Autowired
+	private RestaurantService rService;
 	
 	@Autowired
 	private OrdersDao oDao;
@@ -60,7 +64,6 @@ System.out.println("asasasasasasas"+orderId);
 		// 取當前登入者
 		Users u = (Users) httpSession.getAttribute("member");
 
-//		orderId = 3;
 		// 確認DB是否有該會員
 		Users currentUser = uService.findById(u.getId());
 
@@ -157,7 +160,21 @@ System.out.println("asasasasasasas"+orderId);
 	public String commentPage(@PathVariable Integer id, Model model) {
 		List<CommentDto>commentResult=cService.findCommentByRest(id);
 		model.addAttribute("comment", commentResult);
-		model.addAttribute("rid", id); //cart導回餐廳用參數
+		model.addAttribute("rid", id);
 		return "NewComment";
 	}
+	
+	//評論頁面跳頁
+		@GetMapping("/restaurant/{id}/menu2")
+		public String restaurantComment(@PathVariable Integer id, Model model) {
+			Restaurant restaurant = rService.findById(id);
+			model.addAttribute("restaurant", restaurant);
+			model.addAttribute("rid", id);
+			return "restaurantComment";
+		}
+		
+		@GetMapping("/comment/chartjs")
+		public String chartJs() {
+			return "chartjs";
+		}
 }

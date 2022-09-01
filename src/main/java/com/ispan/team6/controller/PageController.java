@@ -125,13 +125,13 @@ public class PageController {
 	public String GM() {
 		return "GM";}
 	
-	@GetMapping("/restaurant/restaurantComment")
-	public String restaurantComment() {
-		return "restaurantComment";}
+//	@GetMapping("/restaurant/restaurantComment")
+//	public String restaurantComment() {
+//		return "restaurantComment";}
 	
 	@GetMapping("/webSocket")
 	public String webSocket() {
 		return "chat";
 	}
-
+	
 }
