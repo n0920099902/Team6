@@ -28,7 +28,7 @@
 				<br>
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
-						<h5 class="card-title">新增評論</h5>
+						<h5 class="card-title">新增評論:</h5>
 
 						<form:form class="form" method="post"
 							modelAttribute="addCommentDto"
@@ -36,6 +36,7 @@
 							<form:hidden path="orderId" value="${orderId }" />
 							<div id="show"></div>
 							<form:input path="score" id="score" type="hidden" />
+							<br>
 							<form:textarea path="comments" class="form-control" />
 
 							<br />
