@@ -99,11 +99,11 @@
 		$(document).ready(function() {
 			var restId = $("#restaurantId").val();
 			listDishesForRest(restId);
-	        getComments(restId);
 //底下程式碼還在做修改,請先不要去刪除			
 			listAllDishCategories(restId);
 			
 			function listAllDishCategories(restId) {
+				console.log('hihi')
 				$.ajax({
 	  	            url: "http://localhost:8080/FeastEat/dish/category?restId=" + restId,
 	  	            type: "GET",
