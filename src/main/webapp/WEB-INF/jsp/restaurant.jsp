@@ -19,12 +19,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Restuarant</title>
+<title>饗訂</title>
 
 
 </head>
 <body>
-	<h1>店家頁面測試</h1>
 
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">

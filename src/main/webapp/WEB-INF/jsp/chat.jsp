@@ -70,7 +70,7 @@ var messageArea = document.querySelector('#messageArea');
 var connectingElement = document.querySelector('.connecting');
 var nameInput = document.querySelector('#name');
 var popup = document.querySelector('#hint');
-var contextRoot = "http://localhost:8080/my-app";
+var contextRoot = "http://localhost:8080/FeastEat";
 var stompClient = null;
 var username = null;
 

@@ -85,21 +85,20 @@
   width: calc(100% - 60px);
   left: 60px;
 }
-.home-section nav{
-  display: flex;
-  justify-content: space-between;
-  height: 80px;
-  background: #fff;
-  display: flex;
-  align-items: center;
-  position: fixed;
-  width: calc(100% - 240px);
-  left: 240px;
-  z-index: 100;
-  padding: 0 20px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s ease;
-}
+/* .home-section nav{ */
+/*   display: flex; */
+/*   justify-content: space-between; */
+/*   height: 80px; */
+/*   background-color:rgba(255, 0, 0, .5); */
+/*   display: flex; */
+/*   align-items: center; */
+/*   position: fixed; */
+/*   width: calc(100% - 240px); */
+/*   left: 240px; */
+/*   z-index: 100; */
+/*   padding: 0 20px; */
+/*   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); */
+/*   transition: all 0.5s ease; */
 .sidebar.active ~ .home-section nav{
   left: 60px;
   width: calc(100% - 60px);

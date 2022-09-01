@@ -7,7 +7,7 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 
 <jsp:include page="layout/navbar.jsp" />
-<jsp:include page="layout/cartBar.jsp"/>	
+<%-- <jsp:include page="layout/cartBar.jsp"/>	 --%>
 <html>
 <head>
 	<link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">

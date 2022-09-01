@@ -111,27 +111,24 @@
 	
 		<h2 class="text-center"><strong>餐廳註冊</strong></h2>
 		<div>
-			會員帳號： <input type="text" name="account" required id="account" onchange="checkAccount()">
+			店家帳號： <input type="text" name="account" required id="account" onchange="checkAccount()">
 		</div>
 		<div>
-			會員密碼： <input type="password" name="password" required>
+			店家密碼： <input type="password" name="password" required>
 		</div>
 		<div>
-			會員信箱： <input type="email" name="email" required>
+			店家信箱： <input type="email" name="email" required>
 		</div>
 		<div>
-			會員電話： <input type="tel" id="mPhone" name="phone"  onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span style="color: red" id="phoneout"></span>
+			店家電話： <input type="tel" id="mPhone" name="phone"  onblur="ckPhone()" onfocus="defaultPhoneOut()" required><span style="color: red" id="phoneout"></span>
 		</div>
-<!-- 		<div> -->
-<!-- 			會員生日： <input type="date" name="Birthday" required > -->
-<!-- 		</div> -->
 		<div>
 			<!-- 			權限 -->
 			<input type="text" name="access" value="Shop" hidden="" required>
 		</div>
 
 		<div>
-			會員圖片： <input type="file" name="Img" onchange="openFile(event)">
+			店家圖片： <input type="file" name="Img" onchange="openFile(event)">
 		</div>
 
 		<img id="output" height="200" style="display: none">

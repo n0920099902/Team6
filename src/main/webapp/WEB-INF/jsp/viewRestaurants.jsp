@@ -4,8 +4,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<jsp:include page="layout/navbar.jsp" />
-<%-- <jsp:include page="layout/navbar2.jsp" /> --%>
+<%-- <jsp:include page="layout/navbar.jsp" /> --%>
+<jsp:include page="layout/navbar2.jsp" />
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <!DOCTYPE html>
 <html>
@@ -56,7 +56,6 @@
 	<table id="restaurantsTable" class="table table-striped table-hover">
 		<thead class="container">
 			<tr class="col-md-center">
-				<th hidden="hidden">#</th>
 				<th scope="col">店家帳號</th>
 				<th scope="col">店家名稱</th>
 				<th scope="col">店家地址</th>

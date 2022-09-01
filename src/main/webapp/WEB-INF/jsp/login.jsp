@@ -66,8 +66,10 @@
 			<button class=" btn btn-outline-primary fastLogin"
 				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Admin</button>
 			<button class=" btn btn-outline-success fastLogin2"
-				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop</button>
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop1</button>
 			<button class=" btn btn-outline-success fastLogin3"
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop2</button>
+			<button class=" btn btn-outline-success fastLogin4"
 				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">User</button>
 
 		</div>
@@ -82,10 +84,14 @@
 		$("#mPassword").val("admin1234");
 	});
 	$(".fastLogin2").click(function() {
-		$("#mAccount").val("shop02");
+		$("#mAccount").val("shop01");
 		$("#mPassword").val("1234");
 	});
 	$(".fastLogin3").click(function() {
+		$("#mAccount").val("shop02");
+		$("#mPassword").val("1234");
+	});
+	$(".fastLogin4").click(function() {
 		$("#mAccount").val("member02");
 		$("#mPassword").val("1234");
 	});

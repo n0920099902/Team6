@@ -19,7 +19,7 @@
 <title>餐廳新增頁面</title>
 </head>
 <body>
-	
+
 	<div id="form-main">
 		<div id="form-div">
 			<form class="form" id="form1"
@@ -56,7 +56,8 @@
 				</div>
 				<div>
 					<h5>營業時間：</h5>
-					<select name="startDate" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+					<select name="startDate" class="form-select form-select-lg mb-3"
+						aria-label=".form-select-lg example">
 						<option value="星期日">星期日</option>
 						<option value="星期一">星期一</option>
 						<option value="星期二">星期二</option>
@@ -72,7 +73,8 @@
 						<option value="星期四">星期四</option>
 						<option value="星期五">星期五</option>
 						<option value="星期六">星期六</option>
-					</select> <br/><input type="time" name="startTime" required>～ <input
+					</select> <br />
+					<input type="time" name="startTime" required>～ <input
 						type="time" name="endTime" required>
 				</div>
 				<div>
@@ -83,20 +85,16 @@
 				<p class="text">
 					<textarea name="remark"
 						class="validate[required,length[6,300]] feedback-input"
-						id="remark" placeholder="備註:"  rows="5" cols="33"></textarea>
-					
-		
+						id="remark" placeholder="備註:" rows="5" cols="33"></textarea>
 				</p>
-
 				<div class="submit">
 					<input type="submit" value="SEND" id="button-blue" />
 					<div class="ease"></div>
 				</div>
 			</form>
 		</div>
-		
-		<jsp:include page="layout/footer.jsp" />
 </body>
+
 <script type="text/javascript">
 	function openFile(event) {
 		var input = event.target; //取得上傳檔案

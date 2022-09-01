@@ -15,7 +15,7 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
-		<a class="navbar-brand" href="${contextRoot}/restaurant">咖哩拌飯外賣</a>
+		<a class="navbar-brand" href="${contextRoot}/restaurant">饗訂</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExample06" aria-controls="navbarsExample06"
 			aria-expanded="false" aria-label="Toggle navigation">
@@ -24,11 +24,12 @@
 
 		<div class="collapse navbar-collapse" id="navbarsExample06">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="${contextRoot}/">主頁 <span class="sr-only">(current)</span>
-				</a></li>
+				<!-- 				<li class="nav-item active"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/">主頁 <span class="sr-only">(current)</span> --%>
+				</a>
+				</li>
 				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/restaurant">餐廳主頁</a></li>
+					href="${contextRoot}/restaurant">主頁</a></li>
 				<!-- 				<li class="nav-item"><a class="nav-link" -->
 				<%-- 					href="${contextRoot}/restaurant/add">新增餐廳</a></li> --%>
 				<!-- 				<li class="nav-item"><a class="nav-link" -->
@@ -41,50 +42,43 @@
 				<%-- 					href="${contextRoot}/Users/register">餐廳帳號新增</a></li> --%>
 				<!-- 				<li class="nav-item"><a class="nav-link" -->
 				<%-- 					href="${contextRoot}/Users/select">後台會員管理</a></li> --%>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/listPhoto">測試商品</a></li>
-				<c:if test="${!empty member}"><li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/cart/eidtOrder">購物車</a></li></c:if>
-				<c:if test="${empty member}"><li class="nav-item"><a class="nav-link"href="${contextRoot}/cart/noLoginCart">購物車</a></li></c:if>
-				<c:if test="${!empty member}">
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/restaurant/cart">購物車</a></li>
-				</c:if>
-				<c:if test="${empty member}">
-					<li class="nav-item"><a class="nav-link"
-						href="${contextRoot}/cart/noLoginCart">購物車</a></li>
-				</c:if>
-				
-<!-- 				<li class="nav-item"><a class="nav-link" -->
-<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/shoppincar/Test">購物車前端頁面測試</a></li> --%>
+				<%-- 				<c:if test="${!empty member}"> --%>
+				<!-- 					<li class="nav-item"><a class="nav-link" -->
+				<%-- 						href="${contextRoot}/restaurant/cart">購物車</a></li> --%>
+				<%-- 				</c:if> --%>
+				<%-- 				<c:if test="${empty member}"> --%>
+				<!-- 					<li class="nav-item"><a class="nav-link" -->
+				<%-- 						href="${contextRoot}/cart/noLoginCart">購物車</a></li> --%>
+				<%-- 				</c:if> --%>
 
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/GM">後台管理</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/backend/dish/category">商品種類(後台)</a></li>
-				<li class="nav-item"><a class="nav-link"
-					href="${contextRoot}/GM">後台管理</a></li>
-					
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li> --%>
 
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/GM">後台管理</a></li> --%>
+								<li class="nav-item"><a class="nav-link"
+									href="${contextRoot}/backend/dish/category">商品種類(後台)</a></li>
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/GM">後台管理</a></li> --%>
 
-				<div class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="#" id="dropdown06"
-						data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-						<img id="img" src="${contextRoot}/images/300.png" width="35"
-						height="35" class="rounded-circle"> <span
-						class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-						id="sp"></span>
-					</a>
-
-					<div class="dropdown-menu dropdown-menu-right"
-						aria-labelledby="dropdown06" style="" id="">
-						<div id="navCart"></div>
-					</div>
 			</ul>
+			<div class="nav-item dropdown fixed-bottom-end">
+				<a class="nav-link dropdown-toggle" href="#" id="dropdown05"
+					data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					<img id="img" src="${contextRoot}/images/300.png" width="35"
+					height="35" class="rounded-circle"> <span
+					class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+					id="sp"></span>
+				</a>
+				<div class="dropdown-menu dropdown-menu-right"
+					aria-labelledby="dropdown05" style="" id="">
+					<div id="navCart"></div>
+				</div>
+			</div>
 		</div>
 		<!-- 會員登入/登入成功圖案 -->
 
@@ -121,7 +115,7 @@
 						</c:if>
 						<c:if test="${member.access == 'Admin' }">
 							<a class="dropdown-item" href="${contextRoot}/Users/select">後台會員管理</a>
-							<a class="dropdown-item" href="${contextRoot}/Users/register">餐廳帳號新增</a>
+<%-- 							<a class="dropdown-item" href="${contextRoot}/Users/register">餐廳帳號新增</a> --%>
 							<a class="dropdown-item"
 								href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a>
 						</c:if>
@@ -132,7 +126,6 @@
 				</div>
 			</c:if>
 		</div>
-
 	</nav>
 	<!-- 會員登入/登入成功圖案 -->
 </body>

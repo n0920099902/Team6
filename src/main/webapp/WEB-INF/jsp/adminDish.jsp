@@ -214,7 +214,7 @@ table.table .avatar {
 		listAllDishCategories();
 		function listAllDishes(keyword) {
 			var restId = $("#restId").val();
-			var url = "http://localhost:8080/my-app/dish?showMode=backend&restId=" + restId
+			var url = "http://localhost:8080/FeastEat/dish?showMode=backend&restId=" + restId
 			if (keyword != "" && keyword !== undefined && keyword != null) {
 				url += "&keyword=" + keyword
 			}
@@ -255,7 +255,7 @@ table.table .avatar {
 		function listAllDishCategories() {
 			var restId = $("#restId").val();
 			$.ajax({
-  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+  	            url: "http://localhost:8080/FeastEat/dish/category?restId=" + restId,
   	            type: "GET",
   	            dataType: "JSON",
   	            contentType : "application/json; charset=utf-8",
@@ -283,7 +283,7 @@ table.table .avatar {
  			if (is_delete) {
  				var dishId = $(this).closest('tr').children('td:eq(0)').text();
  	 			$.ajax({
- 	  	            url: "http://localhost:8080/my-app/dish/" + dishId,
+ 	  	            url: "http://localhost:8080/FeastEat/dish/" + dishId,
  	  	            type: "DELETE",
  	  	            success: function (data, status)
  	  	            {
@@ -363,7 +363,7 @@ table.table .avatar {
 	  	        console.log(value);
 	  	        console.log(json);
 	  	        $.ajax({
-	  	            url: "http://localhost:8080/my-app/dish",
+	  	            url: "http://localhost:8080/FeastEat/dish",
 	  	            type: "POST",
 	  	            dataType: "JSON",
 	  	            contentType : "application/json; charset=utf-8",
@@ -372,7 +372,7 @@ table.table .avatar {
 	  	            {
 	  	            	var yes = confirm("insert successfully!!!");
 	  					if (yes) {
-	  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish";
+	  						window.location.href = "http:\/\/localhost:8080\/FeastEat\/backend\/dish";
 	  					}
 	  	            },
 	  	            error: function (xhr, desc, err)
@@ -421,7 +421,7 @@ table.table .avatar {
 		        if (myFile === undefined) {
 		        	json.dishPhoto = $("#editProductModal #preview_photo").attr('src').split(",")[1];
 		        	$.ajax({
-		  	            url: "http://localhost:8080/my-app/dish/",
+		  	            url: "http://localhost:8080/FeastEat/dish/",
 		  	            type: "PUT",
 		  	            contentType : "application/json; charset=utf-8",
 		  	            data: JSON.stringify(json),
@@ -429,7 +429,7 @@ table.table .avatar {
 		  	            {
 		  	            	var yes = confirm("updated  successfully!!!");
 		  					if (yes) {
-		  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish";
+		  						window.location.href = "http:\/\/localhost:8080\/FeastEat\/backend\/dish";
 		  					}
 		  	            },
 		  	            error: function (xhr, desc, err)
@@ -443,7 +443,7 @@ table.table .avatar {
 		        	fileArrayBuffer = getArrayBuffer(myFile).then(function(value) {
 			        	json.dishPhoto = Array.from(new Uint8Array(value)); //add something
 					$.ajax({
-			  	            url: "http://localhost:8080/my-app/dish/",
+			  	            url: "http://localhost:8080/FeastEat/dish/",
 			  	            type: "PUT",
 			  	            contentType : "application/json; charset=utf-8",
 			  	            data: JSON.stringify(json),
@@ -451,7 +451,7 @@ table.table .avatar {
 			  	            {
 			  	            	var yes = confirm("updated  successfully!!!");
 			  					if (yes) {
-			  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish";
+			  						window.location.href = "http:\/\/localhost:8080\/FeastEat\/backend\/dish";
 			  					}
 			  	            },
 			  	            error: function (xhr, desc, err)

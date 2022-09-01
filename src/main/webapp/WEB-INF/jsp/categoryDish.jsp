@@ -214,7 +214,7 @@ table.table .avatar {
 		function listAllDishCategories() {
 			var restId = $("#restId").val();
 			$.ajax({
-  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+  	            url: "http://localhost:8080/FeastEat/dish/category?restId=" + restId,
   	            type: "GET",
   	            dataType: "JSON",
   	            contentType : "application/json; charset=utf-8",
@@ -248,7 +248,7 @@ table.table .avatar {
  			if (is_delete) {
  				var dishTypeId = $(this).closest('tr').children('td:eq(0)').text();
  	 			$.ajax({
- 	  	            url: "http://localhost:8080/my-app/dish/category/" + dishTypeId,
+ 	  	            url: "http://localhost:8080/FeastEat/dish/category/" + dishTypeId,
  	  	            type: "DELETE",
  	  	            success: function (data, status)
  	  	            {
@@ -281,7 +281,7 @@ table.table .avatar {
 	        const form = $(e.target);
 	        const json = convertFormToJSON(form);
 	  	        $.ajax({
-	  	            url: "http://localhost:8080/my-app/dish/category",
+	  	            url: "http://localhost:8080/FeastEat/dish/category",
 	  	            type: "POST",
 	  	            dataType: "JSON",
 	  	            contentType : "application/json; charset=utf-8",
@@ -290,7 +290,7 @@ table.table .avatar {
 	  	            {
 	  	            	var yes = confirm("insert successfully!!!");
 	  					if (yes) {
-	  						window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish\/category";
+	  						window.location.href = "http:\/\/localhost:8080\/FeastEat\/backend\/dish\/category";
 	  					}
 	  	            },
 	  	            error: function (xhr, desc, err)
@@ -319,7 +319,7 @@ table.table .avatar {
 		    const json = convertFormToJSON(form);
 		    console.log(json);
 			$.ajax({
-			  	    url: "http://localhost:8080/my-app/dish/category",
+			  	    url: "http://localhost:8080/FeastEat/dish/category",
 			  	    type: "PUT",
 			  	    contentType : "application/json; charset=utf-8",
 			  	    data: JSON.stringify(json),
@@ -327,7 +327,7 @@ table.table .avatar {
 			  	    {
 			  	        var yes = confirm("updated  successfully!!!");
 			  			if (yes) {
-			  				window.location.href = "http:\/\/localhost:8080\/my-app\/backend\/dish\/category";
+			  				window.location.href = "http:\/\/localhost:8080\/FeastEat\/backend\/dish\/category";
 			  			}
 			  	    },
 			  	    error: function (xhr, desc, err)

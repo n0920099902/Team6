@@ -105,7 +105,7 @@
 			
 			function listAllDishCategories(restId) {
 				$.ajax({
-	  	            url: "http://localhost:8080/my-app/dish/category?restId=" + restId,
+	  	            url: "http://localhost:8080/FeastEat/dish/category?restId=" + restId,
 	  	            type: "GET",
 	  	            dataType: "JSON",
 	  	            contentType : "application/json; charset=utf-8",
@@ -136,7 +136,7 @@
 			});
 			
 			function listDishesForRest(restId, categoryId) {
-				var url = "http://localhost:8080/my-app/dish?showMode=portal&restId=" + restId
+				var url = "http://localhost:8080/FeastEat/dish?showMode=portal&restId=" + restId
 				if (categoryId !== undefined) {
 					url += "&categoryId=" + categoryId
 				}
@@ -267,7 +267,7 @@
 	//顯示評論
 // 	 function getComments(restId) {
 //             $.ajax({
-//                   url: "http://localhost:8080/my-app/comment?restId=" + restId,
+//                   url: "http://localhost:8080/FeastEat/comment?restId=" + restId,
 //                   type: "GET",
 //                   dataType: "JSON",
 //                   contentType : "application/json; charset=utf-8",
