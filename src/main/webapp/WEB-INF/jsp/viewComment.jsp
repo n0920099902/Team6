@@ -34,25 +34,33 @@
 <c:if test="${!empty comment }">
 <div class="row justify-content-center">
 			<div class="col-4">
-				<div class="card" style="width: 18rem;">
-					<div class="card-header">評論 
+				<div class="card">
+					<div class="card-header" >
+					<div class="row justify-content-center">
+					留言時間:&emsp; 
 					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${comment.time}"/></span>
+					</div>
 					</div>
 					<div class="card-body">
 					<div>
+					<div class="row justify-content-center">
 					<c:forEach begin="1" end="${comment.score }">
   <img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">
                     </c:forEach></div>
-					<div>${comment.comments}</div>
+                    <br>
+					<div class="row justify-content-center">${comment.comments}</div>
+					<br>
+					<div class="row justify-content-center">
 					<div class="edit-link">
 					<a href="${contextRoot}/comment/editComment/${comment.id}" class="card-link"><button type="button" class="btn btn-primary">修改</button></a>
 					<a onclick="return confirm('是否刪除')" href="${contextRoot}/comment/deleteComment/${comment.id}" class="card-link"><button type="button" class="btn btn-danger">刪除</button></a>
 					</div>
 					</div>
+					</div>
 				</div>
 				<br/>
 			</div>
-			
+			</div>
 		</div>
 </c:if>
 </body>

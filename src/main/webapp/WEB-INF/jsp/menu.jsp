@@ -71,21 +71,21 @@
 					<div class="row grid">
 					</div>
 				</div>
-<!-- 				<div class="heading_container heading_center"> -->
-<!-- 					<h2>Comment</h2> -->
-<!-- 				</div> -->
-<!-- 				<table class="table table-striped"> -->
-<!-- 					<thead> -->
-<!-- 						<tr> -->
-<!-- 							<th scope="col">帳號</th> -->
-<!-- 							<th scope="col">評論內容</th> -->
-<!-- 							<th scope="col">評分</th> -->
-<!-- 							<th scope="col">評論時間</th> -->
-<!-- 						</tr> -->
-<!-- 					</thead> -->
-<!-- 					<tbody id="commentBody"> -->
-<!-- 					</tbody> -->
-<!-- 				</table> -->
+				<div class="heading_container heading_center">
+					<h2>Comment</h2>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">帳號</th>
+							<th scope="col">評論內容</th>
+							<th scope="col">評分</th>
+							<th scope="col">評論時間</th>
+						</tr>
+					</thead>
+					<tbody id="commentBody">
+					</tbody>
+				</table>
 			</div>
 		</section>
 	</body>
@@ -265,39 +265,39 @@
 
 		
 	//顯示評論
-// 	 function getComments(restId) {
-//             $.ajax({
-//                   url: "http://localhost:8080/FeastEat/comment?restId=" + restId,
-//                   type: "GET",
-//                   dataType: "JSON",
-//                   contentType : "application/json; charset=utf-8",
-//                   success: function (data, status)
-//                   {
-//                 	  console.log(data);
-//                       $(data).each(function (index, element) {
-//                     	  var cmt = '<p>'+element.id+'</p>';
+	 function getComments(restId) {
+            $.ajax({
+                  url: "http://localhost:8080/FeastEat/comment?restId=" + restId,
+                  type: "GET",
+                  dataType: "JSON",
+                  contentType : "application/json; charset=utf-8",
+                  success: function (data, status)
+                  {
+                	  console.log(data);
+                      $(data).each(function (index, element) {
+                    	  var cmt = '<p>'+element.id+'</p>';
 
-//                         var str = '';
-//                         for(let i=0;i<element.score;i++){
-//                         	str+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
-//                         }
-//                         var cmt = '<tr>'+                
-//                                         '<td>' + element.accountName + '</td>'+
-//                                         '<td>' + element.comments + '</td>'+
-//                                         '<td>' + str + '</td>'+
-//                                         '<td>' + element.time + '</td>'+
-//                                   '</tr>';
+                        var str = '';
+                        for(let i=0;i<element.score;i++){
+                        	str+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
+                        }
+                        var cmt = '<tr>'+                
+                                        '<td>' + element.accountName + '</td>'+
+                                        '<td>' + element.comments + '</td>'+
+                                        '<td>' + str + '</td>'+
+                                        '<td>' + element.time + '</td>'+
+                                  '</tr>';
                             
-//                         $('#commentBody').append(cmt);                              
-//                       });    
-//                   },
-//                   error: function (xhr, desc, err)
-//                   {
-//                       console.log(desc);
-//                       console.log(err);
-//                   }
-//               });
-//         }
+                        $('#commentBody').append(cmt);                              
+                      });    
+                  },
+                  error: function (xhr, desc, err)
+                  {
+                      console.log(desc);
+                      console.log(err);
+                  }
+              });
+        }
 
 	</script>
 <jsp:include page="layout/footer.jsp" />
