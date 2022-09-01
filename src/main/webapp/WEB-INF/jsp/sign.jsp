@@ -107,7 +107,7 @@
 		<div class="image-holder"></div>
 	<form action="${contextRoot}/member/sign" method="POST"
 		enctype="multipart/form-data">	
-			<h2 class="text-center"><strong>Member</strong>Sign</h2>
+			<h2 class="text-center"><strong>會員註冊</strong></h2>
 		<div>
 			會員帳號： <input type="text" name="mAccount" required>
 		</div>
@@ -136,7 +136,7 @@
 
 		<img id="output" height="200" style="display: none">
 		<div class="form-group">
-				<button class="btn btn-primary btn-block" type="submit">Send</button>
+				<button class="btn btn-primary btn-block" type="submit">送出</button>
 		</div>	
 		</form>
 </body>

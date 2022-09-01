@@ -53,8 +53,9 @@
 	<!-- 		<button>GO</button> -->
 	<%-- 	</form> --%>
 
-	<table id="restaurantsTable" class="table table-striped table-hover">
-		<thead class="container">
+	<table id="restaurantsTable" class="table table-striped table-hover"
+		style="border: 3px #cccccc solid;">
+		<thead style="background: lightgray" class="container">
 			<tr class="col-md-center">
 				<th scope="col">店家帳號</th>
 				<th scope="col">店家名稱</th>
@@ -69,7 +70,7 @@
 				<th scope="col">刪除</th>
 			</tr>
 		</thead>
-		<tbody>
+		<tbody class="container">
 			<c:forEach var="restaurant" items="${allRestaurant}">
 				<tr>
 					<td>${restaurant.users.account}</td>

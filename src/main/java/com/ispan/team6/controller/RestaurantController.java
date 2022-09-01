@@ -157,7 +157,7 @@ public class RestaurantController {
 		DateMap.put("星期六", "星期六");
 		m.addAttribute("DateMap", DateMap);
 
-		return "editRestaurant2";
+		return "editRestaurant";
 	}
 
 	// form表單做法
@@ -237,7 +237,7 @@ public class RestaurantController {
 		DateMap.put("星期六", "星期六");
 		m.addAttribute("DateMap", DateMap);
 
-		return "editRestaurant";
+		return "editRestaurantByAdmin";
 	}
 
 	@PostMapping("/restaurant/editRestaurantAdmin")

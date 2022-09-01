@@ -27,6 +27,7 @@ public class UsersBackController {
 	@Autowired
 	private MemberService service;
 	
+	//新增店家帳號
 	@PostMapping("/register")
 	public String addMemberPage2(@RequestParam("account") String account, @RequestParam("password") String password,
 //			@RequestParam("Birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") String birthday,
@@ -70,6 +71,7 @@ public class UsersBackController {
 //
 //	}
 
+	//後台會員總覽
 	@GetMapping("/Users/select")
 	public String MemberSelect(Model model) {
 		List<Users> list = service.findAllMembers();
@@ -79,12 +81,14 @@ public class UsersBackController {
 		return "memberselect";
 	}
 
+	//後台會員刪除
 	@GetMapping("/Users/delete/{id}")
 	public String deleteMember(@PathVariable Integer id) {
 		service.deleteMember(id);
 		return "redirect:/Users/select";
 	}
 
+	//後台會員修改
 	@GetMapping("/Users/update/{id}")
 	public String UpdateMember(@PathVariable Integer id, Model model) {
 		Users update = service.UpdateById(id);
@@ -95,21 +99,11 @@ public class UsersBackController {
 		access.put("Shop", "店家");
 		
 		model.addAttribute("access", access);
-		//		Users users = new Users();
-//		Users update = service.UpdateById(id);
-//
-//		model.addAttribute("getId", update.getId());
-//		model.addAttribute("getAccount", update.getAccount());
-////		if( users.getAccess().equals("User")) {
-//		model.addAttribute("getBirthday", update.getBirthday());
-////		}
-//		model.addAttribute("getEmail", update.getEmail());
-//		model.addAttribute("getPassword", update.getPassword());
-//		model.addAttribute("getPhone", update.getPhone());
 
 		return "updatePage";
 	}
 	
+	//後台會員修改
 	@PostMapping("/users/updateUser2")
 	public String updateUser2(@ModelAttribute("update") Users u) throws IOException {
 //		member.setPhoto(file.getBytes());
@@ -129,6 +123,7 @@ public class UsersBackController {
 		return "redirect:/Users/select";
 	}
 	
+	//後台會員總覽查詢
 	@GetMapping("/member/search")
 	public String Searchaccount(@RequestParam("search") String search, Model m) {
 		List<Users> list = service.SearchMember(search);

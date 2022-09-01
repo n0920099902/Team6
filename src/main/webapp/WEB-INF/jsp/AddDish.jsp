@@ -14,11 +14,9 @@
 <title>Restuarant</title>
 </head>
 <body>
-	<h1>店家頁面測試</h1>
-
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
-			搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
+			搜尋:<input type="text" name="keyword" placeholder="想要搜尋的商品">
 			<button>GO</button>
 		</form>
 	</div>

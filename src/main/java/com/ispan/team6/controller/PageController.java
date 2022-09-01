@@ -125,6 +125,11 @@ public class PageController {
 	public String GM() {
 		return "GM";}
 	
+	@GetMapping("/backstageIndex")
+	public String backstageIndex() {
+		return "BackstageIndex";
+	}
+	
 //	@GetMapping("/restaurant/restaurantComment")
 //	public String restaurantComment() {
 //		return "restaurantComment";}

@@ -81,20 +81,12 @@ cover
 	   			 沒有任何會員資料<br />
 				</c:when>
 				<c:otherwise>
-					<!-- 					<div class="py-5 text-right container"> -->
-					<%-- 						<form action="${contextRoot}/member/search" method="get"> --%>
-					<!-- 							搜尋:<input type="text" name="search" placeholder="搜尋帳戶"> -->
-					<!-- 							<button>GO</button> -->
-					<%-- 						</form> --%>
-					<!-- 					</div> -->
-					<h1>後臺管理</h1>
-					<div class="card-header">會員資料</div>
+					<h1>後臺會員管理</h1>
 					<table id="memberTable" class="table table-striped"
-						style="border: 3px #cccccc solid;">
+						style="border: 3px #cccccc solid">
 						<thead style="background: lightgray" class="container">
 							<tr class="col-md-center">
 								<th scope="col">帳號</th>
-<!-- 								<th>密碼</th> -->
 								<th scope="col">信箱</th>
 								<th scope="col">電話</th>
 								<th scope="col">生日</th>
@@ -108,7 +100,6 @@ cover
 							<c:forEach items="${allmember}" var="m">
 								<tr >
 									<td scope="row"> ${m.account }</td>
-<%-- 									<td>${m.password }</td> --%>
 									<td>${m.email }</td>
 									<td>${m.phone }</td>
 									<td>${m.birthday }</td>

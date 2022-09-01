@@ -19,7 +19,7 @@
 .register-photo .image-holder {
 	display: table-cell;
 	width: auto;
-	background: url(https://image.ibb.co/ciMdh8/640x426.png);
+	background: url("${contextRoot}/img/memberadd.jpg");
 	background-size: cover;
 }
 

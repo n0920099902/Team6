@@ -27,7 +27,7 @@
 
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
-			搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
+			搜尋:<input type="text" name="keyword" placeholder="搜尋想吃的類型或店家">
 			<button>GO</button>
 		</form>
 	</div>
@@ -43,8 +43,8 @@
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>
-<%-- 						<a href="restaurant/${restaurant.id}/menu" --%>
-<!-- 							style="color: black; text-decoration: none"> -->
+						<a href="restaurant/${restaurant.id}/menu"
+							style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">
 									<img
@@ -52,19 +52,22 @@
 										class="img-thumbnail"
 										src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
 										class="card-img-top">
-									<div class="headline">
-										<h5>${restaurant.name }</h5>
+									<div>
+										<h5 style="margin-bottom: 0px;">
+											<strong>${restaurant.name } </strong> <a
+												href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"
+												style="float: right; float: top">
+												<button class="btn btn-outline-dark" type="button"
+													style="padding-bottom: 3px; padding-top: 3px;">評論</button>
+											</a>
+										</h5>
+
 									</div>
 									<div>
 										<span class="me-5">營業時間：<br />
 											${restaurant.startDate}～${restaurant.endDate}<br />
 											${restaurant.startTime}～${restaurant.endTime}
 										</span>
-										<div>
-										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu"><button type="button">菜單</button></a>
-<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu2"><button type="button">評論</button></a> --%>
-										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a>
-										</div>
 									</div>
 								</div>
 							</div>
@@ -106,8 +109,7 @@
 	<jsp:include page="layout/footer.jsp" />
 </body>
 <script type="text/javascript">
-var b=[];
-sessionStorage.setItem('buy', JSON.stringify(b));
-
+	var b = [];
+	sessionStorage.setItem('buy', JSON.stringify(b));
 </script>
 </html>
