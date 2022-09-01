@@ -1,5 +1,9 @@
 package com.ispan.team6.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -22,6 +27,9 @@ public class DishType {
 	@ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name ="fk_rest_id")
 	private Restaurant rest;
+	
+	@OneToMany(mappedBy = "dishType", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+	private List<Dish> dishes = new ArrayList<Dish>();
 	
 	public DishType() {
 	}
@@ -48,6 +56,14 @@ public class DishType {
 
 	public void setRest(Restaurant rest) {
 		this.rest = rest;
+	}
+
+	public List<Dish> getDishes() {
+		return dishes;
+	}
+
+	public void setDishes(List<Dish> dishes) {
+		this.dishes = dishes;
 	}
 	
 }

@@ -10,5 +10,4 @@ import com.ispan.team6.entity.DishType;
 public interface DishTypeDAO extends JpaRepository<DishType, Integer> {
 	@Query(value="from DishType where fk_rest_id=?1")
 	public List<DishType> findAllByRestId(Integer restId);
-
 }

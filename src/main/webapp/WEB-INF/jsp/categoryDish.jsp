@@ -247,12 +247,17 @@ table.table .avatar {
  	 			$.ajax({
  	  	            url: "http://localhost:8080/FeastEat/dish/category/" + dishTypeId,
  	  	            type: "DELETE",
+ 	  	         	dataType: "JSON",
  	  	            success: function (data, status)
  	  	            {
- 	  	            	var yes = confirm("delete successfully!!!");
- 	  					if (yes) {
- 	  						location.reload();
- 	  					}
+ 	  	            	if (data.result == "done") {
+ 	  	            		var yes = confirm("delete successfully!!!");
+ 	 	  					if (yes) {
+ 	 	  						location.reload();
+ 	 	  					}
+ 	  	            	} else {
+ 	  	            		alert('產品已上架, 故無法刪除產品類別!');
+ 	  	            	}
  	  	            },
  	  	            error: function (xhr, desc, err)
  	  	            {
