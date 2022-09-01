@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
 <!DOCTYPE html>
+<jsp:include page="layout/navbar.jsp" />
 <html>
 <head>
 <meta charset="UTF-8">
@@ -17,11 +18,11 @@
     <!-- 進入頁面 -->
     <div id="username-page">
         <div class="username-page-container">
-            <h1 class="title">輸入名稱</h1>
+            <h1 class="title">饗訂線上客服服務</h1>
             
             <form id="usernameForm" name="usernameForm">
                 <div class="form-group popup">
-                    <input type="text" id="name" placeholder="輸入名稱..."
+                    <input type="text" id="name" placeholder="請輸入您的大名"
                         autocomplete="off" class="form-control popup" />
                     <span class="popuptext" id="hint">請輸入名稱</span>
                 </div>
@@ -36,16 +37,16 @@
     <div id="chat-page" class="hidden">
         <div class="chat-container">
             <div class="chat-header">
-                <h2>線上客服</h2>
+                <h2>饗訂線上客服</h2>
             </div>
-            <div class="connecting">Connecting...</div>
+            <div class="connecting">連線中...</div>
             <ul id="messageArea">
 
             </ul>
             <form id="messageForm" name="messageForm">
                 <div class="form-group">
                     <div class="input-group clearfix">
-                        <input type="text" id="message" placeholder="輸入訊息..."
+                        <input type="text" id="message" placeholder="請輸入訊息"
                             autocomplete="off" class="form-control" />
                         <button type="submit" class="primary">送出</button>
                     </div>
@@ -164,7 +165,7 @@ function onMessageReceived(payload) {
 
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' 加入聊天室';
+        message.content = message.sender + ' 貴賓已加入聊天室';
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' 離開聊天室';

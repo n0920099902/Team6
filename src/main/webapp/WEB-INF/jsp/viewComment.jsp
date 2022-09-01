@@ -36,19 +36,21 @@
 			<div class="col-4">
 				<div class="card">
 					<div class="card-header" >
-					<div class="row justify-content-center">
-					留言時間:&emsp; 
+					<div>
+					<b>留言時間:&emsp; </b>
 					<span><fmt:formatDate pattern="yyyy/MM/dd HH:mm:ss" value="${comment.time}"/></span>
 					</div>
 					</div>
 					<div class="card-body">
 					<div>
-					<div class="row justify-content-center">
+					<div>
+					<b>評價:&emsp;</b>
 					<c:forEach begin="1" end="${comment.score }">
   <img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">
                     </c:forEach></div>
                     <br>
-					<div class="row justify-content-center">${comment.comments}</div>
+                    <b>內文:&emsp;</b>
+					<div >${comment.comments}</div>
 					<br>
 					<div class="row justify-content-center">
 					<div class="edit-link">
