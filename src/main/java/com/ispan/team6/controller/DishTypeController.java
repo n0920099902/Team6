@@ -36,8 +36,8 @@ public class DishTypeController {
 	}
 	
 	@DeleteMapping("/dish/category/{id}")
-	public void delete(@PathVariable String id) {
-		service.deleteDishType(id);
+	public DishTypeDTO delete(@PathVariable String id) {
+		return service.deleteDishType(id);
 	}
 	
 	@PutMapping("/dish/category")

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.ispan.team6.dto.DishTypeDTO;
+import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.DishType;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.model.DishTypeDAO;
@@ -47,8 +48,26 @@ public class DishTypeService {
 			return result;
 		}
 		
-		public void deleteDishType(String id) {
-			dishTypeDAO.deleteById(Integer.parseInt(id));
+		public DishTypeDTO deleteDishType(String id) {
+			DishTypeDTO result = new DishTypeDTO();
+			
+			Optional<DishType> optionalDishType = dishTypeDAO.findById(Integer.valueOf(id));
+			if (optionalDishType.isPresent()) {
+				DishType dishType = optionalDishType.get();
+				List<Dish> dishes = dishType.getDishes();
+				if (dishes.size() > 0) {
+					for (Dish d:dishes) {
+						if (d.getDishStatus().equals("已上架")) {
+							result.setResult("商品已上架");
+							return result;
+						}
+					}
+				}
+				
+				dishTypeDAO.deleteById(Integer.parseInt(id));
+				result.setResult("done");
+			}
+			return result;
 		}
 		
 		public void editDishType(DishTypeDTO dishTypeDto) {

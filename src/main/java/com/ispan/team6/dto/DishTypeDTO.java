@@ -6,6 +6,7 @@ public class DishTypeDTO {
 	private String dishTypeCategory;
 	private String restId;
 	private String restName;
+	private String result;
 	
 	public String getDishTypeId() {
 		return dishTypeId;
@@ -37,6 +38,14 @@ public class DishTypeDTO {
 
 	public void setRestName(String restName) {
 		this.restName = restName;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 	public DishTypeDTO() {
