@@ -21,7 +21,7 @@ public class Dish {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	@ManyToOne(fetch= FetchType.EAGER,cascade = CascadeType.ALL)
+	@ManyToOne(fetch= FetchType.EAGER)
     @JoinColumn(name ="fk_rest_id")
 	private Restaurant rest;
 	

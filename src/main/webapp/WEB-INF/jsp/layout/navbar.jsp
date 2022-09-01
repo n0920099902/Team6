@@ -55,8 +55,8 @@
 
 				<!-- 				<li class="nav-item"><a class="nav-link" -->
 				<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
-				<!-- 				<li class="nav-item"><a class="nav-link" -->
-				<%-- 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li> --%>
+								<li class="nav-item"><a class="nav-link"
+									href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 
 				<!-- 				<li class="nav-item"><a class="nav-link" -->
 				<%-- 					href="${contextRoot}/GM">後台管理</a></li> --%>
