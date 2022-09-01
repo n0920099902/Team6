@@ -16,7 +16,7 @@
 <body>
 
 <div class="container">
-	<h1 style="text-align:center">查看評論</h1>
+	<h1 style="text-align:center">查看訂單評論</h1>
 </div>
 <br>
 <br>
