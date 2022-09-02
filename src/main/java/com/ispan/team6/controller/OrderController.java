@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ispan.team6.dto.DishDTO;
+import com.ispan.team6.entity.Comment;
 import com.ispan.team6.entity.Dish;
 import com.ispan.team6.entity.DishQ;
 import com.ispan.team6.entity.Orders;
@@ -129,6 +130,7 @@ public class OrderController {
 		orders.setOrdersTime(time);
 		orders.setPhone(phone);
 		orders.setTotalPrice(totalPrice);
+		orders.setRemark("待付款");
 		ordersDao.save(orders);
 	
 		
@@ -154,7 +156,7 @@ public class OrderController {
 		System.out.println("c");
 		m.addAttribute("orderPay", orders);
 		//		return "redirect:/getUsersOrder";
-		return "redirect:/restaurant/cart/payment";
+		return "redirect:/restaurant/cart/payment/"+orders.getId();
 	}
 
 	//  結帳後跳轉頁面
@@ -239,6 +241,21 @@ public class OrderController {
 		return "menuTestForOrder";
 	}
 
+	
+	//跳綠界 一定要用post 直接用要改成get
+	@PostMapping("/order/confirmBuy/{id}")
+	public String editOrderRemark(@PathVariable Integer id, Model m,HttpSession session) {
+		Orders o = ordersDao.findOrdersById(id);
+		o.setRemark("已付款");
+		ordersDao.save(o);
+
+       Users u=  o.getUsers();
+       m.addAttribute("member",u);
+		m.addAttribute("message", "購買成功");
+
+		return "confirmBuy";
+	}
+	
 //	@PostMapping("/restaurant/cart")
 //	Public @ResponseBody list<DishQ> showOrders() {
 //		
