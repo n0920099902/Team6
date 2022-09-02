@@ -35,7 +35,7 @@
 						<input type="number" name="UID" value="${member.id }"  hidden="">
 					</div>
 					<div>
-						地址:<input type="text" name="address" required="required">
+						地址:<input type="text" name="address" required="required" id="address">
 					</div>
 					<div>
 						<!-- 		餐廳status -->
@@ -59,7 +59,7 @@
 
 
 
-					<button id = "confirmBuy" onclick="getTime()">確認購買</button>
+					<button id = "confirmBuy" onclick="getTime()" >確認購買</button>
 
 				</form>
 			</div>
@@ -173,13 +173,13 @@
 		var buttonId = event.target.id;	
 		var rowId = buttonId.split("_")[1];
 		let v=+(document.getElementById('quantity' + rowId).value);
-		v+=1;
+		v=parseInt(v)+1;
 		let p=+(document.getElementById('price' + rowId).value);
 		document.getElementById('quantity' + rowId).value=v;
 		document.getElementById('totalprice' + rowId).innerHTML=v*p;
 		for(let i=0;i<list.length;i++){
 			if(list[i].id==rowId){
-				list[i].quantity+=1;
+				list[i].quantity=parseInt(list[i].quantity)+1;
 			}
 		}
 		sessionStorage.setItem('buy', JSON.stringify(list));
@@ -194,13 +194,36 @@
 		var date = new Date();
 
 		const formatDate = (current_datetime)=>{
-		    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+			let y=current_datetime.getFullYear();
+			let m=+(current_datetime.getMonth()) + 1;
+			let d=current_datetime.getDate();
+			let h=current_datetime.getHours();
+			let min= current_datetime.getMinutes();
+			let s=current_datetime.getSeconds();
+			if(y<10){y="0"+y};
+			if(m<10){m="0"+m};
+			if(d<10){d="0"+d};
+			if(h<10){h="0"+h};
+			if(min<10){min="0"+min};
+			if(s<10){s="0"+s};
+			
+// 		    let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + current_datetime.getDate() + " " + current_datetime.getHours() + ":" + current_datetime.getMinutes() + ":" + current_datetime.getSeconds();
+		    let formatted_date=y+'/'+m+'/'+d+' '+h+':'+min+':'+s;
 		    return formatted_date;
 		}
 
 		document.getElementById("time").value = formatDate(date);
+		let phone=document.getElementById("phone").value;
+		let address=document.getElementById("address").value;
+		if(address!="" && phone!=""){
+			sessionStorage.setItem('buy', null);
+			
+		}
 
 	}
+	
+	
+	
 	function defaultPhoneOut() {
 		document.getElementById("phoneout").innerHTML = "";
 	}

@@ -62,9 +62,9 @@
 				<div class="heading_container heading_center">
 					<h2> ${restaurant.name} Menu </h2>
 				</div>
-				<div>
-					<a href="" id="keepBuy"><button>送出訂單</button></a>
-				</div>
+<!-- 				<div> -->
+<!-- 					<a href="" id="keepBuy"><button>送出訂單</button></a> -->
+<!-- 				</div> -->
 				<ul id="categories" class="v-effect-link">
 				</ul>
 				<div class="filters-content">
@@ -182,86 +182,185 @@
 	// for (var i = 0; i < mbuttons.length; i++) {
 	// 	mbuttons[i].addEventListener("click", add);
 	// }	
-	$('.cartBut').click(function() {
-		alert('加入購物車');
-		// let name = console.log($(this).parent().find(".dishName").text());
-		// let id = console.log($(this).parent().find(".dishId").text());
+	  					$('.cartBut').click(function() {
+	  						var buy  = JSON.parse(sessionStorage.getItem('buy'));
+	  						var rid =document.getElementById('rID').value;
+	  						var point= JSON.parse(sessionStorage.getItem('point'))
+	  						if(buy==null){
+	  					    	var b = [];
+	  							sessionStorage.setItem('buy', JSON.stringify(b));
+	  					    }
+	  						if(rid!=point){
+	  							let c=confirm('餐點為不同餐廳,確認要更換餐廳嗎?');
+	  							if(c==false){
+	  								window.reload;
+	  								
+	  							}
+	  							if(c==true){
+	  								var b = [];
+	  							    sessionStorage.setItem('buy', JSON.stringify(b));
+	  							    sessionStorage.setItem('point', JSON.stringify(rid));
+	  							    alert('加入購物車');
 
-		let name = $(this).parent().find(".dishName").text();
-		console.log(name);
+	  								let name = $(this).parent().find(".dishName").text();
+	  								console.log(name);
 
-		let id = $(this).parent().find(".dishId").text();
-        console.log(id);
-	    
-		let quantity = $(this).parent().find(".quantity").val();
-		console.log(quantity);
-		
-	    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
-		console.log(price);
+	  								let id = $(this).parent().find(".dishId").text();
+	  						        console.log(id);
+	  							    
+	  								let quantity = $(this).parent().find(".quantity").val();
+	  								console.log(quantity);
+	  								
+	  							    let price = $(this).parent().find(".dishPrice").text().split("$")[1];
+	  								console.log(price);
 
-		let photo = $(this).parent().parent().find("img").attr("src");
-		console.log(photo);			
-		// var buttonId = event.target.id;
-		// var rowId = buttonId.split("_")[1];
-		// let name = document.getElementById('n' + rowId).value;
-		// let id = +(document.getElementById('id' + rowId).value);
-		// let quantity = +(document.getElementById('quantity' + rowId).value);
-		// let price = +(document.getElementById('price' + rowId).value);
-		// var rid =document.getElementById('rID').value;
-        // sessionStorage.setItem('rID', JSON.stringify(rid));
-        var buy  = JSON.parse(sessionStorage.getItem('buy'));	
-		let temp = -1;
-		var dish = {
-			id: id,
-			name : name,
-			quantity : quantity,
-			price : price,
-			photo : photo
-		};
-				if(buy.length==0){
-					var buy=[];
-				buy.push(dish);
-				}
-				else{
-					for(let i=0;i<buy.length;i++){
-						var d=buy[i];
-						if(dish.id==d.id){
-							temp=1;
-						}
-					}
-					if(temp==1){
-						for(let i=0;i<buy.length;i++){
-							var d=buy[i];
-							if(dish.id==d.id){
-								d.quantity=parseInt(d.quantity)+parseInt(dish.quantity);
-							}
-						}
-					}
-					if(temp==-1){
-						buy.push(dish);
-					}
-				}
+	  								let photo = $(this).parent().parent().find("img").attr("src");
+	  								console.log(photo);			
+	  						        var buy  = JSON.parse(sessionStorage.getItem('buy'));	
+	  								let temp = -1;
+	  								var dish = {
+	  									id: id,
+	  									name : name,
+	  									quantity : quantity,
+	  									price : price,
+	  									photo : photo
+	  								};
+	  										if(buy==null){
+	  											var buy=[];
+	  										buy.push(dish);
+	  										}
+	  										else{
+	  											for(let i=0;i<buy.length;i++){
+	  												var d=buy[i];
+	  												if(dish.id==d.id){
+	  													temp=1;
+	  												}
+	  											}
+	  											if(temp==1){
+	  												for(let i=0;i<buy.length;i++){
+	  													var d=buy[i];
+	  													if(dish.id==d.id){
+	  														d.quantity=parseInt(d.quantity)+parseInt(dish.quantity);
+	  													}
+	  												}
+	  											}
+	  											if(temp==-1){
+	  												buy.push(dish);
+	  											}
+	  										}
+	  								sessionStorage.setItem('buy', JSON.stringify(buy));
+	  								var buy = JSON.parse(sessionStorage.buy);
+	  								window.location.reload();
+	  							}
+	  					    }if (rid == point) {
+	  								
+	  								alert('加入購物車');
 
-			
-		sessionStorage.setItem('buy', JSON.stringify(buy));
-		var buy = JSON.parse(sessionStorage.buy);
+	  								let name = $(
+	  										this)
+	  										.parent()
+	  										.find(
+	  												".dishName")
+	  										.text();
+	  								console
+	  										.log(name);
 
-		
-		// alert(JSON.stringify(buy));
-		// document.getElementById('quantity' + rowId).value=1;
+	  								let id = $(
+	  										this)
+	  										.parent()
+	  										.find(
+	  												".dishId")
+	  										.text();
+	  								console
+	  										.log(id);
 
-	})
-				
+	  								let quantity = $(
+	  										this)
+	  										.parent()
+	  										.find(
+	  												".quantity")
+	  										.val();
+	  								console
+	  										.log(quantity);
 
+	  								let price = $(
+	  										this)
+	  										.parent()
+	  										.find(
+	  												".dishPrice")
+	  										.text()
+	  										.split(
+	  												"$")[1];
+	  								console
+	  										.log(price);
 
-	  	            },
-	  	            error: function (xhr, desc, err){
-	  	            	console.log(desc);
-	  	            	console.log(err);
-	  	            }
-	  	        });
-			}
-		});
+	  								let photo = $(
+	  										this)
+	  										.parent()
+	  										.parent()
+	  										.find(
+	  												"img")
+	  										.attr(
+	  												"src");
+	  								console
+	  										.log(photo);
+	  								var buy = JSON
+	  										.parse(sessionStorage
+	  												.getItem('buy'));
+	  								let temp = -1;
+	  								var dish = {
+	  									id : id,
+	  									name : name,
+	  									quantity : quantity,
+	  									price : price,
+	  									photo : photo
+	  								};
+	  								if (buy.length == 0) {
+	  									var buy = [];
+	  									buy
+	  											.push(dish);
+	  								} else {
+	  									for (let i = 0; i < buy.length; i++) {
+	  										var d = buy[i];
+	  										if (dish.id == d.id) {
+	  											temp = 1;
+	  										}
+	  									}
+	  									if (temp == 1) {
+	  										for (let i = 0; i < buy.length; i++) {
+	  											var d = buy[i];
+	  											if (dish.id == d.id) {
+	  												d.quantity = parseInt(d.quantity)
+	  														+ parseInt(dish.quantity);
+	  											}
+	  										}
+	  									}
+	  									if (temp == -1) {
+	  										buy
+	  												.push(dish);
+	  									}
+	  								}
+	  								sessionStorage
+	  										.setItem(
+	  												'buy',
+	  												JSON
+	  														.stringify(buy));
+	  								var buy = JSON
+	  										.parse(sessionStorage.buy);
+	  								window.location
+	  										.reload();
+	  							
+	  						}
+	  					})
+	  					  	            },
+	  					  	            error: function (xhr, desc, err){
+	  					  	            	console.log(desc);
+	  					  	            	console.log(err);
+	  					  	            }
+	  					  	        });
+	  							}
+	  						});
+
 
 		
 	//顯示評論

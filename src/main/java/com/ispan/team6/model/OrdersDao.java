@@ -16,6 +16,9 @@ public interface OrdersDao extends JpaRepository<Orders, Integer> {
 	@Query(value = "select * from Orders where fk_rest_id =:id", nativeQuery = true)
 	public List<Orders> findOrdersByRestId(int id);
 	
+	@Query(value = "select * from Orders where id =:id", nativeQuery = true)
+	public Orders findOrdersById(int id);
+	
 //	@Query(value = "select * from orders whrere ")
 	
 }

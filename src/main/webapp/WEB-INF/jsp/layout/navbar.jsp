@@ -53,9 +53,9 @@
 					<li class="nav-item"><a class="nav-link"
 						href="${contextRoot}/cart/noLoginCart">購物車</a></li>
 				</c:if>
-				
-<!-- 				<li class="nav-item"><a class="nav-link" -->
-<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
+
+				<!-- 				<li class="nav-item"><a class="nav-link" -->
+				<%-- 					href="${contextRoot}/menu/dish">菜單頁面(前台)</a></li> --%>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/backend/dish">商品總覽(後台)</a></li>
 				<li class="nav-item"><a class="nav-link"
@@ -64,7 +64,7 @@
 					href="${contextRoot}/backend/dish/category">商品種類(後台)</a></li>
 				<li class="nav-item"><a class="nav-link"
 					href="${contextRoot}/GM">後台管理</a></li>
-					
+
 
 
 				<div class="nav-item dropdown">
@@ -139,7 +139,7 @@
 <script type="text/javascript">
 	var list = JSON.parse(sessionStorage.getItem('buy'));
 	var str = '';
-	if (list.length == 0) {
+	if (list == null) {
 		document.getElementById("sp").className = '';
 		document.getElementById("navCart").innerHTML += '購物車尚未有商品!!!'
 	} else {
