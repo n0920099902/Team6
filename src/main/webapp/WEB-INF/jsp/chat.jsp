@@ -165,7 +165,7 @@ function onMessageReceived(payload) {
 
     if (message.type === 'JOIN') {
         messageElement.classList.add('event-message');
-        message.content = message.sender + ' 貴賓已加入聊天室';
+        message.content = message.sender + ' 已加入聊天室';
     } else if (message.type === 'LEAVE') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' 離開聊天室';

@@ -112,7 +112,7 @@
 							<h2>會員中心</h2>
 						</div>
 						<h4>
-							<a href="${contextRoot }/users/typeUserOldPasswordPage">修改密碼</a>
+							<a href="${contextRoot }/typeUserOldPasswordPage">修改密碼</a>
 						</h4>
 						<h4>
 							<a href="${contextRoot }/users/updateUserPage">會員資料修改</a>

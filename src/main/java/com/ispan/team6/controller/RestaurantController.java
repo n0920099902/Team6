@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,9 +32,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.RestaurantType;
+import com.ispan.team6.entity.Rstatistics;
 import com.ispan.team6.entity.Users;
+import com.ispan.team6.model.RestaurantTypeDao;
 import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
+import com.sun.mail.handlers.message_rfc822;
 
 @Controller
 public class RestaurantController {
@@ -43,6 +47,9 @@ public class RestaurantController {
 
 	@Autowired
 	private UsersService uService;
+	
+	@Autowired
+	private RestaurantTypeDao rtDao;
 
 	@GetMapping("/restaurant/downloadImage/{id}")
 	public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
@@ -292,4 +299,33 @@ public class RestaurantController {
 		return result;
 	}
 
+	
+	@GetMapping("/getRStatis")
+	public String list(Model m) {
+		//抓取餐廳 bean
+	   List<Restaurant> allRestaurants=rService.findAllRestuarant();
+	   //抓取類別 bean
+	   List<RestaurantType> allRestaurantTypes=rtDao.findAll();
+	   //抓取統計 bean
+	   List<Rstatistics> result=new ArrayList<Rstatistics>();
+	
+	  //一序列印類別中的統計數量 存入sum中
+	   for(int i=0;i<allRestaurantTypes.size();i++) {
+		   int sum=0;
+		for(int j=0;j<allRestaurants.size();j++) {
+			if(allRestaurants.get(j).getRestaurantType().getId()==allRestaurantTypes.get(i).getId()) {
+				sum+=1;
+			}
+		}
+		//給予物件R得型別
+		Rstatistics r=new Rstatistics();
+		//將對應的類別存入	
+		r.setTypeString(allRestaurantTypes.get(i).getType());
+		r.setQuantity(sum);
+		result.add(r);
+	}
+	   m.addAttribute("statistics",result);
+		return "BackstageIndex";
+	}
+	
 }

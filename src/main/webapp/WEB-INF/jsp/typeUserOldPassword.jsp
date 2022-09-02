@@ -100,6 +100,7 @@
 }
 </style>
 <body>
+
 	<div class="register-photo">
 		<div class="image-holder"></div>
 		<div class="container">
@@ -110,6 +111,7 @@
 							<h2>請輸入舊密碼</h2>
 						</div>
 						<div class="card-body" style="padding-top: 0px">
+							<h3 style="color:red">${message }</h3>
 							<form:form class="form" method="post" modelAttribute="member"
 								action="${contextRoot}/users/checkUserOldPassword/${member.id }"
 								enctype='multipart/form-data'>

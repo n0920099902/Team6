@@ -101,6 +101,7 @@
 }
 </style>
 <body>
+
 	<div class="register-photo">
 		<div class="image-holder"></div>
 		<div class="container">
@@ -108,8 +109,9 @@
 				<div class="col-8">
 					<div class="card">
 						<div class="card-header">
-							<h1>輸入新密碼頁面測試</h1>
+							<h1>請輸入新密碼</h1>
 						</div>
+						<h3 style="color:red">${message }</h3>
 						<form:form class="form" method="post" modelAttribute="member"
 							action="${contextRoot}/users/updateUserPassword/${member.id }">
 							<form:hidden path="id" />

@@ -106,7 +106,7 @@
 			<div class="image-holder"></div>
 
 
-			<form:form action="${contextRoot}/restaurant/editRestaurant"
+			<form:form action="${contextRoot}/restaurant/editRestaurantAdmin"
 				modelAttribute="restaurant" method="post"
 				enctype="multipart/form-data">
 				<h2 class="text-center">

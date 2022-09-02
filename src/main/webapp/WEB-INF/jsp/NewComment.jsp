@@ -79,8 +79,8 @@ div.awesomeRating {
 	<br><br>
 	<c:out value="${c.comments }"></c:out>
 	<br><br>
-	<b>(時間)</b> <fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${c.time}" />
-  		
+	<b>時間:</b> 
+	<fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${c.time}" />
   		  </div>
 <br><br>
 				</c:forEach>
