@@ -115,7 +115,7 @@ public class RestaurantController {
 
 		rService.insertRestaurant(newRest);
 
-		return "redirect:/shop/shopBack";
+		return "redirect:/backstageIndex";
 	}
 
 	@GetMapping("/restaurant/viewRestaurants")
