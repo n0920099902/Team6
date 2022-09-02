@@ -106,7 +106,7 @@
 </head>
 <body>
 	<div class="register-photo">
-		<!-- 	<div class="form-container"> -->
+			<div class="form-container">
 		<div class="image-holder"></div>
 
 
@@ -146,7 +146,7 @@
 
 			<div>
 				會員圖片：
-				<form:input type="file" path="Image" />
+				<form:input type="file" path="Image" onchange="openFile(event)" />
 			</div>
 
 			<img id="output" height="200" style="display: none">

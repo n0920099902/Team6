@@ -47,11 +47,11 @@
 							style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">
-									<img
-										width: "150px", height: "150px" 
-										class="img-thumbnail"
-										src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
-										class="card-img-top">
+									<div style="width: 100%; height: 150px;">
+										<img style="width: 100%; height: 100%"
+											src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
+											class="card-img-top img-thumbnail">
+									</div>
 									<div>
 										<h5 style="margin-bottom: 0px;">
 											<strong>${restaurant.name } </strong> <a
@@ -68,11 +68,11 @@
 											${restaurant.startDate}～${restaurant.endDate}<br />
 											${restaurant.startTime}～${restaurant.endTime}
 										</span>
-<!-- 										<div> -->
-<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu"><button type="button" class="btn btn-success">菜單</button></a> --%>
-<%-- <%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu2"><button type="button">評論</button></a> --%> --%>
-<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button" class="btn btn-secondary">評論</button></a> --%>
-<!-- 										</div> -->
+										<!-- 										<div> -->
+										<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu"><button type="button" class="btn btn-success">菜單</button></a> --%>
+										<%-- <%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/menu2"><button type="button">評論</button></a> --%>
+										<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button" class="btn btn-secondary">評論</button></a> --%>
+										<!-- 										</div> -->
 									</div>
 								</div>
 							</div>

@@ -31,14 +31,14 @@ import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
-@SessionAttributes({"member","shop"})
+@SessionAttributes({ "member", "shop" })
 public class UsersApi {
 	@Autowired
 	private UsersDao dao;
 
 	@Autowired
 	private UsersService uService;
-	
+
 	@Autowired
 	private RestaurantService rService;
 
@@ -49,11 +49,11 @@ public class UsersApi {
 			m.addAttribute("message", "登入失敗,請重新登入");
 			return "login";
 		}
-		Restaurant r=rService.findByUsers(member);
-		if(member.getAccess().equals("Shop")&&r==null) {
+		Restaurant r = rService.findByUsers(member);
+		if (member.getAccess().equals("Shop") && r == null) {
 			m.addAttribute("shop", "NO");
 		}
-		if(member.getAccess().equals("Shop")&&r!=null) {
+		if (member.getAccess().equals("Shop") && r != null) {
 			m.addAttribute("shop", "YES");
 		}
 		m.addAttribute("member", member);
@@ -151,7 +151,7 @@ public class UsersApi {
 		if (file != null && !file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
-				Blob blob = new SerialBlob(bytes);	
+				Blob blob = new SerialBlob(bytes);
 				member.setPhoto(blob);
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -163,7 +163,7 @@ public class UsersApi {
 		return "userCentre";
 	}
 
-	@GetMapping("/users/typeUserOldPasswordPage")
+	@GetMapping("/typeUserOldPasswordPage")
 	public String typeUserOldPasswordPage() {
 
 		return "typeUserOldPassword";
@@ -174,9 +174,12 @@ public class UsersApi {
 			Model model) {
 
 		if (uService.findPasswordById(id).getPassword().equals(password)) {
+
 			return "updateUserPassword";
+		} else {
+			model.addAttribute("message", "密碼輸入錯誤，請重新輸入");
+			return "typeUserOldPassword";
 		}
-		return "userCentre";
 	}
 
 	@GetMapping("/users/updateUserPassword")
@@ -187,19 +190,21 @@ public class UsersApi {
 
 	@PostMapping("/users/updateUserPassword/{id}")
 	public String updateUserPassword(@ModelAttribute("member") Users member, @PathVariable Integer id, String password,
-			String confimation_password, Model model) {
+			String confimation_password, HttpSession httpSession, Model model) {
 		if (id != null) {
 			Users members = uService.findById(id);
 			model.addAttribute("member", members);
 		}
 		if (password.equals(confimation_password)) {
-
+			httpSession.invalidate();
+			model.addAttribute("member", null);
+			model.addAttribute("shop", null);
+			model.addAttribute("message", "修改成功，請重新登入");
 			uService.insertUser(member);
-
-			return "userCentre";
+			return "login";
+		} else {
+			model.addAttribute("message", "兩次密碼不相符，請重新輸入");
+			return "updateUserPassword";
 		}
-		return "updateUserPassword";
-
 	}
-
 }

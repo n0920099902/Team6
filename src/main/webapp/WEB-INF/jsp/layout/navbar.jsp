@@ -116,7 +116,7 @@
 							</c:if>
 						</c:if>
 						<c:if test="${member.access == 'Admin' }">
-							<a class="dropdown-item" href="${contextRoot}/backstageIndex">後台管理</a>
+							<a class="dropdown-item" href="${contextRoot}/getRStatis">後台管理</a>
 							<%-- 							<a class="dropdown-item" href="${contextRoot}/Users/register">餐廳帳號新增</a> --%>
 							<!-- 							<a class="dropdown-item" -->
 							<%-- 								href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a> --%>
@@ -145,10 +145,10 @@
 		document.getElementById("navCart").innerHTML += '購物車尚未有商品!!!'
 	} else {
 		document.getElementById("navCart").style = "overflow:scroll;height:200px; width:300px";
-		document.getElementById("sp").innerHTML += list.length;
+		//document.getElementById("sp").innerHTML += list.length;
 		str += '<h6>最近加入購物車</h6>';
 		str += '<table class="table table-success table-striped">';
-
+		let totalQuantity = 0;
 		for (let i = 0; i < list.length; i++) {
 			var dish = list[i];
 			//card
@@ -166,14 +166,17 @@
 			// 		str+='</div>';
 			// 		str+='</div>';
 
-			str += '<thead><tr><th scope="col">商品</th><th scope="col">名稱</th><th scope="col">價格</th><th scope="col"></thead>';
+			str += '<thead><tr><th scope="col">商品</th><th scope="col">名稱</th><th scope="col">價格</th><th scope="col">數量</th></thead>';
 			str += '<tbody><tr><td><img width="35" height="35"src="'+dish.photo+' "></td>';
 
-			str += '<td>' + dish.name + '</td>' + '<td>' + dish.price + '</td>';
+			str += '<td>' + dish.name + '</td>' + '<td>' + dish.price + '</td>'+ '<td>' + dish.quantity + '</td>';
 
 			str += '</tr></tbody>';
+			
+			totalQuantity += dish.quantity;
 
 		}
+		document.getElementById("sp").innerHTML = totalQuantity;
 		str += "</table>"
 		str += '<br><c:if test="${empty member}"><a href="${contextRoot}/login"><button class="btn btn-primary">請先登入</button></a></c:if>';
 		str += '<br><c:if test="${!empty member}"><a href="${contextRoot}/cart/eidtOrder"><button class="btn btn-primary">前往購買</button></a></c:if>';
