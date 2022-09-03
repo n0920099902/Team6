@@ -56,8 +56,8 @@
 
 
 </head>
-<body>
-<<<<<<< HEAD
+<%-- <body style="background:url(${pageContext.request.contextPath}/img/背景圖2.jpg) no-repeat;"> --%>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
 		<!-- 輪播圖片 -->
 		<section class="py-5 text-center container">
 			<div id="carouselExampleIndicators" class="carousel slide"
@@ -101,9 +101,6 @@
 				</button>
 			</div>
 		</section>
-=======
-	<h1></h1>
->>>>>>> 47c2c2fdae8c286debe8933c853a64edc64b0391
 
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
