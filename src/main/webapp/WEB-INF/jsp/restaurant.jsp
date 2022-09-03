@@ -113,8 +113,8 @@
 
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
-			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
-			<button>GO</button>
+			搜尋:&ensp;<input type="text" name="keyword" placeholder="想要吃的類型或商店">
+			<button type="button" class="btn btn-outline-dark">GO</button>
 		</form>
 	</div>
 	<div class="album py-5 bg-light">
@@ -142,7 +142,10 @@
 							<span class="me-5">營業時間：<br />
 								${restaurant.startDate}～${restaurant.endDate}<br />
 								${restaurant.startTime}～${restaurant.endTime}
-							</span> <input id="Adress${restaurant.id}" type="text"
+							</span> 
+							&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&thinsp;
+							<button type="button" id="${restaurant.id }" class="b">詳細資訊</button>
+							<input id="Adress${restaurant.id}" type="text"
 								value="${restaurant.address }" hidden=""> <input
 								id="remark${restaurant.id}" type="text"
 								value="${restaurant.remark }" hidden="">
@@ -150,8 +153,6 @@
 						</div>
 					</div>
 			</div>
-
-			<button type="button" id="${restaurant.id }" class="b">詳細資訊</button>
 		</div>
 		</c:forEach>
 	</div>
@@ -159,7 +160,7 @@
 	</div>
 	<div class="dialog" id="dialog">
 		<div class="close" onclick="hideDialog();" id="x">
-			<img alt="" style="width: 20px; height: 20px"
+			&emsp;<img alt="" style="width: 20px; height: 20px"
 				src="${pageContext.request.contextPath}/images/x-symbol.svg">
 		</div>
 		<nav class="nav">
