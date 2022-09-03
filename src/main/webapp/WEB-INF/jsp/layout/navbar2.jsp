@@ -66,6 +66,9 @@
 					<li><a href="${contextRoot}/restaurant/viewRestaurants"> <i
 							class='bx bx-pie-chart-alt-2'></i> <span class="links_name">餐廳總覽(後台)</span>
 					</a></li>
+					<li><a href="${contextRoot}/getRStatis"> <i
+							class='bx bx-pie-chart-alt-2'></i> <span class="links_name">餐廳類別統計</span>
+					</a></li>
 				</c:if>
 				<li class="log_out"><a href="${contextRoot}/"> <i
 						class='bx bx-log-out'></i> <span class="links_name">返回主頁</span>
