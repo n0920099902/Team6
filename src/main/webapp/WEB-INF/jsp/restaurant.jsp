@@ -4,6 +4,16 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <style>
+.my-custom-scrollbar {
+	position: relative;
+	height: 300px;
+	overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+	display: block;
+}
+
 .dialog {
 	position: fixed;
 	top: 40%;
@@ -44,18 +54,14 @@
 
 <!-- web icon -->
 <!-- <link rel="icon" -->
-<%-- 	href="${contextRoot}/img/favicon.ico"> --%>
-
+<%--     href="${contextRoot}/img/favicon.ico"> --%>
 <jsp:include page="layout/navbar.jsp" />
-
-
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Restuarant</title>
-
-
 </head>
+
 <%-- <body style="background:url(${pageContext.request.contextPath}/img/背景圖2.jpg) no-repeat;"> --%>
 <body
 	style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; ">
@@ -88,7 +94,7 @@
 						class="d-block w-100 " width="500" height="400">
 				</div>
 				<div class="carousel-item">
-					<img src="${pageContext.request.contextPath}/img/輪播4.jpg"
+					<img src="${pageContext.request.contextPath}/img/444k.jpg"
 						class="d-block w-100 " width="500" height="400">
 				</div>
 			</div>
@@ -104,17 +110,13 @@
 			</button>
 		</div>
 	</section>
-
+	>>>>>>> c64120543233bdec05c4d65ae2aa3a7d7f5057ac
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
 			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
 			<button>GO</button>
 		</form>
 	</div>
-	<!-- 		<div class="py-5 text-center container"> -->
-	<!-- 			金錢排序(由小到大)<input type="checkbox" id="cbox1" name="cbox1" value="ok" -->
-	<!-- 				onclick="ch()"> <a href="" id="change"><button>套用</button></a> -->
-	<!-- 		</div> -->
 	<div class="album py-5 bg-light">
 		<div class="container">
 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
@@ -125,44 +127,36 @@
 							id="${restaurant.id}" style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">
-									<div style="width: 100%; height: 150px;">
-										<c:choose>
-											<c:when test="${restaurant.photo == null }">
-												<img style="width: 100%; height: 100%"
-													src="https://fakeimg.pl/50/"
-													class="card-img-top img-thumbnail">
-											</c:when>
-											<c:otherwise>
-												<img style="width: 100%; height: 100%"
-													class="card-img-top img-thumbnail"
-													src="${contextRoot}/restaurant/downloadImage/${restaurant.id}">
-											</c:otherwise>
-										</c:choose>
+									<img
+										width: "150px", height: "150px" 
+										class="img-thumbnail"
+										src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
+										class="card-img-top">
 						</a>
-					</div>
-
-					<div class="headline">
-						<h5>${restaurant.name }</h5>
-					</div>
-					<div>
-						<span class="me-5">營業時間：<br />
-							${restaurant.startDate}～${restaurant.endDate}<br />
-							${restaurant.startTime}～${restaurant.endTime}
-						</span> <input id="Adress${restaurant.id}" type="text"
-							value="${restaurant.address }" hidden="">
-						<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a> --%>
-
+						<div class="headline">
+							<h5>${restaurant.name }<span class="distance"
+									style="float: right" id='showKm${restaurant.id}'></span>
+							</h5>
+						</div>
+						<div>
+							<span class="me-5">營業時間：<br />
+								${restaurant.startDate}～${restaurant.endDate}<br />
+								${restaurant.startTime}～${restaurant.endTime}
+							</span> <input id="Adress${restaurant.id}" type="text"
+								value="${restaurant.address }" hidden=""> <input
+								id="remark${restaurant.id}" type="text"
+								value="${restaurant.remark }" hidden="">
+							<%--<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a> --%>
+						</div>
 					</div>
 			</div>
 
+			<button type="button" id="${restaurant.id }" class="b">詳細資訊</button>
 		</div>
-		<button type="button" id="${restaurant.id }" class="b">詳細資訊</button>
-	</div>
-	</c:forEach>
+		</c:forEach>
 	</div>
 	</div>
 	</div>
-	
 	<div class="dialog" id="dialog">
 		<div class="close" onclick="hideDialog();" id="x">
 			<img alt="" style="width: 20px; height: 20px"
@@ -172,45 +166,56 @@
 			<a id="map" class="nav-link active" aria-current="page"
 				onclick="showMap()">地圖</a> <a id="comment" class="nav-link disabled"
 				onclick="showComment()">評論</a>
-
 		</nav>
 		<div id="showMap" style="display: none;">
 			<iframe id="f" width="50%" height="80%" frameborder="0"
 				style="border: 0"
 				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=103台北市大同區民生西路55號(麥當勞-民生三店)&language=zh-Hant"
 				allowfullscreen> </iframe>
-
+			<div id="remark" style="float: right; width: 40%"></div>
 		</div>
-		<table class="table table-striped" id="tableComment"
-			style="display: table;">
-			<thead>
-				<tr>
-					<th scope="col">帳號</th>
-					<th scope="col">評論內容</th>
-					<th scope="col">評分</th>
-					<th scope="col">評論時間</th>
-				</tr>
-			</thead>
-			<tbody id="commentBody">
-				<tr>
-					<td>暫無評論</td>
-					<td></td>
-					<td></td>
-					<td></td>
-				</tr>
-			</tbody>
-		</table>
-
+		<div class="table-wrapper-scroll-y my-custom-scrollbar">
+			<table class="table table-bordered table-striped mb-0"
+				id="tableComment">
+				<thead>
+					<tr>
+						<th scope="col">帳號</th>
+						<th scope="col">評論內容</th>
+						<th scope="col">評分</th>
+						<th scope="col">評論時間</th>
+					</tr>
+				</thead>
+				<tbody id="commentBody">
+					<tr>
+						<td>暫無評論</td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
 	</div>
-	<jsp:include page="layout/footer.jsp" />
+</body>
+<jsp:include page="layout/footer.jsp" />
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
 	var dialog, x, c, sId;
 
+
+    var distanceClass = document.getElementsByClassName('distance');
+	var dialog, x,c,sId;
+	
 	window.onload = function() {
 		dialog = document.getElementById("dialog");
 		x = document.getElementById("x");
+		for (let i = 0; i < distanceClass.length; i++) {
+		 	let dID=distanceClass[i].id;
+		 	let num=dID.split('showKm')[1];
+		 	let address=document.getElementById("Adress"+num).value;
+		 	Distance(address,num);
+		}
 	}
 
 	var list = JSON.parse(sessionStorage.getItem('buy'));
@@ -257,8 +262,7 @@
 
 	function AddComment(sId) {
 		var cStr = '';
-		$
-				.ajax({
+		$.ajax({
 					url : "http://localhost:8080/FeastEat/comment?restId="
 							+ sId,
 					type : "GET",
@@ -266,9 +270,7 @@
 					contentType : "application/json; charset=utf-8",
 					success : function(data, status) {
 						console.log(data);
-						$(data)
-								.each(
-										function(index, element) {
+						$(data).each(function(index, element) {
 
 											var star = '';
 											for (let i = 0; i < element.score; i++) {
@@ -309,5 +311,64 @@
 		dialog.style.display = "none";
 		document.getElementById('commentBody').innerHTML = "<tr><td>暫無評論</td><td></td><td></td><td></td></tr>";
 	}
+	
+	var map, marker, lat, lng;
+    var stack;
+	function initMap() {
+	    navigator.geolocation.watchPosition((position) => {
+	        console.log(position.coords);
+	        lat = position.coords.latitude;
+	        lng = position.coords.longitude;
+	        // 初始化地圖
+	        map = new google.maps.Map(document.getElementById('map1'), {
+	            zoom: 18,
+	            center: { lat: lat, lng: lng }
+	        });
+	        marker = new google.maps.Marker({
+	            position: { lat: lat, lng: lng },
+	            map: map
+	        });
+	    });
+	    stack={ lat: lat, lng: lng };
+	}
+  
+	//算距離
+	var end;
+	var dis='請輸入正確地址';
+	function Distance(end,num) {
+	    var request = {
+	        origin: { lat: lat, lng: lng },//現在位置
+	        destination: end,
+	        travelMode: google.maps.DirectionsTravelMode.DRIVING
+	    };
+	    //宣告
+	    var directionsService = new google.maps.DirectionsService();
+	    directionsService.route(request, function (response, status) {
+	        var strTmp = "";
+	        if (status == google.maps.DirectionsStatus.OK) {
+	            var route = response.routes[0];
+	            for (var i = 0; i < route.legs.length; i++) {
+	                var routeSegment = i + 1;
+	                strTmp += route.legs[i].distance.text;
+	            }
+	            //取得距離(正整數，公尺)
+	            var dist = parseInt(parseFloat(strTmp) * 1000).toString();
+	            if(dist<1000){
+	            	 dis=dist+'公尺';
+	            }
+	            else{
+	            dis=dist/1000+'公里';
+	            }
+
+	        }
+	        document.getElementById('showKm'+num).innerHTML=dis;
+	    });
+	}
+
 </script>
+<script type="text/javascript"
+	src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW"></script>
+<script async defer
+	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&callback=initMap">
+    </script>
 </html>
