@@ -74,7 +74,7 @@ public class Restaurant {
 
 	public Restaurant(Integer id, String name, String phone, String address, String type, String startTime,
 			String endTime, String startDate, String endDate, String remark, Integer fk_type_id, Blob photo,
-			Set<Orders> orders, RestaurantType restaurantType, Users users) {
+			Set<Orders> orders, RestaurantType restaurantType, Users users,MultipartFile image) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -89,6 +89,7 @@ public class Restaurant {
 		this.orders = orders;
 		this.restaurantType = restaurantType;
 		this.users = users;
+		Image = image;
 	}
 
 	public Integer getId() {

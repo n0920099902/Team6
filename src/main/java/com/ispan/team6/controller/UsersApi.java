@@ -147,10 +147,11 @@ public class UsersApi {
 	@PostMapping("/users/updateUser")
 	public String updateUserAction(@ModelAttribute("member") Users member) throws IOException {
 //		member.setPhoto(file.getBytes());
+		byte[] bytes = null;
 		MultipartFile file = member.getImage();
 		if (file != null && !file.isEmpty()) {
 			try {
-				byte[] bytes = file.getBytes();
+				bytes = file.getBytes();
 				Blob blob = new SerialBlob(bytes);
 				member.setPhoto(blob);
 			} catch (Exception e) {
@@ -195,16 +196,23 @@ public class UsersApi {
 			Users members = uService.findById(id);
 			model.addAttribute("member", members);
 		}
+		if (member.getPassword() == "") {
+			model.addAttribute("message", "密碼不得為空白");
+			return "updateUserPassword";
+		}
 		if (password.equals(confimation_password)) {
 			httpSession.invalidate();
 			model.addAttribute("member", null);
 			model.addAttribute("shop", null);
 			model.addAttribute("message", "修改成功，請重新登入");
 			uService.insertUser(member);
+			System.out.println("password========>" + password);
+			System.out.println("member.getPassword()" + member.getPassword());
 			return "login";
 		} else {
 			model.addAttribute("message", "兩次密碼不相符，請重新輸入");
 			return "updateUserPassword";
 		}
 	}
+
 }

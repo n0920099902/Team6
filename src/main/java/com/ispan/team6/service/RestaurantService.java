@@ -1,5 +1,8 @@
 package com.ispan.team6.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +17,7 @@ import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.RestaurantDao;
 import com.ispan.team6.model.RestaurantTypeDao;
+
 @Configurable
 @Service
 @Transactional
@@ -73,7 +77,7 @@ public class RestaurantService {
 	}
 
 	public void deleteRestaurantById(Integer id) {
-		 rDao.deleteRestaurantById(id);
+		rDao.deleteRestaurantById(id);
 	}
 
 	public List<Restaurant> findByNameLike(String name) {
@@ -92,6 +96,21 @@ public class RestaurantService {
 		}
 
 		return null;
+	}
+
+	public byte[] blobToByteArray(Blob blob) {
+		byte[] result = null;
+		try (InputStream is = blob.getBinaryStream(); ByteArrayOutputStream baos = new ByteArrayOutputStream();) {
+			byte[] b = new byte[819200];
+			int len = 0;
+			while ((len = is.read(b)) != -1) {
+				baos.write(b, 0, len);
+			}
+			result = baos.toByteArray();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
 	}
 
 }

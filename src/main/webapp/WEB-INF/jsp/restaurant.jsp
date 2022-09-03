@@ -57,54 +57,57 @@
 
 </head>
 <%-- <body style="background:url(${pageContext.request.contextPath}/img/背景圖2.jpg) no-repeat;"> --%>
-<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
-		<!-- 輪播圖片 -->
-		<section class="py-5 text-center container">
-			<div id="carouselExampleIndicators" class="carousel slide"
-				data-bs-ride="carousel">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselExampleIndicators"
-						data-bs-slide-to="0" class="active" aria-current="true"
-						aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators"
-						data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselExampleIndicators"
-						data-bs-slide-to="2" aria-label="Slide 3"></button>
-				</div>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<img src="${pageContext.request.contextPath}/img/輪播2.jpg"
-							class="d-block w-100"   width="500"  height="400"> 
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/img/輪播5.jpg"
-							class="d-block w-100 " width="500"  height="400">
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/img/2222.jpg"
-							class="d-block w-100 " width="500"  height="400">
-					</div>
-					<div class="carousel-item">
-						<img src="${pageContext.request.contextPath}/img/444k.jpg"
-							class="d-block w-100 " width="500"  height="400">
-					</div>
-				</div>
-				<button class="carousel-control-prev" type="button"
-					data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-					<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button"
-					data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-					<span class="carousel-control-next-icon" aria-hidden="true"></span>
-					<span class="visually-hidden">Next</span>
-				</button>
+<body
+	style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; ">
+	<!-- 輪播圖片 -->
+	<section class="py-5 text-center container">
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="0" class="active" aria-current="true"
+					aria-label="Slide 1"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="1" aria-label="Slide 2"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="2" aria-label="Slide 3"></button>
+				<button type="button" data-bs-target="#carouselExampleIndicators"
+					data-bs-slide-to="3" aria-label="Slide 4"></button>
 			</div>
-		</section>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="${pageContext.request.contextPath}/img/輪播2.jpg"
+						class="d-block w-100" width="500" height="400">
+				</div>
+				<div class="carousel-item">
+					<img src="${pageContext.request.contextPath}/img/輪播5.jpg"
+						class="d-block w-100 " width="500" height="400">
+				</div>
+				<div class="carousel-item">
+					<img src="${pageContext.request.contextPath}/img/2222.jpg"
+						class="d-block w-100 " width="500" height="400">
+				</div>
+				<div class="carousel-item">
+					<img src="${pageContext.request.contextPath}/img/輪播4.jpg"
+						class="d-block w-100 " width="500" height="400">
+				</div>
+			</div>
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</section>
 
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
-			搜尋:<input type="text" name="keyword" placeholder="想要收搜尋的商品">
+			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
 			<button>GO</button>
 		</form>
 	</div>
@@ -122,78 +125,94 @@
 							id="${restaurant.id}" style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">
-								<div style="width: 100%; height: 150px;">
-									<img style="width: 100%; height: 100%"
-										class="card-img-top img-thumbnail"src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
-										class="card-img-top"></a>
-							</div>			
-										
-									<div class="headline">
-										<h5 >${restaurant.name }</h5>
-									</div>
-									<div>
-										<span class="me-5">營業時間：<br />
-											${restaurant.startDate}～${restaurant.endDate}<br />
-											${restaurant.startTime}～${restaurant.endTime}
-										</span>
-										<input id="Adress${restaurant.id}" type="text" value="${restaurant.address }" hidden="">
-										<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a> --%>
-
-									</div>
-								</div>
-							</div>
-						
-						<button type="button" " id="${restaurant.id }" class="b">詳細資訊</button>
+									<div style="width: 100%; height: 150px;">
+										<c:choose>
+											<c:when test="${restaurant.photo == null }">
+												<img style="width: 100%; height: 100%"
+													src="https://fakeimg.pl/50/"
+													class="card-img-top img-thumbnail">
+											</c:when>
+											<c:otherwise>
+												<img style="width: 100%; height: 100%"
+													class="card-img-top img-thumbnail"
+													src="${contextRoot}/restaurant/downloadImage/${restaurant.id}">
+											</c:otherwise>
+										</c:choose>
+						</a>
 					</div>
-				</c:forEach>
-			</div>
-		</div>
-	</div>
-	<div class="dialog" id="dialog">
-		<div class="close" onclick="hideDialog();" id="x"><img alt="" style="width: 20px ;height: 20px" src="${pageContext.request.contextPath}/images/x-symbol.svg"></div>
-		<nav class="nav">
-  <a id="map" class="nav-link active" aria-current="page"  onclick="showMap()">地圖</a>
-  <a id="comment" class="nav-link disabled" onclick="showComment()">評論</a>
-  
-</nav>
-<div id="showMap" style="display: none;">
-<iframe id="f"
-      width="50%" 
-      height="80%" 
-      frameborder="0" 
-      style="border:0" 
-      src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=103台北市大同區民生西路55號(麥當勞-民生三店)&language=zh-Hant"
-      allowfullscreen>
-  </iframe>
 
-</div>
-		<table class="table table-striped" id="tableComment" style="display: table;">
-					<thead>
-						<tr>
-							<th scope="col">帳號</th>
-							<th scope="col">評論內容</th>
-							<th scope="col">評分</th>
-							<th scope="col">評論時間</th>
-						</tr>
-					</thead>
-					<tbody id="commentBody">
-					<tr><td>暫無評論</td><td></td><td></td><td></td></tr>
-					</tbody>
+					<div class="headline">
+						<h5>${restaurant.name }</h5>
+					</div>
+					<div>
+						<span class="me-5">營業時間：<br />
+							${restaurant.startDate}～${restaurant.endDate}<br />
+							${restaurant.startTime}～${restaurant.endTime}
+						</span> <input id="Adress${restaurant.id}" type="text"
+							value="${restaurant.address }" hidden="">
+						<%-- 										<a href="${pageContext.request.contextPath}/restaurant/${restaurant.id}/comment"><button type="button">評論</button></a> --%>
+
+					</div>
+			</div>
+
+		</div>
+		<button type="button" id="${restaurant.id }" class="b">詳細資訊</button>
+	</div>
+	</c:forEach>
+	</div>
+	</div>
+	</div>
+	
+	<div class="dialog" id="dialog">
+		<div class="close" onclick="hideDialog();" id="x">
+			<img alt="" style="width: 20px; height: 20px"
+				src="${pageContext.request.contextPath}/images/x-symbol.svg">
+		</div>
+		<nav class="nav">
+			<a id="map" class="nav-link active" aria-current="page"
+				onclick="showMap()">地圖</a> <a id="comment" class="nav-link disabled"
+				onclick="showComment()">評論</a>
+
+		</nav>
+		<div id="showMap" style="display: none;">
+			<iframe id="f" width="50%" height="80%" frameborder="0"
+				style="border: 0"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=103台北市大同區民生西路55號(麥當勞-民生三店)&language=zh-Hant"
+				allowfullscreen> </iframe>
+
+		</div>
+		<table class="table table-striped" id="tableComment"
+			style="display: table;">
+			<thead>
+				<tr>
+					<th scope="col">帳號</th>
+					<th scope="col">評論內容</th>
+					<th scope="col">評分</th>
+					<th scope="col">評論時間</th>
+				</tr>
+			</thead>
+			<tbody id="commentBody">
+				<tr>
+					<td>暫無評論</td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</tbody>
 		</table>
-					
+
 	</div>
 	<jsp:include page="layout/footer.jsp" />
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
+	var dialog, x, c, sId;
 
-	var dialog, x,c,sId;
-	
 	window.onload = function() {
 		dialog = document.getElementById("dialog");
 		x = document.getElementById("x");
 	}
-	
+
 	var list = JSON.parse(sessionStorage.getItem('buy'));
 	var s = document.getElementsByClassName('s');
 	for (let i = 0; i < s.length; i++) {
@@ -210,82 +229,85 @@
 			sessionStorage.setItem('point', JSON.stringify(aId));
 		}
 	}
-	
-	function showMap(){
+
+	function showMap() {
 		document.getElementById('tableComment').style.display = "none";
-		document.getElementById('comment').className='nav-link active';
-		document.getElementById('map').className='nav-link disabled';
+		document.getElementById('comment').className = 'nav-link active';
+		document.getElementById('map').className = 'nav-link disabled';
 		addMap(sId);
-		
+
 	}
-	
-	function showComment(){
+
+	function showComment() {
 		AddComment(sId);
 		document.getElementById('tableComment').style.display = "";
-		document.getElementById('map').className='nav-link active';
-		document.getElementById('comment').className='nav-link disabled';
-		document.getElementById('showMap').style.display ="none";
+		document.getElementById('map').className = 'nav-link active';
+		document.getElementById('comment').className = 'nav-link disabled';
+		document.getElementById('showMap').style.display = "none";
 	}
-	
-	var mapstr='https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=';
-	var len='&language=zh-Hant';
-	
-	
-	function addMap(sId){
-		document.getElementById('showMap').style.display ="";
-		let rAdress=document.getElementById('Adress'+sId).value;
-		document.getElementById('f').src=mapstr+rAdress+len;
-	}
-	
-	function AddComment(sId){
-		var cStr='';
-		$.ajax({
-            url: "http://localhost:8080/FeastEat/comment?restId=" + sId,
-            type: "GET",
-            dataType: "JSON",
-            contentType : "application/json; charset=utf-8",
-            success: function (data, status)
-            {
-          	  console.log(data);
-                $(data).each(function (index, element) {
 
-                  var star = '';
-                  for(let i=0;i<element.score;i++){
-                  	star+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
-                  }
-                  var cmt = '<tr>'+                
-                                  '<td>' + element.accountName + '</td>'+
-                                  '<td>' + element.comments + '</td>'+
-                                  '<td>' + star+ '</td>'+
-                                  '<td>' + element.time + '</td>'+
-                            '</tr>';
-                      cStr+=cmt;
-                                   
-                });
-                document.getElementById('commentBody').innerHTML=cStr; 
-                if(cStr==""){
-                	 document.getElementById('commentBody').innerHTML='<tr><td>暫無評論</td><td></td><td></td><td></td></tr>';
-                }
-            },
-            error: function (xhr, desc, err)
-            {
-                console.log(desc);
-                console.log(err);
-            }
-        }); return cStr;   
+	var mapstr = 'https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=';
+	var len = '&language=zh-Hant';
+
+	function addMap(sId) {
+		document.getElementById('showMap').style.display = "";
+		let rAdress = document.getElementById('Adress' + sId).value;
+		document.getElementById('f').src = mapstr + rAdress + len;
 	}
-	
+
+	function AddComment(sId) {
+		var cStr = '';
+		$
+				.ajax({
+					url : "http://localhost:8080/FeastEat/comment?restId="
+							+ sId,
+					type : "GET",
+					dataType : "JSON",
+					contentType : "application/json; charset=utf-8",
+					success : function(data, status) {
+						console.log(data);
+						$(data)
+								.each(
+										function(index, element) {
+
+											var star = '';
+											for (let i = 0; i < element.score; i++) {
+												star += '<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
+											}
+											var cmt = '<tr>' + '<td>'
+													+ element.accountName
+													+ '</td>' + '<td>'
+													+ element.comments
+													+ '</td>' + '<td>' + star
+													+ '</td>' + '<td>'
+													+ element.time + '</td>'
+													+ '</tr>';
+											cStr += cmt;
+
+										});
+						document.getElementById('commentBody').innerHTML = cStr;
+						if (cStr == "") {
+							document.getElementById('commentBody').innerHTML = '<tr><td>暫無評論</td><td></td><td></td><td></td></tr>';
+						}
+					},
+					error : function(xhr, desc, err) {
+						console.log(desc);
+						console.log(err);
+					}
+				});
+		return cStr;
+	}
+
 	function showDialog(event) {
 		sId = this.id;
 		dialog.style.display = "block";
-		document.getElementById('showMap').style.display ="none";
+		document.getElementById('showMap').style.display = "none";
 		showComment();
 	}
-	
+
 	function hideDialog() {
 		dialog.style.display = "none";
-		document.getElementById('commentBody').innerHTML="<tr><td>暫無評論</td><td></td><td></td><td></td></tr>";
+		document.getElementById('commentBody').innerHTML = "<tr><td>暫無評論</td><td></td><td></td><td></td></tr>";
 	}
-	
 </script>
 </html>

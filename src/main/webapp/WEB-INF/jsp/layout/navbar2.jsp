@@ -28,8 +28,8 @@
 
 </head>
 <body>
-<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
-<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
+	<script src="${contextRoot}/js/jquery-3.6.0.min.js"></script>
+	<script src="${contextRoot}/js/bootstrap.bundle.min.js"></script>
 	<!------ Include the above in your HEAD tag ---------->
 
 	<div id="wrapper" class="active">
@@ -45,14 +45,16 @@
 			</a>
 			<ul class="nav-links">
 				<c:if test="${member.access == 'Shop' }">
-					<li><a href="${contextRoot}/restaurant/editRestaurant/${member.id}"> <i
-							class='bx bx-grid-alt'></i> <span class="links_name">修改餐廳資料</span>
-					</a></li>
+
 					<li><a href="${contextRoot}/backend/dish/category"> <i
 							class='bx bx-grid-alt'></i> <span class="links_name">商品種類管理</span>
 					</a></li>
 					<li><a href="${contextRoot}/backend/dish"> <i
 							class='bx bx-grid-alt'></i> <span class="links_name">商品管理</span>
+					</a></li>
+					<li><a
+						href="${contextRoot}/restaurant/editRestaurant/${member.id}">
+							<i class='bx bx-grid-alt'></i> <span class="links_name">修改餐廳資料</span>
 					</a></li>
 				</c:if>
 				<c:if test="${member.access == 'Admin' }">

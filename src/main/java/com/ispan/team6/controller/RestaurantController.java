@@ -16,18 +16,15 @@ import javax.servlet.http.HttpSession;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.ispan.team6.entity.Restaurant;
@@ -37,9 +34,9 @@ import com.ispan.team6.entity.Users;
 import com.ispan.team6.model.RestaurantTypeDao;
 import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
-import com.sun.mail.handlers.message_rfc822;
 
 @Controller
+@SessionAttributes("restaurant")
 public class RestaurantController {
 
 	@Autowired
@@ -47,7 +44,7 @@ public class RestaurantController {
 
 	@Autowired
 	private UsersService uService;
-	
+
 	@Autowired
 	private RestaurantTypeDao rtDao;
 
@@ -91,7 +88,8 @@ public class RestaurantController {
 			@RequestParam("restaurantPhone") String phone, @RequestParam("restaurantAddress") String address,
 			@RequestParam("startTime") String starttime, @RequestParam("endTime") String endtime,
 			@RequestParam("startDate") String startdate, @RequestParam("endDate") String enddate,
-			@RequestParam("remark") String remark, @RequestParam("restaurantType") Integer rest_type_id,
+//			@RequestParam("remark") String remark,
+			@RequestParam("restaurantType") Integer rest_type_id,
 			@RequestParam("restaurantImg") MultipartFile file, Model m, Users member, HttpSession session) {
 
 		Users user = (Users) session.getAttribute("member");
@@ -107,7 +105,7 @@ public class RestaurantController {
 		newRest.setEndTime(endtime);
 		newRest.setStartDate(startdate);
 		newRest.setEndDate(enddate);
-		newRest.setRemark(remark);
+//		newRest.setRemark(remark);
 		if (file != null && !file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
@@ -207,7 +205,7 @@ public class RestaurantController {
 			Users member, HttpSession session, Model model) throws IOException {
 		Users user = (Users) session.getAttribute("member");
 		MultipartFile file = restaurant.getImage();
-		if (file != null && !file.isEmpty()) {
+		if (file != null && !file.isEmpty() && !file.toString().trim().equals("0x")) {
 			try {
 				byte[] bytes = file.getBytes();
 				Blob blob = new SerialBlob(bytes);
@@ -250,23 +248,23 @@ public class RestaurantController {
 	@PostMapping("/restaurant/editRestaurantAdmin")
 	public String editRestaurantAdmin(@ModelAttribute("restaurant") Restaurant restaurant,
 			RestaurantType restaurantType, Users member, HttpSession session, Model model) throws IOException {
-
+		Restaurant rest = (Restaurant) session.getAttribute("restaurant");
 		MultipartFile file = restaurant.getImage();
 		if (file != null && !file.isEmpty()) {
 			try {
 				byte[] bytes = file.getBytes();
 				Blob blob = new SerialBlob(bytes);
-				restaurant.setPhoto(blob);
+				rest.setPhoto(blob);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("檔案上傳發生異常: " + e.getMessage());
 			}
 		}
-		Users u = uService.findUsersById(restaurant.getUsers().getId());
-		RestaurantType typeId = rService.findTypeById(restaurant.getRestaurantType().getId());
-		restaurant.setRestaurantType(typeId);
-		restaurant.setUsers(u);
-		rService.insertRestaurant(restaurant);
+		Users u = uService.findUsersById(rest.getUsers().getId());
+		RestaurantType typeId = rService.findTypeById(rest.getRestaurantType().getId());
+		rest.setRestaurantType(typeId);
+		rest.setUsers(u);
+		rService.insertRestaurant(rest);
 
 		return "redirect:/restaurant/viewRestaurants";
 	}
@@ -299,33 +297,32 @@ public class RestaurantController {
 		return result;
 	}
 
-	
 	@GetMapping("/getRStatis")
 	public String list(Model m) {
-		//抓取餐廳 bean
-	   List<Restaurant> allRestaurants=rService.findAllRestuarant();
-	   //抓取類別 bean
-	   List<RestaurantType> allRestaurantTypes=rtDao.findAll();
-	   //抓取統計 bean
-	   List<Rstatistics> result=new ArrayList<Rstatistics>();
-	
-	  //一序列印類別中的統計數量 存入sum中
-	   for(int i=0;i<allRestaurantTypes.size();i++) {
-		   int sum=0;
-		for(int j=0;j<allRestaurants.size();j++) {
-			if(allRestaurants.get(j).getRestaurantType().getId()==allRestaurantTypes.get(i).getId()) {
-				sum+=1;
+		// 抓取餐廳 bean
+		List<Restaurant> allRestaurants = rService.findAllRestuarant();
+		// 抓取類別 bean
+		List<RestaurantType> allRestaurantTypes = rtDao.findAll();
+		// 抓取統計 bean
+		List<Rstatistics> result = new ArrayList<Rstatistics>();
+
+		// 一序列印類別中的統計數量 存入sum中
+		for (int i = 0; i < allRestaurantTypes.size(); i++) {
+			int sum = 0;
+			for (int j = 0; j < allRestaurants.size(); j++) {
+				if (allRestaurants.get(j).getRestaurantType().getId() == allRestaurantTypes.get(i).getId()) {
+					sum += 1;
+				}
 			}
+			// 給予物件R得型別
+			Rstatistics r = new Rstatistics();
+			// 將對應的類別存入
+			r.setTypeString(allRestaurantTypes.get(i).getType());
+			r.setQuantity(sum);
+			result.add(r);
 		}
-		//給予物件R得型別
-		Rstatistics r=new Rstatistics();
-		//將對應的類別存入	
-		r.setTypeString(allRestaurantTypes.get(i).getType());
-		r.setQuantity(sum);
-		result.add(r);
-	}
-	   m.addAttribute("statistics",result);
+		m.addAttribute("statistics", result);
 		return "BackstageIndex";
 	}
-	
+
 }

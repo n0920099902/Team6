@@ -107,7 +107,7 @@
 
 
 			<form:form action="${contextRoot}/restaurant/editRestaurant"
-				modelAttribute="restaurant" method="post"
+				modelAttribute="restaurant" method="post" 
 				enctype="multipart/form-data">
 				<h2 class="text-center">
 					<strong>修改餐廳資料</strong>
@@ -119,14 +119,14 @@
 						<td>餐廳名稱：&nbsp;${restaurant.name } <form:hidden path="name" /></td>
 					</tr>
 					<tr>
-						<td>餐廳電話：<form:input path="phone" /></td>
+						<td>修改餐廳電話：<form:input path="phone" /></td>
 					</tr>
 					<tr>
-						<td>餐廳地址：<form:input path="address" /></td>
+						<td>修改餐廳地址：<form:input path="address" /></td>
 					</tr>
 				</table>
 				<div>
-					餐廳類別：
+					修改餐廳類別：
 					<form:select path="restaurantType.id">
 						<form:option value="-1" label="請挑選" />
 						<form:options items="${allRestaurantType}" itemLabel='type'
@@ -134,7 +134,7 @@
 					</form:select>
 				</div>
 				<div>
-					營業時間：
+					修改營業時間：
 					<form:select path="startDate">
 						<form:option value="-1" label="請挑選" />
 						<form:options items="${DateMap}" />
@@ -149,7 +149,7 @@
 					<form:input type="time" path="endTime" />
 				</div>
 				<div>
-					餐廳圖片:
+					修改餐廳圖片:
 					<form:input type="file" path="Image" onchange="openFile(event)" />
 				</div>
 				<img id="output" height="200" style="display: none">

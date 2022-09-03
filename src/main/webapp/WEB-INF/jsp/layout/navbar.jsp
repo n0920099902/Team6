@@ -12,7 +12,6 @@
 <link rel="icon"
 	href="${pageContext.request.contextPath}/images/shortcut.ico">
 
-
 </head>
 <body>
 
@@ -68,6 +67,7 @@
 		<!-- 		<div class="container" -->
 		<!-- 			style="margin-right: 0px; padding-left: 0px; padding-right: 0px; margin-left: 85%;"> -->
 		<div class="nav-item dropdown fixed-bottom-end ">
+
 			<a class="nav-link dropdown-toggle" href="#" id="cart"
 				data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				<img id="img" src="${contextRoot}/images/300.png" width="35"
@@ -88,7 +88,7 @@
 
 			<c:if test="${empty member}">
 				<a href="${contextRoot}/login">
-					<button class="btn btn-primary">會員登入</button>
+					<button class="btn btn-primary">會員登入/註冊</button>
 				</a>
 			</c:if>
 
@@ -110,9 +110,11 @@
 						aria-labelledby="dropdown06" style="">
 						<a class="dropdown-item" href="${contextRoot}/users/userCentre">會員中心</a>
 						<c:if test="${member.access == 'Shop' }">
-							<a class="dropdown-item" href="${contextRoot}/backstageIndex">商家後臺</a>
+							<c:if test="${shop == 'YES' }">
+								<a class="dropdown-item" href="${contextRoot}/backend/dish">商家後臺</a>
+							</c:if>
 							<c:if test="${shop == 'NO' }">
-								<a class="dropdown-item" href="${contextRoot}/restaurant/add">新增餐廳</a>
+								<a class="dropdown-item" href="${contextRoot}/restaurant/add">商家後臺</a>
 							</c:if>
 						</c:if>
 						<c:if test="${member.access == 'Admin' }">
@@ -144,9 +146,11 @@
 		document.getElementById("sp").className = '';
 		document.getElementById("navCart").innerHTML += '購物車尚未有商品!!!'
 	} else {
-		document.getElementById("navCart").style = "overflow:scroll;height:200px; width:300px";
+		document.getElementById("navCart").style = "overflow:auto;height:200px; width:300px";
 		//document.getElementById("sp").innerHTML += list.length;
-		str += '<h6>最近加入購物車</h6>';
+		str += '<h6>最近加入購物車';
+		str += '<c:if test="${empty member}"><a href="${contextRoot}/login" style="float:right">請先登入</a></c:if>';
+		str += '<c:if test="${!empty member}"><a href="${contextRoot}/cart/eidtOrder" style="float:right">前往購買</a></c:if></h6>';
 		str += '<table class="table table-success table-striped">';
 		let totalQuantity = 0;
 		for (let i = 0; i < list.length; i++) {
@@ -169,17 +173,17 @@
 			str += '<thead><tr><th scope="col">商品</th><th scope="col">名稱</th><th scope="col">價格</th><th scope="col">數量</th></thead>';
 			str += '<tbody><tr><td><img width="35" height="35"src="'+dish.photo+' "></td>';
 
-			str += '<td>' + dish.name + '</td>' + '<td>' + dish.price + '</td>'+ '<td>' + dish.quantity + '</td>';
+			str += '<td>' + dish.name + '</td>' + '<td>' + dish.price + '</td>'
+					+ '<td>' + dish.quantity + '</td>';
 
 			str += '</tr></tbody>';
-			
+
 			totalQuantity += dish.quantity;
 
 		}
 		document.getElementById("sp").innerHTML = totalQuantity;
 		str += "</table>"
-		str += '<br><c:if test="${empty member}"><a href="${contextRoot}/login"><button class="btn btn-primary">請先登入</button></a></c:if>';
-		str += '<br><c:if test="${!empty member}"><a href="${contextRoot}/cart/eidtOrder"><button class="btn btn-primary">前往購買</button></a></c:if>';
+
 		$('#navCart').html(str);
 	}
 	var mbuttons = document.getElementsByClassName('minBut');
