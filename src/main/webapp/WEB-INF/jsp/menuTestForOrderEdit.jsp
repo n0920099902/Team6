@@ -19,7 +19,7 @@
 
 	<div class="album py-5 bg-light">
 		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+<!-- 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
 				
 				<form action="${pageContext.request.contextPath}/confirmBuy"
 					method="POST">
@@ -34,16 +34,24 @@
 						<!-- 		UserID -->
 						<input type="number" name="UID" value="${member.id }"  hidden="">
 					</div>
-					<div>
-						地址:<input type="text" name="address" required="required" id="address">
+					
+					<div class="input-group mb-3">
+					        <span class="input-group-text" id="basic-addon1">地址:</span>
+						    <input type="text" class="form-control" name="address" required="required" id="address" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
+					
+					<div class="input-group mb-3">
+                         <span class="input-group-text" id="basic-addon1">@</span>
+                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                   </div>
+                   
 					<div>
 						<!-- 		餐廳status -->
 						<input type="text" name="orderStatus" value="準備中" hidden="">
 					</div>
 					<div>
 <!-- 訂單時間 -->
-						<input type="text" name="time" id="time" value="" >
+						<input type="text" name="time" id="time" value="" hidden="" >
 					</div>
 				
 					<div>
@@ -53,18 +61,12 @@
 							style="color: red" id="phoneout"></span>
 					</div>
 
-					<!-- <div>
-						<input type="number">
-					</div> -->
-
-
-
 					<button id = "confirmBuy" onclick="getTime()" >確認購買</button>
 
 				</form>
 			</div>
 		</div>
-	</div>
+<!-- 	</div> -->
 </body>
 </html>
 <script type="text/javascript">
@@ -77,46 +79,34 @@
 	var list = JSON.parse(sessionStorage.getItem('buy'));
 	console.log(list);
 	
-	
+	var temp = '';
 	for (let i = 0; i < list.length; i++) {
 		var dish = list[i];
-		document.getElementById("show").innerHTML += '<div class="col"><div class="card"><img style="height: 200px width: 200px" src="'+dish.photo+'" class="card-img-top">';
-
-		document.getElementById("show").innerHTML += '<div class="headline">餐點名稱: '
+		temp += '<div class="row row-cols-1 row-cols-md-3 g-4"><div class="col"><div class="card"><img style="height: 200px width: 200px" src="'+dish.photo+'" class="card-img-top"> <div class="card-body">'
+				+ ' <h5 class="card-title">Card title</h5><p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p><div class="headline">餐點名稱: '
 				+ dish.name
 				+ '</div><div class="card-footer text-end">'
-				+ '<div>價格:' + dish.price + '</div>';
-
-// 		document.getElementById("show").innerHTML += '<div><input id="n'
-// 				+ dish.id + '" type="text" name="name" min="0"'
-// 				+ 'style="width: 20%; margin-right: 40%" value="' + dish.name
-// 				+ '"required hidden="">';
+				+ '<div>價格:' + dish.price ;
 		
-				//id
-		document.getElementById("show").innerHTML += '<input id="id'+dish.id+'" style="width: 100px" type="number" name="id" value="'+dish.id+'" min="1"required="required"	 "required hidden="">';
+		temp += '<input id="id'+dish.id+'" style="width: 100px" type="number" name="id" value="'+dish.id+'" min="1"required="required"	 "required hidden="">';
 
-		document.getElementById("show").innerHTML += '<br>數量:<input type="button" value="-" class="minBut" id="m_'+dish.id+'">';
-// 		document.getElementById("show").innerHTML += '<input id="id'+dish.id+'" style="width: 100px" type="number" name="id" value="'+dish.id+'" min="1"required="required"	 "required hidden="">';
+		temp += '<br>數量:<input type="button" value="-" class="minBut btn btn-primary btn-sm" id="m_'+dish.id+'">';
 
-		document.getElementById("show").innerHTML += '<input id="quantity'+dish.id+'" style="width: 70px" type="number" name="quantity"  readonly="readonly" value="'+dish.quantity+'" min="1"	required="required">';
+		temp += '<input id="quantity'+dish.id+'" style="width: 70px" type="number" name="quantity"  readonly="readonly" value="'+dish.quantity+'" min="1"	required="required">';
 		
-		document.getElementById("show").innerHTML += '<input id="price'+dish.id+'" style="width: 100px" type="number" name="price" value="'+dish.price+'" min="1"	required="required" "required hidden="">';
+		temp += '<input id="price'+dish.id+'" style="width: 100px" type="number" name="price" value="'+dish.price+'" min="1"	required="required" "required hidden="">';
 
-		document.getElementById("show").innerHTML += '<input type="button" value="+" class="addBut" id="a_'+dish.id+'">';
+		temp += '<input type="button" value="+" class="addBut btn btn-danger btn-sm" id="a_'+dish.id+'">';
 
-// 		document.getElementById("show").innerHTML += '<button class="addBut" id="a_'+dish.id+'">+</button>';
-		
-		document.getElementById("show").innerHTML += '總價: <span id="totalprice'+dish.id+'">'
+		temp += '總價: <span id="totalprice'+dish.id+'">'
 				+ dish.quantity * dish.price + '</span>';
 				
-		document.getElementById("show").innerHTML += '<input type="button" value="刪除此商品" class="deleteBut" style="background-color: red ; border: red"  id="d_'+dish.id+'">';
+		temp += '<input type="button" value="刪除此商品" class="deleteBut btn btn-danger" style="background-color: red ; border: red"  id="d_'+dish.id+'">';
 
-
-		document.getElementById("show").innerHTML += '</div></div></div></div>';
-		
-		
+		temp += '</div></div></div></div></div></div></div></div>';
 
 	}
+	$('#show').html(temp);
 	var mbuttons = document.getElementsByClassName('minBut');
 	for (var i=0;i<mbuttons.length;i++) {
 		mbuttons[i].addEventListener("click", min);
@@ -221,8 +211,6 @@
 		}
 
 	}
-	
-	
 	
 	function defaultPhoneOut() {
 		document.getElementById("phoneout").innerHTML = "";
