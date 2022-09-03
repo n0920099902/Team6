@@ -84,47 +84,27 @@ public class CommentService {
 	}
 
 	public List<CommentDto> findCommentByRest(Integer id) {
-
-		Restaurant r = rService.findById(id);
-//		Set<Orders> orders = r.getOrders();
+		List<CommentDto> commentResult = new ArrayList<CommentDto>();
+		List<Orders> ol = oDao.findOrdersByRestId(id);
+		List<Comment> cl = new ArrayList<Comment>();//容器
+		List<Comment> c = cDao.findAll();
 		
-		List<Orders> orders= oDao.findOrdersByRestId(id);
-		
-		List<Comment> comments=  new ArrayList<>();;
-		for(int i=0;i<orders.size();i++) {
-			Comment c= cDao.findCommentByOrderId(orders.get(i).getId());
-			comments.add(c);
+		for (int i = 0; i < c.size(); i++) {
+			for (int y = 0; y < ol.size(); y++) {
+				if (c.get(i).getOrders().getId() == ol.get(y).getId()) {
+					cl.add(c.get(i));
+				}
+			}
 		}
-	
-		
-		
-		List<CommentDto> result = new ArrayList<>();
-		for(int i=0;i<comments.size();i++) {
-			CommentDto dto = new CommentDto();
-			Users users=comments.get(i).getUsers();
-			
-			dto.setAccountName(users.getAccount());
-			dto.setId(comments.get(i).getId());
-			dto.setComments(comments.get(i).getComments());
-			dto.setTime(comments.get(i).getTime());
-			dto.setScore(comments.get(i).getScore());
-			result.add(dto);
-			
+		for (int i = 0; i < cl.size(); i++) {
+			CommentDto cdto = new CommentDto();
+			cdto.setAccountName(cl.get(i).getUsers().getAccount());
+			cdto.setTime(cl.get(i).getTime());
+			cdto.setComments(cl.get(i).getComments());
+			cdto.setScore(cl.get(i).getScore());
+			commentResult.add(cdto);
 		}
-
-//		for (Orders i : orders) {
-//			Comment cmt = i.getComment();
-//
-//			CommentDto dto = new CommentDto();
-//			dto.setAccountName(i.getUsers().getAccount());
-//			dto.setId(cmt.getId());
-//			dto.setComments(cmt.getComments());
-//			dto.setTime(cmt.getTime());
-//
-//			result.add(dto);
-//
-//		}
-		return result;
+		return commentResult;
 	}
 
 	public Comment findCommentByOrder(Integer id) {

@@ -22,14 +22,20 @@ public class CommentApi {
 	@Autowired
 	private RestaurantService rService;
 	
+//	@GetMapping("/comment")
+//	public List<CommentDto> listAllComment(@RequestParam(value="restId", required=false) Integer restId) {
+//		List<CommentDto> cmt = cService.findCommentByRest(restId);
+////		List <String> commentList = new ArrayList<>();
+////		for (Comment comment : cService.findCommentByRest(restId)) {
+////			commentList.add(comment.getComments());
+////		}
+////		
+//		return cmt;
+//	}
+	
 	@GetMapping("/comment")
 	public List<CommentDto> listAllComment(@RequestParam(value="restId", required=false) Integer restId) {
 		List<CommentDto> cmt = cService.findCommentByRest(restId);
-//		List <String> commentList = new ArrayList<>();
-//		for (Comment comment : cService.findCommentByRest(restId)) {
-//			commentList.add(comment.getComments());
-//		}
-//		
 		return cmt;
 	}
 }
