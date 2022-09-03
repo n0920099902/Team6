@@ -15,17 +15,19 @@
 <title>修改訂單</title>
 </head>
 <body>
-<a href="" id="keepBuy"><button>繼續購買</button></a> 
+<a href="" id="keepBuy"><button class="btn btn-secondary btn-lg">返回餐廳繼續購買</button></a> 
 
-	<div class="album py-5 bg-light">
+<!-- 	<div class="album py-5 bg-light"> -->
 		<div class="container">
-<!-- 			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
+			
 				
 				<form action="${pageContext.request.contextPath}/confirmBuy"
 					method="POST">
-					<div id="show"></div>
+<!-- 					<div class="container"> -->
+<!-- 					<div class="row row-cols-1 row-cols-md-2 g-4"> -->
+					<div id="show" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+					</div>
 					<div>
-					
 						<!-- 		餐廳ID -->
 						<input type="number" name="rID" value="" id="rID" hidden="">
 					</div>
@@ -37,13 +39,8 @@
 					
 					<div class="input-group mb-3">
 					        <span class="input-group-text" id="basic-addon1">地址:</span>
-						    <input type="text" class="form-control" name="address" required="required" id="address" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+						    <input type="text" class="form-control" name="address" required="required" id="address" placeholder="郵遞區號/市縣/鄉鎮/路街/巷/弄/門牌號碼" aria-label="Username" aria-describedby="basic-addon1">
 					</div>
-					
-					<div class="input-group mb-3">
-                         <span class="input-group-text" id="basic-addon1">@</span>
-                        <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
-                   </div>
                    
 					<div>
 						<!-- 		餐廳status -->
@@ -54,21 +51,26 @@
 						<input type="text" name="time" id="time" value="" hidden="" >
 					</div>
 				
-					<div>
-						訂購電話<input type="text" id="phone" name="phone" onblur="ckPhone()"
+					<div class="input-group mb-3">
+					          <span class="input-group-text" id="basic-addon1">訂購電話</span>
+						<input type="text" id="phone" name="phone" onblur="ckPhone()"
 							onfocus="defaultPhoneOut()" onblur="ckPhone()"
-							onfocus="defaultPhoneOut()" required><span
-							style="color: red" id="phoneout"></span>
+							onfocus="defaultPhoneOut()" required class="form-control" placeholder="範例:09XX-XXX-XXX" aria-label="Username" aria-describedby="basic-addon1">
+							<span style="color: red" id="phoneout"></span>
 					</div>
-
-					<button id = "confirmBuy" onclick="getTime()" >確認購買</button>
-
+					<button id = "confirmBuy" class="btn btn-success" onclick="getTime()" >前往付款</button>
+				
+<!-- 				</div> -->
+<!-- 				</div> -->
+				
 				</form>
-			</div>
+				
+			
 		</div>
 <!-- 	</div> -->
 </body>
 </html>
+<!-- style="height: 200px;width: 200px; " -->
 <script type="text/javascript">
 
     var rid  = JSON.parse(sessionStorage.getItem('rID'));
@@ -82,9 +84,9 @@
 	var temp = '';
 	for (let i = 0; i < list.length; i++) {
 		var dish = list[i];
-		temp += '<div class="row row-cols-1 row-cols-md-3 g-4"><div class="col"><div class="card"><img style="height: 200px width: 200px" src="'+dish.photo+'" class="card-img-top"> <div class="card-body">'
-				+ ' <h5 class="card-title">Card title</h5><p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p><div class="headline">餐點名稱: '
-				+ dish.name
+		temp += '<div  class="col"><div class="card"><img src="'+dish.photo+'" class="card-img-top "> <div class="card-body">'
+				+ ' <h5 class="card-title ">餐點名稱: '+ dish.name
+				+ '</h5><p class="card-text">特惠商店</p><div class="headline">'
 				+ '</div><div class="card-footer text-end">'
 				+ '<div>價格:' + dish.price ;
 		
@@ -103,7 +105,7 @@
 				
 		temp += '<input type="button" value="刪除此商品" class="deleteBut btn btn-danger" style="background-color: red ; border: red"  id="d_'+dish.id+'">';
 
-		temp += '</div></div></div></div></div></div></div></div>';
+		temp += '</div></div></div></div></div>';
 
 	}
 	$('#show').html(temp);
