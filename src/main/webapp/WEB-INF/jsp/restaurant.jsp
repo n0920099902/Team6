@@ -110,7 +110,7 @@
 			</button>
 		</div>
 	</section>
-	>>>>>>> c64120543233bdec05c4d65ae2aa3a7d7f5057ac
+
 	<div class="py-5 text-center container">
 		<form action="${contextRoot}/restaurant/search" method="get">
 			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
@@ -127,11 +127,11 @@
 							id="${restaurant.id}" style="color: black; text-decoration: none">
 							<div class="col">
 								<div class="card">
-									<img
-										width: "150px", height: "150px" 
-										class="img-thumbnail"
-										src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
-										class="card-img-top">
+									<div style="width: 100%; height: 150px;">
+										<img style="width: 100%; height: 100%"
+											src="${contextRoot}/restaurant/downloadImage/${restaurant.id}"
+											class="card-img-top img-thumbnail">
+									</div>
 						</a>
 						<div class="headline">
 							<h5>${restaurant.name }<span class="distance"
