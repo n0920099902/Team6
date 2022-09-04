@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.ispan.team6.dto.RestDistance;
 import com.ispan.team6.entity.Restaurant;
 import com.ispan.team6.entity.RestaurantType;
 import com.ispan.team6.entity.Rstatistics;
@@ -323,6 +326,39 @@ public class RestaurantController {
 		}
 		m.addAttribute("statistics", result);
 		return "BackstageIndex";
+	}
+	
+	@GetMapping(value = "/restaurant/SortByDistance", produces = "text/pain;charset=UTF-8")
+	public String SortByDistance(@RequestParam("restDistance")List<Integer> distance,@RequestParam("restId") List<Integer> rid, Model m) {
+		
+		class SortByDistance implements Comparator<RestDistance> {
+	        @Override
+	        public int compare(RestDistance a, RestDistance b) {
+	            return a.distance.compareTo(b.distance);
+	        }
+	    }
+		
+		
+	    List<RestDistance> rd=new ArrayList<RestDistance>();
+	    
+		for(int i=0;i<distance.size();i++) {
+			Restaurant r=rService.findById(rid.get(i));
+			RestDistance rd1=new RestDistance();
+			rd1.setDistance(distance.get(i));
+			rd1.setRes(r);
+			rd.add(rd1);
+		}
+		Collections.sort(rd, new SortByDistance());
+		
+		List<Restaurant>r1=new ArrayList<Restaurant>();
+		
+		for(int i=0;i<rd.size();i++) {
+			r1.add(rd.get(i).getRes());
+		}
+		
+		m.addAttribute("allRestaurant",r1);
+		
+		return "restaurant";
 	}
 
 }

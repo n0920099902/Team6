@@ -206,5 +206,20 @@ public class CommentController {
 
 		return "NewComment";
 	}
+	
+	@GetMapping("/comment/showComment/{userId}")
+	public String showComment(@PathVariable("userId") Integer id, Model m) {
+
+		Comment cmt = cService.findCommentByOrder(id);
+
+		if (cmt != null) {
+			m.addAttribute("comment", cmt);
+		} else {
+			m.addAttribute("message", "尚無評論");
+			m.addAttribute("orderId", id);
+
+		}
+		return "showComment";
+	}
 
 }

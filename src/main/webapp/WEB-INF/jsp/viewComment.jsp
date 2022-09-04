@@ -66,4 +66,5 @@
 		</div>
 </c:if>
 </body>
+<jsp:include page="layout/footer.jsp" />
 </html>
