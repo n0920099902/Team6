@@ -87,9 +87,7 @@
 		temp += '<div  class="col"><div class="card"><img src="'+dish.photo+'" class="card-img-top "> <div class="card-body">'
 				+ ' <h5 class="card-title ">餐點名稱: '+ dish.name
 				+ '</h5><p class="card-text">特惠商店</p><div class="headline">'
-		temp += '<div class="row row-cols-1 row-cols-md-3 g-4"><div class="col"><div class="card"><img style="height: 200px width: 200px" src="'+dish.photo+'" class="card-img-top"> <div class="card-body">'
-				+ ' <h5 class="card-title"></h5><p class="card-text"></p><div class="headline">餐點名稱: '
-				+ dish.name
+		
 				+ '</div><div class="card-footer text-end">'
 				+ '<div>價格:' + dish.price ;
 		
