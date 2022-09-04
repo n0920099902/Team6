@@ -46,7 +46,7 @@ import com.ispan.team6.service.RestaurantService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
-@SessionAttributes({ "dish", "member", "buy" ,"orderPay" })
+@SessionAttributes({ "dish", "member", "buy", "orderPay" })
 public class OrderController {
 
 	@Autowired
@@ -63,14 +63,11 @@ public class OrderController {
 
 	@Autowired
 	private UsersService usersService;
-	
+
 	@Autowired
 	private DishDAO dishDAO;
 	@Autowired
 	private OrdersDetailService ordersDetailService;
-	
-	
-	
 
 	// 導向無登入訂單頁面
 	@GetMapping("cart/noLoginCart")
@@ -87,7 +84,7 @@ public class OrderController {
 //	//將購物車session裡的商品圖片印出來
 	@GetMapping("/cart/downloadImage/{id}")
 	public void downloadImage(@PathVariable Integer id, HttpServletResponse response) throws IOException {
-		 Dish r = ordersService.findOrderImgbyId(id);
+		Dish r = ordersService.findOrderImgbyId(id);
 
 		int len = 0;
 		try {
@@ -104,13 +101,14 @@ public class OrderController {
 			e.printStackTrace();
 		}
 	}
+
 //確認購買並送出訂單導向結帳頁
 	@PostMapping("/confirmBuy")
-	public String confirmBuy(@RequestParam("id") List<Integer> id,@RequestParam("price") List<Integer> price,
-			@RequestParam("quantity") List<Integer> quantity,@RequestParam("rID") Integer rID,
-			@RequestParam("UID") int UID,@RequestParam("address") String address,
-			@RequestParam("orderStatus") String orderStatus,@RequestParam("time") String time,
-			@RequestParam("phone") Integer phone, Model m,HttpSession session) {
+	public String confirmBuy(@RequestParam("id") List<Integer> id, @RequestParam("price") List<Integer> price,
+			@RequestParam("quantity") List<Integer> quantity, @RequestParam("rID") Integer rID,
+			@RequestParam("UID") int UID, @RequestParam("address") String address,
+			@RequestParam("orderStatus") String orderStatus, @RequestParam("time") String time,
+			@RequestParam("phone") Integer phone, Model m, HttpSession session) {
 		int totalPrice = 0;
 		for (int i = 0; i < price.size(); i++) {
 			int p = price.get(i);
@@ -132,51 +130,66 @@ public class OrderController {
 		orders.setTotalPrice(totalPrice);
 		orders.setRemark("待付款");
 		ordersDao.save(orders);
-	
-		
+
 		System.out.println("列印出id1:" + id + "數量" + quantity + "orders" + orders);
-		
-		for(int i= 0; i < id.size(); i++) {
+
+		for (int i = 0; i < id.size(); i++) {
 			OrdersDetail detail = new OrdersDetail();
-			
-			 Dish dish = ordersDetailService.OrderFindDishById((Integer) id.get(i));
-			 System.out.println("列印出id2:" + id + "數量" + quantity + "orders" + orders);
-			 Integer q = quantity.get(i);
-			 System.out.println("q"+q);
-			 detail.setDish(dish);
-			 System.out.println("dish" +dish);
-			 detail.setQuantity(q);
-			 detail.setOrders(orders);
-			 System.out.println("orders" +orders);
-			 System.out.println("detail=====>" +detail);
-			 System.out.println("detail.getId()=====>" +detail.getId());
-			 ordersDetailDao.save(detail);
-			 
+
+			Dish dish = ordersDetailService.OrderFindDishById((Integer) id.get(i));
+			System.out.println("列印出id2:" + id + "數量" + quantity + "orders" + orders);
+			Integer q = quantity.get(i);
+			System.out.println("q" + q);
+			detail.setDish(dish);
+			System.out.println("dish" + dish);
+			detail.setQuantity(q);
+			detail.setOrders(orders);
+			System.out.println("orders" + orders);
+			System.out.println("detail=====>" + detail);
+			System.out.println("detail.getId()=====>" + detail.getId());
+			ordersDetailDao.save(detail);
+
 		}
 		System.out.println("c");
 		m.addAttribute("orderPay", orders);
-		//		return "redirect:/getUsersOrder";
-		return "redirect:/restaurant/cart/payment/"+orders.getId();
+		// return "redirect:/getUsersOrder";
+		return "redirect:/restaurant/cart/payment/" + orders.getId();
 	}
 
-	//  結帳後跳轉頁面
-		@GetMapping("/restaurant/cart/payment/checkoutDetails")
-		public String checkoutDetails(HttpSession session,Model m, @SessionAttribute("member") Users us) {
-			System.out.println(ordersDao);
-			Orders order = (Orders)session.getAttribute("orderPay");
-			Integer oId = order.getId();
-			System.out.println("order.getId() ====>"+order.getId());
-			Orders orders = ordersDao.findById(oId).get();
-			System.out.println("orders ======>"+orders);
-			if (orders==null) {
-				m.addAttribute("message", "沒有歷史訂單");
-			} else {
-				m.addAttribute("Horders", orders);
-			}
-
-			return "orderCheckoutDetail";
+	// 結帳後跳轉頁面(合併至底下editOrderRemark)(無使用)
+	@GetMapping("/restaurant/cart/payment/checkoutDetails")
+	public String checkoutDetails(HttpSession session, Model m, @SessionAttribute("member") Users us) {
+//		System.out.println(ordersDao);
+		Orders order = (Orders) session.getAttribute("orderPay");
+		Integer oId = order.getId();
+//		System.out.println("order.getId() ====>" + order.getId());
+		Orders orders = ordersDao.findById(oId).get();
+//		System.out.println("orders ======>" + orders);
+		if (orders == null) {
+			m.addAttribute("message", "沒有歷史訂單");
+		} else {
+			m.addAttribute("Horders", orders);
 		}
-	
+
+		return "orderCheckoutDetail";
+	}
+
+	// 跳出綠界 一定要用post 直接用要改成get
+	@PostMapping("/order/confirmBuy/{id}")
+	public String editOrderRemark(@PathVariable Integer id, Model m, HttpSession session) {
+		
+		Orders o = ordersDao.findOrdersById(id);
+		o.setRemark("已付款");
+		ordersDao.save(o);
+		m.addAttribute("Horders",o);
+
+		Users u = o.getUsers();
+		m.addAttribute("member", u);
+		m.addAttribute("message", "購買成功");
+
+		return "confirmBuy";
+	}
+
 	// 查詢使用者歷史訂單
 	@GetMapping("/getUsersOrder")
 	public String getUsrsOrder(Model m, @SessionAttribute("member") Users us) {
@@ -201,7 +214,12 @@ public class OrderController {
 
 		return "oderDetail";
 	}
-
+//以上有使用
+	
+	
+	
+//以下廢棄
+	
 // -------------------------------------------------------------
 // -------------------------------------------------------------
 // -------------------------------------------------------------
@@ -241,21 +259,6 @@ public class OrderController {
 		return "menuTestForOrder";
 	}
 
-	
-	//跳綠界 一定要用post 直接用要改成get
-	@PostMapping("/order/confirmBuy/{id}")
-	public String editOrderRemark(@PathVariable Integer id, Model m,HttpSession session) {
-		Orders o = ordersDao.findOrdersById(id);
-		o.setRemark("已付款");
-		ordersDao.save(o);
-
-       Users u=  o.getUsers();
-       m.addAttribute("member",u);
-		m.addAttribute("message", "購買成功");
-
-		return "confirmBuy";
-	}
-	
 //	@PostMapping("/restaurant/cart")
 //	Public @ResponseBody list<DishQ> showOrders() {
 //		

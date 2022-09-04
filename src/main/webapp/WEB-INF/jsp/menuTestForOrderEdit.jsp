@@ -5,6 +5,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html>
 
+
 <jsp:include page="layout/navbar.jsp" />
 
 
@@ -14,7 +15,8 @@
 <meta charset="UTF-8">
 <title>修改訂單</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
+
 <a href="" id="keepBuy"><button class="btn btn-secondary btn-lg">返回餐廳繼續購買</button></a> 
 
 <!-- 	<div class="album py-5 bg-light"> -->
@@ -69,6 +71,7 @@
 		</div>
 <!-- 	</div> -->
 </body>
+<jsp:include page="layout/footer.jsp" />
 </html>
 <!-- style="height: 200px;width: 200px; " -->
 <script type="text/javascript">

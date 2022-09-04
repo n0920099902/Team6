@@ -11,9 +11,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>歷史訂單</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
 ${message }
 
 	<div class="album py-5 bg-light">
@@ -75,6 +75,10 @@ ${message }
 				</c:if>
 				</c:forEach>
 				</div>
+			</div>
+		</div>
+	</div>
 
 </body>
+<jsp:include page="layout/footer.jsp" />
 </html>

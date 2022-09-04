@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
 
 	<div class="album py-5 bg-light">
 		<div class="container">
@@ -40,4 +40,5 @@
 				</c:forEach>
 
 </body>
+<jsp:include page="layout/footer.jsp" />
 </html>
