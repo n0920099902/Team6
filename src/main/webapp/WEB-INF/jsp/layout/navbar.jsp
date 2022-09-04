@@ -147,12 +147,12 @@
 		document.getElementById("navCart").innerHTML += '購物車尚未有商品!!!'
 	} else {
 		document.getElementById("navCart").style = "overflow:auto;height:200px; width:300px";
-		//document.getElementById("sp").innerHTML += list.length;
-		str += '<h6>最近加入購物車';
+		document.getElementById("sp").innerHTML += list.length;
+		str += '<h6>最近加入購物車</h6>';
 		str += '<c:if test="${empty member}"><a href="${contextRoot}/login" style="float:right">請先登入</a></c:if>';
 		str += '<c:if test="${!empty member}"><a href="${contextRoot}/cart/eidtOrder" style="float:right">前往購買</a></c:if></h6>';
 		str += '<table class="table table-success table-striped">';
-		let totalQuantity = 0;
+// 		let totalQuantity = 0;
 		for (let i = 0; i < list.length; i++) {
 			var dish = list[i];
 			//card
@@ -176,14 +176,19 @@
 			str += '<td>' + dish.name + '</td>' + '<td>' + dish.price + '</td>'
 					+ '<td>' + dish.quantity + '</td>';
 
+// 			str += '</tr></tbody>';
+
+// 			totalQuantity += dish.quantity;
+
+// 		}
+// 		document.getElementById("sp").innerHTML = totalQuantity;
+// 		str += "</table>"
 			str += '</tr></tbody>';
 
-			totalQuantity += dish.quantity;
-
 		}
-		document.getElementById("sp").innerHTML = totalQuantity;
 		str += "</table>"
-
+// 		str += '<br><c:if test="${empty member}"><a href="${contextRoot}/login"><button class="btn btn-primary">請先登入</button></a></c:if>';
+// 		str += '<br><c:if test="${!empty member}"><a href="${contextRoot}/cart/eidtOrder"><button class="btn btn-primary">前往購買</button></a></c:if>';
 		$('#navCart').html(str);
 	}
 	var mbuttons = document.getElementsByClassName('minBut');
