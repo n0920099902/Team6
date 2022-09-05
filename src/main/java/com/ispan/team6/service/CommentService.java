@@ -125,4 +125,13 @@ public class CommentService {
 
 		cDao.save(cmt1);
 	}
+	
+//	public Set<Comment> findCommentsByUser(Integer id) {
+//
+//		Users user = uService.findById(id);
+//		
+//		Set<Comment> comments = user.getComment();
+//		
+//		return comments;
+//	}
 }

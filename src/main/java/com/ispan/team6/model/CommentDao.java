@@ -9,8 +9,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.ispan.team6.entity.Comment;
-import com.ispan.team6.entity.Orders;
-import com.ispan.team6.entity.Restaurant;
+import com.ispan.team6.entity.Users;
 
 public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
@@ -18,6 +17,11 @@ public interface CommentDao extends JpaRepository<Comment, Integer> {
 	
 	@Query(value = "select * from Comment where fk_order_id =:id", nativeQuery = true)
 	public Comment findCommentByOrderId(int id);
+	
+	@Query(value = "select * from Comment where fk_users_id =:id", nativeQuery = true)
+	public List<Comment> findCommentByUserId(int id);
+	
+//	public Users findByUsers(Integer id);
 	
 	@Transient
 	@Modifying
