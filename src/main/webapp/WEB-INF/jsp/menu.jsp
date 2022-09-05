@@ -157,7 +157,7 @@
 							detail_box.append('<h5 class="dishId" style="display:none;"name="dishId">'+ this.dishId + '</h5>')
 									  .append('<h5 class="dishName">' + this.dishName + '</h5>')
 									  .append('<div class="dishPrice">' + "$" + this.dishPrice + '</div>')
-									  .append('<input id="quantity" type="number" name="quantity" class="quantity" min="0" style="width: 20%; margin-right: 40%; background-color: #343a40; color: white" value="1" required>')
+									  .append('<input id="quantity" type="number" name="quantity" min="1" class="quantity" min="0" style="width: 20%; margin-right: 40%; background-color: #343a40; color: white" value="1" required>')
 									  .append('<button type="button" class="cartBut btn-danger" id="c_'+this.dishId +'">加入購物車</button>')
 					
 	  						var img_box=$('<div class="img-box"></div>')

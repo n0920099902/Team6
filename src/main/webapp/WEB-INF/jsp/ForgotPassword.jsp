@@ -114,8 +114,12 @@
 							<h1>請輸入您的郵件</h1>
 						</div>
 						<form action="${contextRoot }/users/send/email" method="post">
-							請輸入您的郵件: <input type="text" name="email">
+							請輸入您的郵件: <input type="text" name="email" id="email">
 							<button class="btn btn-primary" type="submit">送出</button>
+							<div>
+								<a class=" btn btn-outline-success fastSign"
+									style="margin: 4px, 2px; padding: 6px 12px; width: 7em">一鍵輸入</a>
+							</div>
 						</form>
 					</div>
 				</div>
@@ -123,4 +127,10 @@
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	//一鍵輸入
+	$(".fastSign").click(function() {
+		$("#email").val("a0921829199@gmail.com");
+	});
+</script>
 </html>

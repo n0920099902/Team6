@@ -111,7 +111,7 @@
 				method="post" enctype="multipart/form-data">
 
 				<h2 class="text-center">
-					<strong>餐廳註冊</strong>
+					<strong>店家帳號註冊</strong>
 				</h2>
 				<div>
 					店家帳號： <input type="text" name="account" required id="account"

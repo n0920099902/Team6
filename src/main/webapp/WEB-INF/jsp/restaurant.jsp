@@ -56,6 +56,9 @@ display: block;
 	right: 5px;
 	cursor: pointer; /*cursor游標pointer指針:改變鼠標*/
 }
+#location:hover {
+	cursor: pointer;
+}
 </style>
 <!DOCTYPE html>
 
@@ -87,7 +90,7 @@ display: block;
 <body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
 
       		 <!--- 輪播圖片 --->
-        <section class="py-5 text-center container">
+        <section  class="py-5 text-center container">
             <div id="carouselExampleIndicators" class="carousel slide"
                 data-bs-ride="carousel">
                 <div class="carousel-indicators">
@@ -132,18 +135,18 @@ display: block;
             </div>
         </section>
         
-	<div class="py-5 text-center container">
+	<div class="py-5 text-center container" >
 	<span >現在地址:<span id="location" style="color: blue;" onclick="showDialog1()"></span></span>
 		<form action="${contextRoot}/restaurant/search" method="get">
 			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
 			<button>GO</button>
 		</form>
-		<input  type="submit"" value="以距離排序" onclick="sub()">
+		<input  type="submit" value="以距離排序" onclick="sub()">
 	</div>
-	<form id="sortForm" action="${contextRoot}/restaurant/SortByDistance" method="get">
-	<div class="album py-5 bg-light">
-		<div class="container">
-			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+	<form id="sortForm" action="${contextRoot}/SortByDistance" method="post" >
+	<div class="album py-5 bg-transparent" >
+		<div class="container" >
+			<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" style="background:transparent ">
 				<!-- 重複的結構 -->
 				<c:forEach items="${allRestaurant }" var="restaurant">
 					<div>

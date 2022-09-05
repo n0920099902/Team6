@@ -123,7 +123,7 @@ public class RestaurantController {
 
 		rService.insertRestaurant(newRest);
 
-		return "redirect:/backstageIndex";
+		return "redirect:/backend/dish/category";
 	}
 
 	@GetMapping("/restaurant/viewRestaurants")
@@ -328,7 +328,7 @@ public class RestaurantController {
 		return "BackstageIndex";
 	}
 	
-	@GetMapping(value = "/restaurant/SortByDistance", produces = "text/pain;charset=UTF-8")
+	@PostMapping(value = "/SortByDistance", produces = "text/pain;charset=UTF-8")
 	public String SortByDistance(@RequestParam("restDistance")List<Integer> distance,@RequestParam("restId") List<Integer> rid, Model m) {
 		
 		class SortByDistance implements Comparator<RestDistance> {

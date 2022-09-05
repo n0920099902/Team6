@@ -92,7 +92,7 @@
 		$("#mPassword").val("1234");
 	});
 	$(".fastLogin4").click(function() {
-		$("#mAccount").val("member02");
+		$("#mAccount").val("user1234");
 		$("#mPassword").val("1234");
 	});
 	//密碼可視切換

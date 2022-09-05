@@ -13,7 +13,8 @@
 <meta charset="UTF-8">
 <title>查看評論</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
+
 
 <div class="container">
 	<h1 style="text-align:center">查看訂單評論</h1>

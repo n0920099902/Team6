@@ -28,11 +28,6 @@ public class PageController {
 		return "redirect:/restaurant";
 	}
 	
-	@PostMapping("/")
-	public String welcomeIndex2() {
-		return "index";
-	}
-
 	@GetMapping("/member/view")
 	public String memberaddPage(Model m) {
 

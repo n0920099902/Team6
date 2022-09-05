@@ -13,7 +13,8 @@
 <meta charset="UTF-8">
 <title>評論後台修改刪除</title>
 </head>
-<body>
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; "> 
+
 
 	<div class="container">
 		<div class="row justify-content-center">
