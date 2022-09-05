@@ -3,6 +3,7 @@ package com.ispan.team6.controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.ispan.team6.dto.AddCommentDto;
 import com.ispan.team6.dto.CommentDto;
@@ -28,6 +30,7 @@ import com.ispan.team6.service.OrdersService;
 import com.ispan.team6.service.UsersService;
 
 @Controller
+@SessionAttributes("member")
 public class CommentController {
 
 	@Autowired
@@ -160,11 +163,9 @@ public class CommentController {
 
 		List<CommentDto> commentResult = new ArrayList<CommentDto>();
 		List<Orders> ol = oDao.findOrdersByRestId(id);
-		List<Comment> cl = new ArrayList<Comment>();//容器
+		List<Comment> cl = new ArrayList<Comment>();// 容器
 		List<Comment> c = cDao.findAll();
-		
 
-		
 //		List<Comment> cn = new ArrayList<Comment>();
 //		
 //		for(int i=0;i<ol.size();i++) {
@@ -173,7 +174,7 @@ public class CommentController {
 //            	cn.add(c3);
 //            }
 //		}
-		
+
 		for (int i = 0; i < c.size(); i++) {
 			for (int y = 0; y < ol.size(); y++) {
 				if (c.get(i).getOrders().getId() == ol.get(y).getId()) {
@@ -181,8 +182,7 @@ public class CommentController {
 				}
 			}
 		}
-		
-		
+
 //		for (int i = 0; i < cn.size(); i++) {
 //			CommentDto cdto = new CommentDto();
 //			cdto.setAccountName(cn.get(i).getUsers().getAccount());
@@ -191,7 +191,7 @@ public class CommentController {
 //			cdto.setScore(cn.get(i).getScore());
 //			commentResult.add(cdto);
 //		}
-		
+
 		for (int i = 0; i < cl.size(); i++) {
 			CommentDto cdto = new CommentDto();
 			cdto.setAccountName(cl.get(i).getUsers().getAccount());
@@ -206,20 +206,20 @@ public class CommentController {
 
 		return "NewComment";
 	}
-	
-	@GetMapping("/comment/showComment/{userId}")
-	public String showComment(@PathVariable("userId") Integer id, Model m) {
 
-		Comment cmt = cService.findCommentByOrder(id);
+	@GetMapping("/comment/NewComment/{id}")
+	public String showComment(@PathVariable("id") Integer id,Model m) {
 
-		if (cmt != null) {
-			m.addAttribute("comment", cmt);
-		} else {
-			m.addAttribute("message", "尚無評論");
-			m.addAttribute("orderId", id);
+//		Users u=(Users) m.getAttribute("member");
+		
+		
+	    List<Comment> cL=cDao.findCommentByUserId(id);
+	    
+	    m.addAttribute("comment",cL);
+		
+		
 
-		}
-		return "showComment";
+		return "NewComment";
 	}
 
 }

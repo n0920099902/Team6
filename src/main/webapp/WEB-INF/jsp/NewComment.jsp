@@ -44,6 +44,7 @@ div.awesomeRating {
 <body>
 
 	<div class="heading_container heading_center">
+	<br><br>
 	<h2>評論區</h2>
 	</div>
 	<br><br>
@@ -68,10 +69,10 @@ div.awesomeRating {
 <%-- 						<td> <fmt:formatDate  value="${c.time}" pattern="yyyy-MM-dd HH:mm"/></td> --%>
 
 <!-- 					</tr> -->
-<div class="card-header">
-		<c:out value="帳號: ${c.accountName}"></c:out>
-  </div>
   <div class="card-body">
+  <b>訂單編號:</b>
+  <c:out value="${c.orders.id }"></c:out>
+  <br><br>
   	<b>評價:</b>
   	<div id="${c.score}" class="star"></div>
   	<br>
@@ -81,8 +82,10 @@ div.awesomeRating {
 	<br><br>
 	<b>時間:</b> 
 	<fmt:formatDate pattern="yyyy 年 MM 月 dd 日 a hh:mm:ss EEEE" value="${c.time}" />
-  		  </div>
-<br><br>
+  	</div>
+  	&emsp;
+  	<a href="${pageContext.request.contextPath}/comment/viewComment/${c.orders.id}"><button type="button" class="btn btn-outline-dark">查看評論</button></a>
+ 	<hr style="border-top:8px dashed #000000;"/>
 				</c:forEach>
 <!-- 			</tbody> -->
 <!-- 		</table> -->

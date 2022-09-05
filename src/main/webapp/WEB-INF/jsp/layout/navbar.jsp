@@ -124,6 +124,7 @@
 							<%-- 								href="${contextRoot}/restaurant/viewRestaurants">餐廳總覽(後台)</a> --%>
 						</c:if>
 						<a class="dropdown-item" href="${contextRoot}/getUsersOrder">歷史訂單</a>
+						<a class="dropdown-item" href="${contextRoot}/comment/NewComment/${member.id}">我的評論</a>
 						<hr class="dropdown-divider">
 						<a class="dropdown-item" href="${contextRoot}/member/logout">登出</a>
 					</div>
