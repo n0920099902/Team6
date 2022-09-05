@@ -11,6 +11,10 @@
 
 <html>
 <head>
+<link href="../../css/font-awesome.min.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+<link href="../../css/responsive.css" rel="stylesheet" />
+<body style="background:url(${pageContext.request.contextPath}/img/abstract-textured-white-background.jpg) ;background-size:cover; ">
 <meta charset="UTF-8">
 <title>新增評論頁面</title>
 </head>
@@ -20,13 +24,15 @@
 		<div class="row justify-content-center">
 			<!--至中-->
 			<div class="col-4">
-
-				<h1>建立評論</h1>
+				&emsp;&emsp;
+				<div class="heading_container heading_center">
+				<h1>&nbsp;&nbsp;&nbsp;建立評論</h1>
+				</div>
 				<br>
 				<br>
 				<br>
 				<br>
-				<div class="card" style="width: 18rem;">
+				<div class="card" style="width: 25rem;height:300px;">
 					<div class="card-body">
 						<h5 class="card-title">新增評論:</h5>
 
@@ -51,9 +57,12 @@
 
 
 	</div>
-
+<br><br><br><br><br>
 
 </body>
+
+<jsp:include page="layout/footer.jsp" />
+
 <script type="text/javascript">
 	var list = [];
 	var num = 0;

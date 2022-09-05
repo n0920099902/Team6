@@ -10,6 +10,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link href="../../css/font-awesome.min.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+<link href="../../css/responsive.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>評論後台修改刪除</title>
 </head>
@@ -20,7 +23,8 @@
 		<div class="row justify-content-center">
 			<!--至中-->
 			<div class="col-4">
-				<h1>評論修改</h1>
+			<br><br>
+				<h1>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;評論修改</h1>
 				<br><br>
 				<div class="card" style="width: 18rem;">
 					<div class="card-body">
@@ -47,5 +51,8 @@
 			</div>
 		</div>
 	</div>
+	<br><br><br><br><br><br><br><br><br><br>
+<input type ="button" onclick="history.back()" value="回上一頁"></input>
 </body>
+<jsp:include page="layout/footer.jsp" />
 </html>

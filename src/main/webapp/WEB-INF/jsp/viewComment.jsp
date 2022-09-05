@@ -10,6 +10,9 @@
 <c:set var="contextRoot" value="${pageContext.request.contextPath}" />
 <html>
 <head>
+<link href="../../css/font-awesome.min.css" rel="stylesheet" />
+<link href="../../css/style.css" rel="stylesheet" />
+<link href="../../css/responsive.css" rel="stylesheet" />
 <meta charset="UTF-8">
 <title>查看評論</title>
 </head>
@@ -17,6 +20,7 @@
 
 
 <div class="container">
+<br>
 	<h1 style="text-align:center">查看訂單評論</h1>
 </div>
 <br>
@@ -66,6 +70,8 @@
 			</div>
 		</div>
 </c:if>
+<br><br><br><br>
+<input type ="button" onclick="history.back()" value="回上一頁"></input>
 </body>
 <jsp:include page="layout/footer.jsp" />
 </html>

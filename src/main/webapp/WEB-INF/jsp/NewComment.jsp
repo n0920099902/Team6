@@ -45,22 +45,15 @@ div.awesomeRating {
 
 	<div class="heading_container heading_center">
 	<br><br>
-	<h2>評論區</h2>
+	<h2>我的評論</h2>
 	</div>
 	<br><br>
 	<div class="container">
-<!-- 		<table class="table table-striped"> -->
-<!-- 			<thead> -->
-<!-- 				<tr> -->
-<!-- 					<th scope="col">帳號</th> -->
-<!-- 					<th scope="col">評論內容</th> -->
-<!-- 					<th scope="col">評分</th> -->
-<!-- 					<th scope="col">評論時間</th> -->
-<!-- 				</tr> -->
-<!-- 			</thead> -->
-
-<!-- 			<tbody id="commentBody"> -->
-
+<c:if test="${empty comment }">
+<h4 style="text-align:center">尚無評論</h4>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+</c:if>
+<c:if test="${!empty comment }">
 				<c:forEach items="${comment }" var="c">
 <!-- 					<tr> -->
 <%-- 						<td>${c.accountName }</td> --%>
@@ -85,8 +78,10 @@ div.awesomeRating {
   	</div>
   	&emsp;
   	<a href="${pageContext.request.contextPath}/comment/viewComment/${c.orders.id}"><button type="button" class="btn btn-outline-dark">查看評論</button></a>
- 	<hr style="border-top:8px dashed #000000;"/>
+  	<br><br>
+ 	<hr style="border-top:6px solid #000000;"/>
 				</c:forEach>
+				</c:if>
 <!-- 			</tbody> -->
 <!-- 		</table> -->
 	</div>
