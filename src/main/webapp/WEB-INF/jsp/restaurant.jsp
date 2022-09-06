@@ -298,7 +298,7 @@ function addMap(sId){
 function AddComment(sId){
 	var cStr='';
 	$.ajax({
-        url: "http://localhost:8080/my-app/comment?restId=" + sId,
+        url: "http://localhost:8080/FeastEat/comment?restId=" + sId,
         type: "GET",
         dataType: "JSON",
         contentType : "application/json; charset=utf-8",
