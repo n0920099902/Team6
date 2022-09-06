@@ -39,9 +39,9 @@ display: block;
 .dialog1 {
 	position: fixed;
 	top: 10%;
-	left: 68%;
-	width: 20%;
-	height: 40%;
+	left: 40%;
+	width: 40%;
+	height: 70%;
 	border: 1px solid #888888;
 	background-color: #eeeeee;
 	box-shadow: 0px 0px 10px;
@@ -136,7 +136,7 @@ display: block;
         </section>
         
 	<div class="py-5 text-center container" >
-	<span >現在地址:<span id="location" style="color: blue;" onclick="showDialog1()"></span></span>
+	現在地址:<span id="location" style="color: blue;" ></span> <button onclick="showDialog1()">變更</button>
 		<form action="${contextRoot}/restaurant/search" method="get">
 			搜尋:<input type="text" name="keyword" placeholder="想要吃的類型或商店">
 			<button>GO</button>
@@ -221,218 +221,303 @@ display: block;
 </div>
 <div class="dialog1" id="dialog1" style="display: none;">
 <div class="close" onclick="hideDialog1();" id="x">&emsp;<img alt="" style="width: 20px ;height: 20px" src="${pageContext.request.contextPath}/images/x-symbol.svg"></div>
-<br><div  id="map" ></div>
+<br>
+<input id="StringLocation" type="text" style="width: 80%"> <button onclick="getStringLoc()">確認</button><div  id="map" ></div>
 </div>
 </body>
 	<jsp:include page="layout/footer.jsp" />
 </body>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script type="text/javascript">
- function sub(){
-	    document.getElementById("sortForm").submit();
- }
+function sub(){
+    document.getElementById("sortForm").submit();
+}
 
-    var distanceClass = document.getElementsByClassName('distance');
-	var dialog, x,c,sId,dialog1, x1;
-	
-	window.onload = function() {
-		dialog = document.getElementById("dialog");
-		x = document.getElementById("x");
-		dialog1 = document.getElementById("dialog1");
-		x1 = document.getElementById("x1");
-		for (let i = 0; i < distanceClass.length; i++) {
-		 	let dID=distanceClass[i].id;
-		 	let num=dID.split('showKm')[1];
-		 	let address=document.getElementById("Adress"+num).value;
-		 	GetNowAddress();
-		 	Distance(address,num);
-		}
-	}
-	
-	var list = JSON.parse(sessionStorage.getItem('buy'));
-	var s = document.getElementsByClassName('s');
-	for (let i = 0; i < s.length; i++) {
-		s[i].addEventListener("click", getR);
-	}
-	var b = document.getElementsByClassName('b');
-	for (let i = 0; i < b.length; i++) {
-		b[i].addEventListener("click", showDialog);
-	}
+var distanceClass = document.getElementsByClassName('distance');
+var dialog, x,c,sId,dialog1, x1;
 
-	function getR(event) {
-		var aId = this.id;
-		if (list == null) {//購物車為空 拿到餐廳ID 存成session
-			sessionStorage.setItem('point', JSON.stringify(aId));
-		}
+window.onload = function() {
+	dialog = document.getElementById("dialog");
+	x = document.getElementById("x");
+	dialog1 = document.getElementById("dialog1");
+	x1 = document.getElementById("x1");
+ 	GetNowAddress();
+	for (let i = 0; i < distanceClass.length; i++) {
+	 	let dID=distanceClass[i].id;
+	 	let num=dID.split('showKm')[1];
+	 	let address=document.getElementById("Adress"+num).value;
+	 	Distance(address,num);
 	}
-	
-	function showMap(){
-		document.getElementById('tableComment').style.display = "none";
-		document.getElementById('comment').className='nav-link active';
-		document.getElementById('Rmap').className='nav-link disabled';
-		addMap(sId);
-		
-	}
-	
-	function showComment(){
-		AddComment(sId);
-		document.getElementById('tableComment').style.display = "";
-		document.getElementById('Rmap').className='nav-link active';
-		document.getElementById('comment').className='nav-link disabled';
-		document.getElementById('showMap').style.display ="none";
-	}
-	
-	var mapstr='https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=';
-	var len='&language=zh-Hant';
-	
-	
-	function addMap(sId){
-		document.getElementById('showMap').style.display ="";
-		let rAdress=document.getElementById('Adress'+sId).value;
-		document.getElementById('f').src=mapstr+rAdress+len;
-		let rRemak=document.getElementById('remark'+sId).value;
-		document.getElementById('remark').innerHTML=" 餐廳描述:<br>"+rRemak;
-		
-	}
-	
-	function AddComment(sId){
-		var cStr='';
-		$.ajax({
-            url: "http://localhost:8080/FeastEat/comment?restId=" + sId,
-            type: "GET",
-            dataType: "JSON",
-            contentType : "application/json; charset=utf-8",
-            success: function (data, status)
-            {
-          	  console.log(data);
-                $(data).each(function (index, element) {
+}
+var list = JSON.parse(sessionStorage.getItem('buy'));
+var s = document.getElementsByClassName('s');
+for (let i = 0; i < s.length; i++) {
+	s[i].addEventListener("click", getR);
+}
+var b = document.getElementsByClassName('b');
+for (let i = 0; i < b.length; i++) {
+	b[i].addEventListener("click", showDialog);
+}
 
-                  var star = '';
-                  for(let i=0;i<element.score;i++){
-                  	star+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
-                  }
-                  var cmt = '<tr>'+                
-                                  '<td>' + element.accountName + '</td>'+
-                                  '<td>' + element.comments + '</td>'+
-                                  '<td>' + star+ '</td>'+
-                                  '<td>' + element.time + '</td>'+
-                            '</tr>';
-                      cStr+=cmt;
-                                   
-                });
-                document.getElementById('commentBody').innerHTML=cStr; 
-                if(cStr==""){
-                	 document.getElementById('commentBody').innerHTML='<tr><td>暫無評論</td><td></td><td></td><td></td></tr>';
-                }
-            },
-            error: function (xhr, desc, err)
-            {
-                console.log(desc);
-                console.log(err);
+function getR(event) {
+	var aId = this.id;
+	if (list == null) {//購物車為空 拿到餐廳ID 存成session
+		sessionStorage.setItem('point', JSON.stringify(aId));
+	}
+}
+
+function showMap(){
+	document.getElementById('tableComment').style.display = "none";
+	document.getElementById('comment').className='nav-link active';
+	document.getElementById('Rmap').className='nav-link disabled';
+	addMap(sId);
+	
+}
+
+function showComment(){
+	AddComment(sId);
+	document.getElementById('tableComment').style.display = "";
+	document.getElementById('Rmap').className='nav-link active';
+	document.getElementById('comment').className='nav-link disabled';
+	document.getElementById('showMap').style.display ="none";
+}
+
+var mapstr='https://www.google.com/maps/embed/v1/place?key=AIzaSyCS8vYMlbu2dItCFcm1HnffxaD_8i5aRAc&q=';
+var len='&language=zh-Hant';
+
+
+function addMap(sId){
+	document.getElementById('showMap').style.display ="";
+	let rAdress=document.getElementById('Adress'+sId).value;
+	document.getElementById('f').src=mapstr+rAdress+len;
+	let rRemak=document.getElementById('remark'+sId).value;
+	document.getElementById('remark').innerHTML=" 餐廳描述:<br>"+rRemak;
+	
+}
+
+function AddComment(sId){
+	var cStr='';
+	$.ajax({
+        url: "http://localhost:8080/my-app/comment?restId=" + sId,
+        type: "GET",
+        dataType: "JSON",
+        contentType : "application/json; charset=utf-8",
+        success: function (data, status)
+        {
+      	  console.log(data);
+            $(data).each(function (index, element) {
+
+              var star = '';
+              for(let i=0;i<element.score;i++){
+              	star+='<img alt="" style="width: 30px ;height: 30px" src="${pageContext.request.contextPath}/StarPhoto/star.svg">';
+              }
+              var cmt = '<tr>'+                
+                              '<td>' + element.accountName + '</td>'+
+                              '<td>' + element.comments + '</td>'+
+                              '<td>' + star+ '</td>'+
+                              '<td>' + element.time + '</td>'+
+                        '</tr>';
+                  cStr+=cmt;
+                               
+            });
+            document.getElementById('commentBody').innerHTML=cStr; 
+            if(cStr==""){
+            	 document.getElementById('commentBody').innerHTML='<tr><td>暫無評論</td><td></td><td></td><td></td></tr>';
             }
-        }); return cStr;   
-	}
-	
-	function showDialog(event) {
-		sId = this.id;
-		dialog.style.display = "block";
-		document.getElementById('showMap').style.display ="none";
-		showComment();
-	}
-	
-	function hideDialog() {
-		dialog.style.display = "none";
-		document.getElementById('commentBody').innerHTML="<tr><td>暫無評論</td><td></td><td></td><td></td></tr>";
-	}
-	
-	function showDialog1(event) {
-		dialog1.style.display = "block";
-	}
-	
-	function hideDialog1() {
-		dialog1.style.display = "none";
-	}
-	
-	var map, marker, lat, lng;
-	function initMap() {
-	    navigator.geolocation.watchPosition((position) => {
-	        console.log(position.coords);
-	        lat = position.coords.latitude;
-	        lng = position.coords.longitude;
-// 	        初始化地圖
-	        map = new google.maps.Map(document.getElementById('map'), {
-	            zoom: 18,
-	            center: { lat: lat, lng: lng }
-	        });
-	        marker = new google.maps.Marker({
-	            position: { lat: lat, lng: lng },
-	            map: map
-	        });
-	    });
-	}
-  
-	//算距離
-	var end;
-	var dis='請輸入正確地址';
-	function Distance(end,num) {
-	    var request = {
-	        origin: { lat: lat, lng: lng },//現在位置
-	        destination: end,
-	        travelMode: google.maps.DirectionsTravelMode.DRIVING
-	    };
-	    //宣告
-	    var directionsService = new google.maps.DirectionsService();
-	    directionsService.route(request, function (response, status) {
-	        var strTmp = "";
-	        if (status == google.maps.DirectionsStatus.OK) {
-	            var route = response.routes[0];
-	            for (var i = 0; i < route.legs.length; i++) {
-	                var routeSegment = i + 1;
-	                strTmp += route.legs[i].distance.text;
-	            }
-	            //取得距離(正整數，公尺)
-	            var dist = parseInt(parseFloat(strTmp) * 1000).toString();
-	            var distDivThousand=dist;
-	            
-	            if(dist<1000){
-	            	distDivThousand=dist+'公尺';
-	            }
-	            else{
-	            	distDivThousand=dist/1000+'公里';
-	            }
+        },
+        error: function (xhr, desc, err)
+        {
+            console.log(desc);
+            console.log(err);
+        }
+    }); return cStr;   
+}
 
-	        }
-	        document.getElementById('showKm'+num).innerHTML=distDivThousand;
-	        document.getElementById('Distance'+num).value=dist;
-	    });
+function showDialog(event) {
+	sId = this.id;
+	dialog.style.display = "block";
+	document.getElementById('showMap').style.display ="none";
+	showComment();
+}
+
+function hideDialog() {
+	dialog.style.display = "none";
+	document.getElementById('commentBody').innerHTML="<tr><td>暫無評論</td><td></td><td></td><td></td></tr>";
+}
+
+function showDialog1(event) {
+	dialog1.style.display = "block";
+}
+
+function hideDialog1() {
+	dialog1.style.display = "none";
+}
+let slat=JSON.parse(sessionStorage.getItem('lat'));
+let slng=JSON.parse(sessionStorage.getItem('lng'));
+var map, marker, lat, lng;
+if(slat!=null && slng!=null){
+	lat=slat;
+	lng=slng;
+}
+function initMap() {
+    navigator.geolocation.watchPosition((position) => {
+        console.log(position.coords);
+        if(lat ==null &&lng ==null){
+        lat = position.coords.latitude;
+        lng = position.coords.longitude;
+        }
+//	        初始化地圖
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 18,
+            center: { lat: lat, lng: lng }
+        });
+        marker = new google.maps.Marker({
+            position: { lat: lat, lng: lng },
+            animation: google.maps.Animation.BOUNCE,
+//             draggable: true,
+            map: map
+        });
+        google.maps.event.addListener(marker, 'dragend', function () {
+            geocodePosition(marker.getPosition(), marker);
+        });
+    });
+}
+
+//算距離
+var end;
+var dis='請輸入正確地址';
+function Distance(end,num) {
+    var request = {
+        origin: { lat: lat, lng: lng },//現在位置
+        destination: end,
+        travelMode: google.maps.DirectionsTravelMode.DRIVING
+    };
+    //宣告
+    var directionsService = new google.maps.DirectionsService();
+    directionsService.route(request, function (response, status) {
+        var strTmp = "";
+        if (status == google.maps.DirectionsStatus.OK) {
+            var route = response.routes[0];
+            for (var i = 0; i < route.legs.length; i++) {
+                var routeSegment = i + 1;
+                strTmp += route.legs[i].distance.text;
+            }
+            //取得距離(正整數，公尺)
+            var dist = parseInt(parseFloat(strTmp) * 1000).toString();
+            var distDivThousand=dist;
+            
+            if(dist<1000){
+            	distDivThousand=dist+'公尺';
+            }
+            else{
+            	distDivThousand=dist/1000+'公里';
+            }
+
+        }
+        document.getElementById('showKm'+num).innerHTML=distDivThousand;
+        document.getElementById('Distance'+num).value=dist;
+    });
+}
+
+
+function GetNowAddress(){
+
+	var geocoder = new google.maps.Geocoder();
+
+	//google.maps.LatLng 物件
+	var coord = new google.maps.LatLng(lat, lng);
+
+	//傳入 latLng 資訊至 geocoder.geocode
+	geocoder.geocode({'latLng': coord }, function(results, status) {
+		  if (status === google.maps.GeocoderStatus.OK) {
+			    // 如果有資料就會回傳
+			    if (results) {
+			      console.log(results[0].formatted_address);
+			      
+			    }
+			  }
+			  // 經緯度資訊錯誤
+			  else {
+//				    alert("Reverse Geocoding failed because: " + status);
+			  }
+		  document.getElementById('location').innerHTML=results[0].formatted_address;
+		  document.getElementById('StringLocation').value=results[0].formatted_address;
+			});
+			
 	}
 
+function geocodePosition( pos, marker) {
+	var geocoder = new google.maps.Geocoder();
+	geocoder.geocode({
+        'latLng': pos
+    }, function (results, status) {
+        if (status == google.maps.GeocoderStatus.OK) {
+            marker.setPosition(pos);
+            if (results[0]) {
+                document.getElementById("location").innerHTML = results[0].formatted_address;
+                document.getElementById('StringLocation').value=results[0].formatted_address;
+                lat=results[0].geometry.location.lat();
+                lng=results[0].geometry.location.lng();
+                initMap();
+                sessionStorage.setItem('lat', JSON.stringify(lat));
+                sessionStorage.setItem('lng', JSON.stringify(lng));
+            } else {
+                alert('此位置無法定址');
+            }
+        }
+        else {
+            marker.setPosition({
+                lat: parseFloat(vm.location.latitude),
+                lng: parseFloat(vm.location.longitude)
+            });
+            alert('此位置無法定址');
+        }
+        showDis();
+    });
+
 	
-	function GetNowAddress(){
+}
+function showDis(){
+for (let i = 0; i < distanceClass.length; i++) {
+ 	let dID=distanceClass[i].id;
+ 	let num=dID.split('showKm')[1];
+ 	let address=document.getElementById("Adress"+num).value;
+    Distance(address,num);
+	}
+}
 
-		var geocoder = new google.maps.Geocoder();
-
-		//google.maps.LatLng 物件
-		var coord = new google.maps.LatLng(lat, lng);
-
-		//傳入 latLng 資訊至 geocoder.geocode
-		geocoder.geocode({'latLng': coord }, function(results, status) {
-			  if (status === google.maps.GeocoderStatus.OK) {
-				    // 如果有資料就會回傳
-				    if (results) {
-				      console.log(results[0].formatted_address);
-				      
-				    }
-				  }
-				  // 經緯度資訊錯誤
-				  else {
-// 				    alert("Reverse Geocoding failed because: " + status);
-				  }
-			  document.getElementById('location').innerHTML=results[0].formatted_address;
-				});
-				
-		}
+function getStringLoc(){
+	var geocoder = new google.maps.Geocoder();
+	var address1=document.getElementById('StringLocation').value;
+	if(address1!=null){
+	geocoder.geocode({'address': address1 }, function(results) {
+			    lat= results[0].geometry.location.lat();
+			    lng= results[0].geometry.location.lng();
+			    sessionStorage.setItem('lat', JSON.stringify(lat));
+	            sessionStorage.setItem('lng', JSON.stringify(lng));
+			    map = new google.maps.Map(document.getElementById('map'), {
+		            zoom: 18,
+		            center: { lat: lat, lng: lng }
+		        });
+		        marker = new google.maps.Marker({
+		            position: { lat: lat, lng: lng },
+		            animation: google.maps.Animation.BOUNCE,
+		            draggable: true,
+		            map: map
+		        });
+		        google.maps.event.addListener(marker, 'dragend', function () {
+		            geocodePosition(marker.getPosition(), marker);
+		        });
+		        google.maps.event.addListener( marker, 'dragend',showDis);
+				showDis();
+				GetNowAddress();
+	});
+	}
+	else{
+		alert('請輸入正確地址');
+	}
 	
+}
 </script>
 <!--  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&language=zh-TW"></script> -->
  <script async defer

@@ -189,9 +189,9 @@
 <script type="text/javascript">
 	//一鍵輸入資料
 	$(".fastData").click(function() {
-		$("#restaurantName").val("摩斯漢堡");
+		$("#restaurantName").val("漢堡王");
 		$("#restaurantPhone").val("0989213447");
-		$("#restaurantAddress").val("台北市大安區信義路三段184號");
+		$("#restaurantAddress").val("106台北市大安區敦化南路二段164號");
 		$("#restaurantType").val("1");
 		$("#startDate").val("星期日");
 		$("#endDate").val("星期六");

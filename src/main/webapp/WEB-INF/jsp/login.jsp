@@ -68,7 +68,7 @@
 			<button class=" btn btn-outline-success fastLogin2"
 				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop1</button>
 			<button class=" btn btn-outline-success fastLogin3"
-				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop2</button>
+				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">Shop3</button>
 			<button class=" btn btn-outline-success fastLogin4"
 				style="margin: 4px, 2px; padding: 6px 12px; width: 5em">User</button>
 
@@ -88,7 +88,7 @@
 		$("#mPassword").val("1234");
 	});
 	$(".fastLogin3").click(function() {
-		$("#mAccount").val("shop02");
+		$("#mAccount").val("shop03");
 		$("#mPassword").val("1234");
 	});
 	$(".fastLogin4").click(function() {

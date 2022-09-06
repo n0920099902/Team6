@@ -152,7 +152,7 @@
 	$(".fastSign").click(function() {
 		$("#mAccount").val("user1234");
 		$("#mPassword").val("1234");
-		$("#mEmail").val("a0921829199@gmail.com");
+		$("#mEmail").val("b0921829199@gmail.com");
 		$("#mPhone").val("0989213447");
 		$("#mBirthday").val("1990-01-07");
 	});

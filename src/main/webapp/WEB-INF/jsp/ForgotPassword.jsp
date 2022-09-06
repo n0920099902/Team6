@@ -130,7 +130,7 @@
 <script type="text/javascript">
 	//一鍵輸入
 	$(".fastSign").click(function() {
-		$("#email").val("a0921829199@gmail.com");
+		$("#email").val("b0921829199@gmail.com");
 	});
 </script>
 </html>
